@@ -1,0 +1,9 @@
+{
+  "trajectories": 153,
+  "excluded_fields": [
+    "gate_us_p50",
+    "gate_us_p95"
+  ],
+  "numerical_tolerance": 1e-12,
+  "issues": []
+}

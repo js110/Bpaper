@@ -1,0 +1,13 @@
+{
+  "inputs": {
+    "results/recent_baselines/rows.csv": "77f180c91860739df4e34cfa49a93332a6f0f54e6c6cf63758d743c41ff4260d",
+    "results/final/rows.csv": "bd5d25cadd5c0852c9d66ed71877d1e614280447e8ee908efbafb2c915a16edd"
+  },
+  "bootstrap": 1000,
+  "seed": 92026,
+  "unit": "synthetic seed or GeoLife user",
+  "ci": "paired percentile, pointwise, no multiplicity correction",
+  "interpolation": "inside observed utility range only; require 95% bootstrap overlap",
+  "conditions": 96,
+  "trajectory_rows": 7368
+}

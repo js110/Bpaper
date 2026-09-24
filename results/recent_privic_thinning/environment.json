@@ -1,0 +1,19 @@
+{
+  "python": "3.14.5",
+  "numpy": "2.4.1",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "code_sha256": {
+    "src/audit.py": "030804acf0513687b236334f7be50db5c0d6d794ef69a3c5a1e7b1941b2e9d9f",
+    "src/reproduce.py": "7e0c14d47b5a30449a71c5b2f94e70cbe1009b7ca95ae1866d571f9c1ef8571d",
+    "src/prepare_data.py": "7232b2bcc77e5ce5179c0729ab9242d7af716d7ec2cba21dea9c6376af98b0a0",
+    "src/analyze_stress.py": "aa444d9879767fb3a1e2fe1da862d862b9148068f5abe30fceed869a8a97ecd2",
+    "src/audit_recent.py": "b2dd26ada2d8b569859b1638420b2beacad91329cc28b2595307a8144178779d",
+    "src/paper_assets.py": "14c1e334a8478b6fc363299206989624720ba1189fe4b85b8d868c14cbfb0f2d",
+    "src/recent_baselines.py": "80e462dde7db02994b5cf61c3645d7e257b2a3e40bf1a08665fb92434f6a873c",
+    "src/analyze_recent.py": "2f4914effaec7fd645788d4759f74afc3b3519e71e9491481fd49a8f83ee69bd",
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/model.py": "c09e4f9bfaccf9c8b309f3f276cdde4cd2fb7321af2b30aeac182b535a93594b",
+    "src/experiment.py": "3b3c12d1428951a267b7c7b0f38b0ddceba7224d0e64330570b800436e8a06d3",
+    "src/analyze.py": "1ca948aaa6d1663aa77e797337cf9aed0ca88dcfe83b5864f591d7a090ec4fbd"
+  }
+}

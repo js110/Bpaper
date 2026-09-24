@@ -1,0 +1,11 @@
+WARNING: Cache entry deserialization failed, entry ignored
+Collecting scipy
+  Downloading scipy-1.18.1-cp314-cp314-macosx_14_0_arm64.whl.metadata (62 kB)
+Requirement already satisfied: numpy<2.8,>=2.0.0 in /opt/homebrew/lib/python3.14/site-packages (from scipy) (2.4.1)
+Downloading scipy-1.18.1-cp314-cp314-macosx_14_0_arm64.whl (20.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 20.5/20.5 MB 20.2 MB/s  0:00:01
+Installing collected packages: scipy
+Successfully installed scipy-1.18.1
+
+[notice] A new release of pip is available: 26.1.1 -> 26.2.1
+[notice] To update, run: /Users/jiangsheng/Desktop/crowdsensing_task_privacy/.venv/bin/python -m pip install --upgrade pip

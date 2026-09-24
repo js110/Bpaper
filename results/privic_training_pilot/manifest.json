@@ -1,0 +1,4412 @@
+[
+  {
+    "scenario": "static",
+    "beta": 0,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.011601375000054759,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_0.npz",
+    "sha256": "0f2f9c41d070d6f2eb71d7d8b6403f390252a8a35fd1909784187d4ca7e36438",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "log_likelihood": -15970.11104010114
+    },
+    "final_ba": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "mi_nats": 0.0,
+      "distortion_cells": 4.136482711405379,
+      "objective": 0.0
+    }
+  },
+  {
+    "scenario": "static",
+    "beta": 0.1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.9203872079999655,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_0.1.npz",
+    "sha256": "83601e642a1b3e7815ba9dfa531d74f749f52a3ea6d05a1f2643f1fa73988529",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 790,
+          "residual": 9.949680856990994e-09,
+          "converged": true,
+          "mi_nats": 0.0012474784523391492,
+          "distortion_cells": 3.0689900814674727,
+          "objective": 0.30814648659908644
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 5.7220923037698546e-05,
+          "converged": false,
+          "log_likelihood": -664.97400664307
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 10000,
+          "residual": 3.398084957861869e-08,
+          "converged": false,
+          "mi_nats": 0.0004939450368624803,
+          "distortion_cells": 2.0739683786112675,
+          "objective": 0.20789078289798923
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.189140973937742e-05,
+          "converged": false,
+          "log_likelihood": -289.76211197451016
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.850038562575492e-09,
+          "converged": true,
+          "mi_nats": 1.222502212832733e-09,
+          "distortion_cells": 1.62951296711331,
+          "objective": 0.16295129793383323
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.406634555147008e-09,
+          "converged": true,
+          "log_likelihood": -0.0001912524824363918
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.85003489883951e-09,
+          "converged": true,
+          "mi_nats": 1.2225017713593207e-09,
+          "distortion_cells": 1.6295129656132223,
+          "objective": 0.162951297783824
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.406630419566241e-09,
+          "converged": true,
+          "log_likelihood": -0.00019125240740304898
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.850032345326554e-09,
+          "converged": true,
+          "mi_nats": 1.2225017714680172e-09,
+          "distortion_cells": 1.629512964488157,
+          "objective": 0.16295129767131747
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.406627338697348e-09,
+          "converged": true,
+          "log_likelihood": -0.00019125235155436772
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.850029791813597e-09,
+          "converged": true,
+          "mi_nats": 1.2225012903502548e-09,
+          "distortion_cells": 1.629512963588105,
+          "objective": 0.1629512975813118
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.406624785184391e-09,
+          "converged": true,
+          "log_likelihood": -0.00019125230641712243
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.850028348523665e-09,
+          "converged": true,
+          "mi_nats": 1.2225010480596425e-09,
+          "distortion_cells": 1.6295129628380614,
+          "objective": 0.16295129750630719
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.406622731271796e-09,
+          "converged": true,
+          "log_likelihood": -0.00019125226916690468
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 686,
+          "residual": 9.85002679421143e-09,
+          "converged": true,
+          "mi_nats": 1.222500691747684e-09,
+          "distortion_cells": 1.6295129621951676,
+          "objective": 0.16295129744201745
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.40662092715938e-09,
+          "converged": true,
+          "log_likelihood": -0.00019125223692601517
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 1.091322737459266e-05,
+      "converged": false,
+      "log_likelihood": -955.1445178637495
+    },
+    "final_ba": {
+      "iterations": 10000,
+      "residual": 1.1176357894715494e-07,
+      "converged": false,
+      "mi_nats": 0.0003378406482788432,
+      "distortion_cells": 2.5058469127347758,
+      "objective": 0.25092253192175645
+    }
+  },
+  {
+    "scenario": "static",
+    "beta": 0.3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.9937526250000701,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_0.3.npz",
+    "sha256": "91d3d7b8c6ea8f641fd08a2e4f55ba2a3eea39cf984d7047ec652bad14b01785",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 576,
+          "residual": 9.838125203387449e-09,
+          "converged": true,
+          "mi_nats": 0.011286696019529354,
+          "distortion_cells": 3.0188121724650703,
+          "objective": 0.9169303477590504
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.096521153411196e-06,
+          "converged": false,
+          "log_likelihood": -663.8876569577369
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 452,
+          "residual": 9.74600648970999e-09,
+          "converged": true,
+          "mi_nats": 0.017667125711643014,
+          "distortion_cells": 1.2819955861169228,
+          "objective": 0.40226580154671987
+        },
+        "ibu": {
+          "iterations": 358,
+          "residual": 9.985832161163444e-09,
+          "converged": true,
+          "log_likelihood": -323.83929421732256
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 451,
+          "residual": 9.83509141326369e-09,
+          "converged": true,
+          "mi_nats": 0.018443918870207337,
+          "distortion_cells": 1.2810877245043082,
+          "objective": 0.4027702362214998
+        },
+        "ibu": {
+          "iterations": 503,
+          "residual": 9.947547341404572e-09,
+          "converged": true,
+          "log_likelihood": -331.8936212905356
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1196,
+          "residual": 9.988553220652285e-09,
+          "converged": true,
+          "mi_nats": 0.004590714767680963,
+          "distortion_cells": 1.2613122329458772,
+          "objective": 0.38298438465144413
+        },
+        "ibu": {
+          "iterations": 2473,
+          "residual": 9.975862025335402e-09,
+          "converged": true,
+          "log_likelihood": -95.28731680608365
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 266,
+          "residual": 9.520506938365259e-09,
+          "converged": true,
+          "mi_nats": 6.922816319916307e-09,
+          "distortion_cells": 1.1432653812979023,
+          "objective": 0.342979621312187
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.478731476156625e-08,
+          "converged": false,
+          "log_likelihood": -4.979718863777298e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 266,
+          "residual": 9.48946465850753e-09,
+          "converged": true,
+          "mi_nats": 6.897134423784052e-09,
+          "distortion_cells": 1.1432376780368723,
+          "objective": 0.3429713103081961
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4734121200898898e-08,
+          "converged": false,
+          "log_likelihood": -4.962273270332625e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 266,
+          "residual": 9.463769545803302e-09,
+          "converged": true,
+          "mi_nats": 6.875884382408404e-09,
+          "distortion_cells": 1.143214672561475,
+          "objective": 0.3429644086443268
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4690104299663886e-08,
+          "converged": false,
+          "log_likelihood": -4.947836513051489e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 265,
+          "residual": 9.998155303669876e-09,
+          "converged": true,
+          "mi_nats": 7.256715442488401e-09,
+          "distortion_cells": 1.1431950105692799,
+          "objective": 0.3429585104274994
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.5511657402988988e-08,
+          "converged": false,
+          "log_likelihood": -5.226787010674056e-05
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.3216974344611452e-05,
+      "converged": false,
+      "log_likelihood": -1417.8169619930025
+    },
+    "final_ba": {
+      "iterations": 6605,
+      "residual": 9.990505204083778e-09,
+      "converged": true,
+      "mi_nats": 0.010885311328110065,
+      "distortion_cells": 2.5232611277670927,
+      "objective": 0.7678636496582378
+    }
+  },
+  {
+    "scenario": "static",
+    "beta": 1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.630345583999997,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_1.npz",
+    "sha256": "d99e717d75e3b9b775440b6d2215621ed8b7e9fe46131b968371ec3dbe087b57",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1999,
+          "residual": 9.963645103416852e-09,
+          "converged": true,
+          "mi_nats": 0.9685006746547538,
+          "distortion_cells": 1.6023659761768996,
+          "objective": 2.570866650831653
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 9.766249919052061e-07,
+          "converged": false,
+          "log_likelihood": -1615.6348426789466
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 234,
+          "residual": 9.434393766216687e-09,
+          "converged": true,
+          "mi_nats": 1.2363801281065259,
+          "distortion_cells": 0.8410101926666064,
+          "objective": 2.0773903207731323
+        },
+        "ibu": {
+          "iterations": 259,
+          "residual": 9.636739555646257e-09,
+          "converged": true,
+          "log_likelihood": -1044.9130701661284
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 225,
+          "residual": 9.913750959045231e-09,
+          "converged": true,
+          "mi_nats": 1.181612022239933,
+          "distortion_cells": 0.8612401244729169,
+          "objective": 2.0428521467128498
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.2116747901780873e-07,
+          "converged": false,
+          "log_likelihood": -1045.695562150408
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 228,
+          "residual": 9.578507314613892e-09,
+          "converged": true,
+          "mi_nats": 1.1856662302515135,
+          "distortion_cells": 0.8513388747676672,
+          "objective": 2.0370051050191806
+        },
+        "ibu": {
+          "iterations": 110,
+          "residual": 9.59145687873253e-09,
+          "converged": true,
+          "log_likelihood": -1033.3392698077046
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 227,
+          "residual": 9.397744050274278e-09,
+          "converged": true,
+          "mi_nats": 1.1701989968502047,
+          "distortion_cells": 0.8558978397675645,
+          "objective": 2.026096836617769
+        },
+        "ibu": {
+          "iterations": 127,
+          "residual": 9.61647161901169e-09,
+          "converged": true,
+          "log_likelihood": -1031.5174733149722
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 215,
+          "residual": 9.571172754881972e-09,
+          "converged": true,
+          "mi_nats": 1.1637540085512803,
+          "distortion_cells": 0.8588659056009713,
+          "objective": 2.0226199141522514
+        },
+        "ibu": {
+          "iterations": 108,
+          "residual": 9.422707794581875e-09,
+          "converged": true,
+          "log_likelihood": -1015.442505346045
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 203,
+          "residual": 9.602408392736282e-09,
+          "converged": true,
+          "mi_nats": 1.1475822586749749,
+          "distortion_cells": 0.8647712220467043,
+          "objective": 2.0123534807216794
+        },
+        "ibu": {
+          "iterations": 110,
+          "residual": 9.310469423207124e-09,
+          "converged": true,
+          "log_likelihood": -1012.5578281181529
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 202,
+          "residual": 9.972776493294956e-09,
+          "converged": true,
+          "mi_nats": 1.139074742731851,
+          "distortion_cells": 0.8689642998688718,
+          "objective": 2.008039042600723
+        },
+        "ibu": {
+          "iterations": 97,
+          "residual": 9.194358496777966e-09,
+          "converged": true,
+          "log_likelihood": -1030.9991339868527
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.7323798671916033e-06,
+      "converged": false,
+      "log_likelihood": -8855.219527030527
+    },
+    "final_ba": {
+      "iterations": 1198,
+      "residual": 9.921941835566211e-09,
+      "converged": true,
+      "mi_nats": 1.09764492910904,
+      "distortion_cells": 0.9889999987932145,
+      "objective": 2.0866449279022543
+    }
+  },
+  {
+    "scenario": "static",
+    "beta": 3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.2868395000000419,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_3.npz",
+    "sha256": "d3d4db2f7b342289cd84783f343f9f3bdc541e31647d2b0e4b2d073cc863e23b",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 16,
+          "residual": 8.776234294849417e-09,
+          "converged": true,
+          "mi_nats": 3.299399978698241,
+          "distortion_cells": 0.2168571881123419,
+          "objective": 3.9499715430352667
+        },
+        "ibu": {
+          "iterations": 302,
+          "residual": 9.91929339965598e-09,
+          "converged": true,
+          "log_likelihood": -1848.2364232035623
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 213,
+          "residual": 9.776411768719831e-09,
+          "converged": true,
+          "mi_nats": 2.9498138829354135,
+          "distortion_cells": 0.18142593123146566,
+          "objective": 3.4940916766298105
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.305397393802011e-07,
+          "converged": false,
+          "log_likelihood": -1665.370982642752
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 2390,
+          "residual": 9.971767251336361e-09,
+          "converged": true,
+          "mi_nats": 2.958977416758205,
+          "distortion_cells": 0.17397290336294471,
+          "objective": 3.480896126847039
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.0238078407883572e-07,
+          "converged": false,
+          "log_likelihood": -1657.9059830862648
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 190,
+          "residual": 9.671344669786868e-09,
+          "converged": true,
+          "mi_nats": 2.9602428241229006,
+          "distortion_cells": 0.17056141040152312,
+          "objective": 3.4719270553274697
+        },
+        "ibu": {
+          "iterations": 31,
+          "residual": 9.891001980996683e-09,
+          "converged": true,
+          "log_likelihood": -1663.591122597883
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 177,
+          "residual": 9.372058043179422e-09,
+          "converged": true,
+          "mi_nats": 2.961984088028524,
+          "distortion_cells": 0.16996021375687181,
+          "objective": 3.4718647292991394
+        },
+        "ibu": {
+          "iterations": 31,
+          "residual": 6.487473211413963e-09,
+          "converged": true,
+          "log_likelihood": -1650.576387438427
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 172,
+          "residual": 9.884907460619063e-09,
+          "converged": true,
+          "mi_nats": 2.962220348708186,
+          "distortion_cells": 0.1697490346500458,
+          "objective": 3.471467452658324
+        },
+        "ibu": {
+          "iterations": 25,
+          "residual": 6.510187621627805e-09,
+          "converged": true,
+          "log_likelihood": -1648.3799375436024
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 168,
+          "residual": 9.723357313328894e-09,
+          "converged": true,
+          "mi_nats": 2.9593912121936508,
+          "distortion_cells": 0.16947862561246274,
+          "objective": 3.467827089031039
+        },
+        "ibu": {
+          "iterations": 26,
+          "residual": 6.9713818467986854e-09,
+          "converged": true,
+          "log_likelihood": -1644.904488896193
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 159,
+          "residual": 9.44935346598184e-09,
+          "converged": true,
+          "mi_nats": 2.9577385375786784,
+          "distortion_cells": 0.16993130642816542,
+          "objective": 3.4675324568631747
+        },
+        "ibu": {
+          "iterations": 30,
+          "residual": 7.060604616596078e-09,
+          "converged": true,
+          "log_likelihood": -1652.6244954092003
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 696,
+      "residual": 9.940885336309855e-09,
+      "converged": true,
+      "log_likelihood": -13557.309663132724
+    },
+    "final_ba": {
+      "iterations": 336,
+      "residual": 9.990858650937926e-09,
+      "converged": true,
+      "mi_nats": 2.9568595214596103,
+      "distortion_cells": 0.16871487178408748,
+      "objective": 3.4630041368118727
+    }
+  },
+  {
+    "scenario": "static",
+    "beta": 10,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.01983970799983581,
+    "source_sample_sha256": "26062f1f625f4742750862f14ebe69aa637bf4196c1711cf8afbb966954f8f99",
+    "channel_file": "results/privic_training/static_10.npz",
+    "sha256": "09fdfe5754810446e92a3226836e95c0f580e5b8d223b52bfd091bc67ceb7952",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 2,
+          "residual": 6.222800053024002e-13,
+          "converged": true,
+          "mi_nats": 4.157101863778388,
+          "distortion_cells": 0.00016201168600238266,
+          "objective": 4.158721980638412
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 2.3781226987651394e-11,
+          "converged": true,
+          "log_likelihood": -1726.984458149634
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 6.20193592940215e-12,
+          "converged": true,
+          "mi_nats": 3.5965790310419568,
+          "distortion_cells": 0.00010934868930327478,
+          "objective": 3.5976725179349893
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 2.0933603808725998e-11,
+          "converged": true,
+          "log_likelihood": -1721.7830399182094
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 6.2021040380027436e-12,
+          "converged": true,
+          "mi_nats": 3.6135003716984837,
+          "distortion_cells": 0.00011083268598538078,
+          "objective": 3.6146086985583374
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 3.641864346618718e-11,
+          "converged": true,
+          "log_likelihood": -1701.7211059792355
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 6.473044322774513e-12,
+          "converged": true,
+          "mi_nats": 3.6066644618602544,
+          "distortion_cells": 0.00011129911912992329,
+          "objective": 3.6077774530515536
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.0681888625796429e-10,
+          "converged": true,
+          "log_likelihood": -1729.515326381429
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 3.666700276738766e-11,
+          "converged": true,
+          "mi_nats": 3.616842713131496,
+          "distortion_cells": 0.00011140791474838503,
+          "objective": 3.61795679227898
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.787157311957944e-10,
+          "converged": true,
+          "log_likelihood": -1711.478847272305
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 1.0815737194747044e-10,
+          "converged": true,
+          "mi_nats": 3.616523984935619,
+          "distortion_cells": 0.00011084386876334664,
+          "objective": 3.617632423623253
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.977891592834923e-10,
+          "converged": true,
+          "log_likelihood": -1705.9957665747925
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.069248106195687e-10,
+          "converged": true,
+          "mi_nats": 3.6136454877658784,
+          "distortion_cells": 0.0001106128413629548,
+          "objective": 3.614751616179508
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 2.9548276176957015e-10,
+          "converged": true,
+          "log_likelihood": -1723.2314334537741
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 3.977200790927782e-10,
+          "converged": true,
+          "mi_nats": 3.6175180583717985,
+          "distortion_cells": 0.00011098741071945088,
+          "objective": 3.618627932478993
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 4.5656525036402124e-10,
+          "converged": true,
+          "log_likelihood": -1725.4920226031718
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 128,
+      "residual": 9.283683595352572e-09,
+      "converged": true,
+      "log_likelihood": -13900.46647780364
+    },
+    "final_ba": {
+      "iterations": 10,
+      "residual": 5.780811553135919e-10,
+      "converged": true,
+      "mi_nats": 3.618710245487538,
+      "distortion_cells": 0.00011089360473498572,
+      "objective": 3.6198191815348877
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 0,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.003599542000074507,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_0.npz",
+    "sha256": "0f2f9c41d070d6f2eb71d7d8b6403f390252a8a35fd1909784187d4ca7e36438",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "log_likelihood": -15970.11104010114
+    },
+    "final_ba": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "mi_nats": 0.0,
+      "distortion_cells": 4.136482711405379,
+      "objective": 0.0
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 0.1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.6673305409999557,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_0.1.npz",
+    "sha256": "04952956921866f15df598d0ea046112b078982f01bcb844023f866141d4c27a",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 790,
+          "residual": 9.949680856990994e-09,
+          "converged": true,
+          "mi_nats": 0.0012474784523391492,
+          "distortion_cells": 3.0689900814674727,
+          "objective": 0.30814648659908644
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.343265541754796e-05,
+          "converged": false,
+          "log_likelihood": -665.0722284213801
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840691372886567e-09,
+          "converged": true,
+          "mi_nats": 1.0941346083760706e-09,
+          "distortion_cells": 1.6895718568653626,
+          "objective": 0.1689571867806709
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677074503360416e-09,
+          "converged": true,
+          "log_likelihood": -0.00016610433712807348
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840685710749142e-09,
+          "converged": true,
+          "mi_nats": 1.094133845920501e-09,
+          "distortion_cells": 1.6895718450916484,
+          "objective": 0.1689571856032987
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677069118778746e-09,
+          "converged": true,
+          "log_likelihood": -0.00016610423374406965
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840681935990858e-09,
+          "converged": true,
+          "mi_nats": 1.094133374081045e-09,
+          "distortion_cells": 1.6895718372425108,
+          "objective": 0.16895718481838445
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677065455042765e-09,
+          "converged": true,
+          "log_likelihood": -0.0001661041649990362
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840679160433297e-09,
+          "converged": true,
+          "mi_nats": 1.094132761072111e-09,
+          "distortion_cells": 1.6895718313556591,
+          "objective": 0.1689571842296987
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677062734996355e-09,
+          "converged": true,
+          "log_likelihood": -0.00016610411341361572
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840676717942642e-09,
+          "converged": true,
+          "mi_nats": 1.0941328672412559e-09,
+          "distortion_cells": 1.6895718266461799,
+          "objective": 0.16895718375875088
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677060625572608e-09,
+          "converged": true,
+          "log_likelihood": -0.00016610407190014202
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840674719541198e-09,
+          "converged": true,
+          "mi_nats": 1.0941326144198157e-09,
+          "distortion_cells": 1.6895718227216148,
+          "objective": 0.16895718336629412
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.677058738193466e-09,
+          "converged": true,
+          "log_likelihood": -0.00016610403758091598
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 594,
+          "residual": 9.840673498295871e-09,
+          "converged": true,
+          "mi_nats": 1.094132360030077e-09,
+          "distortion_cells": 1.6895718193577025,
+          "objective": 0.16895718302990262
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 8.67705712837008e-09,
+          "converged": true,
+          "log_likelihood": -0.0001661040082177273
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 4.956465632151297e-06,
+      "converged": false,
+      "log_likelihood": -665.2753926769199
+    },
+    "final_ba": {
+      "iterations": 10000,
+      "residual": 2.509673469042184e-08,
+      "converged": false,
+      "mi_nats": 0.0004317770004008121,
+      "distortion_cells": 2.880263940289542,
+      "objective": 0.288458171029355
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 0.3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 1.5058392920000188,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_0.3.npz",
+    "sha256": "7f9bccbaf6d1273f64d68e8f07cc3969822e77ebd229c9b676148a9815f803d5",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 576,
+          "residual": 9.838125203387449e-09,
+          "converged": true,
+          "mi_nats": 0.011286696019529354,
+          "distortion_cells": 3.0188121724650703,
+          "objective": 0.9169303477590504
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.2216808872311802e-05,
+          "converged": false,
+          "log_likelihood": -663.8647550352559
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6927,
+          "residual": 9.994193703826267e-09,
+          "converged": true,
+          "mi_nats": 0.006077281319004651,
+          "distortion_cells": 1.5798470791752908,
+          "objective": 0.48003140507159187
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.816831330381241e-07,
+          "converged": false,
+          "log_likelihood": -156.04250134050147
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 5955,
+          "residual": 9.996438104932036e-09,
+          "converged": true,
+          "mi_nats": 0.008777046649178246,
+          "distortion_cells": 1.5772643817577465,
+          "objective": 0.48195636117650215
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4570164075244918e-07,
+          "converged": false,
+          "log_likelihood": -214.65468069167622
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4228,
+          "residual": 9.989847166480117e-09,
+          "converged": true,
+          "mi_nats": 0.016363626199172338,
+          "distortion_cells": 1.5696052547263253,
+          "objective": 0.48724520261706994
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 9.826332669771176e-08,
+          "converged": false,
+          "log_likelihood": -326.6700272433033
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 3585,
+          "residual": 9.976574101996585e-09,
+          "converged": true,
+          "mi_nats": 0.016742965355651833,
+          "distortion_cells": 1.5647429092356502,
+          "objective": 0.4861658381263469
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 7.979499766497256e-08,
+          "converged": false,
+          "log_likelihood": -325.67317539945384
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 3422,
+          "residual": 9.987625170367773e-09,
+          "converged": true,
+          "mi_nats": 0.015554230375929064,
+          "distortion_cells": 1.5632543759699757,
+          "objective": 0.4845305431669218
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 7.873190754903447e-08,
+          "converged": false,
+          "log_likelihood": -319.52388320674686
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 2811,
+          "residual": 9.962998755158394e-09,
+          "converged": true,
+          "mi_nats": 0.017076926316360888,
+          "distortion_cells": 1.5555232335737461,
+          "objective": 0.4837338963884847
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 6.011284420237573e-08,
+          "converged": false,
+          "log_likelihood": -332.5615098081813
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 2675,
+          "residual": 9.999369441354615e-09,
+          "converged": true,
+          "mi_nats": 0.016958620922132385,
+          "distortion_cells": 1.553407128538965,
+          "objective": 0.4829807594838219
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 5.8381723344602676e-08,
+          "converged": false,
+          "log_likelihood": -332.3738936945748
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 1.6811878618377962e-05,
+      "converged": false,
+      "log_likelihood": -2678.438184867796
+    },
+    "final_ba": {
+      "iterations": 4325,
+      "residual": 9.990936300496855e-09,
+      "converged": true,
+      "mi_nats": 0.038563076313826564,
+      "distortion_cells": 2.5499060967784573,
+      "objective": 0.8035349053473637
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 1.3124866250000196,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_1.npz",
+    "sha256": "45c3e6fde7de53f07ecd834df689e2d47952bd3e4c71833c5cafdbd3b238f822",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1999,
+          "residual": 9.963645103416852e-09,
+          "converged": true,
+          "mi_nats": 0.9685006746547538,
+          "distortion_cells": 1.6023659761768996,
+          "objective": 2.570866650831653
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 4.795128255158376e-06,
+          "converged": false,
+          "log_likelihood": -1621.5869867084257
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 446,
+          "residual": 9.803678008291072e-09,
+          "converged": true,
+          "mi_nats": 1.0786892520259745,
+          "distortion_cells": 1.1157632169913811,
+          "objective": 2.1944524690173557
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 9.124952786015994e-06,
+          "converged": false,
+          "log_likelihood": -1218.9989049171513
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 636,
+          "residual": 9.928139380055434e-09,
+          "converged": true,
+          "mi_nats": 1.1029395349613225,
+          "distortion_cells": 1.0897012025368829,
+          "objective": 2.1926407374982055
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.067416367129704e-06,
+          "converged": false,
+          "log_likelihood": -1129.2666623940697
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1442,
+          "residual": 9.932669215389815e-09,
+          "converged": true,
+          "mi_nats": 1.0897541417338292,
+          "distortion_cells": 1.0748371141030324,
+          "objective": 2.1645912558368616
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.0327135226715374e-08,
+          "converged": false,
+          "log_likelihood": -1116.490115310866
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1349,
+          "residual": 9.96244689721377e-09,
+          "converged": true,
+          "mi_nats": 1.1162545166216056,
+          "distortion_cells": 1.0568940403065619,
+          "objective": 2.1731485569281674
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.6580962993183466e-08,
+          "converged": false,
+          "log_likelihood": -1081.028003042876
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4226,
+          "residual": 9.990034685776472e-09,
+          "converged": true,
+          "mi_nats": 1.1137506315299872,
+          "distortion_cells": 1.0521283231167864,
+          "objective": 2.1658789546467734
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.606709959381698e-06,
+          "converged": false,
+          "log_likelihood": -1026.0736009971206
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1033,
+          "residual": 9.904933424947751e-09,
+          "converged": true,
+          "mi_nats": 1.1222660405704943,
+          "distortion_cells": 1.0357978888606791,
+          "objective": 2.158063929431173
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4691901636249005e-08,
+          "converged": false,
+          "log_likelihood": -1068.6479943046515
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1480,
+          "residual": 9.941276710365576e-09,
+          "converged": true,
+          "mi_nats": 1.106479701309146,
+          "distortion_cells": 1.044415501954344,
+          "objective": 2.15089520326349
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.488096683198049e-08,
+          "converged": false,
+          "log_likelihood": -1066.1546094314645
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.305508283447638e-06,
+      "converged": false,
+      "log_likelihood": -9364.160025662954
+    },
+    "final_ba": {
+      "iterations": 6086,
+      "residual": 9.992731868965071e-09,
+      "converged": true,
+      "mi_nats": 1.1345483827254599,
+      "distortion_cells": 1.0254690367166797,
+      "objective": 2.1600174194421395
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.5299331250000705,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_3.npz",
+    "sha256": "71759af3a7ec8ade53d28499eafe3c8dbb7552672cf38be4ffdb5976c7863b97",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 16,
+          "residual": 8.776234294849417e-09,
+          "converged": true,
+          "mi_nats": 3.299399978698241,
+          "distortion_cells": 0.2168571881123419,
+          "objective": 3.9499715430352667
+        },
+        "ibu": {
+          "iterations": 170,
+          "residual": 9.586561899074374e-09,
+          "converged": true,
+          "log_likelihood": -1934.8755554315885
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 70,
+          "residual": 8.60045018535871e-09,
+          "converged": true,
+          "mi_nats": 3.1284440844841654,
+          "distortion_cells": 0.20814799428364233,
+          "objective": 3.7528880673350926
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.047784169887824e-06,
+          "converged": false,
+          "log_likelihood": -1873.8633363463937
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 480,
+          "residual": 9.974091014913755e-09,
+          "converged": true,
+          "mi_nats": 3.1643896947936394,
+          "distortion_cells": 0.2098725780204645,
+          "objective": 3.794007428855033
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 7.01422082451976e-08,
+          "converged": false,
+          "log_likelihood": -1876.187428426299
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 87,
+          "residual": 9.59908122433184e-09,
+          "converged": true,
+          "mi_nats": 3.1831769631082514,
+          "distortion_cells": 0.2073132709957899,
+          "objective": 3.805116776095621
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.2390864942148023e-07,
+          "converged": false,
+          "log_likelihood": -1883.636389583049
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 83,
+          "residual": 9.152104220210277e-09,
+          "converged": true,
+          "mi_nats": 3.1980164057360825,
+          "distortion_cells": 0.20700221088394205,
+          "objective": 3.8190230383879085
+        },
+        "ibu": {
+          "iterations": 30,
+          "residual": 7.397840806958045e-09,
+          "converged": true,
+          "log_likelihood": -1894.677788035514
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 81,
+          "residual": 8.250584038182537e-09,
+          "converged": true,
+          "mi_nats": 3.200615687022644,
+          "distortion_cells": 0.20744686921819527,
+          "objective": 3.8229562946772297
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 5.402461046360649e-07,
+          "converged": false,
+          "log_likelihood": -1866.2197220140793
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 127,
+          "residual": 9.750065194738515e-09,
+          "converged": true,
+          "mi_nats": 3.1930726188322835,
+          "distortion_cells": 0.20817611658479995,
+          "objective": 3.8176009685866834
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.5859732279939823e-07,
+          "converged": false,
+          "log_likelihood": -1877.3450256542294
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 122,
+          "residual": 9.511750313752722e-09,
+          "converged": true,
+          "mi_nats": 3.1918878206406918,
+          "distortion_cells": 0.2087125176544875,
+          "objective": 3.8180253736041543
+        },
+        "ibu": {
+          "iterations": 42,
+          "residual": 9.049044217938895e-09,
+          "converged": true,
+          "log_likelihood": -1883.8065450042996
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 1128,
+      "residual": 9.972509844137813e-09,
+      "converged": true,
+      "log_likelihood": -15311.58449339552
+    },
+    "final_ba": {
+      "iterations": 34,
+      "residual": 7.143990325292582e-09,
+      "converged": true,
+      "mi_nats": 3.197995500093815,
+      "distortion_cells": 0.20365328646843847,
+      "objective": 3.80895535949913
+    }
+  },
+  {
+    "scenario": "walk",
+    "beta": 10,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.01569237500007148,
+    "source_sample_sha256": "2f77fabaa7b5f6eaf3f4cbb04ee3959ccab8bfed101f3d5fa404495ed886c8bc",
+    "channel_file": "results/privic_training/walk_10.npz",
+    "sha256": "934698ee3eb999a489d67b607c4cd86510b8d926ea0e59c0ba97867701d2052d",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 2,
+          "residual": 6.222800053024002e-13,
+          "converged": true,
+          "mi_nats": 4.157101863778388,
+          "distortion_cells": 0.00016201168600238266,
+          "objective": 4.158721980638412
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 3.597124549614694e-09,
+          "converged": true,
+          "log_likelihood": -1930.3955030018144
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6070866675324647e-12,
+          "converged": true,
+          "mi_nats": 4.019830512640369,
+          "distortion_cells": 0.00016290151249793105,
+          "objective": 4.021459527765348
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.8641602150815118e-11,
+          "converged": true,
+          "log_likelihood": -1926.231361824262
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6065927169781632e-12,
+          "converged": true,
+          "mi_nats": 4.0574668637190205,
+          "distortion_cells": 0.00016217279008119446,
+          "objective": 4.059088591619832
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 7.309336267757177e-09,
+          "converged": true,
+          "log_likelihood": -1934.5550402037288
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6070399585148402e-12,
+          "converged": true,
+          "mi_nats": 4.071633684946933,
+          "distortion_cells": 0.00016174199740466864,
+          "objective": 4.07325110492098
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 5.423245647701025e-09,
+          "converged": true,
+          "log_likelihood": -1929.075344678659
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6070370416952247e-12,
+          "converged": true,
+          "mi_nats": 4.077981212417224,
+          "distortion_cells": 0.00016162131850332916,
+          "objective": 4.079597425602257
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 4.895469927872209e-09,
+          "converged": true,
+          "log_likelihood": -1943.7914533509204
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.607032638956921e-12,
+          "converged": true,
+          "mi_nats": 4.081945346638781,
+          "distortion_cells": 0.0001620371221840051,
+          "objective": 4.083565717860621
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 9.206705707271584e-09,
+          "converged": true,
+          "log_likelihood": -1902.8998461823157
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.607057106229085e-12,
+          "converged": true,
+          "mi_nats": 4.076140691706178,
+          "distortion_cells": 0.000162136289176818,
+          "objective": 4.0777620545979465
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 7.034167250844631e-09,
+          "converged": true,
+          "log_likelihood": -1925.4579157441058
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6070280370024995e-12,
+          "converged": true,
+          "mi_nats": 4.077283270639341,
+          "distortion_cells": 0.00016237715086813098,
+          "objective": 4.078907042148022
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 4.180849250134955e-09,
+          "converged": true,
+          "log_likelihood": -1925.4084738827087
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 73,
+      "residual": 9.74316136400452e-09,
+      "converged": true,
+      "log_likelihood": -15661.028772058333
+    },
+    "final_ba": {
+      "iterations": 9,
+      "residual": 1.6215391269132333e-09,
+      "converged": true,
+      "mi_nats": 4.076612384344381,
+      "distortion_cells": 0.00016224344382347728,
+      "objective": 4.078234818782616
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 0,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.0036126659999808908,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_0.npz",
+    "sha256": "0f2f9c41d070d6f2eb71d7d8b6403f390252a8a35fd1909784187d4ca7e36438",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -1996.2638800126424
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "log_likelihood": -15970.11104010114
+    },
+    "final_ba": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "mi_nats": 0.0,
+      "distortion_cells": 4.136482711405379,
+      "objective": 0.0
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 0.1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 1.2647704580001573,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_0.1.npz",
+    "sha256": "a92d6a4835a03bc0cd75480aa2892ff3e53063171396db16a44e64a1711354ca",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 790,
+          "residual": 9.949680856990994e-09,
+          "converged": true,
+          "mi_nats": 0.0012474784523391492,
+          "distortion_cells": 3.0689900814674727,
+          "objective": 0.30814648659908644
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.5858510976056737e-05,
+          "converged": false,
+          "log_likelihood": -664.8792244282268
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1866,
+          "residual": 9.98601956681e-09,
+          "converged": true,
+          "mi_nats": 2.746180940009755e-09,
+          "distortion_cells": 1.9744684790043996,
+          "objective": 0.19744685064662093
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4551710475485535e-08,
+          "converged": false,
+          "log_likelihood": -0.0006068395874985295
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1863,
+          "residual": 9.967271785704668e-09,
+          "converged": true,
+          "mi_nats": 2.7355097987044157e-09,
+          "distortion_cells": 1.97438318616879,
+          "objective": 0.19743832135238878
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4493859820663424e-08,
+          "converged": false,
+          "log_likelihood": -0.0006045074157510093
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1861,
+          "residual": 9.955812729778302e-09,
+          "converged": true,
+          "mi_nats": 2.7287180637268566e-09,
+          "distortion_cells": 1.9743265376567936,
+          "objective": 0.19743265649439742
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.445700996416388e-08,
+          "converged": false,
+          "log_likelihood": -0.0006030237529040536
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1859,
+          "residual": 9.98311744382363e-09,
+          "converged": true,
+          "mi_nats": 2.7334715327657256e-09,
+          "distortion_cells": 1.9742841532103161,
+          "objective": 0.19742841805450315
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.448153301442101e-08,
+          "converged": false,
+          "log_likelihood": -0.0006040871809212629
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1858,
+          "residual": 9.962470959301584e-09,
+          "converged": true,
+          "mi_nats": 2.7256392490006094e-09,
+          "distortion_cells": 1.9742501840455358,
+          "objective": 0.19742502113019283
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4439525283793664e-08,
+          "converged": false,
+          "log_likelihood": -0.0006023665551153507
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1857,
+          "residual": 9.95738702602722e-09,
+          "converged": true,
+          "mi_nats": 2.722441038587311e-09,
+          "distortion_cells": 1.9742219560939893,
+          "objective": 0.19742219833184
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.4422151251025639e-08,
+          "converged": false,
+          "log_likelihood": -0.0006016682863960342
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1856,
+          "residual": 9.963297076254207e-09,
+          "converged": true,
+          "mi_nats": 2.7225100718233514e-09,
+          "distortion_cells": 1.9741977880911645,
+          "objective": 0.19741978153162654
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.442214592195512e-08,
+          "converged": false,
+          "log_likelihood": -0.0006016909434473593
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.544148041044858e-06,
+      "converged": false,
+      "log_likelihood": -665.0290736275371
+    },
+    "final_ba": {
+      "iterations": 2144,
+      "residual": 9.973845083166566e-09,
+      "converged": true,
+      "mi_nats": 4.216330347953524e-09,
+      "distortion_cells": 2.6435694122053652,
+      "objective": 0.2643569454368669
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 0.3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.9337734169998839,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_0.3.npz",
+    "sha256": "166a035545f448dab8ee50088759bb4dfadf913b5c2907c5530dc98c705e6627",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 576,
+          "residual": 9.838125203387449e-09,
+          "converged": true,
+          "mi_nats": 0.011286696019529354,
+          "distortion_cells": 3.0188121724650703,
+          "objective": 0.9169303477590504
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.25405706323245e-05,
+          "converged": false,
+          "log_likelihood": -664.2675102184851
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 459,
+          "residual": 9.860705474373788e-09,
+          "converged": true,
+          "mi_nats": 0.013973004157079479,
+          "distortion_cells": 0.9835684619728544,
+          "objective": 0.3090435427489358
+        },
+        "ibu": {
+          "iterations": 426,
+          "residual": 9.869441486287656e-09,
+          "converged": true,
+          "log_likelihood": -244.2939027863376
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1208,
+          "residual": 9.951732854451834e-09,
+          "converged": true,
+          "mi_nats": 0.004547448961658436,
+          "distortion_cells": 0.982948225400286,
+          "objective": 0.29943191658174423
+        },
+        "ibu": {
+          "iterations": 875,
+          "residual": 9.988782967429444e-09,
+          "converged": true,
+          "log_likelihood": -106.73125830387045
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1101,
+          "residual": 9.981289350591283e-09,
+          "converged": true,
+          "mi_nats": 0.0050844397918901295,
+          "distortion_cells": 0.9829492769197035,
+          "objective": 0.29996922286780114
+        },
+        "ibu": {
+          "iterations": 1672,
+          "residual": 9.988344706890473e-09,
+          "converged": true,
+          "log_likelihood": -98.21010862857742
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 317,
+          "residual": 9.6980937724922e-09,
+          "converged": true,
+          "mi_nats": 1.0944680148908202e-08,
+          "distortion_cells": 0.9052211066121498,
+          "objective": 0.2715663429283251
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.2060583582117488e-08,
+          "converged": false,
+          "log_likelihood": -6.292219083850015e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 317,
+          "residual": 9.63601498593647e-09,
+          "converged": true,
+          "mi_nats": 1.0868606484184679e-08,
+          "distortion_cells": 0.9051843686397235,
+          "objective": 0.2715553214605235
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.1907186176228777e-08,
+          "converged": false,
+          "log_likelihood": -6.248520955687749e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 317,
+          "residual": 9.584938398532472e-09,
+          "converged": true,
+          "mi_nats": 1.0806050327187712e-08,
+          "distortion_cells": 0.9051539663389643,
+          "objective": 0.2715462007077396
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.1781044523550008e-08,
+          "converged": false,
+          "log_likelihood": -6.212586826014476e-05
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 316,
+          "residual": 9.983577187178128e-09,
+          "converged": true,
+          "mi_nats": 1.1251086411197478e-08,
+          "distortion_cells": 0.9051280563691043,
+          "objective": 0.27153842816181767
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.267786514131842e-08,
+          "converged": false,
+          "log_likelihood": -6.46843946824394e-05
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.1118878491613313e-05,
+      "converged": false,
+      "log_likelihood": -1114.6337067261736
+    },
+    "final_ba": {
+      "iterations": 1541,
+      "residual": 9.995121064143575e-09,
+      "converged": true,
+      "mi_nats": 0.003940006966723721,
+      "distortion_cells": 2.62966682376049,
+      "objective": 0.7928400540948707
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 1,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 1.1816664170000877,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_1.npz",
+    "sha256": "b140649e0727c1df9a9984a931656ba7856c344b3e5659e9d0b66bace6076443",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1999,
+          "residual": 9.963645103416852e-09,
+          "converged": true,
+          "mi_nats": 0.9685006746547538,
+          "distortion_cells": 1.6023659761768996,
+          "objective": 2.570866650831653
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 6.1740786104769185e-06,
+          "converged": false,
+          "log_likelihood": -1649.3096560920833
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 2197,
+          "residual": 9.976947194607332e-09,
+          "converged": true,
+          "mi_nats": 0.9907780084502734,
+          "distortion_cells": 1.2109309563759278,
+          "objective": 2.201708964826201
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 6.0856202467977905e-06,
+          "converged": false,
+          "log_likelihood": -1124.61592172487
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1240,
+          "residual": 9.974916878596751e-09,
+          "converged": true,
+          "mi_nats": 1.0278391157211917,
+          "distortion_cells": 1.195456308269777,
+          "objective": 2.223295423990969
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.764962012713928e-07,
+          "converged": false,
+          "log_likelihood": -1225.0889559952825
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 703,
+          "residual": 9.914076365413749e-09,
+          "converged": true,
+          "mi_nats": 1.0103104230698796,
+          "distortion_cells": 1.1796529964579952,
+          "objective": 2.1899634195278748
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.938114800223087e-06,
+          "converged": false,
+          "log_likelihood": -1203.0956191238213
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 3016,
+          "residual": 9.98425377964074e-09,
+          "converged": true,
+          "mi_nats": 1.007586967035965,
+          "distortion_cells": 1.1710178913325717,
+          "objective": 2.1786048583685367
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.141505370568014e-07,
+          "converged": false,
+          "log_likelihood": -1184.4114071834192
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 1033,
+          "residual": 9.94519849112363e-09,
+          "converged": true,
+          "mi_nats": 0.9691596061346373,
+          "distortion_cells": 1.1846012638567034,
+          "objective": 2.1537608699913404
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 9.064474385429844e-07,
+          "converged": false,
+          "log_likelihood": -1100.11454705807
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 437,
+          "residual": 9.820766672108405e-09,
+          "converged": true,
+          "mi_nats": 0.948774073510782,
+          "distortion_cells": 1.1764596062054808,
+          "objective": 2.125233679716263
+        },
+        "ibu": {
+          "iterations": 1570,
+          "residual": 9.96317573061234e-09,
+          "converged": true,
+          "log_likelihood": -1083.1494363358672
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 875,
+          "residual": 9.898310626005324e-09,
+          "converged": true,
+          "mi_nats": 0.9320731891836498,
+          "distortion_cells": 1.1778853638478597,
+          "objective": 2.1099585530315093
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.883363652700366e-08,
+          "converged": false,
+          "log_likelihood": -1045.2305428682403
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 3.1449804765992795e-06,
+      "converged": false,
+      "log_likelihood": -9662.923412204289
+    },
+    "final_ba": {
+      "iterations": 477,
+      "residual": 9.810885379488377e-09,
+      "converged": true,
+      "mi_nats": 1.0373005888636104,
+      "distortion_cells": 1.1697503320377987,
+      "objective": 2.207050920901409
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 3,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.05094612499988216,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_3.npz",
+    "sha256": "46d80c6be8cbf5ab5ce2a306b3b744a13a620eea8ff27d337bc5c633f21aa633",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 16,
+          "residual": 8.776234294849417e-09,
+          "converged": true,
+          "mi_nats": 3.299399978698241,
+          "distortion_cells": 0.2168571881123419,
+          "objective": 3.9499715430352667
+        },
+        "ibu": {
+          "iterations": 32,
+          "residual": 8.19435209360342e-09,
+          "converged": true,
+          "log_likelihood": -1948.9076594855946
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 62,
+          "residual": 8.207264035053896e-09,
+          "converged": true,
+          "mi_nats": 3.132107817443932,
+          "distortion_cells": 0.22349999192469205,
+          "objective": 3.8026077932180082
+        },
+        "ibu": {
+          "iterations": 50,
+          "residual": 9.219489720269092e-09,
+          "converged": true,
+          "log_likelihood": -1903.5380318660436
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 39,
+          "residual": 8.982567634152616e-09,
+          "converged": true,
+          "mi_nats": 3.1495404434428913,
+          "distortion_cells": 0.22462096471675616,
+          "objective": 3.8234033375931595
+        },
+        "ibu": {
+          "iterations": 106,
+          "residual": 9.350772782218842e-09,
+          "converged": true,
+          "log_likelihood": -1913.1622856011334
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 42,
+          "residual": 9.056025318532335e-09,
+          "converged": true,
+          "mi_nats": 3.1584048706985977,
+          "distortion_cells": 0.22540149852534513,
+          "objective": 3.8346093662746332
+        },
+        "ibu": {
+          "iterations": 36,
+          "residual": 9.834752698854865e-09,
+          "converged": true,
+          "log_likelihood": -1912.5224070153129
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 55,
+          "residual": 8.115402849728781e-09,
+          "converged": true,
+          "mi_nats": 3.167381119439364,
+          "distortion_cells": 0.224945686654894,
+          "objective": 3.842218179404046
+        },
+        "ibu": {
+          "iterations": 50,
+          "residual": 8.822381171100235e-09,
+          "converged": true,
+          "log_likelihood": -1917.1764515090576
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 40,
+          "residual": 8.164438403124308e-09,
+          "converged": true,
+          "mi_nats": 3.1708722713252104,
+          "distortion_cells": 0.22564274688730307,
+          "objective": 3.8478005119871197
+        },
+        "ibu": {
+          "iterations": 155,
+          "residual": 9.998584529768983e-09,
+          "converged": true,
+          "log_likelihood": -1908.9780103049768
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 28,
+          "residual": 5.643668421484449e-09,
+          "converged": true,
+          "mi_nats": 3.1759661399633687,
+          "distortion_cells": 0.22524536250023444,
+          "objective": 3.851702227464072
+        },
+        "ibu": {
+          "iterations": 268,
+          "residual": 9.999003631303602e-09,
+          "converged": true,
+          "log_likelihood": -1917.9281601251548
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 28,
+          "residual": 8.820277841437019e-09,
+          "converged": true,
+          "mi_nats": 3.179936909358541,
+          "distortion_cells": 0.22519381436977254,
+          "objective": 3.8555183524678585
+        },
+        "ibu": {
+          "iterations": 57,
+          "residual": 8.400340499158804e-09,
+          "converged": true,
+          "log_likelihood": -1911.0551343969248
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 284,
+      "residual": 9.94154276879662e-09,
+      "converged": true,
+      "log_likelihood": -15585.027816791926
+    },
+    "final_ba": {
+      "iterations": 28,
+      "residual": 6.332217528104422e-09,
+      "converged": true,
+      "mi_nats": 3.1788203729057427,
+      "distortion_cells": 0.22542306492525074,
+      "objective": 3.855089567681495
+    }
+  },
+  {
+    "scenario": "commute",
+    "beta": 10,
+    "development_ids": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009,
+      4010,
+      4011,
+      4012,
+      4013,
+      4014,
+      4015,
+      4016,
+      4017,
+      4018,
+      4019
+    ],
+    "n_samples": 3840,
+    "wall_seconds": 0.010860874999934822,
+    "source_sample_sha256": "f503e10392714a24555a7aafb3a7ba2a6a4158fecd7dbb9c36b284755a6e38cf",
+    "channel_file": "results/privic_training/commute_10.npz",
+    "sha256": "2832f62a06e81bc8df589764262eddb08287e8c9826d70d60bbcfe5bc4610632",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 2,
+          "residual": 6.222800053024002e-13,
+          "converged": true,
+          "mi_nats": 4.157101863778388,
+          "distortion_cells": 0.00016201168600238266,
+          "objective": 4.158721980638412
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 3.6187222697547927e-09,
+          "converged": true,
+          "log_likelihood": -1952.8538058315262
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 1.7567858279221582e-10,
+          "converged": true,
+          "mi_nats": 4.066567377096467,
+          "distortion_cells": 0.00016888941907669628,
+          "objective": 4.068256271287234
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 6.76568868984706e-09,
+          "converged": true,
+          "log_likelihood": -1938.6952817451797
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 8.134903861645171e-11,
+          "converged": true,
+          "mi_nats": 4.082416696344724,
+          "distortion_cells": 0.0001700256727223738,
+          "objective": 4.084116953071948
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 5.784557065985352e-09,
+          "converged": true,
+          "log_likelihood": -1936.166401720167
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 6.242972805381442e-11,
+          "converged": true,
+          "mi_nats": 4.086706979711259,
+          "distortion_cells": 0.00017014080625803947,
+          "objective": 4.08840838777384
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 3.724929475978911e-09,
+          "converged": true,
+          "log_likelihood": -1947.444562054278
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 3.6831537819637106e-11,
+          "converged": true,
+          "mi_nats": 4.094495691343582,
+          "distortion_cells": 0.0001697562382023319,
+          "objective": 4.096193253725605
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 4.879101405015629e-09,
+          "converged": true,
+          "log_likelihood": -1929.67527328814
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 2.2480350914122482e-11,
+          "converged": true,
+          "mi_nats": 4.0920986361242075,
+          "distortion_cells": 0.00017002010282315489,
+          "objective": 4.093798837152439
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 3.155870009763362e-11,
+          "converged": true,
+          "log_likelihood": -1924.3511372190408
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 1.1062373239667522e-11,
+          "converged": true,
+          "mi_nats": 4.093478926696655,
+          "distortion_cells": 0.0001700298735394784,
+          "objective": 4.09517922543205
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 4.22420378017041e-09,
+          "converged": true,
+          "log_likelihood": -1938.774220257925
+        },
+        "n": 480
+      },
+      {
+        "ba": {
+          "iterations": 4,
+          "residual": 1.699240748109787e-11,
+          "converged": true,
+          "mi_nats": 4.096278698264339,
+          "distortion_cells": 0.0001700653910696648,
+          "objective": 4.097979352175035
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 6.174741131598216e-09,
+          "converged": true,
+          "log_likelihood": -1926.4565658914053
+        },
+        "n": 480
+      }
+    ],
+    "gibu": {
+      "iterations": 3,
+      "residual": 7.360349205121075e-10,
+      "converged": true,
+      "log_likelihood": -15736.413880345403
+    },
+    "final_ba": {
+      "iterations": 4,
+      "residual": 8.514855487362638e-12,
+      "converged": true,
+      "mi_nats": 4.09615407557234,
+      "distortion_cells": 0.0001700909767704421,
+      "objective": 4.097854985340044
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 0.002892707999990307,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_0.npz",
+    "sha256": "78e8e048ad7590a370e0278be7265cbcaabeaed815b40a9e3e12559993b3db9d",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "mi_nats": 0.0,
+          "distortion_cells": 4.136482711405379,
+          "objective": 0.0
+        },
+        "ibu": {
+          "iterations": 1,
+          "residual": 0.0,
+          "converged": true,
+          "log_likelihood": -573.9258655036347
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "log_likelihood": -4591.406924029077
+    },
+    "final_ba": {
+      "iterations": 1,
+      "residual": 0.0,
+      "converged": true,
+      "mi_nats": 0.0,
+      "distortion_cells": 4.136482711405379,
+      "objective": 0.0
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0.1,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 1.451845042000059,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_0.1.npz",
+    "sha256": "f9a2aeb9b12c93bb3498bbc52de9d488d1763c4c00989e7aece6f5022bc2bf13",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 790,
+          "residual": 9.949680856990994e-09,
+          "converged": true,
+          "mi_nats": 0.0012474784523391492,
+          "distortion_cells": 3.0689900814674727,
+          "objective": 0.30814648659908644
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.931794382403762e-05,
+          "converged": false,
+          "log_likelihood": -190.83859166567305
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3081,
+          "residual": 9.984731708101435e-09,
+          "converged": true,
+          "mi_nats": 5.332938758794382e-09,
+          "distortion_cells": 1.2337130494611648,
+          "objective": 0.12337131027905524
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.876382312362203e-08,
+          "converged": false,
+          "log_likelihood": -0.00030740694504069477
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3063,
+          "residual": 9.991465543812694e-09,
+          "converged": true,
+          "mi_nats": 5.301115932366288e-09,
+          "distortion_cells": 1.2336393644440053,
+          "objective": 0.12336394174551647
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.85200812635933e-08,
+          "converged": false,
+          "log_likelihood": -0.00030557684433789317
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3052,
+          "residual": 9.963027770834009e-09,
+          "converged": true,
+          "mi_nats": 5.262876976584363e-09,
+          "distortion_cells": 1.2335905030327987,
+          "objective": 0.12335905556615685
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.823413635695161e-08,
+          "converged": false,
+          "log_likelihood": -0.00030337549169488906
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3043,
+          "residual": 9.97716911035737e-09,
+          "converged": true,
+          "mi_nats": 5.253214594499404e-09,
+          "distortion_cells": 1.2335541061843904,
+          "objective": 0.12335541587165365
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.815783389260474e-08,
+          "converged": false,
+          "log_likelihood": -0.00030282062007256705
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3036,
+          "residual": 9.982397114402282e-09,
+          "converged": true,
+          "mi_nats": 5.242358248153112e-09,
+          "distortion_cells": 1.2335250330051895,
+          "objective": 0.12335250854287719
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.807412754519568e-08,
+          "converged": false,
+          "log_likelihood": -0.0003021965101902606
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3030,
+          "residual": 9.995112848493193e-09,
+          "converged": true,
+          "mi_nats": 5.237757254240705e-09,
+          "distortion_cells": 1.2335008493978252,
+          "objective": 0.12335009017753978
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.803665929447142e-08,
+          "converged": false,
+          "log_likelihood": -0.0003019326908426308
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 3026,
+          "residual": 9.960015145971113e-09,
+          "converged": true,
+          "mi_nats": 5.209777765798245e-09,
+          "distortion_cells": 1.2334801342865889,
+          "objective": 0.12334801863843665
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.783014593250478e-08,
+          "converged": false,
+          "log_likelihood": -0.00030032107385261916
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 5.294840637486142e-06,
+      "converged": false,
+      "log_likelihood": -190.9210658553659
+    },
+    "final_ba": {
+      "iterations": 4985,
+      "residual": 9.988916360725852e-09,
+      "converged": true,
+      "mi_nats": 1.1747260533542006e-08,
+      "distortion_cells": 2.1120476596230393,
+      "objective": 0.21120477770956447
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0.3,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 1.159544207999943,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_0.3.npz",
+    "sha256": "873338cd5115ad9aa66b4268f2b05ef04eeee6eff9e566d7f93e5578b57db28b",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 576,
+          "residual": 9.838125203387449e-09,
+          "converged": true,
+          "mi_nats": 0.011286696019529354,
+          "distortion_cells": 3.0188121724650703,
+          "objective": 0.9169303477590504
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.629936073793692e-05,
+          "converged": false,
+          "log_likelihood": -190.6141942712086
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 2150,
+          "residual": 9.999177374986346e-09,
+          "converged": true,
+          "mi_nats": 0.0048799650299499175,
+          "distortion_cells": 2.104318534055133,
+          "objective": 0.6361755252464898
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.758971838523472e-05,
+          "converged": false,
+          "log_likelihood": -74.73739190953123
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 821,
+          "residual": 9.927350164140591e-09,
+          "converged": true,
+          "mi_nats": 1.228687556772872e-08,
+          "distortion_cells": 1.5434041273582801,
+          "objective": 0.4630212504943596
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.673502816352702e-08,
+          "converged": false,
+          "log_likelihood": -6.192342756921042e-05
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 819,
+          "residual": 9.948962098604852e-09,
+          "converged": true,
+          "mi_nats": 1.2280335014584972e-08,
+          "distortion_cells": 1.5432286514212916,
+          "objective": 0.4629686077067225
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.67229614547837e-08,
+          "converged": false,
+          "log_likelihood": -6.189195810737865e-05
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 818,
+          "residual": 9.886558349769814e-09,
+          "converged": true,
+          "mi_nats": 1.2178623611995936e-08,
+          "distortion_cells": 1.5430971134900755,
+          "objective": 0.46292914622564624
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.650322958319684e-08,
+          "converged": false,
+          "log_likelihood": -6.138051307843664e-05
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 817,
+          "residual": 9.870489116034298e-09,
+          "converged": true,
+          "mi_nats": 1.2139344586152425e-08,
+          "distortion_cells": 1.5429927538892063,
+          "objective": 0.4628978383061065
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.641902058231338e-08,
+          "converged": false,
+          "log_likelihood": -6.118345083766467e-05
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 816,
+          "residual": 9.8844432638856e-09,
+          "converged": true,
+          "mi_nats": 1.2140344296267922e-08,
+          "distortion_cells": 1.542906067514834,
+          "objective": 0.46287183239479446
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.642225480076199e-08,
+          "converged": false,
+          "log_likelihood": -6.118922025250397e-05
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 815,
+          "residual": 9.91954907103576e-09,
+          "converged": true,
+          "mi_nats": 1.2169591498535586e-08,
+          "distortion_cells": 1.5428317584256748,
+          "objective": 0.4628495396972939
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.648682081995979e-08,
+          "converged": false,
+          "log_likelihood": -6.133724181594175e-05
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 4.8922174234411475e-05,
+      "converged": false,
+      "log_likelihood": -265.4882406195228
+    },
+    "final_ba": {
+      "iterations": 252,
+      "residual": 9.850359306007306e-09,
+      "converged": true,
+      "mi_nats": 3.0200996828174377e-09,
+      "distortion_cells": 1.212260664004498,
+      "objective": 0.36367820222144903
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 1,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 0.7906823749999603,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_1.npz",
+    "sha256": "179cc2145b249198d54fb1a9ee755a8f15e745efe68a7a8970deda995830fd1c",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 1999,
+          "residual": 9.963645103416852e-09,
+          "converged": true,
+          "mi_nats": 0.9685006746547538,
+          "distortion_cells": 1.6023659761768996,
+          "objective": 2.570866650831653
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.274403371118895e-08,
+          "converged": false,
+          "log_likelihood": -469.9074816347004
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 245,
+          "residual": 9.499019792968966e-09,
+          "converged": true,
+          "mi_nats": 0.5416168350515665,
+          "distortion_cells": 0.9387112835874893,
+          "objective": 1.480328118639056
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.396831900898123e-06,
+          "converged": false,
+          "log_likelihood": -168.55953918527968
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 173,
+          "residual": 9.81961789658925e-09,
+          "converged": true,
+          "mi_nats": 0.4945607003619171,
+          "distortion_cells": 0.8892668879108585,
+          "objective": 1.3838275882727755
+        },
+        "ibu": {
+          "iterations": 135,
+          "residual": 9.227552916213355e-09,
+          "converged": true,
+          "log_likelihood": -171.16269514943752
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 214,
+          "residual": 9.887627383520226e-09,
+          "converged": true,
+          "mi_nats": 0.40763442000427813,
+          "distortion_cells": 0.9134761099236471,
+          "objective": 1.3211105299279253
+        },
+        "ibu": {
+          "iterations": 819,
+          "residual": 9.958278091026784e-09,
+          "converged": true,
+          "log_likelihood": -153.24801265603392
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 292,
+          "residual": 9.826734204132492e-09,
+          "converged": true,
+          "mi_nats": 0.36060203070361196,
+          "distortion_cells": 0.9114046832185669,
+          "objective": 1.272006713922179
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 2.412116638006792e-06,
+          "converged": false,
+          "log_likelihood": -125.14526676742028
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 213,
+          "residual": 9.416946339015223e-09,
+          "converged": true,
+          "mi_nats": 0.374773281862121,
+          "distortion_cells": 0.8128081616680973,
+          "objective": 1.1875814435302183
+        },
+        "ibu": {
+          "iterations": 58,
+          "residual": 9.74215119686761e-09,
+          "converged": true,
+          "log_likelihood": -100.79352880043187
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 214,
+          "residual": 9.726633449635407e-09,
+          "converged": true,
+          "mi_nats": 0.35448830019041055,
+          "distortion_cells": 0.8124827060165654,
+          "objective": 1.166971006206976
+        },
+        "ibu": {
+          "iterations": 31,
+          "residual": 9.875142925608316e-09,
+          "converged": true,
+          "log_likelihood": -107.84638764218562
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 214,
+          "residual": 9.7310229913672e-09,
+          "converged": true,
+          "mi_nats": 0.3524108907780701,
+          "distortion_cells": 0.8127980094126406,
+          "objective": 1.1652089001907107
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.0092985031073809e-08,
+          "converged": false,
+          "log_likelihood": -112.83829750576264
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 5000,
+      "residual": 2.8516494541483417e-06,
+      "converged": false,
+      "log_likelihood": -1420.7528368698036
+    },
+    "final_ba": {
+      "iterations": 295,
+      "residual": 9.78725710359696e-09,
+      "converged": true,
+      "mi_nats": 0.3853568180983882,
+      "distortion_cells": 0.9823447049674868,
+      "objective": 1.367701523065875
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 3,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 0.662596915999984,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_3.npz",
+    "sha256": "8bdc71eaafa903fbedd5e8ac0e33604ef1aca48ae332caf7ebf359ec6c46b0e7",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 16,
+          "residual": 8.776234294849417e-09,
+          "converged": true,
+          "mi_nats": 3.299399978698241,
+          "distortion_cells": 0.2168571881123419,
+          "objective": 3.9499715430352667
+        },
+        "ibu": {
+          "iterations": 49,
+          "residual": 9.07087414946453e-09,
+          "converged": true,
+          "log_likelihood": -433.3910443066915
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 1581,
+          "residual": 9.999673658302878e-09,
+          "converged": true,
+          "mi_nats": 2.1784080818920817,
+          "distortion_cells": 0.20188532677036952,
+          "objective": 2.78406406220319
+        },
+        "ibu": {
+          "iterations": 2455,
+          "residual": 9.981189464138651e-09,
+          "converged": true,
+          "log_likelihood": -347.55382283182394
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 529,
+          "residual": 9.957392960594158e-09,
+          "converged": true,
+          "mi_nats": 2.031544898656667,
+          "distortion_cells": 0.2017227933579659,
+          "objective": 2.6367132787305647
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 3.546420665349881e-06,
+          "converged": false,
+          "log_likelihood": -345.5607076436875
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 597,
+          "residual": 9.878166797145986e-09,
+          "converged": true,
+          "mi_nats": 2.013354203824748,
+          "distortion_cells": 0.2004482368923891,
+          "objective": 2.6146989145019153
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 1.9162182740084868e-08,
+          "converged": false,
+          "log_likelihood": -317.3040032220905
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 100,
+          "residual": 9.279090290888394e-09,
+          "converged": true,
+          "mi_nats": 1.9559464725276108,
+          "distortion_cells": 0.19581689336029387,
+          "objective": 2.5433971526084926
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 7.311442173354651e-08,
+          "converged": false,
+          "log_likelihood": -345.6446243047168
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 193,
+          "residual": 9.42041723794862e-09,
+          "converged": true,
+          "mi_nats": 1.9669354720277554,
+          "distortion_cells": 0.1931717349603167,
+          "objective": 2.5464506769087056
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 9.569698805698273e-08,
+          "converged": false,
+          "log_likelihood": -315.0813946571698
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 707,
+          "residual": 9.968349030078321e-09,
+          "converged": true,
+          "mi_nats": 1.926270120663741,
+          "distortion_cells": 0.1915007333449021,
+          "objective": 2.5007723206984473
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 5.658517633275184e-08,
+          "converged": false,
+          "log_likelihood": -325.02566421809445
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 85,
+          "residual": 8.734396126460687e-09,
+          "converged": true,
+          "mi_nats": 1.9101566741056157,
+          "distortion_cells": 0.19029302285272431,
+          "objective": 2.4810357426637886
+        },
+        "ibu": {
+          "iterations": 5000,
+          "residual": 8.078736278603962e-08,
+          "converged": false,
+          "log_likelihood": -339.2838458525961
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 697,
+      "residual": 9.87848031586851e-09,
+      "converged": true,
+      "log_likelihood": -2846.963374171107
+    },
+    "final_ba": {
+      "iterations": 734,
+      "residual": 9.936360342160944e-09,
+      "converged": true,
+      "mi_nats": 1.8860028291599789,
+      "distortion_cells": 0.2021524471970147,
+      "objective": 2.492460170751023
+    }
+  },
+  {
+    "scenario": "geolife",
+    "beta": 10,
+    "development_ids": [
+      0,
+      5,
+      10,
+      15,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      65,
+      70,
+      75,
+      85,
+      95,
+      115,
+      125,
+      130,
+      135,
+      140,
+      145,
+      155
+    ],
+    "n_samples": 1104,
+    "wall_seconds": 0.018289957999968465,
+    "source_sample_sha256": "ff83ba33fc285995a8f16b49d00240297bab5f8f62a193027e90835ddfa720ae",
+    "channel_file": "results/privic_training/geolife_10.npz",
+    "sha256": "4fbf4440b51e29b7315ae3acdf02e621edfee181403a2076a75ea6378ba677cc",
+    "rounds": [
+      {
+        "ba": {
+          "iterations": 2,
+          "residual": 6.222800053024002e-13,
+          "converged": true,
+          "mi_nats": 4.157101863778388,
+          "distortion_cells": 0.00016201168600238266,
+          "objective": 4.158721980638412
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.075553708596022e-11,
+          "converged": true,
+          "log_likelihood": -392.21345439263325
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.64722353534488e-12,
+          "converged": true,
+          "mi_nats": 2.840505186642699,
+          "distortion_cells": 0.00013830416151533605,
+          "objective": 2.841888228257852
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 1.494902118759356e-11,
+          "converged": true,
+          "log_likelihood": -363.02017411005704
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6464109149960696e-12,
+          "converged": true,
+          "mi_nats": 2.79840881249347,
+          "distortion_cells": 0.0001433647519260878,
+          "objective": 2.799842460012731
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 8.334222201256125e-11,
+          "converged": true,
+          "log_likelihood": -360.78961734835667
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6475001048289647e-12,
+          "converged": true,
+          "mi_nats": 2.772822490662231,
+          "distortion_cells": 0.00014461006000431582,
+          "objective": 2.774268591262274
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 2.733055361886505e-11,
+          "converged": true,
+          "log_likelihood": -358.59106062993305
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6473068182876193e-12,
+          "converged": true,
+          "mi_nats": 2.7568120912529563,
+          "distortion_cells": 0.00014644658518588394,
+          "objective": 2.758276557104815
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 4.1386540028387486e-11,
+          "converged": true,
+          "log_likelihood": -382.0087074858444
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6475651964375196e-12,
+          "converged": true,
+          "mi_nats": 2.7792681052206856,
+          "distortion_cells": 0.00014511754217952672,
+          "objective": 2.7807192806424808
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 7.153132253190364e-12,
+          "converged": true,
+          "log_likelihood": -346.7180253720992
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.6475861062391057e-12,
+          "converged": true,
+          "mi_nats": 2.7470785984214814,
+          "distortion_cells": 0.00014508628269366755,
+          "objective": 2.748529461248418
+        },
+        "ibu": {
+          "iterations": 3,
+          "residual": 7.785211808553072e-09,
+          "converged": true,
+          "log_likelihood": -367.1159965150154
+        },
+        "n": 138
+      },
+      {
+        "ba": {
+          "iterations": 6,
+          "residual": 2.647565931274879e-12,
+          "converged": true,
+          "mi_nats": 2.7421980605223264,
+          "distortion_cells": 0.00014457808151327958,
+          "objective": 2.7436438413374593
+        },
+        "ibu": {
+          "iterations": 4,
+          "residual": 2.1692102974979477e-11,
+          "converged": true,
+          "log_likelihood": -383.6379358269153
+        },
+        "n": 138
+      }
+    ],
+    "gibu": {
+      "iterations": 114,
+      "residual": 9.272438954312429e-09,
+      "converged": true,
+      "log_likelihood": -3051.969223233127
+    },
+    "final_ba": {
+      "iterations": 43,
+      "residual": 9.045088067427542e-09,
+      "converged": true,
+      "mi_nats": 2.7629067096024693,
+      "distortion_cells": 0.00014466581333331043,
+      "objective": 2.7643533677358025
+    }
+  }
+]

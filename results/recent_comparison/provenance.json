@@ -1,0 +1,14 @@
+{
+  "inputs": {
+    "results/recent_baselines/rows.csv": "77f180c91860739df4e34cfa49a93332a6f0f54e6c6cf63758d743c41ff4260d",
+    "results/final/rows.csv": "bd5d25cadd5c0852c9d66ed71877d1e614280447e8ee908efbafb2c915a16edd",
+    "results/recent_privic_thinning/rows.csv": "2c3cef93892387911a99f093f497e886decb1e87e9b4884eecef7fc492ec9373"
+  },
+  "bootstrap": 1000,
+  "seed": 92026,
+  "unit": "synthetic seed or GeoLife user",
+  "ci": "paired percentile, pointwise, no multiplicity correction",
+  "interpolation": "lower convex envelope, reselected within each bootstrap; inside observed range only; require 95% overlap; exploratory oracle mixtures, no deployed-policy claim",
+  "conditions": 168,
+  "trajectory_rows": 12894
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "scenario": "static",
+    "target_utility": 0.5,
+    "comparator": "pml",
+    "bsp_hit": 0.08522875584412697,
+    "comparator_hit": 0.16737569597239935
+  },
+  {
+    "scenario": "static",
+    "target_utility": 0.5,
+    "comparator": "privic",
+    "bsp_hit": 0.08522875584412697,
+    "comparator_hit": 0.1930911126066209
+  },
+  {
+    "scenario": "static",
+    "target_utility": 0.5,
+    "comparator": "random",
+    "bsp_hit": 0.08522875584412697,
+    "comparator_hit": 0.22145768873838642
+  },
+  {
+    "scenario": "static",
+    "target_utility": 0.7,
+    "comparator": "pml",
+    "bsp_hit": 0.18618711997068635,
+    "comparator_hit": 0.28076668175225
+  },
+  {
+    "scenario": "static",
+    "target_utility": 0.7,
+    "comparator": "privic",
+    "bsp_hit": 0.18618711997068635,
+    "comparator_hit": 0.39160192467027005
+  },
+  {
+    "scenario": "static",
+    "target_utility": 0.7,
+    "comparator": "random",
+    "bsp_hit": 0.18618711997068635,
+    "comparator_hit": null
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.5,
+    "comparator": "pml",
+    "bsp_hit": 0.06135000403487363,
+    "comparator_hit": 0.08902740700012644
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.5,
+    "comparator": "privic",
+    "bsp_hit": 0.06135000403487363,
+    "comparator_hit": 0.08148785405829
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.5,
+    "comparator": "random",
+    "bsp_hit": 0.06135000403487363,
+    "comparator_hit": 0.07948129501883479
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.7,
+    "comparator": "pml",
+    "bsp_hit": 0.10458029077322488,
+    "comparator_hit": 0.11470702982147717
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.7,
+    "comparator": "privic",
+    "bsp_hit": 0.10458029077322488,
+    "comparator_hit": 0.10710615429586293
+  },
+  {
+    "scenario": "walk",
+    "target_utility": 0.7,
+    "comparator": "random",
+    "bsp_hit": 0.10458029077322488,
+    "comparator_hit": null
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.5,
+    "comparator": "pml",
+    "bsp_hit": 0.03669117865531068,
+    "comparator_hit": 0.04341221819615374
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.5,
+    "comparator": "privic",
+    "bsp_hit": 0.03669117865531068,
+    "comparator_hit": 0.0432190144148151
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.5,
+    "comparator": "random",
+    "bsp_hit": 0.03669117865531068,
+    "comparator_hit": 0.04722144031224832
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.7,
+    "comparator": "pml",
+    "bsp_hit": 0.05573328851224819,
+    "comparator_hit": 0.04981554106974325
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.7,
+    "comparator": "privic",
+    "bsp_hit": 0.05573328851224819,
+    "comparator_hit": 0.05963573204750895
+  },
+  {
+    "scenario": "commute",
+    "target_utility": 0.7,
+    "comparator": "random",
+    "bsp_hit": 0.05573328851224819,
+    "comparator_hit": null
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.5,
+    "comparator": "pml",
+    "bsp_hit": 0.02887931640674383,
+    "comparator_hit": 0.10540613459087253
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.5,
+    "comparator": "privic",
+    "bsp_hit": 0.02887931640674383,
+    "comparator_hit": 0.13333099355374026
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.5,
+    "comparator": "random",
+    "bsp_hit": 0.02887931640674383,
+    "comparator_hit": 0.14796663994494183
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.7,
+    "comparator": "pml",
+    "bsp_hit": 0.19265172678877923,
+    "comparator_hit": 0.20285194017665886
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.7,
+    "comparator": "privic",
+    "bsp_hit": 0.19265172678877923,
+    "comparator_hit": 0.19327788443693641
+  },
+  {
+    "scenario": "geolife",
+    "target_utility": 0.7,
+    "comparator": "random",
+    "bsp_hit": 0.19265172678877923,
+    "comparator_hit": null
+  }
+]
