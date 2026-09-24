@@ -1,0 +1,12 @@
+{
+  "input_sha256": "8d44a519a480b302c354114bb64e02b6f8b80eea4bb18fc4b131fab4fb2b08b2",
+  "bootstrap": 1000,
+  "unit": "synthetic: seed with four users; GeoLife: user",
+  "estimator": "cluster mean for risks; ratio of summed completions to opportunities for utility",
+  "figure_files": [
+    "tradeoff",
+    "calibration",
+    "attacks"
+  ],
+  "interval": "percentile cluster bootstrap 95%, pointwise; no multiplicity correction"
+}

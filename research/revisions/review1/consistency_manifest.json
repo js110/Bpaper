@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0",
+  "numeric_facts": [
+    {
+      "fact_id": "N001",
+      "concept": "development_fitted_no_output_hit",
+      "value": 25.74626865671642,
+      "unit": "percent",
+      "section": "Abstract",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N002",
+      "concept": "development_fitted_no_output_hit",
+      "value": 25.74626865671642,
+      "unit": "percent",
+      "section": "6.1",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N003",
+      "concept": "development_fitted_no_output_hit",
+      "value": 25.74626865671642,
+      "unit": "percent",
+      "section": "Table 1",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N004",
+      "concept": "test_static_windows",
+      "value": 17,
+      "unit": "count",
+      "section": "5.1",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N005",
+      "concept": "static_raw_completion",
+      "value": 4.6891281695033,
+      "unit": "percent",
+      "section": "6.2 and Table 2",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": 2879,
+      "numerator": 135,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N006",
+      "concept": "static_large_task_share",
+      "value": 83.7037037037037,
+      "unit": "percent",
+      "section": "6.2 and Appendix A",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N007",
+      "concept": "walk_raw_completion",
+      "value": 4.758596734977423,
+      "unit": "percent",
+      "section": "6.2 and Table 2",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": 2879,
+      "numerator": 137,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N008",
+      "concept": "walk_large_task_share",
+      "value": 90.51094890510949,
+      "unit": "percent",
+      "section": "6.2 and Appendix A",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N009",
+      "concept": "commute_raw_completion",
+      "value": 4.897533865925668,
+      "unit": "percent",
+      "section": "6.2 and Table 2",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": 2879,
+      "numerator": 141,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N010",
+      "concept": "commute_large_task_share",
+      "value": 84.39716312056737,
+      "unit": "percent",
+      "section": "6.2 and Appendix A",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 20,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N011",
+      "concept": "geolife_raw_completion",
+      "value": 5.327181208053691,
+      "unit": "percent",
+      "section": "6.2 and Table 2",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": 2384,
+      "numerator": 127,
+      "evidence_ids": [
+        "E017"
+      ]
+    },
+    {
+      "fact_id": "N012",
+      "concept": "geolife_large_task_share",
+      "value": 85.8267716535433,
+      "unit": "percent",
+      "section": "6.2 and Appendix A",
+      "analysis_set": "review1_diagnostics",
+      "sample_size": 67,
+      "denominator": null,
+      "numerator": null,
+      "evidence_ids": [
+        "E017"
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "method_id": "M017",
+      "name": "Development-fitted no-output predictor and user bootstrap",
+      "analysis_intent": "descriptive",
+      "protocol_status": "post_hoc",
+      "outcome_ids": [
+        "O017"
+      ]
+    },
+    {
+      "method_id": "M018",
+      "name": "Task-area counts and pooled raw completion",
+      "analysis_intent": "descriptive",
+      "protocol_status": "post_hoc",
+      "outcome_ids": [
+        "O018",
+        "O019",
+        "O020",
+        "O021"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "result_id": "R017",
+      "method_id": "M017",
+      "outcome_id": "O017",
+      "analysis_intent": "descriptive",
+      "sample_size": 67,
+      "evidence_ids": [
+        "E017"
+      ],
+      "reported_sections": [
+        "6.1",
+        "Table 1"
+      ]
+    },
+    {
+      "result_id": "R018",
+      "method_id": "M018",
+      "outcome_id": "O018",
+      "analysis_intent": "descriptive",
+      "sample_size": 20,
+      "evidence_ids": [
+        "E017"
+      ],
+      "reported_sections": [
+        "6.2",
+        "Table 2",
+        "Appendix A: static"
+      ]
+    },
+    {
+      "result_id": "R019",
+      "method_id": "M018",
+      "outcome_id": "O019",
+      "analysis_intent": "descriptive",
+      "sample_size": 20,
+      "evidence_ids": [
+        "E017"
+      ],
+      "reported_sections": [
+        "6.2",
+        "Table 2",
+        "Appendix A: walk"
+      ]
+    },
+    {
+      "result_id": "R020",
+      "method_id": "M018",
+      "outcome_id": "O020",
+      "analysis_intent": "descriptive",
+      "sample_size": 20,
+      "evidence_ids": [
+        "E017"
+      ],
+      "reported_sections": [
+        "6.2",
+        "Table 2",
+        "Appendix A: commute"
+      ]
+    },
+    {
+      "result_id": "R021",
+      "method_id": "M018",
+      "outcome_id": "O021",
+      "analysis_intent": "descriptive",
+      "sample_size": 67,
+      "evidence_ids": [
+        "E017"
+      ],
+      "reported_sections": [
+        "6.2",
+        "Table 2",
+        "Appendix A: geolife"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "citation_occurrence_count": 24,
+  "cited_reference_count": 11,
+  "errors": [],
+  "malformed_citation_line_numbers": [],
+  "missing_reference_ids": [],
+  "missing_reference_line_numbers": {},
+  "notice": "This local audit checks structured citation-key consistency and identifier format only. It does not query registries, verify that a source exists, confirm that a citation supports a claim, or echo manuscript/reference prose.",
+  "reference_count": 11,
+  "references_without_persistent_locator": [
+    "geolife2008",
+    "geolife2009"
+  ],
+  "schema_version": "2.0",
+  "status": "VALID",
+  "uncited_reference_ids": [],
+  "unverified_cited_reference_ids": [
+    "adaptive2023",
+    "bayesian",
+    "fedsense2025",
+    "fingerprint",
+    "geolife2008",
+    "geolife2009",
+    "geolife2010",
+    "inference2026",
+    "pml2024",
+    "privic2024",
+    "tmarkov"
+  ],
+  "valid": true,
+  "verification_counts": {
+    "not_verified": 11
+  },
+  "warnings": [
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "adaptive2023"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "bayesian"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "fedsense2025"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "fingerprint"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "geolife2008"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "geolife2009"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "geolife2010"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "inference2026"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "pml2024"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "privic2024"
+    },
+    {
+      "code": "CITED_REFERENCE_NOT_VERIFIED",
+      "field": "tmarkov"
+    },
+    {
+      "code": "REFERENCE_HAS_NO_PERSISTENT_LOCATOR",
+      "field": "geolife2008"
+    },
+    {
+      "code": "REFERENCE_HAS_NO_PERSISTENT_LOCATOR",
+      "field": "geolife2009"
+    }
+  ]
+}

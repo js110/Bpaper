@@ -1,0 +1,35 @@
+{
+  "runs": {
+    "final": {
+      "conditions": 120,
+      "trajectories": 9210,
+      "events": 442080,
+      "rows_sha256": "bd5d25cadd5c0852c9d66ed71877d1e614280447e8ee908efbafb2c915a16edd",
+      "issues": []
+    },
+    "kl_baseline": {
+      "conditions": 16,
+      "trajectories": 1228,
+      "events": 58944,
+      "rows_sha256": "1ceed8457fb3183516ee896b267e818fa73d23823205a1f7e19bee71ca55414f",
+      "issues": []
+    },
+    "sensitivity": {
+      "conditions": 72,
+      "trajectories": 2880,
+      "events": 138240,
+      "rows_sha256": "b2b59173d8a81b93e77e53f3665858f6e580fc1fe2f6f454d6b71a809837c07b",
+      "issues": []
+    },
+    "informed": {
+      "conditions": 12,
+      "trajectories": 480,
+      "events": 23040,
+      "rows_sha256": "2be3612422c062535038a9016f4bc21d1f20f4c2f978ebba9993e163e6a84b8e",
+      "issues": []
+    }
+  },
+  "issues": [],
+  "dataset_sha256_matches": true,
+  "scope": "All completed main, KL, sensitivity and informed logs checked against trajectory rows; this is not independent scientific validation."
+}

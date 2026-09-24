@@ -1,0 +1,61 @@
+{
+  "prior": {
+    "fit_split": "development",
+    "evaluate_split": "test",
+    "map_cells": [
+      34
+    ],
+    "development_peak": 0.223731884057971,
+    "hit": 0.2574626865671642,
+    "low": 0.17877021144278607,
+    "high": 0.3482664800995025,
+    "users": 67,
+    "slots": 48,
+    "uniform_hit": 0.015625,
+    "bootstrap_seed": 170926,
+    "bootstrap_replicates": 1000,
+    "interval": "percentile user bootstrap conditional on fixed development predictor; pointwise",
+    "interpretation": "No task outputs; fixed cell predictor; not a rerun of an adaptive attack"
+  },
+  "mobility": {
+    "users": 67,
+    "static_windows": 17,
+    "unique_cells_median": 3.0,
+    "changes": 180,
+    "adjacent_pairs": 3149
+  },
+  "totals": {
+    "static": {
+      "tasks": 2879,
+      "opportunities": 277,
+      "completed": 135,
+      "retention": 0.48736462093862815,
+      "raw_completion": 0.046891281695032996,
+      "large_region_completion_share": 0.837037037037037
+    },
+    "walk": {
+      "tasks": 2879,
+      "opportunities": 280,
+      "completed": 137,
+      "retention": 0.48928571428571427,
+      "raw_completion": 0.04758596734977423,
+      "large_region_completion_share": 0.9051094890510949
+    },
+    "commute": {
+      "tasks": 2879,
+      "opportunities": 259,
+      "completed": 141,
+      "retention": 0.5444015444015444,
+      "raw_completion": 0.048975338659256684,
+      "large_region_completion_share": 0.8439716312056738
+    },
+    "geolife": {
+      "tasks": 2384,
+      "opportunities": 257,
+      "completed": 127,
+      "retention": 0.49416342412451364,
+      "raw_completion": 0.05327181208053691,
+      "large_region_completion_share": 0.8582677165354331
+    }
+  }
+}

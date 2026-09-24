@@ -1,0 +1,12 @@
+{
+  "paper/main.tex": "c523c1f292833203b1037178bd13c71442072d4103624026cb8dd35d39a45270",
+  "paper/main.pdf": "0d2d2866de3eef0fca05d7c589f7376189b4e96d410d523dc55f9a034c057179",
+  "paper/main_table.tex": "7b91a324cd05d3d4d3f7bde9374572de998ab1dc2212251b45a48449620624d0",
+  "paper/recent_tradeoff.pdf": "bf43f27055cf7cb306e7276854368901fb54977fb628ccd402d2b0b007fc51d6",
+  "paper/recent_tradeoff.png": "03c5aee86b9fb701bd5147d8b40fd930392cc75b0b59c988728627e352d28959",
+  "paper/manuscript_source.zip": "e5c1f98a01513be7a158c019059111462c6feac55c7886e3dba2af5b02d0e523",
+  "src/analyze_recent.py": "685bcb570d00ff6062d6ed95a73401c27b162be2dac8509485557cec799d86bf",
+  "src/paper_assets.py": "2b7f9d2ed578deed59b4b726ff9a01937e9a4b138c4bc8f6579757ccec108655",
+  "research/manuscript_status.json": "6d0783db70f41a18f8d1a02df21d2ceb0266be6a243cfa9641047f53772bc8f9",
+  "research/delivery_manifest.json": "62211ba03a34c19d3ff36da79b7093f65cda2f9298f36757b600afe5800c4fd0"
+}

@@ -1,0 +1,25 @@
+
+============================================================
+CITATION VALIDATION REPORT
+============================================================
+
+File: paper/references.bib
+Total entries in BibTeX: 11
+Manuscript checked: paper/main.tex
+  Actual unique citations in manuscript: 11
+  Missing/unresolved: 0
+  Unused in bib file: 0
+Valid entries: 11
+Errors: 0
+Warnings: 2
+Duplicates: 0
+
+------------------------------------------------------------
+WARNINGS (should fix):
+------------------------------------------------------------
+
+Entry inference2026: Missing recommended field "volume"
+
+Entry geolife2010: Missing recommended field "doi"
+
+Detailed report saved to: research/citation_validation.json

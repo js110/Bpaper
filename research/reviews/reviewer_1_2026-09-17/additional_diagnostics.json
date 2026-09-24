@@ -1,0 +1,26 @@
+{
+  "static": {
+    "legitimate": 2879.0,
+    "opportunities": 277.0,
+    "complete": 135.0,
+    "raw_completion": 0.046891281695032996
+  },
+  "walk": {
+    "legitimate": 2879.0,
+    "opportunities": 280.0,
+    "complete": 137.0,
+    "raw_completion": 0.04758596734977423
+  },
+  "commute": {
+    "legitimate": 2879.0,
+    "opportunities": 259.0,
+    "complete": 141.0,
+    "raw_completion": 0.048975338659256684
+  },
+  "geolife": {
+    "legitimate": 2384.0,
+    "opportunities": 257.0,
+    "complete": 127.0,
+    "raw_completion": 0.05327181208053691
+  }
+}

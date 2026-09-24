@@ -1,0 +1,10 @@
+{
+  "python": "3.14.5",
+  "numpy": "2.4.1",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "code_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/model.py": "8d40e179d50505367f669e26e3a6b239185664d5e9ebe77009019e2f51830527",
+    "src/experiment.py": "08567b3b7173b976063dc9348beffc683fb728d28062165672d7dd5f34b01efa"
+  }
+}

@@ -1,0 +1,386 @@
+[
+  {
+    "id": "StaticNoneHit",
+    "value": "49.7",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_none_1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticNoneRetention",
+    "value": "100.0",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_none_1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticNoneCoverage",
+    "value": "98.5",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_none_1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticNonePeak",
+    "value": "51.9",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_none_1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticBspHit",
+    "value": "7.4",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_bsp_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticBspRetention",
+    "value": "48.7",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_bsp_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticBspCoverage",
+    "value": "96.9",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_bsp_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticBspPeak",
+    "value": "8.0",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_bsp_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticAblationHit",
+    "value": "10.1",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_positive_only_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticAblationRetention",
+    "value": "51.6",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_positive_only_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticAblationCoverage",
+    "value": "96.9",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_positive_only_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticAblationPeak",
+    "value": "10.2",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_positive_only_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticRandomHit",
+    "value": "21.5",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_random_0.5:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticRandomRetention",
+    "value": "49.1",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_random_0.5:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticRandomCoverage",
+    "value": "98.1",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_random_0.5:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "StaticRandomPeak",
+    "value": "22.5",
+    "source": "results/combined/analysis/summary.csv:static_adaptive_random_0.5:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkNoneHit",
+    "value": "16.4",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_none_1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkNoneRetention",
+    "value": "100.0",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_none_1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkNoneCoverage",
+    "value": "95.3",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_none_1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkNonePeak",
+    "value": "16.1",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_none_1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkBspHit",
+    "value": "5.9",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_bsp_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkBspRetention",
+    "value": "48.9",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_bsp_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkBspCoverage",
+    "value": "94.9",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_bsp_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkBspPeak",
+    "value": "6.8",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_bsp_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkAblationHit",
+    "value": "6.5",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_positive_only_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkAblationRetention",
+    "value": "47.1",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_positive_only_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkAblationCoverage",
+    "value": "95.7",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_positive_only_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkAblationPeak",
+    "value": "7.3",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_positive_only_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkRandomHit",
+    "value": "7.9",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_random_0.5:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkRandomRetention",
+    "value": "48.6",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_random_0.5:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkRandomCoverage",
+    "value": "94.3",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_random_0.5:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "WalkRandomPeak",
+    "value": "7.9",
+    "source": "results/combined/analysis/summary.csv:walk_adaptive_random_0.5:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteNoneHit",
+    "value": "7.8",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_none_1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteNoneRetention",
+    "value": "100.0",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_none_1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteNoneCoverage",
+    "value": "78.4",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_none_1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteNonePeak",
+    "value": "13.4",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_none_1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteBspHit",
+    "value": "3.9",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_bsp_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteBspRetention",
+    "value": "54.4",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_bsp_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteBspCoverage",
+    "value": "82.5",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_bsp_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteBspPeak",
+    "value": "6.7",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_bsp_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteAblationHit",
+    "value": "4.2",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_positive_only_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteAblationRetention",
+    "value": "54.1",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_positive_only_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteAblationCoverage",
+    "value": "82.4",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_positive_only_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteAblationPeak",
+    "value": "7.2",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_positive_only_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteRandomHit",
+    "value": "4.8",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_random_0.5:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteRandomRetention",
+    "value": "50.6",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_random_0.5:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteRandomCoverage",
+    "value": "81.8",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_random_0.5:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "CommuteRandomPeak",
+    "value": "7.7",
+    "source": "results/combined/analysis/summary.csv:commute_adaptive_random_0.5:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeNoneHit",
+    "value": "35.6",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_none_1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeNoneRetention",
+    "value": "100.0",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_none_1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeNoneCoverage",
+    "value": "94.0",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_none_1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeNonePeak",
+    "value": "35.8",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_none_1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeBspHit",
+    "value": "2.4",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_bsp_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeBspRetention",
+    "value": "49.4",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_bsp_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeBspCoverage",
+    "value": "92.7",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_bsp_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeBspPeak",
+    "value": "7.9",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_bsp_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeAblationHit",
+    "value": "1.8",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_positive_only_0.1:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeAblationRetention",
+    "value": "44.7",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_positive_only_0.1:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeAblationCoverage",
+    "value": "93.3",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_positive_only_0.1:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeAblationPeak",
+    "value": "9.3",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_positive_only_0.1:peak percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeRandomHit",
+    "value": "16.5",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_random_0.5:hit percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeRandomRetention",
+    "value": "55.6",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_random_0.5:utility percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeRandomCoverage",
+    "value": "94.0",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_random_0.5:covered95 percent",
+    "human_verified": false
+  },
+  {
+    "id": "GeolifeRandomPeak",
+    "value": "14.8",
+    "source": "results/combined/analysis/summary.csv:geolife_adaptive_random_0.5:peak percent",
+    "human_verified": false
+  }
+]

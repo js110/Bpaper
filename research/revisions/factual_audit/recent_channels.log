@@ -1,0 +1,14 @@
+{
+  "channels": 24,
+  "limit_hits": 68,
+  "final_ba_converged": 24,
+  "final_gibu_limit_hits": 7,
+  "largest_mean_log_likelihood_gap": 1.0576587812893834e-05,
+  "conditions": 60,
+  "trajectories": 4605,
+  "events": 221040,
+  "max_posterior_error": 0,
+  "shared_normal_tasks_and_availability": true,
+  "public_channel_reconstructed": true,
+  "issues": []
+}

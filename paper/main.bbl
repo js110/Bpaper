@@ -1,0 +1,82 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{fedsense2025}
+Z.~You, X.~Dong, X.~Liu, S.~Gao, Y.~Wang, Y.~Shen, {Location Privacy
+  Preservation Crowdsensing With Federated Reinforcement Learning}, IEEE
+  Transactions on Dependable and Secure Computing 22~(3) (2025) 1877--1894.
+\newblock \href {https://doi.org/10.1109/tdsc.2024.3398994}
+  {\path{doi:10.1109/tdsc.2024.3398994}}.
+
+\bibitem{tmarkov}
+G.~Qiu, Y.~Shen, K.~Cheng, L.~Liu, S.~Zeng, {Mobility-Aware Privacy-Preserving
+  Mobile Crowdsourcing}, Sensors 21~(7) (2021) 2474.
+\newblock \href {https://doi.org/10.3390/s21072474}
+  {\path{doi:10.3390/s21072474}}.
+
+\bibitem{fingerprint}
+C.~Wang, J.~Tao, S.~Su, D.~Chi, W.~Li, {Privacy-preserving task assignment in
+  mobile crowdsensing: a bilateral location fingerprint-based approach},
+  Cybersecurity 9~(1) (2026) 105.
+\newblock \href {https://doi.org/10.1186/s42400-025-00539-2}
+  {\path{doi:10.1186/s42400-025-00539-2}}.
+
+\bibitem{privic2024}
+S.~Biswas, C.~Palamidessi, {PRIVIC: A privacy-preserving method for incremental
+  collection of location data}, Proceedings on Privacy Enhancing Technologies
+  2024~(1) (2024) 582--596.
+\newblock \href {https://doi.org/10.56553/popets-2024-0033}
+  {\path{doi:10.56553/popets-2024-0033}}.
+
+\bibitem{pml2024}
+L.~Grosse, S.~Saeidian, T.~J. Oechtering, {Extremal Mechanisms for Pointwise
+  Maximal Leakage}, IEEE Transactions on Information Forensics and Security 19
+  (2024) 7952--7967.
+\newblock \href {https://doi.org/10.1109/tifs.2024.3449556}
+  {\path{doi:10.1109/tifs.2024.3449556}}.
+
+\bibitem{bayesian}
+R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
+  (2021) 1557--1603.
+\newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
+
+\bibitem{adaptive2023}
+J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
+  \href{https://proceedings.mlr.press/v202/whitehouse23a.html}{{Fully-Adaptive
+  Composition in Differential Privacy}}, in: Proceedings of the 40th
+  International Conference on Machine Learning, Vol. 202 of Proceedings of
+  Machine Learning Research, 2023, pp. 36990--37007.
+\newline\urlprefix\url{https://proceedings.mlr.press/v202/whitehouse23a.html}
+
+\bibitem{inference2026}
+R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
+  {Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based
+  on Homomorphic Encryption and Reversible Obfuscation}, IEEE Transactions on
+  Mobile Computing (2026) 1--18, Early Access; volume not assigned in the
+  verified record.
+\newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
+  {\path{doi:10.1109/tmc.2026.3721057}}.
+
+\bibitem{geolife2009}
+Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel
+  Sequences from GPS Trajectories}, in: Proceedings of the 18th International
+  Conference on World Wide Web, 2009, pp. 791--800.
+
+\bibitem{geolife2008}
+Y.~Zheng, Q.~Li, Y.~Chen, X.~Xie, W.-Y. Ma, {Understanding Mobility Based on
+  GPS Data}, in: Proceedings of the 10th International Conference on Ubiquitous
+  Computing, 2008, pp. 312--321.
+
+\bibitem{geolife2010}
+Y.~Zheng, X.~Xie, W.-Y. Ma,
+  \href{https://www.microsoft.com/en-us/research/publication/geolife-a-collaborative-social-networking-service-among-user-location-and-trajectory/}{{GeoLife:
+  A Collaborative Social Networking Service among User, Location and
+  Trajectory}}, IEEE Data Engineering Bulletin 33~(2) (2010) 32--40, {DOI} not
+  listed in the publisher record.
+\newline\urlprefix\url{https://www.microsoft.com/en-us/research/publication/geolife-a-collaborative-social-networking-service-among-user-location-and-trajectory/}
+
+\end{thebibliography}

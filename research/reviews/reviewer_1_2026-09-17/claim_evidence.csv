@@ -1,0 +1,7 @@
+claim_id,location,claim_type,claim_summary,evidence_ids,support_level,alignment_issue,limitation,requested_action
+C1,main.tex:99-124,methods,BSP local maximality and conditional sequential cap,E-BSP;E-TESTS,supported,none,Finite checks supplement rather than prove the result,Retain explicit model and transition conditions
+C2,"main.tex:149,204",methods,No test parameter selection,E-CODE;E-REANALYSIS,partly_supported,scope,Training is separate but test envelopes and followup grids are exploratory,Qualify training separation claim
+C3,"main.tex:214,265",prediction,Replay risk under uniform prior model,E-PRIOR,partly_supported,scope,Population prior ignoring outputs attains 25.75 percent hit,Report dev-prior control or narrow replay interpretation
+C4,main.tex:223,primary_outcome,Nonzero useful opportunity retention,E-TASKAREA,partly_supported,outcome,Broad regions account for most completions at rho 0.1,Add area-stratified and raw completion table
+C5,"main.tex:46,304",other,Novelty relative to closest 2026 work,,not_assessed,scope,Full text absent,Complete bounded full-text comparison
+C6,main.tex:247-258,primary_outcome,Recent policy envelope differences,E-REANALYSIS;E-LP,supported,none,Exploratory; fixed training and selected grid,State fixed training conditional uncertainty

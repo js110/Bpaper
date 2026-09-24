@@ -1,0 +1,1360 @@
+{
+  "random_formula_checks": {
+    "bsp_cases": 300,
+    "failures": [],
+    "pml_lp_cases": 100,
+    "pml_max_abs_objective_error": 1.1102230246251565e-16
+  },
+  "silence_example": {
+    "q": 0.0,
+    "success_only_silence_peak": 0.8695652173913043
+  },
+  "geolife": {
+    "development": {
+      "n_users": 23,
+      "static_windows": 7,
+      "cell_changes": 55,
+      "total_adjacent_pairs": 1081,
+      "unique_cells_median": 3.0
+    },
+    "validation": {
+      "n_users": 17,
+      "static_windows": 5,
+      "cell_changes": 45,
+      "total_adjacent_pairs": 799,
+      "unique_cells_median": 3.0
+    },
+    "test": {
+      "n_users": 67,
+      "static_windows": 17,
+      "cell_changes": 180,
+      "total_adjacent_pairs": 3149,
+      "unique_cells_median": 3.0
+    },
+    "development_only_population_prior": {
+      "map_cells": [
+        34
+      ],
+      "dev_peak": 0.223731884057971,
+      "test_hit": 0.2574626865671642,
+      "uniform_reference": 0.015625,
+      "caution": "diagnostic unconditional stationary population prior, not an adaptive attacker rerun; not evidence of posterior cap violation"
+    }
+  },
+  "normal_task_area_stratification": {
+    "static": {
+      "none_1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 8,
+          "completed": 8
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 40,
+          "completed": 40
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 37,
+          "completed": 37
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 51,
+          "completed": 51
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 31,
+          "completed": 31
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 16,
+          "completed": 16
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 25,
+          "completed": 25
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 7,
+          "completed": 7
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 42,
+          "completed": 42
+        }
+      },
+      "bsp_0.1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 8,
+          "completed": 0
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 40,
+          "completed": 0
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 37,
+          "completed": 13
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 51,
+          "completed": 33
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 31,
+          "completed": 16
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 16,
+          "completed": 9
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 25,
+          "completed": 15
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 7,
+          "completed": 0
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 10,
+          "completed": 8
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 42,
+          "completed": 31
+        }
+      }
+    },
+    "walk": {
+      "none_1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 14,
+          "completed": 14
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 40,
+          "completed": 40
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 38,
+          "completed": 38
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 51,
+          "completed": 51
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 28,
+          "completed": 28
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 15,
+          "completed": 15
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 24,
+          "completed": 24
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 9,
+          "completed": 9
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 9,
+          "completed": 9
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 42,
+          "completed": 42
+        }
+      },
+      "bsp_0.1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 14,
+          "completed": 0
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 40,
+          "completed": 0
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 38,
+          "completed": 6
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 51,
+          "completed": 39
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 28,
+          "completed": 15
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 15,
+          "completed": 7
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 24,
+          "completed": 18
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 9,
+          "completed": 0
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 9,
+          "completed": 7
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 42,
+          "completed": 35
+        }
+      }
+    },
+    "commute": {
+      "none_1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 8,
+          "completed": 8
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 44,
+          "completed": 44
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 29,
+          "completed": 29
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 43,
+          "completed": 43
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 27,
+          "completed": 27
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 16,
+          "completed": 16
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 25,
+          "completed": 25
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 5,
+          "completed": 5
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 11,
+          "completed": 11
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 41,
+          "completed": 41
+        }
+      },
+      "bsp_0.1": {
+        "1": {
+          "tasks": 1215,
+          "opportunities": 8,
+          "completed": 0
+        },
+        "4": {
+          "tasks": 926,
+          "opportunities": 44,
+          "completed": 0
+        },
+        "16": {
+          "tasks": 235,
+          "opportunities": 29,
+          "completed": 12
+        },
+        "48": {
+          "tasks": 85,
+          "opportunities": 43,
+          "completed": 35
+        },
+        "32": {
+          "tasks": 80,
+          "opportunities": 27,
+          "completed": 14
+        },
+        "64": {
+          "tasks": 18,
+          "opportunities": 10,
+          "completed": 10
+        },
+        "24": {
+          "tasks": 78,
+          "opportunities": 16,
+          "completed": 10
+        },
+        "40": {
+          "tasks": 70,
+          "opportunities": 25,
+          "completed": 15
+        },
+        "8": {
+          "tasks": 81,
+          "opportunities": 5,
+          "completed": 0
+        },
+        "36": {
+          "tasks": 20,
+          "opportunities": 11,
+          "completed": 7
+        },
+        "56": {
+          "tasks": 71,
+          "opportunities": 41,
+          "completed": 38
+        }
+      }
+    },
+    "geolife": {
+      "none_1": {
+        "1": {
+          "tasks": 1031,
+          "opportunities": 15,
+          "completed": 15
+        },
+        "4": {
+          "tasks": 741,
+          "opportunities": 33,
+          "completed": 33
+        },
+        "48": {
+          "tasks": 65,
+          "opportunities": 45,
+          "completed": 45
+        },
+        "16": {
+          "tasks": 195,
+          "opportunities": 41,
+          "completed": 41
+        },
+        "32": {
+          "tasks": 73,
+          "opportunities": 22,
+          "completed": 22
+        },
+        "56": {
+          "tasks": 49,
+          "opportunities": 33,
+          "completed": 33
+        },
+        "40": {
+          "tasks": 62,
+          "opportunities": 27,
+          "completed": 27
+        },
+        "36": {
+          "tasks": 12,
+          "opportunities": 8,
+          "completed": 8
+        },
+        "8": {
+          "tasks": 57,
+          "opportunities": 1,
+          "completed": 1
+        },
+        "24": {
+          "tasks": 79,
+          "opportunities": 18,
+          "completed": 18
+        },
+        "64": {
+          "tasks": 20,
+          "opportunities": 14,
+          "completed": 14
+        }
+      },
+      "bsp_0.1": {
+        "1": {
+          "tasks": 1031,
+          "opportunities": 15,
+          "completed": 0
+        },
+        "4": {
+          "tasks": 741,
+          "opportunities": 33,
+          "completed": 0
+        },
+        "48": {
+          "tasks": 65,
+          "opportunities": 45,
+          "completed": 34
+        },
+        "16": {
+          "tasks": 195,
+          "opportunities": 41,
+          "completed": 11
+        },
+        "32": {
+          "tasks": 73,
+          "opportunities": 22,
+          "completed": 13
+        },
+        "56": {
+          "tasks": 49,
+          "opportunities": 33,
+          "completed": 27
+        },
+        "40": {
+          "tasks": 62,
+          "opportunities": 27,
+          "completed": 16
+        },
+        "36": {
+          "tasks": 12,
+          "opportunities": 8,
+          "completed": 5
+        },
+        "8": {
+          "tasks": 57,
+          "opportunities": 1,
+          "completed": 0
+        },
+        "24": {
+          "tasks": 79,
+          "opportunities": 18,
+          "completed": 7
+        },
+        "64": {
+          "tasks": 20,
+          "opportunities": 14,
+          "completed": 14
+        }
+      }
+    }
+  },
+  "envelope_endpoint_sensitivity": [
+    {
+      "scenario": "static",
+      "method": "bsp",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.07964120384748612,
+      "hull": [
+        [
+          0.2888086642599278,
+          0.045140665228765135
+        ],
+        [
+          0.48736462093862815,
+          0.07395767313198956
+        ],
+        [
+          0.7870036101083033,
+          0.20873854438519368
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "bsp",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.07964120384748612,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.2888086642599278,
+          0.045140665228765135
+        ],
+        [
+          0.48736462093862815,
+          0.07395767313198956
+        ],
+        [
+          0.7870036101083033,
+          0.20873854438519368
+        ],
+        [
+          1.0,
+          0.4972204601503479
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "pml",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.16737569597239935,
+      "hull": [
+        [
+          0.036101083032490974,
+          0.015625
+        ],
+        [
+          0.148014440433213,
+          0.03430552233914399
+        ],
+        [
+          0.5992779783393503,
+          0.20490830904844576
+        ],
+        [
+          0.996389891696751,
+          0.49341923467061655
+        ],
+        [
+          1.0,
+          0.4972204601503479
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "pml",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.16737569597239935,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.036101083032490974,
+          0.015625
+        ],
+        [
+          0.148014440433213,
+          0.03430552233914399
+        ],
+        [
+          0.5992779783393503,
+          0.20490830904844576
+        ],
+        [
+          0.996389891696751,
+          0.49341923467061655
+        ],
+        [
+          1.0,
+          0.4972204601503479
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "privic",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.18580924825728978,
+      "hull": [
+        [
+          0.1407942238267148,
+          0.032479963369337665
+        ],
+        [
+          0.18772563176895307,
+          0.04362292550679084
+        ],
+        [
+          0.23104693140794225,
+          0.054903283530549886
+        ],
+        [
+          0.34657039711191334,
+          0.10375900446094195
+        ],
+        [
+          0.36462093862815886,
+          0.11197552848620793
+        ],
+        [
+          0.5126353790613718,
+          0.19270039543592407
+        ],
+        [
+          0.9350180505415162,
+          0.48851236147147803
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "privic",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.18580924825728978,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.1407942238267148,
+          0.032479963369337665
+        ],
+        [
+          0.18772563176895307,
+          0.04362292550679084
+        ],
+        [
+          0.23104693140794225,
+          0.054903283530549886
+        ],
+        [
+          0.34657039711191334,
+          0.10375900446094195
+        ],
+        [
+          0.36462093862815886,
+          0.11197552848620793
+        ],
+        [
+          0.5126353790613718,
+          0.19270039543592407
+        ],
+        [
+          1.0,
+          0.4972204601503479
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "random",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.22145768873838642,
+      "hull": [
+        [
+          0.1588447653429603,
+          0.05618220552884494
+        ],
+        [
+          0.31407942238267145,
+          0.11307646352178022
+        ],
+        [
+          0.49097472924187724,
+          0.21519839217163717
+        ],
+        [
+          0.6498194945848376,
+          0.3253620117464239
+        ]
+      ]
+    },
+    {
+      "scenario": "static",
+      "method": "random",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.2171997047132078,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.1588447653429603,
+          0.05618220552884494
+        ],
+        [
+          0.31407942238267145,
+          0.11307646352178022
+        ],
+        [
+          1.0,
+          0.4972204601503479
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "bsp",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.06103919994625723,
+      "hull": [
+        [
+          0.30357142857142855,
+          0.03795670314566799
+        ],
+        [
+          0.48928571428571427,
+          0.059034095816747664
+        ],
+        [
+          0.8785714285714287,
+          0.13188621252226182
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "bsp",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.06103919994625723,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.30357142857142855,
+          0.03795670314566799
+        ],
+        [
+          0.48928571428571427,
+          0.059034095816747664
+        ],
+        [
+          0.8785714285714287,
+          0.13188621252226182
+        ],
+        [
+          1.0,
+          0.16362411259319418
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "pml",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.08043289232786241,
+      "hull": [
+        [
+          0.03571428571428571,
+          0.015625
+        ],
+        [
+          0.12142857142857143,
+          0.02374651227678571
+        ],
+        [
+          0.8857142857142858,
+          0.13818882671952548
+        ],
+        [
+          1.0,
+          0.1634288000931942
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "pml",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.08043289232786241,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.03571428571428571,
+          0.015625
+        ],
+        [
+          0.12142857142857143,
+          0.02374651227678571
+        ],
+        [
+          0.8857142857142858,
+          0.13818882671952548
+        ],
+        [
+          1.0,
+          0.1634288000931942
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "privic",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.047835513941261634,
+      "hull": [
+        [
+          0.14285714285714285,
+          0.023752328780872908
+        ],
+        [
+          0.21071428571428572,
+          0.02765719736624686
+        ],
+        [
+          0.37857142857142856,
+          0.038607979350201646
+        ],
+        [
+          0.5214285714285715,
+          0.049463902398507516
+        ],
+        [
+          0.9392857142857143,
+          0.1508307936760294
+        ],
+        [
+          1.0,
+          0.1727553620222952
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "privic",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.047835513941261634,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.14285714285714285,
+          0.023752328780872908
+        ],
+        [
+          0.21071428571428572,
+          0.02765719736624686
+        ],
+        [
+          0.37857142857142856,
+          0.038607979350201646
+        ],
+        [
+          0.5214285714285715,
+          0.049463902398507516
+        ],
+        [
+          1.0,
+          0.16362411259319418
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "random",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.06948510894456877,
+      "hull": [
+        [
+          0.18571428571428572,
+          0.0370545249245394
+        ],
+        [
+          0.3321428571428572,
+          0.049751688259650394
+        ],
+        [
+          0.6607142857142857,
+          0.0883788096003417
+        ]
+      ]
+    },
+    {
+      "scenario": "walk",
+      "method": "random",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.06948510894456877,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.3321428571428572,
+          0.049751688259650394
+        ],
+        [
+          0.6607142857142857,
+          0.0883788096003417
+        ],
+        [
+          1.0,
+          0.16362411259319418
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "bsp",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.03669117865531068,
+      "hull": [
+        [
+          0.3166023166023166,
+          0.028172445953207677
+        ],
+        [
+          0.5444015444015444,
+          0.038753608677925086
+        ],
+        [
+          0.8687258687258688,
+          0.06851700270033068
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "bsp",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.03669117865531068,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.3166023166023166,
+          0.028172445953207677
+        ],
+        [
+          0.5444015444015444,
+          0.038753608677925086
+        ],
+        [
+          1.0,
+          0.07810824419069856
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "pml",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.03909539565899682,
+      "hull": [
+        [
+          0.03861003861003861,
+          0.015625
+        ],
+        [
+          0.7876447876447876,
+          0.05372756701125843
+        ],
+        [
+          0.9536679536679536,
+          0.07143731506114578
+        ],
+        [
+          0.9961389961389963,
+          0.0778478275240319
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "pml",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.03909539565899682,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.03861003861003861,
+          0.015625
+        ],
+        [
+          0.7876447876447876,
+          0.05372756701125843
+        ],
+        [
+          0.9536679536679536,
+          0.07143731506114578
+        ],
+        [
+          1.0,
+          0.07810824419069856
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "privic",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.03832924200996406,
+      "hull": [
+        [
+          0.1312741312741313,
+          0.018796877341554157
+        ],
+        [
+          0.16602316602316602,
+          0.016230018083045427
+        ],
+        [
+          0.41312741312741313,
+          0.032163095496640856
+        ],
+        [
+          1.0,
+          0.07381884083109091
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "privic",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.03832924200996406,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.16602316602316602,
+          0.016230018083045427
+        ],
+        [
+          0.41312741312741313,
+          0.032163095496640856
+        ],
+        [
+          1.0,
+          0.07381884083109091
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "random",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.042639464789002664,
+      "hull": [
+        [
+          0.1698841698841699,
+          0.020122425903765652
+        ],
+        [
+          0.6833976833976834,
+          0.05514893083635656
+        ]
+      ]
+    },
+    {
+      "scenario": "commute",
+      "method": "random",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.042639464789002664,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.1698841698841699,
+          0.020122425903765652
+        ],
+        [
+          0.6833976833976834,
+          0.05514893083635656
+        ],
+        [
+          1.0,
+          0.07810824419069856
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "bsp",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.02887931640674383,
+      "hull": [
+        [
+          0.24902723735408558,
+          0.008778682233672903
+        ],
+        [
+          0.4941634241245136,
+          0.024429519744351827
+        ],
+        [
+          0.5836575875486381,
+          0.09265973523436215
+        ],
+        [
+          0.735408560311284,
+          0.2230840720444714
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "bsp",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.02825263222657252,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.24902723735408558,
+          0.008778682233672903
+        ],
+        [
+          0.4941634241245136,
+          0.024429519744351827
+        ],
+        [
+          1.0,
+          0.35576593487014335
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "pml",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.10190046487910114,
+      "hull": [
+        [
+          0.05447470817120622,
+          0.015625
+        ],
+        [
+          0.10505836575875485,
+          0.004019661735963043
+        ],
+        [
+          0.42412451361867703,
+          0.06843739511766565
+        ],
+        [
+          0.8754863813229572,
+          0.2674997588267178
+        ],
+        [
+          0.9766536964980544,
+          0.3342136761277004
+        ],
+        [
+          1.0,
+          0.35576593487014335
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "pml",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.10190046487910114,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.10505836575875485,
+          0.004019661735963043
+        ],
+        [
+          0.42412451361867703,
+          0.06843739511766565
+        ],
+        [
+          0.8754863813229572,
+          0.2674997588267178
+        ],
+        [
+          0.9766536964980544,
+          0.3342136761277004
+        ],
+        [
+          1.0,
+          0.35576593487014335
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "privic",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.07163658528309735,
+      "hull": [
+        [
+          0.10894941634241244,
+          0.011582751300872383
+        ],
+        [
+          0.14396887159533076,
+          0.004830761354497069
+        ],
+        [
+          0.19066147859922178,
+          0.009584061102834423
+        ],
+        [
+          0.20233463035019456,
+          0.011007095620768688
+        ],
+        [
+          0.5330739299610895,
+          0.07837319524557833
+        ],
+        [
+          0.7626459143968871,
+          0.19853245246748744
+        ],
+        [
+          0.9688715953307392,
+          0.3507888484421905
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "privic",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.07163658528309735,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.14396887159533076,
+          0.004830761354497069
+        ],
+        [
+          0.19066147859922178,
+          0.009584061102834423
+        ],
+        [
+          0.20233463035019456,
+          0.011007095620768688
+        ],
+        [
+          0.5330739299610895,
+          0.07837319524557833
+        ],
+        [
+          0.7626459143968871,
+          0.19853245246748744
+        ],
+        [
+          1.0,
+          0.35576593487014335
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "random",
+      "add_common_endpoints": false,
+      "risk_at_0.5": 0.14542388448103022,
+      "hull": [
+        [
+          0.16731517509727625,
+          0.04164448609302847
+        ],
+        [
+          0.6964980544747081,
+          0.20672048820727687
+        ]
+      ]
+    },
+    {
+      "scenario": "geolife",
+      "method": "random",
+      "add_common_endpoints": true,
+      "risk_at_0.5": 0.14542388448103022,
+      "hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          0.16731517509727625,
+          0.04164448609302847
+        ],
+        [
+          0.6964980544747081,
+          0.20672048820727687
+        ],
+        [
+          1.0,
+          0.35576593487014335
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "scenario": "static",
+    "beta": 0,
+    "gibu_mean_log_likelihood_gap_upper_bound": 0,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "static",
+    "beta": 0.1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 8.27969784400473e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "static",
+    "beta": 0.3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 5.600438865549506e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "static",
+    "beta": 1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 1.3406470378285462e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "static",
+    "beta": 3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 5.908962366074633e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "static",
+    "beta": 10,
+    "gibu_mean_log_likelihood_gap_upper_bound": 2.1986031351062252e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 0,
+    "gibu_mean_log_likelihood_gap_upper_bound": 0,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 0.1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 2.828506033170086e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 0.3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 7.727689535830251e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 7.349505124487621e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 1.1532250532297894e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "walk",
+    "beta": 10,
+    "gibu_mean_log_likelihood_gap_upper_bound": 2.7659915868838425e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 0,
+    "gibu_mean_log_likelihood_gap_upper_bound": 0,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 0.1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 3.1081392638521166e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 0.3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 1.0576587812893834e-05,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 9.39793053045257e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 1.023393292332031e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "commute",
+    "beta": 10,
+    "gibu_mean_log_likelihood_gap_upper_bound": 1.130850968422692e-11,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0,
+    "gibu_mean_log_likelihood_gap_upper_bound": 0,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0.1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 7.135981512362832e-06,
+    "converged": false,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 0.3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 5.7773636097380177e-08,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 1,
+    "gibu_mean_log_likelihood_gap_upper_bound": 6.492821984505071e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 3,
+    "gibu_mean_log_likelihood_gap_upper_bound": 3.1751830997794883e-07,
+    "converged": true,
+    "final_ba_converged": true
+  },
+  {
+    "scenario": "geolife",
+    "beta": 10,
+    "gibu_mean_log_likelihood_gap_upper_bound": 8.598474332544015e-08,
+    "converged": true,
+    "final_ba_converged": true
+  }
+]

@@ -1,0 +1,1548 @@
+Truthful Reports and Informative Silence:
+A Bayesian Participation Filter for Sequential Mobile Crowdsensing
+Lili Hea , Sheng Jianga , Linghui Lyua , Lei Zhanga,∗
+a College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China
+
+Abstract
+Keeping precise coordinates on a mobile device does not eliminate the location information contained in successful
+region-constrained sensing tasks. Silence can also be informative without establishing that a user is outside a region.
+We study this binary channel for linkable accounts under uncertain delivery, participation, and timely completion. A
+branch-safe participation (BSP) filter limits the maximum posterior mass after either output. We derive its maximal
+scalar gate and a model-conditional sequential bound. A software evaluation combines synthetic mobility and replay of
+67 GeoLife users excluded from model fitting. At opportunity retention 0.5, exploratory policy envelopes selected
+on test results give static-scenario MAP hit-rate reductions of 8.8 and 10.6 percentage points against task-channel
+adaptations of PML and PRIVIC, both published in 2024. Pointwise cluster-bootstrap intervals for this selection
+procedure exclude zero, conditional on fixed training; other scenarios show no consistent advantage over both methods.
+Two diagnostics qualify the utility and privacy interpretation: completed tasks mainly cover large regions, and a
+development-fitted, no-output location predictor attains 25.75% replay accuracy, exceeding the reported uniform-prior
+inference accuracy under BSP. A better-informed attacker can also exceed the client’s cap. These results support a
+conditional participation mechanism for the declared channel, while limiting claims about practical attacker accuracy,
+fine-region task service, and general superiority.
+Keywords: Mobile crowdsensing, location privacy, Bayesian inference, adaptive tasks, participation filtering,
+reproducible simulation
+Draft status. This manuscript contains executed experiments and reproducible analyses. The author, affiliation,
+corresponding-author, and funding details below were supplied for this draft; author approval and verification of the
+remaining declarations and citations remain pending. No submission or external peer review has occurred.
+1. Introduction
+Mobile crowdsensing allows personal devices to contribute observations associated with places and time windows.
+A participant may wish to supply a valid observation for a public region without disclosing precise coordinates
+to the platform. Recent systems such as FedSense move task-selection decisions to participants through federated
+reinforcement learning [1]. However, the meaning of a report can itself carry location information. When a platform
+knows that a task can only be completed inside a specified region, a successful completion provides evidence of
+presence there, even if the message contains no coordinate field.
+This concern is established rather than new. Qiu et al. explicitly discuss location inference from task acceptance
+and refusal together with mobility correlations [2]. Recent location-fingerprint task assignment also addresses the
+exposure of worker and task locations [3]. Coordinate mechanisms such as PRIVIC optimize a location-distortion
+trade-off [4]; valid sensing-task completion is a distinct application objective. These observations motivate a narrower
+question: for truthful task completions linked to one account, how much additional location information can repeated
+outputs provide, and can a client limit this information while retaining useful participation?
+∗ Corresponding author.
+
+Email address: 8213662@163.com (Lei Zhang)
+
+1
+
+A negative output needs careful treatment. A user may not receive a task, may decline participation, or may fail to
+submit before the deadline. The platform may therefore see silence even when the user is inside the region. An attack
+that deterministically removes the region after every missing report uses information that the platform does not have.
+Conversely, treating every missing report as uninformative discards evidence that is present in the probability of silence.
+Both mistakes can misstate the apparent strength of a defense.
+We model successful completion and silence as two branches of a public observation channel. The client maintains
+the posterior that follows from the declared observation and mobility models. Before each task, it chooses a scalar gate
+probability using only the task and public history. This restriction makes the gate reproducible by the platform and
+avoids adding a private, location-dependent refusal signal. The resulting branch-safe participation (BSP) rule enforces
+a maximum-posterior constraint on both possible observations. Its purpose is to regulate participation; it does not
+conceal task regions, falsify measurements, or introduce a cryptographic protocol.
+The study provides three concrete outputs. First, it specifies the observation boundary and derives a closed-form,
+maximal feasible gate for the binary channel. The accompanying sequential bound states exactly when mobility
+prediction preserves the cap. Second, it compares the gate with task-channel instantiations of two 2024 mechanisms,
+PRIVIC [4] and pointwise maximal leakage (PML) optimization [5], alongside random participation, periodic limits,
+aligned-region admission, a success-only ablation, and a KL branch filter [6]. Third, it reports the limits of these
+findings: several matched-utility comparisons are inconclusive, a weaker ablation can achieve a lower empirical hit
+rate, and more accurate attacker knowledge invalidates the client’s interpretation of its own bound.
+These are channel-specific analytical and experimental outputs. In contrast to protocols that conceal task choices
+through encrypted allocation and dummy reports, we retain linkable truthful completion outcomes and regulate their
+disclosure through participation. The closed-form gate solves a one-dimensional set of linear constraints; its algebra
+alone does not establish a new general privacy framework. We do not claim to introduce task-output inference, adaptive
+privacy filtering, or Bayesian privacy. Recent work on fully adaptive composition formalizes privacy accounting in
+differential privacy [7]. Our guarantee concerns posterior concentration under a declared model and is substantially
+narrower. The distinction matters for both the proof and the interpretation of the experiments.
+2. Related work and scope
+FedSense combines local reinforcement-learning task selection with asynchronous federated aggregation [1]. Its
+training and selection design keeps participant locations on the device. Our question concerns the information carried
+by subsequent linkable completion outcomes. This is a different observation interface, not evidence that FedSense fails
+its own stated security model. An ideal history-reset experiment later isolates the role of removing linkage; it is not an
+anonymity protocol.
+TMarkov studies mobility-aware privacy in mobile crowdsourcing and describes how task outcomes and movement
+correlations enable inference [2]. This is a direct precedent for the research problem. We focus on successful in-region
+completion rather than treating acceptance as proof of arrival. We also distinguish probabilistic silence from explicit
+refusal and inspect both posterior branches before participation. These differences define the present model; they do
+not establish that earlier systems lack every corresponding protection.
+Privacy-preserving matching and assignment operate at related but different interfaces. Wang et al. use location
+fingerprints and two-stage assignment [3], while FedSense learns decentralized task-selection policies [1]. Neither
+is a drop-in scalar gate for the binary channel studied here. Reusing their reported execution times or imposing our
+channel on a partial reimplementation would not produce a fair system comparison. Accordingly, the experiments use
+explicitly specified channel baselines and do not claim computational superiority over those systems. Duan et al.’s
+HECTA [8] directly addresses inference from task-acceptance sequences. Its platform and non-colluding auxiliary
+party jointly process masked selection vectors; encrypted sensing payloads are mixed with dummy tasks, and perturbed
+incentives support settlement. The platform receives participant-linked mixed task sets, whereas the requester receives
+forwarded data without participant identifiers (Sections IV–V, Eqs. (6)–(9) of that work). Thus its protection depends
+on concealing which submitted tasks are genuine and separating the parties’ knowledge.
+HECTA’s semi-honest simulation-based security statement concerns leakage beyond prescribed protocol outputs
+under its cryptographic and non-collusion assumptions (Section VI). Its evaluation measures allocation ratio, protocol
+overhead, and identification of real tasks within a padded set (Section VIII, Eq. (13)); that hit ratio is not our locationcell MAP accuracy. Its network-loss discussion provides retransmission and offline handling (Section IV-C), rather
+2
+
+than a Bayesian update for deadline silence. BSP instead bounds posterior concentration for both outcomes of an
+explicitly visible truthful-completion channel across a declared mobility process, without an auxiliary server or dummy
+submissions. This establishes a specific model and objective distinction, not a ranking of the two privacy guarantees.
+We have not reproduced HECTA or measured superiority over it. A joint evaluation would need to preserve its padded
+observations and trust model rather than expose its hidden real-task labels to our attacker.
+Bayesian privacy measures information through changes between prior and posterior beliefs [6]. We adapt a perobservation KL constraint as an additional comparator. This adaptation does not reproduce the economic mechanism
+of that work and does not bound cumulative KL over an entire session. Likewise, fully adaptive differential-privacy
+composition [7] concerns a different guarantee. Geo-indistinguishability provides a distance-sensitive differentialprivacy formulation for location mechanisms, including PRIVIC [4]. BSP does not satisfy that definition merely
+because it uses randomized participation. The truthful positive-report support makes this distinction unavoidable.
+The literature audit is a targeted review of directly relevant primary sources, not a systematic or exhaustive
+review. The local evidence matrix records whether a claim was checked against a full paper, a publisher page, or only
+bibliographic metadata. The present positioning should therefore be read as a bounded research contribution rather
+than a claim of priority over all task-allocation privacy mechanisms.
+Two recent methods provide stronger optimization-based comparators. PRIVIC, published in PoPETs 2024,
+combines rate–distortion optimization through Blahut–Arimoto (BA) updates with incremental distribution estimation
+from noisy locations [4]. Grosse et al., published in IEEE TIFS 2024, characterize the PML mechanism polytope and
+its extremal optimization [5]. We read both full papers and check the PRIVIC numerical updates against the authors’
+public implementation. Their original output spaces differ from truthful task completions. Section 5.3 specifies the
+adaptations, their optimization targets, and the privacy guarantees that do not transfer. The year refers to journal
+publication; both methods have earlier preprints.
+3. System, observation, and threat models
+Figure 1 separates private sensing state from the information available to the platform. Public task metadata enters
+both the eligibility check and the participation filter. The same observable outcome updates the client’s declared-model
+belief and the attacker’s inference.
+3.1. Tasks and private state
+Let Xt ∈ X denote a user’s location cell at the sampling instant in slot t, where |X| = N. A task specifies a public
+region S t ⊆ X, a sampling slot, and a deadline. A valid report requires an observation collected inside S t at that
+sampling instant and submitted by the deadline. Receiving or accepting a task is not sufficient. All timely reports are
+released at the slot boundary, giving a fixed one-slot reporting delay in the simulator.
+Let Dt , Wt , Lt denote successful delivery, willingness to participate, and timely completion. In the baseline model
+these are independent Bernoulli variables, independent of location conditional on public history, with product probability
+αt . The filter additionally samples Gt ∼ Bernoulli(qt ) independently. The only published outcome is
+Yt = 1{Xt ∈ S t }Dt Wt Lt Gt ∈ {0, 1}.
+
+(1)
+
+Here Yt = 0 means that no valid report appeared by the deadline. There are no separate acknowledgments of delivery,
+online status, refusal, or filter rejection. Reports do not disclose additional measurement content in this model. If such
+content, network metadata, or fine-grained submission times are visible, the observation channel must be extended
+before applying the guarantee.
+This design represents opportunistic sampling at a specified instant, not continuous movement toward a newly
+assigned destination. Users do not change their paths in response to tasks. The simulated normal task stream is public
+and exogenous. Probe tasks share the same completion requirements and cannot be recognized by the client as probes.
+3.2. Attacker knowledge and capabilities
+The platform links outcomes to an account, knows the task regions, deadlines, filtering algorithm, and its parameters,
+and retains the account’s public history. At designated probe slots, it may choose a task region from a finite public library
+3
+
+Figure 1: System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform
+selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for
+eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual, image-model-generated
+schematic, not an experimental result.
+
+4
+
+using that history. It does not observe the simulator’s actual location, future trajectory, delivery draws, willingness,
+or deadline-success draws. A prior-only estimator receives no outcomes. A fixed attack uses independently selected
+regions. An adaptive attack selects the next probe to maximize one-step mutual information under its current belief and
+the known gate. This greedy attack is a reproducible adversary, not a proof of optimal sequential inference or task
+selection.
+The principal analytical model assumes that client and attacker use the same correct mobility and observation
+models. The main replay experiment relaxes correctness: both use the same approximate model. Separate stress tests
+give the attacker the correct generating probabilities while leaving the client’s probabilities misspecified. Auxiliary
+information about an individual’s home, routines, network attachment, or other accounts is outside the main model.
+3.3. Bayesian observation channel
+Let bt (i) = Pr(Xt = i | Ht−1 , S t ) be the predicted belief before the current output, and abbreviate b = bt ,
+P
+hi = αt 1{i ∈ S t }, and m = i bi hi . A gate is a deterministic function of public history and the current task; its random
+coin is private. For q > 0 and m > 0, the report posterior is
+bi hi
+.
+m
+
+(2)
+
+bi (1 − qhi )
+.
+1 − qm
+
+(3)
+
+b+i =
+For a positive-probability silence branch, it is
+b−i =
+
+Zero-probability branches impose no condition. For example, when q = 0, silence leaves the predicted belief unchanged.
+With αt < 1, silence generally preserves positive probability inside S t . Between slots, a public transition matrix predicts
+the next location belief.
+We evaluate posterior concentration through ∥b∥∞ , as well as attack hit rate, error, log loss, and calibration. A count
+of plausible cells alone is not a probability bound. A posterior with many nonzero entries can still place nearly all
+probability on one cell.
+4. Branch-safe participation
+4.1. Feasible gate and interpretation
+Fix a desired posterior threshold ρ and set c = max{ρ, ∥b∥∞ }. The local objective is to maximize q ∈ [0, 1] subject
+to ∥by ∥∞ ≤ c for each positive-probability output y. Using c prevents a request from being infeasible solely because
+the predicted belief already exceeds ρ. In that situation the rule prevents additional peak concentration relative to the
+current belief; it cannot restore a previously violated absolute threshold.
+Proposition 1 (Maximal scalar gate). If m > 0 and maxi bi hi /m > c, the only feasible gate is q∗ = 0. Otherwise, define
+di = cm − bi hi . Then the maximal feasible scalar gate is
+(
+)
+c − bi
+∗
+q = min 1, min
+,
+(4)
+i:di >0 di
+where an empty inner minimum is +∞. When m = 0, this expression gives q∗ = 1 and the output is uninformative.
+Proof. For every q > 0 with m > 0, Eq. (2) is independent of q. If its peak exceeds c, no positive gate can satisfy the
+report constraint. Otherwise only the silence constraints remain. For a nonzero silence probability, Eq. (3) is at most c
+exactly when
+q(cm − bi hi ) ≤ c − bi for all i.
+(5)
+The right side is nonnegative. A nonpositive coefficient on the left imposes no upper bound on q; a positive coefficient
+gives the bound in Eq. (4). Their intersection with [0, 1] yields the stated maximum. If silence has zero probability, the
+corresponding constraint is vacuous and the same expression admits q = 1. Finally, q = 0 is always feasible because
+the resulting posterior equals b.
+5
+
+The calculation takes O(N) time for one task and stores an N-cell belief. Maximizing q maximizes the current
+expected completion probability qm within this scalar family. It does not optimize the utility of future tasks. In
+particular, consuming available posterior concentration now can restrict later participation. A nonmyopic scheduler or
+a mechanism whose gate depends on private location would be a different optimization problem.
+Corollary 1 (Conditional sequential cap). Suppose the initial belief has peak at most ρ, the declared models are correct,
+all public signals are represented by Eq. (1), and every location transition is doubly stochastic. Then BSP maintains
+posterior peak at most ρ after every output, including under adaptive task selection measurable from public history.
+Proof. A doubly stochastic transition makes each predicted probability a convex combination of previous probabilities,
+so prediction cannot increase the maximum. The proposition bounds both possible observation branches by ρ.
+Induction over slots proves the result. Given the public history, the attacker’s adaptive task choice supplies no additional
+private-state information under the stated measurability assumption.
+The corollary applies to the declared posterior, and to an attacker’s posterior only when the knowledge and model
+assumptions coincide. It is not robust to arbitrary prior knowledge, location-dependent availability, undisclosed outputs,
+or an attacker with a more accurate mobility model. A reflecting symmetric grid walk satisfies the transition condition.
+A general learned human-mobility transition need not do so.
+4.2. Why reports and silence both matter
+Equation (2) gives a basic limitation: reducing a scalar participation probability does not weaken the conditional
+evidence of a report that actually occurs. Thinning reduces how often that report occurs. If a task identifies a single cell,
+every truthful successful report identifies that cell regardless of how small q is. BSP must reject tasks whose positive
+branch violates the cap.
+Checking only successful reports is nevertheless insufficient. Consider b = (0.2, 0.2, 0.2, 0.4), S = {1, 2, 3}, α = 0.9,
+and c = 0.4. The report posterior has peak 1/3, so a success-only rule allows q = 1. After silence, the fourth cell has
+probability 0.4/0.46 ≈ 0.870, violating the cap. BSP instead sets q = 0. This example also illustrates a potential utility
+cost when the current belief already has a cell at the cap.
+There is a separate support obstruction to pure location differential privacy. For any proper region and any nonzero
+truthful reporting probability inside it, the report event has positive probability inside and zero probability outside.
+No finite multiplicative likelihood-ratio bound can hold between those two states for that event. This elementary
+observation does not rule out other privacy definitions, altered report semantics, or mechanisms with false positives. It
+explains why the present filter must not be described as a differentially private coordinate-release mechanism.
+4.3. Execution procedure
+Figure 2 summarizes the two-branch check and the illustrative silence calculation. At each slot the client predicts its
+belief, reads the public region and deadline, and computes q∗ . It samples the gate independently of its location, attempts
+the task only if permitted, and releases any valid report at the common deadline. The public posterior is updated using
+either Eq. (2) or Eq. (3). The platform can reproduce q∗ from the same declared model and history without receiving
+the gate coin. No extra refusal message is sent.
+The implementation uses half-open rectangles. It rejects repeated task identifiers, checks agreement between task
+and observation identifiers and sampling slots, and rejects task deadlines preceding their sampling slots. It does not
+implement arrival-time validation for late network messages; timely completion is represented by the Bernoulli variable
+in Eq. (1). True locations are consulted only by the response simulator and evaluation metrics. Archived evaluation
+logs contain ground truth for auditing, but the attack receives only public tasks, outcomes, model parameters, and the
+gate determined by public history.
+5. Experimental design
+5.1. Data and task generation
+The evaluation uses Python event simulation, NumPy, and local algorithm timing. It requires no sensing hardware
+or paid cloud service. The main grid has 8 × 8 cells and each trajectory contains 48 slots. Synthetic mobility is static, a
+6
+
+Figure 2: BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With q = 0 the gate never
+passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts q = 1, although silence
+raises the outside-cell posterior to about 0.870. BSP sets q = 0 for this example. Image-model-generated schematic; numbers follow the stated
+calculation, not simulated measurements.
+
+reflecting random walk with move-attempt probability 0.3, or periodic movement back and forth along a row. The
+first two start uniformly. The periodic condition uses a random row and phase; its initial distribution and temporal
+dependence are intentionally not represented by the attacker’s uniform-prior random-walk model. Synthetic cells have
+a nominal width of 1 km for distance reporting.
+GeoLife [9, 10, 11]1 provides observed locations for replay, not task logs. Tasks, delivery, participation, and
+completion remain simulated. For each user, we select the first lexicographically ordered file containing 48 consecutive
+minute bins with samples in latitude [39.8, 40.1) and longitude [116.2, 116.6). We take the first in-bounds sample
+in each minute, without interpolating gaps or joining files. This retains 107 of 182 users; 75 have no qualifying
+window. User ID modulo five assigns 23 development, 17 validation, and 67 test users, each contributing one window.
+Test users are excluded from mobility-parameter and PRIVIC-channel fitting. The later thinning-grid extension and
+policy-envelope selection use test results and are exploratory analyses, not independent validation of a selected policy.
+The validation split was reserved but not used to select those envelopes.
+The development fraction of consecutive samples changing grid cell is 0.0508788, used as the approximate replay
+walk parameter. Jump distances and directions are not fitted. Boundary reflection also means that a cell-change
+fraction is only a proxy for a move-attempt probability. This is an approximate mobility model, not a validated
+human-movement predictor. The geographic cells are approximately 4.17 km north–south and 4.27 km east–west, so
+the experiment concerns coarse cell inference rather than address recovery. At this resolution, 17/67 test windows
+remain in one cell throughout and the median window visits 3 distinct cells. A post-review diagnostic additionally fits a
+fixed no-output predictor using the most frequent cell among development positions only, with ties averaged uniformly.
+Test positions evaluate that frozen predictor; they do not select its cell. This diagnostic does not change or rerun the
+original uniform-prior attacks.
+The main public library contains 152 rectangles: squares at several widths and horizontal or vertical prefix/suffix
+strips. Normal task regions are sampled uniformly. A shared Bernoulli schedule chooses a normal task with probability
+1 Microsoft Research, GeoLife GPS Trajectories, archive version 1.3: https://www.microsoft.com/en-us/download/details.aspx?id
+=52367. The download page requests the three original dataset-related citations.
+
+7
+
+0.75 and a probe otherwise. Delivery, willingness, and timely-completion probabilities are 0.9, 0.8, and 0.9, giving
+α = 0.648. Sampling occurs at the slot’s specified instant and reports are released at its deadline. Varying timelycompletion probability does not simulate continuous movement within variable-length acquisition windows.
+5.2. Policies and fair comparison
+The main policy grid contains no filtering; random participation probabilities 0.15, 0.3, 0.5, 0.7; periodic admission
+every 2, 4, 8 slots; admission of rectangles aligned to blocks of side 2 or 4; BSP thresholds 0.05, 0.1, 0.2, 0.4; and a
+success-only ablation at 0.1. The aligned-grid policy rejects nonaligned tasks. It does not enlarge task regions, forge
+completions, or implement an anonymity protocol.
+A later exploratory extension adds a KL branch filter at κ = 0.25, 0.5, 1, 2 nats. This adaptation of Bayesian
+privacy [6] approximates the largest scalar q satisfying DKL (by ∥b) ≤ κ for both positive-probability branches. For
+positive prior region mass and nonzero availability, the report divergence is − log Prb (S ); silence divergence reduces
+to a binary region partition and is solved with 30 bisection steps. Zero-mass candidate regions use q = 0 in the
+implementation; their output is uninformative for any gate under the declared prior. It limits each update relative to its
+current prior, not cumulative session KL or an absolute posterior maximum. It is not a reproduction of the published
+economic mechanism.
+For each trajectory and seed, policies share the normal tasks and all exogenous random draws. Fixed and adaptive
+attacks are rerun for every main policy; adaptive probes may therefore differ. The greedy attack searches the library for
+maximal expected information under the known gate. There is one probe per probe slot. Probe completions contribute
+observations but do not count as normal-task utility. A pilot’s fixed normal/probe schedule was confounded with
+periodic admission; the main run corrects this by using an independent shared random schedule. Pilot results are
+retained but excluded.
+5.3. Recent optimization-based comparators
+PML-T (TIFS 2024 constraint specialization). PML bounds the maximum posterior-to-prior likelihood ratio for each
+output. Lemma 1 of Grosse et al. [5] expresses this as linear constraints on a stochastic channel. We specialize those
+constraints to truthful binary completion and maximize its expected probability. Write li = Pr(Y = 1 | X = i) and
+P
+m = i bi li . The linear program is
+max m,
+l
+
+subject to
+
+0 ≤ li ≤ α1{i ∈ S },
+ϵ
+
+li ≤ e m,
+
+(6)
+ϵ
+
+1 − li ≤ e (1 − m),
+
+bi > 0.
+
+P
+If M = i∈S bi < e−ϵ , a nonzero report is infeasible: summing the report constraint over S gives m ≤ eϵ Mm. If
+e−ϵ ≤ M < 1, the outside-state silence constraint and the availability bound give m ≤ min(αM, 1 − e−ϵ ). Constant
+likelihood li = αq inside S , with q = min{1, (1 − e−ϵ )/(αM)}, attains their minimum for α > 0. If α = 0, every gate has
+zero completion probability. When M = 1, q = 1 is feasible; when M = 0, the gate does not affect the output. Thus this
+specialization is exactly optimal for current completion even among location-dependent gates. We verify it against an
+independent general linear program over 100 random priors. This is our binary-channel instantiation of the published
+constraints, not a reproduction of the paper’s general-output vertex-enumeration experiment. The tested ϵ values are
+0.025, 0.05, 0.1, 0.25, 0.5, 1, 2, 4, 8 nats per update.
+PRIVIC-T (PoPETs 2024 mechanism with task adaptation). We implement the paper’s incremental BA–IBU loop
+and final generalized IBU (GIBU), followed by BA [4]. BA minimizes mutual information plus β times expected
+spatial distortion. Training uses only development locations: synthetic seeds 4000–4019 or the 23 development replay
+users. Eight shuffled collection batches release noisy locations through their current channels; only those noisy counts
+enter IBU/GIBU. The training seed is 42024. The resulting 64 × 64 channel C is frozen before testing. We report all
+β ∈ {0, 0.1, 0.3, 1, 3, 10}, where zero is an independent-output boundary control and distances are in cells. BA/IBU
+recurrences match the author code on fixed-iteration checks; the paper’s final GIBU step is also implemented. Iterations
+stop at maximum component change below 10−8 or 100,000 iterations, with residuals and limit hits archived.
+8
+
+To connect the location mechanism to a valid-task interface, the client admits a task when a privately sampled
+surrogate Z ∼ C X,: lies inside its region, while still requiring the true location to be inside. The surrogate is not
+transmitted. Consequently the report likelihood is
+X
+li = α1{i ∈ S }
+Ciz .
+(7)
+z∈S
+
+The simulator samples the equivalent Bernoulli event. Both the attack’s probe objective and its report/silence update
+use the entire public likelihood vector; neither receives the true-state-indexed gate probability. This task adapter is
+explicitly ours. Checking true eligibility after perturbation is not post-processing of Z alone, so PRIVIC’s original
+geo-indistinguishability guarantee does not transfer. Likewise, task completion is different from the original locationdistortion or population-estimation utility. We label the result PRIVIC-T to keep that distinction visible.
+The initial extension adds 60 conditions and 4,605 trajectory executions. Because its PRIVIC-T settings did not
+cover retention 0.5 in several scenarios, we subsequently add public random thinning factors γ = 0.25, 0.5, 0.75 for
+every PRIVIC-T setting, multiplying Eq. (7) by γ. These 72 additional conditions contribute 5,526 executions, while
+retaining the original γ = 1 cases. No training channel changes. All methods use the same test users, normal tasks,
+exogenous randomness, and clustering, with adaptive probes regenerated separately for each setting. The two published
+mechanisms offer optimized constraints or rate–distortion objectives; simple policies remain diagnostic controls. The
+initial grid was fixed before its test run; the thinning grid was fixed after observing the initial coverage gap. This is an
+explicitly exploratory extension.
+All 24 final BA channels reach the declared iteration-change tolerance. Seven final GIBU fits reach the iteration
+limit; their finite-iteration estimates are retained and identified. A concavity-based gradient bound on the mean
+log-likelihood optimization gap is at most 1.06 × 10−5 nats per sample across all final GIBU fits. This numerical bound
+concerns the fitted objective, not recovery of the true population distribution. Intermediate-loop residuals and limit hits
+are also archived.
+5.4. Metrics and inference units
+MAP cell hit rate and Euclidean grid error average over slots, resolving maximum-posterior ties uniformly in
+expectation. Replay error also uses a local latitude/longitude distance scale. We record posterior peak, entropy, log
+loss, 95% credible-set size and coverage, and ten-bin calibration error. Credible sets include descending-probability
+cells until cumulative mass reaches 0.95, breaking probability ties by cell index. MAP ties use numerical tolerances of
+10−10 relative and 10−14 absolute. Discreteness and model mismatch prevent interpreting nominal mass as a guaranteed
+empirical coverage rate.
+Legitimate opportunity retention is
+U=
+
+valid normal-task completions
+.
+eligible normal tasks externally completable without filtering
+
+(8)
+
+The denominator uses the same delivery, willingness, and deadline draws as the numerator and excludes only the
+gate. Table 2 additionally reports raw completion, defined as summed valid completions divided by all normal tasks,
+including those for which the user was outside the region or externally unavailable. This pooled ratio differs from
+averaging per-user completion fractions. A descriptive post-review analysis stratifies the executed BSP ρ = 0.1 logs
+into regions of 1–8, 9–31, and 32–64 cells; it does not characterize policy-envelope mixtures. We also save coverage of
+opportunity cells, unit reward per completion, delay, and real gate execution time. Reward is not economic welfare.
+Reporting delay is one slot by construction, not measured network latency.
+The main run has 120 conditions and 9,210 trajectory executions: 20 independent synthetic seeds, four users
+per seed, or 67 replay users per condition. The KL extension adds 16 conditions and 1,228 executions. These are
+repeated evaluations of shared trajectories, not 10,438 distinct people. Risk estimates average users within seed clusters;
+retention is a ratio of summed completions to summed opportunities. We use 1,000 percentile-bootstrap resamples,
+clustering by synthetic seed or replay user. Repeat counts were a computationally modest design choice, not a formal
+power calculation.
+Utility-adjusted comparisons linearly interpolate observed curves at retention 0.5 and 0.7, without extrapolation.
+Paired resampling uses the same cluster indices across policies. We report an interval only when original curves overlap
+9
+
+Table 1: No-output replay diagnostics on 67 test users with 48 slots each. The modal cell is fitted only on 23 development users. Its pointwise
+interval resamples test users and conditions on that fixed predictor; the uniform row is an exact randomized-tie expectation. Neither row observes
+task outcomes.
+
+No-output predictor
+Uniform random cell
+Development modal cell
+
+Hit (%)
+
+95% interval
+
+1.56
+25.75
+
+Exact expectation
+[17.88, 34.83]
+
+and at least 95% of resamples retain overlap. These are exploratory interpolations, not independently deployed policies
+tested at exactly matched completion rates. Intervals are pointwise without multiplicity correction and do not quantify
+generalization to unsampled populations.
+For the recent-method extension, we strengthen the comparison by using each method’s lower convex envelope
+over all tested settings, rather than connecting dominated parameter points. An envelope segment describes expected
+performance when a setting is selected for an entire trajectory and revealed to the attacker before that trajectory.
+Normal-task opportunity denominators are shared across settings, so expected completion retention and mean risk mix
+linearly. We recompute the envelope in every paired bootstrap sample and apply the same overlap rule. These are
+exploratory envelopes selected using test results, not independently validated tuned policies; selection and the finite
+grid limit inferential interpretation. Their intervals are conditional on the fixed development sample and fitted PRIVIC
+channels. They exclude training-noise variability and do not refit BA/IBU/GIBU; different thinning factors share the
+same channel. Raw points and ordinary adjacent-point interpolations are retained separately. The no-output replay
+diagnostic uses 1,000 user-bootstrap resamples conditional on its fixed development-fitted predictor, with seed 170926.
+5.5. Sensitivity and stronger knowledge
+The sensitivity run contains 72 conditions, ten independent seeds with four users each, and 2,880 executions. It
+varies true mobility, delivery, willingness, timely completion, assumed availability and mobility, normal-task fraction,
+grid side, and ideal history-reset period. Each condition compares no filtering, random participation at 0.5, and BSP at
+0.1. Resets every 1, 4, or 12 slots erase account history; they do not implement unlinkable rotating identities. Changing
+grid size also changes the inference target and task library.
+Twelve additional exploratory conditions, totaling 480 executions, give the attacker correct generating probabilities
+while the client uses a wrong probability. The true walk and availability probabilities are v = 0.3 and α = 0.648; the
+b = 0.3 or 0.9, or v
+b = 0.05 or 0.8. The attacker maintains its own belief and chooses probes using that belief
+client uses α
+and the client’s public gate. It receives no true locations or future trajectory. This is a stronger test than giving both
+parties the same incorrect model.
+6. Results
+6.1. Information beyond the specified uniform prior
+A uniform prior gives expected MAP hit rate 1/64 ≈ 1.56% when ties are randomized uniformly. Under adaptive
+probes with no filtering, hit rates are 49.7% for static users, 16.4% for random walks, 7.8% for periodic mobility, and
+35.6% for replay. Outputs improve the specified uniform-prior estimator in these task processes. This demonstrates a
+possible mechanism under declared assumptions, not its observed prevalence on a deployed platform or the incremental
+leakage over every plausible prior.
+Table 1 shows why the prior qualification matters for replay. The most frequent development cell, index 34, has
+development mass 22.37%; always predicting it attains 25.75% test accuracy without task outputs. This exceeds the
+uniform-prior attack’s 2.4% accuracy under BSP ρ = 0.1. An observer with the development statistics could choose
+that no-output predictor instead, so the latter number is not an upper bound on its attainable accuracy. The diagnostic is
+not a rerun of a stronger adaptive attack and does not replace the original paired comparison. Nor does it refute the
+conditional sequential cap: this nonuniform initial peak already exceeds 0.1. A population-prior adaptive evaluation
+would require declaring a different belief model and interpreting the local cap accordingly.
+
+10
+
+0.7
+No filter, fixed
+No filter, adaptive
+
+MAP cell hit rate
+
+0.6
+
+BSP, fixed
+BSP, adaptive
+
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+Static
+
+Walk
+
+Commute
+
+GeoLife
+
+Figure 3: Fixed and defense-aware adaptive probes. Each main condition has 20 synthetic seed clusters or 67 replay users. The adaptive objective is
+expected information under the model, not realized MAP accuracy; it need not improve every empirical metric.
+
+6.2. Participation and inference
+Figure 4 shows all adaptive policy thresholds, including the exploratory KL extension. Table 2 reports representative
+executed conditions. At ρ = 0.1, BSP retains 48.7%, 48.9%, 54.4%, and 49.4% of normal-task opportunities, with hit
+rates 7.4%, 5.9%, 3.9%, and 2.4%, respectively. These are nonzero completions under the current region library and
+equal-reward convention; they do not establish preservation of fine-region sensing service.
+The task-size breakdown in Table A.1 shows that 83.7–90.5% of these completions come from regions covering
+at least 32 of 64 cells. None of the 1–8-cell opportunities is completed. This matches the support restriction: at
+posterior cap 0.1, any permitted positive report needs at least ten positive-probability cells. Raw completion over all
+normal tasks is only 4.69–5.33%, partly because many tasks are ineligible even before filtering. The approximately
+one-half opportunity retention therefore refers to a restricted denominator and favors large-region tasks. This descriptive
+breakdown concerns the executed ρ = 0.1 conditions, not the matched-retention envelopes.
+At interpolated retention 0.5, BSP minus random participation has a hit-rate difference of −13.62 percentage
+points for static users, with pointwise 95% interval [−20.02, −7.51], and −11.91 points for replay, with interval
+[−16.32, −6.07]. Table 3 also shows lower risks than the KL adaptation in those two scenarios. In contrast, walk and
+periodic comparisons against both random participation and KL have intervals containing zero. They do not establish a
+consistent advantage.
+Several coarse-grid and periodic-limit comparisons have insufficient utility overlap for stable interpolation. In replay,
+periodic-limit settings do not bracket retention 0.5; we make no matched claim there. Lower risk at a substantially
+lower completion level is not evidence of a superior trade-off.
+6.3. Comparison with 2024 mechanisms
+Figure 5 and Table 4 use the strengthened policy envelopes, including the additional PRIVIC-T thinning settings. At
+retention 0.5, BSP’s static hit-rate advantage is 8.77 percentage points over PML-T and 10.62 points over PRIVIC-T; the
+pointwise exploratory intervals exclude zero. For replay, the PML-T difference is −7.30 points, whereas the PRIVIC-T
+difference is −4.28 points with an interval containing zero. In the walk scenario, PRIVIC-T has the lower point
+estimate, while its difference interval also includes zero. Neither recent comparator establishes a clear periodic-mobility
+separation at this retention. These results narrow the evidence from comparisons against simple thinning: BSP has no
+consistent empirical advantage across the recent comparators and mobility models.
+At retention 0.7, the static envelope differences remain negative: −10.85 points against PML-T and −15.43 against
+PRIVIC-T. Walk and periodic intervals contain zero for both comparators. Replay has only 887 of 1,000 bootstrap
+samples with sufficient overlap, so no interval is reported there. These comparisons concern the declared task adapters
+11
+
+Walk
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+MAP cell hit rate
+
+MAP cell hit rate
+
+Static
+
+0.4
+0.3
+0.2
+0.1
+0.0
+0.0
+
+0.4
+0.3
+0.2
+0.1
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+0.0
+0.0
+
+1.0
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+0.4
+0.3
+0.2
+0.1
+0.0
+0.0
+
+1.0
+
+Geolife
+
+MAP cell hit rate
+
+MAP cell hit rate
+
+Commute
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+0.4
+0.3
+0.2
+0.1
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+No filter
+Random participation
+Periodic limit
+
+1.0
+
+0.0
+0.0
+
+Aligned task grid
+BSP
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+1.0
+
+Success-only ablation
+KL branch filter
+
+Figure 4: Opportunity retention and MAP hit rate under adaptive probes. Symbols are executed settings; connecting lines are visual guides. Error
+bars are pointwise 95% cluster-bootstrap intervals for hit rate, from 20 synthetic seed clusters or 67 users. The dotted line is the uniform-prior rate.
+Higher retention and lower hit rate are preferred.
+
+12
+
+Table 2: Representative executed adaptive conditions. Retention uses Eq. (8); raw completion divides summed completions by all normal tasks,
+including ineligible tasks. Both are fractions. Error is in grid cells, whose geographic sizes differ across synthetic and replay scenarios. Complete
+estimates and intervals are saved as CSV.
+Scenario
+Policy
+Retention
+Raw comp.
+MAP hit
+Error
+95% cover
+Static
+Static
+Static
+Static
+Static
+Static
+
+None
+Random .5
+Period 2
+Grid 2
+Success only
+BSP .1
+
+1.000
+0.491
+0.570
+0.556
+0.516
+0.487
+
+0.096
+0.047
+0.055
+0.053
+0.050
+0.047
+
+0.497
+0.215
+0.291
+0.157
+0.101
+0.074
+
+1.28
+2.13
+2.00
+1.74
+2.08
+2.33
+
+0.985
+0.981
+0.967
+0.972
+0.969
+0.969
+
+Walk
+Walk
+Walk
+Walk
+Walk
+Walk
+
+None
+Random .5
+Period 2
+Grid 2
+Success only
+BSP .1
+
+1.000
+0.486
+0.564
+0.525
+0.471
+0.489
+
+0.097
+0.047
+0.055
+0.051
+0.046
+0.048
+
+0.164
+0.079
+0.106
+0.093
+0.065
+0.059
+
+2.06
+2.80
+2.68
+2.37
+2.67
+2.85
+
+0.953
+0.943
+0.945
+0.961
+0.957
+0.949
+
+Commute
+Commute
+Commute
+Commute
+Commute
+Commute
+
+None
+Random .5
+Period 2
+Grid 2
+Success only
+BSP .1
+
+1.000
+0.506
+0.537
+0.506
+0.541
+0.544
+
+0.090
+0.046
+0.048
+0.046
+0.049
+0.049
+
+0.078
+0.048
+0.046
+0.044
+0.042
+0.039
+
+2.71
+3.31
+3.45
+3.13
+3.24
+3.33
+
+0.784
+0.818
+0.805
+0.796
+0.824
+0.825
+
+Geolife
+Geolife
+Geolife
+Geolife
+Geolife
+Geolife
+
+None
+Random .5
+Period 2
+Grid 2
+Success only
+BSP .1
+
+1.000
+0.556
+0.428
+0.549
+0.447
+0.494
+
+0.108
+0.060
+0.046
+0.059
+0.048
+0.053
+
+0.356
+0.165
+0.141
+0.180
+0.018
+0.024
+
+1.40
+2.09
+2.29
+1.73
+2.55
+2.74
+
+0.940
+0.940
+0.932
+0.963
+0.933
+0.927
+
+Table 3: Exploratory interpolation at retention 0.5. Hit rates and differences are in percentage points. Paired cluster-bootstrap intervals are pointwise.
+All displayed comparisons have 1,000 valid overlapping resamples.
+
+Scenario
+
+Comparator
+
+BSP hit
+
+Other hit
+
+Difference [95% CI]
+
+Static
+Static
+Walk
+Walk
+Commute
+Commute
+Geolife
+Geolife
+
+Random
+KL
+Random
+KL
+Random
+KL
+Random
+KL
+
+8.52
+8.52
+6.14
+6.14
+3.67
+3.67
+2.89
+2.89
+
+22.15
+15.03
+7.95
+7.33
+4.72
+4.43
+14.80
+9.47
+
+-13.62 [-20.02, -7.51]
+-6.51 [-9.42, -3.25]
+-1.81 [-4.55, +2.00]
+-1.20 [-3.74, +2.15]
+-1.05 [-2.08, +0.07]
+-0.76 [-1.52, +0.04]
+-11.91 [-16.32, -6.07]
+-6.59 [-10.03, -2.01]
+
+13
+
+Walk
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+MAP cell hit rate
+
+MAP cell hit rate
+
+Static
+
+0.4
+0.3
+0.2
+0.1
+0.0
+0.0
+
+0.4
+0.3
+0.2
+0.1
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+0.0
+0.0
+
+1.0
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+Geolife
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+MAP cell hit rate
+
+MAP cell hit rate
+
+Commute
+
+0.4
+0.3
+0.2
+0.1
+0.0
+0.0
+
+1.0
+
+0.4
+0.3
+0.2
+0.1
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+1.0
+
+BSP
+PML-T (TIFS 2024)
+
+0.0
+0.0
+
+0.2
+0.4
+0.6
+0.8
+Legitimate opportunity retention
+
+1.0
+
+PRIVIC-T (PoPETs 2024)
+Random participation
+
+Figure 5: Recent-method comparison under defense-aware adaptive probes. Faint symbols show all executed settings, including PRIVIC-T thinning;
+solid lines are each method’s lower convex envelope. Error bars at envelope vertices are pointwise 95% cluster-bootstrap intervals for those executed
+settings. Envelope-mixture difference intervals are computed separately by paired resampling and envelope reselection, conditional on fixed training.
+These are exploratory comparisons on the simulated truthful-task interface. Figure A.1 repeats the Commute panel on an expanded vertical scale.
+
+and exploratory mixtures, not the complete original location-release systems. PML-T optimizes current completion
+under its per-step PML constraint, whereas BSP limits an absolute posterior peak. PRIVIC optimizes a different native
+utility; interface compatibility limits the interpretation of its task-adapted performance.
+6.4. Ablation and calibration
+The main runs record no client branch-cap violations for BSP, consistent with its analytical rule and randomized
+tests. This does not validate the assumed model. The success-only ablation can violate the silence constraint analytically
+yet attain a smaller empirical hit rate in a finite sample. In replay its hit rate is 1.8% at retention 44.7%, versus BSP’s
+2.4% at 49.4%. The utility levels differ, and the favorable ablation result is retained rather than omitted.
+Figure 6 distinguishes posterior concentration from empirical accuracy. BSP’s nominal 95% credible set covers the
+actual location on only 82.5% of periodic-mobility slots; the assumed random walk misses its deterministic structure.
+Replay coverage is 92.7%. A small maximum in a misspecified posterior is not a distribution-free guarantee about
+actual location.
+
+14
+
+Table 4: Recent-method envelope comparison at retention 0.5. Values are percentage points; negative differences favor BSP. All rows have 1,000
+valid overlapping resamples. These pointwise intervals describe exploratory test-selected envelopes, conditional on the development data and fixed
+PRIVIC channels; they omit training variability and do not validate deployed policies.
+
+Scenario
+
+Comparator
+
+BSP hit
+
+Other hit
+
+Difference [95% CI]
+
+Static
+Static
+Walk
+Walk
+Commute
+Commute
+Geolife
+Geolife
+
+PML-T
+PRIVIC-T
+PML-T
+PRIVIC-T
+PML-T
+PRIVIC-T
+PML-T
+PRIVIC-T
+
+7.96
+7.96
+6.10
+6.10
+3.67
+3.67
+2.89
+2.89
+
+16.74
+18.58
+8.04
+4.78
+3.91
+3.83
+10.19
+7.16
+
+-8.77 [-11.38, -6.06]
+-10.62 [-14.76, -4.70]
+-1.94 [-3.89, -0.27]
++1.32 [-1.15, +3.29]
+-0.24 [-0.75, +0.41]
+-0.16 [-0.85, +1.01]
+-7.30 [-10.23, -3.15]
+-4.28 [-7.52, +0.25]
+
+0.7
+
+Mean posterior maximum
+
+Empirical 95% set coverage
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+Static
+
+Walk
+
+Commute
+
+GeoLife
+
+No filter
+Random participation
+
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+
+Static
+
+Walk
+
+Commute
+
+GeoLife
+
+BSP
+Success-only ablation
+
+Figure 6: Empirical credible-set coverage and mean posterior peak for representative policies. Random participation uses 0.5; BSP and the ablation
+use threshold 0.1. Scenario means are connected for readability. Nominal credible mass is not promised empirical coverage under mismatch.
+
+15
+
+0.6
+0.20
+MAP cell hit rate
+
+MAP cell hit rate
+
+0.5
+0.4
+0.3
+0.2
+
+0.15
+
+0.10
+
+0.05
+
+0.1
+
+0.0
+
+0.2
+0.4
+0.6
+True move probability
+
+0.8
+
+0.3
+
+0.4
+0.5
+0.6
+0.7
+0.8
+Assumed availability probability
+
+0.9
+
+4
+
+6
+
+16
+
+0.4
+
+0.10
+
+MAP cell hit rate
+
+MAP cell hit rate
+
+0.12
+
+0.08
+0.06
+0.04
+0.02
+
+0.3
+
+0.2
+
+0.1
+
+0.0
+2
+
+4
+6
+8
+10
+Ideal identity reset period (slots)
+No filter
+
+12
+
+Random participation
+
+8
+10
+12
+Grid side length
+
+14
+
+BSP
+
+Figure 7: Selected exploratory sensitivity results. Ten seed clusters contain four users each; error bars are pointwise 95% bootstrap intervals.
+Assumed availability is shared by client and attacker in this panel. Identity reset is ideal history erasure. Grid changes alter the target resolution.
+
+6.5. Sensitivity and an informed attacker
+Figure 7 presents selected sensitivity dimensions; all 72 conditions remain in the artifact. Reduced availability can
+allow more gate admissions, while movement can spread beliefs and permit later participation. Empirical hit rates
+need not vary monotonically. BSP retention is 0.109 for grid side 4 and 0.810 for grid side 16, but these are different
+resolutions and region libraries, not a free privacy improvement at fixed utility semantics. Ideal resets every slot give
+retention 0.746 and hit rate 0.020; every 12 slots give 0.652 and 0.041. Real identifier rotation may leave linkage clues,
+which this control assumes away.
+Table 5 exposes a stronger limitation. With client availability underestimated as 0.3, the informed attacker’s peak
+exceeds 0.1 on 30.0% of evaluated slots and reaches 0.246, while the client’s peak remains capped. When client move
+probability is overestimated as 0.8, the informed peak exceeds the cap on 41.4% of slots and reaches 0.263. These
+findings do not contradict the conditional corollary: shared correct knowledge is absent. They show that a safe-looking
+client posterior is insufficient against a better-informed observer.
+6.6. Measured computation
+For the 64-cell main grid, the mean of per-trajectory median BSP gate times is approximately 16.8–16.9 microseconds; the mean of per-trajectory 95th percentiles is 18.2–18.7 microseconds. The iterative KL implementation has
+median summaries of about 326–341 microseconds. These are local Python gate timings, excluding probe search,
+16
+
+Table 5: BSP under better-informed attack. Actual α = 0.648 and v = 0.3; one client parameter changes at a time. “Above cap” is the descriptive
+fraction of 1,920 evaluated slots exceeding 0.1, not an independent-sample interval. Client peaks remain within numerical tolerance of 0.1.
+
+Client mismatch
+b = 0.3
+α
+b = 0.9
+α
+b = 0.05
+v
+b = 0.8
+v
+
+Retention
+
+MAP hit
+
+Above cap
+
+Largest peak
+
+0.551
+0.464
+0.457
+0.543
+
+0.098
+0.057
+0.038
+0.083
+
+30.0%
+8.0%
+4.7%
+41.4%
+
+0.246
+0.164
+0.153
+0.263
+
+posterior metrics, loading, and communication. Methods ran in separate batches, so the numbers are descriptive implementation costs, not controlled cross-device speedups. Smartphone latency, energy consumption, and cryptographic
+execution time were not measured. In the recent extension, condition means of trajectory-median gate times range
+from 12.1 to 14.0 microseconds for PML-T and 2.0 to 3.0 microseconds for PRIVIC-T. PRIVIC training across all 24
+channels takes 182.3 seconds separately; online timings exclude that offline fitting. These batch-specific measurements
+do not establish a controlled speedup.
+7. Discussion and limitations
+The supported positive finding is narrow: a public-history participation rule can reduce the declared model’s
+inference accuracy while retaining some large-region task opportunities. Checking both possible outputs before
+participation gives a clear model-conditional bound. Static comparisons provide the clearest recent-baseline evidence.
+Coarse replay improvements are specific to the uniform-prior inference model and do not bound practical observer
+accuracy; walk and periodic comparisons show no consistent advantage over both recent comparators.
+First, BSP relies on one declared belief model. The informed-attacker results show that stronger protection would
+require accounting for multiple plausible priors and transitions, or changing the output channel. Intersecting constraints
+across candidate models is a possible extension, but its cost and utility are not evaluated here. The current cap should
+not be advertised as protection against arbitrary auxiliary knowledge.
+Second, the model omits informative measurement contents, acknowledgments, payment records, network observations, and within-slot timing. Common-deadline release is a protocol requirement, not an implemented property of a
+real platform. General collection windows need a state describing visits or acquisition time rather than only the current
+sampled cell. The on-time probability sweep does not replace such a model.
+Third, the data are short, selected, historical, and coarse. One 48-minute window per user does not describe a
+full day; excluding users without consecutive samples can change the mobility mix. Seventeen test windows have no
+observed cell change, and small movements within a roughly 4-km cell are invisible. Tasks are simulated on public
+movement traces. The experiments estimate neither the prevalence of current attacks nor the probability of identifying
+a home. The development-fitted no-output diagnostic quantifies one weakness of the uniform prior. We have not rerun
+adaptive probes with that population prior, so neither its incremental leakage nor BSP’s resulting utility is established
+here.
+Fourth, the attack is greedy with a fixed probe budget. Longer-horizon task design, coordinated accounts, locationdependent availability, and personalized prior knowledge may change the frontier. The client maximizes current
+admission rather than future utility. Normal tasks have equal reward; coverage is a simple opportunity-cell proxy rather
+than measurement reconstruction quality. The region-size breakdown shows that preserved completions primarily serve
+large regions; fine-region tasks can be excluded entirely. Changes in task scale or reward composition may therefore
+change the usefulness of the same retention value. Independent account repetitions do not constitute a multi-user
+allocation or platform-capacity benchmark.
+Finally, comparisons depend on finite parameter grids and exploratory interpolation. Bootstrap intervals condition
+on the selected traces, tasks, and clustering, without resolving distribution shift or multiple testing. The KL and
+recent-method extensions were added after the main run. Recent policy envelopes are selected on the evaluation set;
+their bootstrap intervals describe this exploratory selection procedure rather than validating an independently tuned
+policy. PRIVIC uses one noisy training seed and some IBU/GIBU loops reach their iteration limits; small likelihood
+gaps do not establish distribution recovery. Its true-eligibility task adapter changes the published output semantics. The
+17
+
+full-text comparison with HECTA establishes differences in observations, trust assumptions, and privacy objectives, but
+does not provide a head-to-head system evaluation or an exhaustive novelty assessment.
+8. Reproducibility and research record
+The local artifact contains configurations, deterministic preprocessing, user splits, hashes, seeds, compressed event
+logs, trajectory-level rows, analysis code, generated figures, and LaTeX sources. The public-observation module
+receives no ground truth or future positions. Evaluation logs retain simulator truth for auditing and are not the attack
+interface. Plots and tabulated numbers are generated from saved results. The post-review prior diagnostic, task-area
+table, pooled raw completions, and expanded comparison plot are regenerated by src.review_diagnostics; its
+input hashes, per-user values, and per-task area records are saved separately from the original simulations.
+Twenty-one tests cover posterior branches, gate bounds and maximality, KL feasibility, transition conservation,
+unbiased ties, boundaries, duplicates, invalid task deadlines, missing minutes, split separation, paired normal tasks,
+numerical replay, author-code BA/IBU conformance, PML optimality against a general linear program, vector-valued
+observation channels, and policy-envelope agreement with a mixture linear program. The corrected pilot, interrupted
+KL run, and initial shorter PRIVIC training are retained separately and excluded from the final comparisons. Completed
+runs contain no recorded simulation failures.
+The raw GeoLife archive is separately sourced; the study does not claim new collection, anonymization, or
+unrestricted redistribution. The project repository is available at https://github.com/js110/Bpaper; it is a
+version-controlled working repository, not an immutable archival release. Third-party full texts and the raw GeoLife
+archive are obtained separately from their recorded sources. The supplied author and funding details require author
+verification; conflicts, contributions, the funders’ roles, and any required ethics or data-use determinations remain for
+responsible authors to supply. AI assistance was used for research organization, code, analysis, drafting, and the two
+conceptual schematics in Figs. 1 and 2. Their prompts, original raster files, revision history, and agent visual checks are
+archived; experimental plots are generated from measured simulation logs. Final disclosure and scientific verification
+require author review under the selected venue’s policy.
+9. Conclusion
+Sequential regional task outputs can reveal location despite local storage of precise coordinates. Probabilistic
+silence must be included in that analysis. BSP provides a maximal scalar gate for both posterior branches and a
+sequential cap under explicit model and transition conditions. Exploratory comparisons favor it in some settings, while
+retained participation concentrates on large-region tasks. Replay accuracy under a uniform-prior inference model is not
+a practical privacy bound: a development-fitted predictor can perform better without any outputs. A more accurately
+informed attacker can also exceed the client-side cap. The evidence supports a conditional mechanism and reproducible
+diagnostics, for applications that expose linkable truthful task outcomes. The comparison with encrypted, padded
+allocation protocols identifies a different observation boundary, while broader novelty and practical benefit require
+further evidence.
+Funding
+This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business
+Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund
+Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under
+Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher
+Fundamental Research Support Plan under Grant YQJH2024239.
+
+18
+
+Appendix A. Task composition and expanded comparison
+Table A.1 records all normal tasks from the representative BSP settings. Its opportunity counts use simulator
+eligibility and the shared external-availability draw, whereas completion additionally requires admission. Counts
+describe the stored finite sample; slots are not independent replicates and no slot-level confidence interval is claimed.
+Table A.1: Post-review task-area breakdown for executed BSP ρ = 0.1 under adaptive probes. Area is the number of cells in the original 64-cell
+region library. Retention is completed/opportunities. Counts are pooled over 80 synthetic trajectories or 67 replay users; these are not policy-envelope
+mixtures.
+
+Scenario
+
+Area (cells)
+
+Tasks
+
+Opportunities
+
+Completed
+
+Retention
+
+Static
+Static
+Static
+Walk
+Walk
+Walk
+Commute
+Commute
+Commute
+Geolife
+Geolife
+Geolife
+
+1–8
+9–31
+32–64
+1–8
+9–31
+32–64
+1–8
+9–31
+32–64
+1–8
+9–31
+32–64
+
+2222
+313
+344
+2222
+313
+344
+2222
+313
+344
+1829
+274
+281
+
+55
+53
+169
+63
+53
+164
+57
+45
+157
+49
+59
+149
+
+0
+22
+113
+0
+13
+124
+0
+22
+119
+0
+18
+109
+
+0.000
+0.415
+0.669
+0.000
+0.245
+0.756
+0.000
+0.489
+0.758
+0.000
+0.305
+0.732
+
+Figure A.1 retains every method setting from the Commute panel of Fig. 5, with a different vertical range to make
+the low-risk portion readable. It does not change the estimates, interval construction, or inconclusive interpretation of
+the matched-retention differences.
+
+19
+
+Commute: expanded vertical scale
+
+0.10
+BSP
+PML-T
+
+PRIVIC-T
+Random participation
+
+MAP cell hit rate
+
+0.08
+
+0.06
+
+0.04
+
+0.02
+
+0.00
+0.0
+
+0.2
+
+0.4
+0.6
+Legitimate opportunity retention
+
+0.8
+
+1.0
+
+Figure A.1: Expanded Commute comparison (vertical range 0–0.10 rather than 0–0.65). Markers and colors identify methods; faint points are
+executed settings and lines are test-selected lower envelopes. Vertex error bars are pointwise cluster-bootstrap intervals conditional on fixed training.
+The dotted line marks uniform-prior expected accuracy.
+
+20
+
+References
+[1] Z. You, X. Dong, X. Liu, S. Gao, Y. Wang, Y. Shen, Location Privacy Preservation Crowdsensing With Federated Reinforcement Learning,
+IEEE Transactions on Dependable and Secure Computing 22 (3) (2025) 1877–1894. doi:10.1109/tdsc.2024.3398994.
+[2] G. Qiu, Y. Shen, K. Cheng, L. Liu, S. Zeng, Mobility-Aware Privacy-Preserving Mobile Crowdsourcing, Sensors 21 (7) (2021) 2474.
+doi:10.3390/s21072474.
+[3] C. Wang, J. Tao, S. Su, D. Chi, W. Li, Privacy-preserving task assignment in mobile crowdsensing: a bilateral location fingerprint-based
+approach, Cybersecurity 9 (1) (2026) 105. doi:10.1186/s42400-025-00539-2.
+[4] S. Biswas, C. Palamidessi, PRIVIC: A privacy-preserving method for incremental collection of location data, Proceedings on Privacy Enhancing
+Technologies 2024 (1) (2024) 582–596. doi:10.56553/popets-2024-0033.
+[5] L. Grosse, S. Saeidian, T. J. Oechtering, Extremal Mechanisms for Pointwise Maximal Leakage, IEEE Transactions on Information Forensics
+and Security 19 (2024) 7952–7967. doi:10.1109/tifs.2024.3449556.
+[6] R. Eilat, K. Eliaz, X. Mu, Bayesian privacy, Theoretical Economics 16 (4) (2021) 1557–1603. doi:10.3982/te4390.
+[7] J. Whitehouse, A. Ramdas, R. Rogers, S. Wu, Fully-Adaptive Composition in Differential Privacy, in: Proceedings of the 40th International
+Conference on Machine Learning, Vol. 202 of Proceedings of Machine Learning Research, 2023, pp. 36990–37007.
+URL https://proceedings.mlr.press/v202/whitehouse23a.html
+[8] R. Duan, Q. Yu, Y. Zhang, C. Xu, C. Chen, X. Zheng, Y. Luo, Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based
+on Homomorphic Encryption and Reversible Obfuscation, IEEE Transactions on Mobile Computing (2026) 1–18, Early Access; volume not
+assigned in the verified record. doi:10.1109/tmc.2026.3721057.
+[9] Y. Zheng, L. Zhang, X. Xie, W.-Y. Ma, Mining Interesting Locations and Travel Sequences from GPS Trajectories, in: Proceedings of the 18th
+International Conference on World Wide Web, 2009, pp. 791–800.
+[10] Y. Zheng, Q. Li, Y. Chen, X. Xie, W.-Y. Ma, Understanding Mobility Based on GPS Data, in: Proceedings of the 10th International Conference
+on Ubiquitous Computing, 2008, pp. 312–321.
+[11] Y. Zheng, X. Xie, W.-Y. Ma, GeoLife: A Collaborative Social Networking Service among User, Location and Trajectory, IEEE Data
+Engineering Bulletin 33 (2) (2010) 32–40, DOI not listed in the publisher record.
+URL https://www.microsoft.com/en-us/research/publication/geolife-a-collaborative-social-networking-servi
+ce-among-user-location-and-trajectory/
+
+21
+
+

@@ -1,0 +1,44 @@
+{
+  "filepath": "paper/references.bib",
+  "total_entries": 11,
+  "valid_entries": 11,
+  "errors": [],
+  "warnings": [
+    {
+      "type": "missing_recommended_field",
+      "field": "volume",
+      "severity": "medium",
+      "message": "Entry inference2026: Missing recommended field \"volume\"",
+      "entry": "inference2026"
+    },
+    {
+      "type": "missing_recommended_field",
+      "field": "doi",
+      "severity": "medium",
+      "message": "Entry geolife2010: Missing recommended field \"doi\"",
+      "entry": "geolife2010"
+    }
+  ],
+  "duplicates": [],
+  "venue_standard_checked": null,
+  "min_count_checked": null,
+  "manuscript_results": {
+    "checked": true,
+    "manuscript_filepath": "paper/main.tex",
+    "cited_keys": [
+      "pml2024",
+      "geolife2009",
+      "tmarkov",
+      "privic2024",
+      "bayesian",
+      "fedsense2025",
+      "geolife2010",
+      "geolife2008",
+      "fingerprint",
+      "adaptive2023",
+      "inference2026"
+    ],
+    "missing_keys": [],
+    "unused_keys": []
+  }
+}

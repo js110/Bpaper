@@ -1,0 +1,30 @@
+[
+  {
+    "name": "crossref",
+    "url": "https://api.crossref.org/works/10.1109/TMC.2026.3721057",
+    "status": 200,
+    "bytes": 4059,
+    "content_type": "application/json"
+  },
+  {
+    "name": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1109/TMC.2026.3721057",
+    "status": 200,
+    "bytes": 13236,
+    "content_type": "application/json"
+  },
+  {
+    "name": "semanticscholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/TMC.2026.3721057?fields=title,openAccessPdf,url",
+    "status": 200,
+    "bytes": 353,
+    "content_type": "application/json"
+  },
+  {
+    "name": "ieee",
+    "url": "https://ieeexplore.ieee.org/document/11643964/",
+    "status": 202,
+    "bytes": 0,
+    "content_type": "text/html; charset=UTF-8"
+  }
+]

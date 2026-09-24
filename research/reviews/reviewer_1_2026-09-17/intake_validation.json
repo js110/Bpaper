@@ -1,0 +1,69 @@
+{
+  "errors": [
+    {
+      "code": "VENUE_POLICY_NOT_CHECKED",
+      "field": "venue_policy.checked"
+    },
+    {
+      "code": "PEER_REVIEW_MODEL_UNKNOWN",
+      "field": "venue_policy.peer_review_model"
+    },
+    {
+      "code": "LOCAL_ONLY_REQUIRED",
+      "field": "handling.local_only"
+    },
+    {
+      "code": "EXTERNAL_SERVICE_NOT_SUPPORTED",
+      "field": "handling.external_service_use"
+    }
+  ],
+  "handling_assertions": {
+    "author_and_editor_channels_must_remain_separate": true,
+    "bundled_tools_are_local_only": true,
+    "data_reuse_authorized": false,
+    "external_service_use_authorized_by_this_report": false
+  },
+  "normalized_scope": {
+    "ai_plan": "approved_ai_assistance",
+    "capacity": "author_requested_reader",
+    "competence_areas": [
+      "bayesian_inference",
+      "simulation",
+      "statistics",
+      "code_audit"
+    ],
+    "manuscript_type": "computational_privacy_research",
+    "out_of_scope": [
+      "editorial_decision",
+      "network_search",
+      "full_experiment_rerun"
+    ],
+    "peer_review_model": "unknown",
+    "requested_focus": [
+      "methods",
+      "statistics",
+      "theory",
+      "baselines",
+      "reproducibility"
+    ]
+  },
+  "notice": "This validates declared process controls only. It does not establish reviewer competence, resolve conflicts, authorize external processing, or assess manuscript quality.",
+  "review_id": "AUTHOR-MOCK-2026-09-17-01",
+  "schema_version": "2.0",
+  "status": "BLOCKED",
+  "valid": false,
+  "warnings": [
+    {
+      "code": "CONFIDENTIAL_NOTES_CHANNEL_UNAVAILABLE",
+      "field": "venue_policy.confidential_editor_notes_supported"
+    },
+    {
+      "code": "COMPETENCE_LIMITS_MUST_BE_DISCLOSED",
+      "field": "reviewer.competence_limits"
+    },
+    {
+      "code": "SPECIALIST_REVIEW_NEEDED",
+      "field": "scope.specialist_review_needed"
+    }
+  ]
+}

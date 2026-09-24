@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-23",
+  "pdf_pages": 21,
+  "cited_references": 11,
+  "undefined_citations": [],
+  "overfull_boxes": 0,
+  "all_pages_visually_checked": true,
+  "visual_review": "All 21 pages inspected in contact sheets; both schematic originals and revised appendix page inspected separately. Author review pending.",
+  "source_bundle_files": [
+    "main.tex",
+    "numbers.tex",
+    "review_numbers.tex",
+    "references.bib",
+    "elsarticle.cls",
+    "elsarticle-num.bst",
+    "main_table_revision.tex",
+    "matched_table.tex",
+    "recent_matched_table.tex",
+    "informed_table.tex",
+    "prior_diagnostic_table.tex",
+    "task_area_table.tex",
+    "attacks.pdf",
+    "tradeoff.pdf",
+    "recent_tradeoff.pdf",
+    "calibration.pdf",
+    "sensitivity.pdf",
+    "recent_commute_zoom.pdf",
+    "figures/system_architecture.png",
+    "figures/bsp_workflow.png",
+    "SOURCE_README.md",
+    "imagegen/prompts.json",
+    "imagegen/architecture_edit_prompt.txt",
+    "imagegen/manifest.json"
+  ],
+  "source_bundle_clean_build_passed": true,
+  "checks": {
+    "event_audit": "results/audit.json",
+    "unit_tests": "research/revisions/factual_audit/tests.log",
+    "recent_channels": [
+      "results/recent_baselines/channel_audit.json",
+      "results/recent_privic_thinning/channel_audit.json"
+    ],
+    "citation_audit": "research/citation_validation.json",
+    "reference_age_policy": "research/reference_policy.md",
+    "images": "research/imagegen/manifest.json",
+    "factual_audit": "research/revisions/factual_audit/final_checks.json"
+  },
+  "sha256": {
+    "paper/main.pdf": "81d6ac6af366862bd06e3b72e8f03e4100fcbc89bb1dfa237fabf79bc66becce",
+    "paper/main.tex": "04270e62c5a34dc89fa43f0a2e28653e22523940ceb1619740138d11b4949fc8",
+    "paper/manuscript_source.zip": "d7d652970b386a37dc12b73e14d9ce2dbc1beb6dbbdc7c0466678877033cab44"
+  },
+  "duplicate_pdf_destinations": 0,
+  "source_bundle_text_matches_main_pdf": true,
+  "review1": {
+    "response": "research/revisions/review1/response_zh.md",
+    "diagnostics": "results/review1_diagnostics/diagnostics.json",
+    "consistency": "research/revisions/review1/consistency_check.json",
+    "tests": "research/revisions/review1/tests.log",
+    "closest_work_full_text_checked": true,
+    "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "2.0",
+  "review_id": "AUTHOR-MOCK-2026-09-17-01",
+  "material": {
+    "status": "unpublished_confidential",
+    "contains_personal_or_sensitive_data": false
+  },
+  "authorization": {
+    "basis": "author_request",
+    "documented": true,
+    "local_processing_authorized": true,
+    "external_processing_authorized": true
+  },
+  "reviewer": {
+    "capacity": "author_requested_reader",
+    "human_accountable": true,
+    "competence_areas": [
+      "bayesian_inference",
+      "simulation",
+      "statistics",
+      "code_audit"
+    ],
+    "competence_limits": [
+      "AI working draft; author must verify; no independent full literature search or full reproduction"
+    ],
+    "conflict_status": "none_identified",
+    "conflicts": []
+  },
+  "venue_policy": {
+    "checked": false,
+    "peer_review_model": "unknown",
+    "confidential_editor_notes_supported": false
+  },
+  "ai_use": {
+    "policy": "permitted_with_disclosure",
+    "planned": "approved_ai_assistance",
+    "permission_confirmed": true,
+    "disclosure_planned": true
+  },
+  "handling": {
+    "local_only": false,
+    "external_service_use": true,
+    "data_reuse_permitted": false,
+    "retention_rule": "retain_per_venue_policy",
+    "deletion_or_retention_record_planned": true
+  },
+  "scope": {
+    "manuscript_type": "computational_privacy_research",
+    "requested_focus": [
+      "methods",
+      "statistics",
+      "theory",
+      "baselines",
+      "reproducibility"
+    ],
+    "out_of_scope": [
+      "editorial_decision",
+      "network_search",
+      "full_experiment_rerun"
+    ],
+    "specialist_review_needed": [
+      "closest_literature_verification"
+    ]
+  }
+}

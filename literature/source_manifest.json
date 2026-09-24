@@ -1,0 +1,810 @@
+[
+  {
+    "id": "anonysense",
+    "doi": "10.1145/1378600.1378624",
+    "pdf_url": "https://homes.luddy.indiana.edu/kapadia/papers/anonysense_mobisys08.pdf",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Anonysense"
+    ],
+    "authors": [
+      {
+        "given": "Cory",
+        "family": "Cornelius",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Dartmouth College, Hanover, NH, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Apu",
+        "family": "Kapadia",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Dartmouth College, Hanover, NH, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "David",
+        "family": "Kotz",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Dartmouth College, Hanover, NH, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Dan",
+        "family": "Peebles",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Dartmouth College, Hanover, NH, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Minho",
+        "family": "Shin",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Dartmouth College, Hanover, NH, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Nikos",
+        "family": "Triandopoulos",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "University of Aarhus, Århus, Denmark"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched",
+    "sha256": "d5476d655933e0e1572b2c4e3321776460c8baca6ae3f313db813a5240db6b91",
+    "fulltext_downloaded": true,
+    "correction": "Initial candidate DOI had different title; rejected and corrected before citation."
+  },
+  {
+    "id": "tmarkov",
+    "doi": "10.3390/s21072474",
+    "pdf_url": "https://mdpi-res.com/d_attachment/sensors/sensors-21-02474/article_deploy/sensors-21-02474.pdf",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Mobility-Aware Privacy-Preserving Mobile Crowdsourcing"
+    ],
+    "authors": [
+      {
+        "given": "Guoying",
+        "family": "Qiu",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Shaanxi Key Laboratory of Network and System Security, School of Computer Science and Technology, Xidian University, Xi’an 710071, China"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yulong",
+        "family": "Shen",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Shaanxi Key Laboratory of Network and System Security, School of Computer Science and Technology, Xidian University, Xi’an 710071, China"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Ke",
+        "family": "Cheng",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Shaanxi Key Laboratory of Network and System Security, School of Computer Science and Technology, Xidian University, Xi’an 710071, China"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0001-8178-6030",
+        "authenticated-orcid": false,
+        "given": "Lingtong",
+        "family": "Liu",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Shaanxi Key Laboratory of Network and System Security, School of Computer Science and Technology, Xidian University, Xi’an 710071, China"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Shuiguang",
+        "family": "Zeng",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Shaanxi Key Laboratory of Network and System Security, School of Computer Science and Technology, Xidian University, Xi’an 710071, China"
+          },
+          {
+            "name": "College of Computer and Cyber Security, Hebei Normal University, Shijiazhuang 050000, China"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched",
+    "sha256": "ee8a370d2fc3484bb70cffb2943d1f7839c988893586413af0065e731ae44581",
+    "fulltext_downloaded": true
+  },
+  {
+    "id": "dual",
+    "doi": "10.1016/j.jnca.2018.09.007",
+    "pdf_url": null,
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Dual-side privacy-preserving task matching for spatial crowdsourcing"
+    ],
+    "authors": [
+      {
+        "given": "Jiangang",
+        "family": "Shu",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Ximeng",
+        "family": "Liu",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Yinghui",
+        "family": "Zhang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Xiaohua",
+        "family": "Jia",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Robert H.",
+        "family": "Deng",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched"
+  },
+  {
+    "id": "crowdprivacy",
+    "doi": null,
+    "pdf_url": "https://www.usenix.org/system/files/sec19-boukoros.pdf",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "sha256": "e5601b15202ba957f65baf547f8ceca0a854aa959fc5ece4e464a91daa82c884",
+    "fulltext_downloaded": true
+  },
+  {
+    "id": "filters",
+    "doi": null,
+    "pdf_url": "https://proceedings.neurips.cc/paper/6170-privacy-odometers-and-filters-pay-as-you-go-composition.pdf",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "sha256": "378198a9f1f92d48ba5a43b0208c8ff7b1ad896574ba2c2a4cdc248c7bb0116f",
+    "fulltext_downloaded": true
+  },
+  {
+    "id": "geo",
+    "doi": "10.1145/2508859.2516735",
+    "pdf_url": "https://arxiv.org/pdf/1212.1984",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Geo-indistinguishability"
+    ],
+    "authors": [
+      {
+        "given": "Miguel E.",
+        "family": "Andrés",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Nicolás E.",
+        "family": "Bordenabe",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Konstantinos",
+        "family": "Chatzikokolakis",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Catuscia",
+        "family": "Palamidessi",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched",
+    "pdf_error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>"
+  },
+  {
+    "id": "adaptive2023",
+    "doi": null,
+    "pdf_url": "https://proceedings.mlr.press/v202/whitehouse23a/whitehouse23a.pdf",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "sha256": "b84564df3e490a58960c6633856f47992df6b2541d482bff5a5ed51e68fc09f8",
+    "fulltext_downloaded": true
+  },
+  {
+    "id": "p2ta",
+    "doi": "10.1016/j.sysarc.2019.01.005",
+    "pdf_url": null,
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "P2TA: Privacy-preserving task allocation for edge computing enhanced mobile crowdsensing"
+    ],
+    "authors": [
+      {
+        "ORCID": "https://orcid.org/0000-0002-8804-2787",
+        "authenticated-orcid": false,
+        "given": "Hang",
+        "family": "Shen",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Guangwei",
+        "family": "Bai",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yujia",
+        "family": "Hu",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Tianjing",
+        "family": "Wang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched"
+  },
+  {
+    "id": "fingerprint",
+    "doi": "10.1186/s42400-025-00539-2",
+    "pdf_url": null,
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Privacy-preserving task assignment in mobile crowdsensing: a bilateral location fingerprint-based approach"
+    ],
+    "authors": [
+      {
+        "given": "Chao",
+        "family": "Wang",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-3052-3828",
+        "authenticated-orcid": false,
+        "given": "Jun",
+        "family": "Tao",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Shengyu",
+        "family": "Su",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Dingwen",
+        "family": "Chi",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Wenqiang",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched"
+  },
+  {
+    "id": "blockchain",
+    "doi": "10.1016/j.pmcj.2025.102125",
+    "pdf_url": null,
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "A blockchain-assisted privacy-preserving framework for Mobile CrowdSensing"
+    ],
+    "authors": [
+      {
+        "given": "Nitish",
+        "family": "Andola",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-6139-7350",
+        "authenticated-orcid": false,
+        "given": "Vijay Kumar",
+        "family": "Yadav",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched"
+  },
+  {
+    "id": "inference2026",
+    "doi": "10.1109/TMC.2026.3721057",
+    "pdf_url": null,
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based on Homomorphic Encryption and Reversible Obfuscation"
+    ],
+    "authors": [
+      {
+        "given": "Ruijia",
+        "family": "Duan",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Qingying",
+        "family": "Yu",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yafei",
+        "family": "Zhang",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Chenyi",
+        "family": "Xu",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Chuanming",
+        "family": "Chen",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Xiaoyao",
+        "family": "Zheng",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yonglong",
+        "family": "Luo",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Anhui Normal University",
+            "place": [
+              "Wuhu, Anhui, China"
+            ],
+            "department": [
+              "School of Computer and Information"
+            ]
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched"
+  },
+  {
+    "id": "bayesian",
+    "doi": "10.3982/TE4390",
+    "pdf_url": "https://www.econtheory.org/ojs/index.php/te/article/viewFile/20211557/32395/934",
+    "checked": "2026-09-06",
+    "human_verified": false,
+    "title": [
+      "Bayesian privacy"
+    ],
+    "authors": [
+      {
+        "given": "Ran",
+        "family": "Eilat",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Economics, Ben-Gurion University of the Negev"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Kfir",
+        "family": "Eliaz",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Economics, Tel-Aviv University"
+          },
+          {
+            "name": "Department of Finance, University of Utah"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Xiaosheng",
+        "family": "Mu",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Economics, Princeton University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "metadata_status": "Crossref fetched",
+    "sha256": "335fa92f91870e459a761250f10fac909c147b35c4028365dac8b365821dc408",
+    "fulltext_downloaded": true
+  },
+  {
+    "id": "geolife2009",
+    "url": "https://www.microsoft.com/en-us/download/details.aspx?id=52367",
+    "locator": "Dataset citation instructions, papers [1]-[3]",
+    "agent_checked": "2026-09-15",
+    "human_verified": false,
+    "scope": "bibliographic attribution for dataset use only; no algorithmic claims"
+  },
+  {
+    "id": "geolife2008",
+    "url": "https://www.microsoft.com/en-us/download/details.aspx?id=52367",
+    "locator": "Dataset citation instructions, papers [1]-[3]",
+    "agent_checked": "2026-09-15",
+    "human_verified": false,
+    "scope": "bibliographic attribution for dataset use only; no algorithmic claims"
+  },
+  {
+    "id": "geolife2010",
+    "url": "https://www.microsoft.com/en-us/download/details.aspx?id=52367",
+    "locator": "Dataset citation instructions, papers [1]-[3]",
+    "agent_checked": "2026-09-15",
+    "human_verified": false,
+    "scope": "bibliographic attribution for dataset use only; no algorithmic claims"
+  }
+]

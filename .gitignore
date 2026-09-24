@@ -1,0 +1,32 @@
+# Local environment and credentials
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+# Third-party source material: see research/repository_management.md
+/data/geolife.zip
+/literature/**/*.pdf
+/literature/**/*.txt
+/literature/**/*.html
+# Original licensed comparison code and our notes remain tracked
+!/literature/recent/PRIVIC_LICENSE
+# TeX temporary output; final PDFs and source archive are tracked
+/paper/*.aux
+/paper/*.log
+/paper/*.blg
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.out
+/paper/*.spl
+/paper/main.txt
+/paper/preview*/
+/paper/source_check*/
+/paper/official_elsarticle.zip
+**/mpl_cache/
+/research/revisions/factual_audit/preview/
+/research/revisions/factual_audit/source_check/

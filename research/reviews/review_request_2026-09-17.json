@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-09-17T10:02:45.614575+08:00",
+  "scope": "Author-requested internal AI-assisted mock review; not journal peer review",
+  "reviewer_agent": "/root/paper_reviewer",
+  "review_directory": "research/reviews/reviewer_1_2026-09-17",
+  "rules": [
+    "No manuscript/code/result modifications",
+    "Preserve local review artifacts for author",
+    "Separate verified errors, evidence gaps and optional improvements",
+    "No external manuscript uploads or official editorial decision"
+  ],
+  "files": {
+    "paper/main.pdf": "0d2d2866de3eef0fca05d7c589f7376189b4e96d410d523dc55f9a034c057179",
+    "paper/main.tex": "c523c1f292833203b1037178bd13c71442072d4103624026cb8dd35d39a45270",
+    "paper/numbers.tex": "3f275384972cbd47900adcbb9595d53254798c941e4cecb84e769f3d79bdaa6d",
+    "paper/references.bib": "92c830e1c4b8e1eac47412c322d42c55fc3ce44de95919914593a8ae46ccc4e2",
+    "paper/recent_matched_table.tex": "aca6023933a50d7efb5bb2655054e0b98008ff9bb4921914e9a60a18ad796950",
+    "src/model.py": "c09e4f9bfaccf9c8b309f3f276cdde4cd2fb7321af2b30aeac182b535a93594b",
+    "src/experiment.py": "3b3c12d1428951a267b7c7b0f38b0ddceba7224d0e64330570b800436e8a06d3",
+    "src/recent_baselines.py": "80e462dde7db02994b5cf61c3645d7e257b2a3e40bf1a08665fb92434f6a873c",
+    "src/analyze_recent.py": "685bcb570d00ff6062d6ed95a73401c27b162be2dac8509485557cec799d86bf",
+    "research/protocol.md": "3cacc6a994bd3d231fbb615a186066f33b10e8ab67548547d08de0392e426e30",
+    "research/manuscript_status.json": "6d0783db70f41a18f8d1a02df21d2ceb0266be6a243cfa9641047f53772bc8f9"
+  }
+}

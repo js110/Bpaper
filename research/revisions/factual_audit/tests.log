@@ -1,0 +1,26 @@
+test_boundaries_duplicates_expiry (test_model.ChannelTests.test_boundaries_duplicates_expiry) ... ok
+test_branch_bound_and_maximality (test_model.ChannelTests.test_branch_bound_and_maximality) ... ok
+test_positive_only_can_leak_silence (test_model.ChannelTests.test_positive_only_can_leak_silence) ... ok
+test_prior_tie_unbiased (test_model.ChannelTests.test_prior_tie_unbiased) ... ok
+test_public_state_no_ground_truth_fields (test_model.ChannelTests.test_public_state_no_ground_truth_fields) ... ok
+test_seed_reproducibility (test_model.ChannelTests.test_seed_reproducibility) ... ok
+test_silence_is_not_false (test_model.ChannelTests.test_silence_is_not_false) ... ok
+test_success_independent_of_thinning (test_model.ChannelTests.test_success_independent_of_thinning) ... ok
+test_transition_mass_and_peak (test_model.ChannelTests.test_transition_mass_and_peak) ... ok
+test_zero_gate_and_zero_delivery (test_model.ChannelTests.test_zero_gate_and_zero_delivery) ... ok
+test_data_split_disjoint (test_pipeline.PipelineTests.test_data_split_disjoint) ... ok
+test_default_replay_matches_archived_numerics (test_pipeline.PipelineTests.test_default_replay_matches_archived_numerics) ... ok
+test_kl_branches_and_maximality (test_pipeline.PipelineTests.test_kl_branches_and_maximality) ... ok
+test_missing_minute_not_interpolated (test_pipeline.PipelineTests.test_missing_minute_not_interpolated) ... ok
+test_shared_normal_tasks_and_exogenous_draws (test_pipeline.PipelineTests.test_shared_normal_tasks_and_exogenous_draws) ... ok
+test_author_code_conformance (test_recent_baselines.RecentBaselines.test_author_code_conformance) ... ok
+test_ba_and_gibu_objectives (test_recent_baselines.RecentBaselines.test_ba_and_gibu_objectives) ... ok
+test_pml_closed_form_matches_general_lp (test_recent_baselines.RecentBaselines.test_pml_closed_form_matches_general_lp) ... ok
+test_pml_zero_and_full_region (test_recent_baselines.RecentBaselines.test_pml_zero_and_full_region) ... ok
+test_policy_envelope_matches_mixture_lp (test_recent_baselines.RecentBaselines.test_policy_envelope_matches_mixture_lp) ... ok
+test_privic_vector_channel_updates (test_recent_baselines.RecentBaselines.test_privic_vector_channel_updates) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.180s
+
+OK

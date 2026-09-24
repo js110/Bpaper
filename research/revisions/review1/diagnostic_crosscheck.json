@@ -1,0 +1,6 @@
+{
+  "independent_reviewer_values_match": true,
+  "counts_reconcile_with_rows": true,
+  "all_small_area_completions_zero": true,
+  "scope": "Diagnostics, not new simulation or adaptive attack"
+}

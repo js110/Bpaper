@@ -1,0 +1,37 @@
+{
+  "stage": "complete_research_draft",
+  "submission_ready": false,
+  "date": "2026-09-22",
+  "human_verified": false,
+  "pages": 20,
+  "references": 11,
+  "figures_in_manuscript": 8,
+  "tables_in_manuscript": 6,
+  "tests_passed": 21,
+  "completed_conditions": 352,
+  "trajectory_executions": 23929,
+  "audited_events": 1148592,
+  "open_items": [
+    "current venue-specific author instructions",
+    "author confirmation of names, order, affiliation, grants and remaining declarations",
+    "broader novelty and practical utility validation"
+  ],
+  "not_performed": [
+    "hardware experiment",
+    "real task-log study",
+    "independent reproduction",
+    "submission"
+  ],
+  "recent_baselines": [
+    "PML-T from TIFS 2024 constraints",
+    "PRIVIC-T from PoPETs 2024 plus explicit task adapter"
+  ],
+  "ai_generated_schematics": 2,
+  "reference_policy": "research/reference_policy.md",
+  "review1_revision": "research/revisions/review1/response_zh.md",
+  "author_information_supplied": true,
+  "funding_information_supplied": true,
+  "grant_D2O25O185_letter_O_confirmed_by_user": true,
+  "closest_work_full_text_checked": true,
+  "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md"
+}

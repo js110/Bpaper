@@ -1,0 +1,38 @@
+[
+  {
+    "condition": "informed_alpha_model_0.3_bsp",
+    "fraction_above_cap": 0.3,
+    "maximum_peak": 0.24598754954593594,
+    "client_maximum": 0.10000000000000005,
+    "events": 1920,
+    "source": "results/informed/informed_alpha_model_0.3_bsp.jsonl.gz",
+    "sha256": "0accb36978c70d04809fccc35373e6ef0b0fd377e0b63ad65c65250fbf705cd3"
+  },
+  {
+    "condition": "informed_alpha_model_0.9_bsp",
+    "fraction_above_cap": 0.08020833333333334,
+    "maximum_peak": 0.1641774911488909,
+    "client_maximum": 0.10000000000000012,
+    "events": 1920,
+    "source": "results/informed/informed_alpha_model_0.9_bsp.jsonl.gz",
+    "sha256": "b9c35f12b7c949c02d8f8dee32a040dbb471db446c10032c121042247a78900f"
+  },
+  {
+    "condition": "informed_move_model_0.05_bsp",
+    "fraction_above_cap": 0.046875,
+    "maximum_peak": 0.15269141309737533,
+    "client_maximum": 0.10000000000000003,
+    "events": 1920,
+    "source": "results/informed/informed_move_model_0.05_bsp.jsonl.gz",
+    "sha256": "82d4ddeeb1a4744b42e6c0c8be61dfa251b8a17f2c8b785e804f2315c1e74cd8"
+  },
+  {
+    "condition": "informed_move_model_0.8_bsp",
+    "fraction_above_cap": 0.4140625,
+    "maximum_peak": 0.26300325853659673,
+    "client_maximum": 0.10000000000000003,
+    "events": 1920,
+    "source": "results/informed/informed_move_model_0.8_bsp.jsonl.gz",
+    "sha256": "67690c2512df29142602b11429ddca24e88cabcf43dd24f3f4798506b320d2f9"
+  }
+]

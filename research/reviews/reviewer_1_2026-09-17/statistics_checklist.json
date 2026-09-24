@@ -1,0 +1,279 @@
+{
+  "schema_version": "2.0",
+  "checklist_id": "STAT-REPRO-AUTHOR-MOCK",
+  "study_design": "computational_simulation",
+  "specialist_review": {
+    "needed": "yes",
+    "areas": [
+      "closest_literature",
+      "selection_uncertainty"
+    ],
+    "requested": true
+  },
+  "items": [
+    {
+      "id": "question.estimand_alignment",
+      "category": "question",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "design.unit_and_independence",
+      "category": "design",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "design.sample_size_precision",
+      "category": "design",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Computational convenience rationale disclosed; no power claim",
+      "requested_action": "No retrospective power calculation requested"
+    },
+    {
+      "id": "design.allocation_randomization",
+      "category": "design",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "design.blinding",
+      "category": "design",
+      "applicability": "not_applicable",
+      "status": "not_applicable",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "No blinded intervention trial; author data-use determination remains outside this computational audit",
+      "requested_action": "Authors to complete relevant data-use declarations before dissemination"
+    },
+    {
+      "id": "data.inclusion_exclusion",
+      "category": "data",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "data.missing_data",
+      "category": "data",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "data.outliers_transformations",
+      "category": "data",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "analysis.prespecification",
+      "category": "analysis",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "See M1 M3 and m1 for prior mismatch and exploratory selection boundaries",
+      "requested_action": "Clarify estimand and conditional uncertainty"
+    },
+    {
+      "id": "analysis.method_design_alignment",
+      "category": "analysis",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "analysis.assumptions_diagnostics",
+      "category": "analysis",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "See M1 M3 and m1 for prior mismatch and exploratory selection boundaries",
+      "requested_action": "Clarify estimand and conditional uncertainty"
+    },
+    {
+      "id": "analysis.multiplicity",
+      "category": "analysis",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "analysis.clustering_repeated_measures",
+      "category": "analysis",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "results.effect_sizes_uncertainty",
+      "category": "results",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "See M1 M3 and m1 for prior mismatch and exploratory selection boundaries",
+      "requested_action": "Clarify estimand and conditional uncertainty"
+    },
+    {
+      "id": "results.denominators_flow",
+      "category": "results",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "results.complete_outcomes_harms",
+      "category": "results",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "reproducibility.data_materials_access",
+      "category": "reproducibility",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Local artifact available; public deposition pending",
+      "requested_action": "Retain explicit local-only availability statement until release"
+    },
+    {
+      "id": "reproducibility.code_environment_parameters",
+      "category": "reproducibility",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "reproducibility.provenance_versions",
+      "category": "reproducibility",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    },
+    {
+      "id": "ethics.approval_consent_governance",
+      "category": "ethics",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Public trajectory secondary use disclosed; responsible authors must determine permissions and any ethics requirements; reviewer did not independently adjudicate them",
+      "requested_action": "Complete applicable data-use and author declarations before dissemination"
+    },
+    {
+      "id": "interpretation.claim_evidence_causality",
+      "category": "interpretation",
+      "applicability": "applicable",
+      "status": "partly_documented",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "See M1 M3 and m1 for prior mismatch and exploratory selection boundaries",
+      "requested_action": "Clarify estimand and conditional uncertainty"
+    },
+    {
+      "id": "integrity.deviations_selective_reporting",
+      "category": "integrity",
+      "applicability": "applicable",
+      "status": "verified_present",
+      "evidence_locations": [
+        "paper/main.tex:144-311",
+        "review_zh.md"
+      ],
+      "note": "Scope-limited review of reported computational design and local checks",
+      "requested_action": "Retain scope and reproducibility details"
+    }
+  ]
+}

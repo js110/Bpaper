@@ -1,0 +1,8 @@
+Matplotlib is building the font cache; this may take a moment.
+Traceback (most recent call last):
+  File "/Users/jiangsheng/Desktop/crowdsensing_task_privacy/research/reviews/reviewer_1_2026-09-17/checks.py", line 19, in <module>
+    eps=float(rng.uniform(.01,4));pq=pml_gates(b,mask,alpha,eps)[0];pmlerr.append(abs(pq*m-pml_lp(b,mask,alpha,eps)))
+                                                                                           ~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/jiangsheng/Desktop/crowdsensing_task_privacy/src/recent_baselines.py", line 84, in pml_lp
+    from scipy.optimize import linprog
+ModuleNotFoundError: No module named 'scipy'

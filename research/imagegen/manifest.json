@@ -1,0 +1,40 @@
+{
+  "tool": "built-in image_gen",
+  "cli_fallback": false,
+  "model_version": "not exposed by tool",
+  "prompts": [
+    "research/imagegen/prompts.json",
+    "research/imagegen/architecture_edit_prompt.txt"
+  ],
+  "images": [
+    {
+      "file": "paper/figures/system_architecture.png",
+      "pixels": [
+        1536,
+        1024
+      ],
+      "sha256": "f15b06b47b6bb486db6965628b7a74333b00672d085de18537db7dd74310272d",
+      "reviewed": true,
+      "review_type": "agent visual and scientific consistency check",
+      "score": null
+    },
+    {
+      "file": "paper/figures/bsp_workflow.png",
+      "pixels": [
+        1774,
+        887
+      ],
+      "sha256": "9f537dd2d01c4e3e84d1144c8394dcafd6c6757d115098770921f7e926bf7c53",
+      "reviewed": true,
+      "review_type": "agent visual and scientific consistency check",
+      "score": null
+    }
+  ],
+  "review_notes": [
+    "Architecture edited to add task input to gate and fix public outcome feedback origin.",
+    "Workflow q=0 branch cannot pass gate; caption makes this explicit.",
+    "Illustrative silence probability 0.46 and posterior 0.4/0.46 checked algebraically.",
+    "Images are conceptual; all experimental plots still derive from saved data.",
+    "Native raster resolution retained; no claim of vector output or 300-dpi compliance at arbitrary print size."
+  ]
+}

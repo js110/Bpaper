@@ -1,0 +1,19 @@
+{
+  "paper/main.tex": "c523c1f292833203b1037178bd13c71442072d4103624026cb8dd35d39a45270",
+  "paper/numbers.tex": "3f275384972cbd47900adcbb9595d53254798c941e4cecb84e769f3d79bdaa6d",
+  "paper/references.bib": "92c830e1c4b8e1eac47412c322d42c55fc3ce44de95919914593a8ae46ccc4e2",
+  "paper/main_table.tex": "7b91a324cd05d3d4d3f7bde9374572de998ab1dc2212251b45a48449620624d0",
+  "paper/matched_table.tex": "a004bcf65542f01e50fed10ca0c6a4acf312e529c08429150a4f82acaa41e027",
+  "paper/recent_matched_table.tex": "aca6023933a50d7efb5bb2655054e0b98008ff9bb4921914e9a60a18ad796950",
+  "paper/informed_table.tex": "6dd65970260febaebb0cf1ddccaeb0f5734f0c8f0c66c0de4efc85a49d35f37b",
+  "src/model.py": "c09e4f9bfaccf9c8b309f3f276cdde4cd2fb7321af2b30aeac182b535a93594b",
+  "src/experiment.py": "3b3c12d1428951a267b7c7b0f38b0ddceba7224d0e64330570b800436e8a06d3",
+  "src/analyze.py": "1ca948aaa6d1663aa77e797337cf9aed0ca88dcfe83b5864f591d7a090ec4fbd",
+  "src/analyze_recent.py": "685bcb570d00ff6062d6ed95a73401c27b162be2dac8509485557cec799d86bf",
+  "src/recent_baselines.py": "80e462dde7db02994b5cf61c3645d7e257b2a3e40bf1a08665fb92434f6a873c",
+  "src/prepare_data.py": "7232b2bcc77e5ce5179c0729ab9242d7af716d7ec2cba21dea9c6376af98b0a0",
+  "data/geolife_development.npz": "cf58efa066484a8896f5f8065925d673c4e5524b956cf066a851104b53eed116",
+  "data/geolife_validation.npz": "8a2d6b189f8808f10eef47bf74a9d16a2b4d6deee3f5d1ba9bf261d9517de570",
+  "data/geolife_test.npz": "46fea0dcc58bdca4dd85f509a66a18616d44cb05615c6951becef63777752410",
+  "results/recent_comparison/matched_utility.json": "ec665585374eb392044e1be3fe1bddfc56a7802e6c6dc80bb8d4e650fcd697f9"
+}

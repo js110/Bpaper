@@ -1,0 +1,12 @@
+{
+  "python": "3.14.5",
+  "numpy": "2.4.1",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "code_sha256": {
+    "src/prepare_data.py": "7232b2bcc77e5ce5179c0729ab9242d7af716d7ec2cba21dea9c6376af98b0a0",
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/model.py": "fff85af472022d23650cd1e3f8afadc2648341bff5fb1a48d3913629aeae53c1",
+    "src/experiment.py": "df747ed66d9d3ebd5f0eb31b9bba0c1ccbe5f4bebece176286338708af6d23af",
+    "src/analyze.py": "9a19ab2b37599b55582297729bea429e4c1175b911ccc9600dcb181c7a1e2e53"
+  }
+}

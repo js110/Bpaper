@@ -1,0 +1,12 @@
+reference_id,title,authors,year,doi,url,verification_status
+tmarkov,Mobility-Aware Privacy-Preserving Mobile Crowdsourcing,Guoying Qiu and Yulong Shen and Ke Cheng and Lingtong Liu and Shuiguang Zeng,2021,10.3390/s21072474,,not_verified
+bayesian,Bayesian privacy,Ran Eilat and Kfir Eliaz and Xiaosheng Mu,2021,10.3982/te4390,,not_verified
+fingerprint,Privacy-preserving task assignment in mobile crowdsensing: a bilateral location fingerprint-based approach,Chao Wang and Jun Tao and Shengyu Su and Dingwen Chi and Wenqiang Li,2026,10.1186/s42400-025-00539-2,,not_verified
+inference2026,Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based on Homomorphic Encryption and Reversible Obfuscation,Ruijia Duan and Qingying Yu and Yafei Zhang and Chenyi Xu and Chuanming Chen and Xiaoyao Zheng and Yonglong Luo,2026,10.1109/tmc.2026.3721057,,not_verified
+adaptive2023,Fully-Adaptive Composition in Differential Privacy,Justin Whitehouse and Aaditya Ramdas and Ryan Rogers and Zhiwei Steven Wu,2023,,https://proceedings.mlr.press/v202/whitehouse23a.html,not_verified
+pml2024,Extremal Mechanisms for Pointwise Maximal Leakage,Leonhard Grosse and Sara Saeidian and Tobias J. Oechtering,2024,10.1109/tifs.2024.3449556,,not_verified
+privic2024,PRIVIC: A privacy-preserving method for incremental collection of location data,Sayan Biswas and Catuscia Palamidessi,2024,10.56553/popets-2024-0033,,not_verified
+fedsense2025,Location Privacy Preservation Crowdsensing With Federated Reinforcement Learning,Zhichao You and Xuewen Dong and Ximeng Liu and Sheng Gao and Yongzhi Wang and Yulong Shen,2025,10.1109/tdsc.2024.3398994,,not_verified
+geolife2009,Mining Interesting Locations and Travel Sequences from GPS Trajectories,Yu Zheng and Lizhu Zhang and Xing Xie and Wei-Ying Ma,2009,,,not_verified
+geolife2008,Understanding Mobility Based on GPS Data,Yu Zheng and Quannan Li and Yukun Chen and Xing Xie and Wei-Ying Ma,2008,,,not_verified
+geolife2010,"GeoLife: A Collaborative Social Networking Service among User, Location and Trajectory",Yu Zheng and Xing Xie and Wei-Ying Ma,2010,,https://www.microsoft.com/en-us/research/publication/geolife-a-collaborative-social-networking-service-among-user-location-and-trajectory/,not_verified
