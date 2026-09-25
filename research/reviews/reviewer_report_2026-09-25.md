@@ -118,7 +118,7 @@ HECTA 又采用了 dummy tasks、加密和非串通辅助方，观测边界不�
 
 当前 corollary 的解释对 transition/model correctness 依赖很强。建议把下一版 theorem 写成：
 
-> 对一个公开定义的候选模型集合 (mathcal M)，只要真实攻击者模型属于 (mathcal M)，且每个候选模型的 transition 满足相应预测条件，则同一个公开 gate 对集合内所有模型的两个输出分支同时满足 posterior concentration constraint。
+> 对一个公开定义的候选模型集合 𝓜，只要真实攻击者模型属于 𝓜，且每个候选模型的 transition 满足相应预测条件，则同一个公开 gate 对集合内所有模型的两个输出分支同时满足 posterior concentration constraint。
 
 这比把 model mismatch 作为 limitation 更能形成方法学贡献。
 
@@ -134,48 +134,28 @@ Elsevier 当前政策要求对实质性 generative-AI manuscript preparation 做
 
 这是当前最值得做的扩展，因为它正面解决论文已经发现的 informed-attacker failure。
 
-设候选攻击者模型集合为
+设候选攻击者模型集合为 𝓜 = {M₁, …, M_K}。模型 M_k 在当前任务前给出 belief b^(k)，并允许具有不同的 availability / completion likelihood h_i^(k)。定义：
 
-[
-mathcal M={M_1,ldots,M_K}.
-]
+- m_k = Σ_i b_i^(k) h_i^(k)
+- c_k = max{ρ, ||b^(k)||∞}
 
-模型 (M_k) 在当前任务前给出 belief (b^{(k)})，并允许不同的 availability / completion likelihood (h_i^{(k)})。定义
+所有模型共享同一个公开 gate probability q。要求对于每一个 M_k，report 和 silence 两个正概率分支的 posterior peak 都不超过 c_k。
 
-[
-m_k=sum_i b_i^{(k)}h_i^{(k)},qquad
-c_k=max{ho,|b^{(k)}|_infty}.
-]
+如果任意候选模型的正报告 posterior 已满足
 
-所有模型共享同一个公开 gate probability (q)。要求对于每一个 (M_k)，report 和 silence 两个正概率分支都满足 peak 不超过 (c_k)。
+max_i [ b_i^(k) h_i^(k) / m_k ] > c_k,
 
-如果任意模型的正报告 posterior 已经满足
+那么只要 q > 0，正报告分支就无法满足该模型的约束，因此 robust gate 必须取 q* = 0。
 
-[
-max_i rac{b_i^{(k)}h_i^{(k)}}{m_k}>c_k,
-]
+否则，对每个候选模型和状态定义
 
-那么任何 (q>0) 都无法安全地产生 report，因此 robust gate 必须取 (q^*=0)。
-
-否则对每个候选模型和状态定义
-
-[
-d_{k,i}=c_km_k-b_i^{(k)}h_i^{(k)}.
-]
+d_(k,i) = c_k m_k - b_i^(k) h_i^(k).
 
 同一个 gate 的最大鲁棒可行值为
 
-[
-q^*_{mathrm{R}}
-=
-minleft{
-1,;
-min_{k}min_{i:d_{k,i}>0}
-rac{c_k-b_i^{(k)}}{d_{k,i}}
-ight}.
-]
+q*_R = min { 1, min_k min_(i : d_(k,i) > 0) [ (c_k - b_i^(k)) / d_(k,i) ] }.
 
-也就是说，R-BSP 是所有候选模型可行 gate 区间的交集。计算复杂度从单模型 (O(N)) 增加到 (O(KN))，对目前 64-cell 规模仍然很轻。
+也就是说，R-BSP 是所有候选模型可行 gate 区间的交集。计算复杂度从单模型 O(N) 增加到 O(KN)，对目前 64-cell 规模仍然很轻。
 
 需要谨慎定位：**多 prior / 多攻击者知识的保护思想本身并不是首次出现**，Pufferfish privacy 及 robust local-privacy 文献已经研究过 attacker belief uncertainty。这里可以主张的创新应当是：
 
@@ -185,7 +165,7 @@ min_{k}min_{i:d_{k,i}>0}
 
 ## 建议新增的 R-BSP 实验
 
-- **Model-set sweep**：让客户端同时防守多个 (alpha)、move probability、population prior 组合，画出 (K) 或 uncertainty radius 增大时的 retention–worst-case posterior frontier。
+- **Model-set sweep**：让客户端同时防守多个 α、move probability、population prior 组合，画出 K 或 uncertainty radius 增大时的 retention–worst-case posterior frontier。
 - **Informed attacker rerun**：用现有 informed.json 中的真实攻击者设置，比较 BSP 与 R-BSP 的 cap violation rate、maximum posterior peak、MAP hit rate、retention。
 - **Nonuniform prior adaptive attack**：把 development-fitted prior 放进候选集合，重新跑 adaptive probes。
 - **Validation-correct selection**：所有 uncertainty set / threshold / baseline 参数只用 development+validation 选择，然后冻结，在 test users 上一次性评估。
@@ -199,7 +179,7 @@ min_{k}min_{i:d_{k,i}>0}
 
 > “攻击者模型不确定时，单模型 Bayesian filter 会失效；我们给出对多个 plausible attacker models 同时成立的闭式双分支参与机制，并量化鲁棒性带来的任务效用代价。”
 
-后一个故事明显更接近期刊论文应有的完整问题闭环。
+后一个故事更接近期刊论文所需要的完整问题闭环。
 
 ---
 
