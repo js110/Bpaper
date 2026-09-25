@@ -1,7 +1,7 @@
 {
   "stage": "complete_research_draft",
   "submission_ready": false,
-  "date": "2026-09-22",
+  "date": "2026-09-25",
   "human_verified": false,
   "pages": 20,
   "references": 11,
@@ -12,9 +12,13 @@
   "trajectory_executions": 23929,
   "audited_events": 1148592,
   "open_items": [
-    "current venue-specific author instructions",
-    "author confirmation of names, order, affiliation, grants and remaining declarations",
-    "broader novelty and practical utility validation"
+    "robustness to attacker/model uncertainty (recommended R-BSP extension)",
+    "nonuniform-prior adaptive attack evaluation",
+    "validation-only policy selection followed by frozen test evaluation",
+    "fine-region/value-aware utility evaluation",
+    "broader directly relevant literature coverage",
+    "author confirmation of final declarations and exact generative-AI disclosure",
+    "final journal-specific author-instruction check in submission portal"
   ],
   "not_performed": [
     "hardware experiment",
@@ -33,5 +37,9 @@
   "funding_information_supplied": true,
   "grant_D2O25O185_letter_O_confirmed_by_user": true,
   "closest_work_full_text_checked": true,
-  "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md"
+  "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md",
+  "target_venue": "Pervasive and Mobile Computing",
+  "submission_prep_branch": "pmc-submission-prep-2026-09-25",
+  "internal_review": "research/reviews/reviewer_report_2026-09-25.md",
+  "submission_checklist": "paper/PMC_SUBMISSION_CHECKLIST.md"
 }
