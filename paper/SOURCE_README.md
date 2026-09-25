@@ -1,12 +1,22 @@
-# Manuscript source bundle
+# Pervasive and Mobile Computing submission source
 
-This is a complete research draft, not an approved submission.
-Build with a TeX Live installation containing common LaTeX mathematics, graphics, font, and bibliography packages:
+Primary target: **Pervasive and Mobile Computing (Elsevier)**.
+
+The repository manuscript uses Elsevier's official `elsarticle` class. Build the working manuscript with:
 
     latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-The included elsarticle class and bibliography style originate from Elsevier's official template. The generated figures and tables correspond to the saved project results. Full code, experiment logs, provenance, source audit, and reproduction instructions are in the parent crowdsensing_task_privacy project. Author, affiliation, and funding text was supplied for this draft and still requires author verification; other declarations and final venue checks remain pending.
+For Editorial Manager packaging, run from the repository root:
 
-Updated 2026-09-23 after internal review and author details: 21 pages, 11 references, eight figures and six tables. The two PNG schematics were created with the built-in image generation tool; their prompts and provenance are included under imagegen/. Quantitative plots and the added task-area, prior-predictor, and expanded Commute displays derive from archived experiment data. The 2024 PML and PRIVIC comparisons are explicitly task-channel adaptations. The source uses the xurl package to wrap long reference URLs. The closest 2026 task-allocation paper has now been compared using the user-supplied accepted author version. This is a model-level comparison, not a numerical reproduction or an independent novelty certification.
+    python -m src.package_paper
 
-Working repository: https://github.com/js110/Bpaper . The latest factual audit corrects implementation-validation wording, PML bound attainment, KL gate approximation, tie handling, and official PMLR author metadata without changing saved experimental results.
+This creates:
+
+- `paper/manuscript_source.zip`: a flat LaTeX source bundle. The packaging script rewrites the two conceptual image paths so no subfolder is required inside the submission archive.
+- `paper/ai_provenance.zip`: prompt/provenance records for the AI-generated conceptual schematics, kept separate from the manuscript source.
+
+Elsevier's current LaTeX instructions state that LaTeX submissions containing subfolders cannot be processed by Editorial Manager, which is why the submission archive is flattened.
+
+The manuscript contains executed experiments, reproducible analyses, and archived negative results. Formatting for PMC does not by itself make the paper submission-ready. Before submission, complete the scientific and disclosure checks in `PMC_SUBMISSION_CHECKLIST.md`, especially the robust-attacker issue, test-set tuning issue, author declarations, and exact generative-AI disclosure.
+
+Working repository: https://github.com/js110/Bpaper
