@@ -9,9 +9,7 @@
 \newcommand{\ind}{\mathbf{1}}
 \input{numbers}
 \input{review_numbers}
-\journal{Research draft}
-% Use a plain first-page footer: this draft has not been submitted.
-\makeatletter\let\ps@pprintTitle\ps@plain\makeatother
+\journal{Pervasive and Mobile Computing}
 \begin{document}
 \begin{frontmatter}
 \title{Truthful Reports and Informative Silence:\\A Bayesian Participation Filter for Sequential Mobile Crowdsensing}
@@ -29,8 +27,6 @@ Keeping precise coordinates on a mobile device does not eliminate the location i
 Mobile crowdsensing \sep location privacy \sep Bayesian inference \sep adaptive tasks \sep participation filtering \sep reproducible simulation
 \end{keyword}
 \end{frontmatter}
-\noindent\textbf{Draft status.} This manuscript contains executed experiments and reproducible analyses. The author, affiliation, corresponding-author, and funding details below were supplied for this draft; author approval and verification of the remaining declarations and citations remain pending. No submission or external peer review has occurred.
-
 \section{Introduction}
 Mobile crowdsensing allows personal devices to contribute observations associated with places and time windows. A participant may wish to supply a valid observation for a public region without disclosing precise coordinates to the platform. Recent systems such as FedSense move task-selection decisions to participants through federated reinforcement learning~\cite{fedsense2025}. However, the meaning of a report can itself carry location information. When a platform knows that a task can only be completed inside a specified region, a successful completion provides evidence of presence there, even if the message contains no coordinate field.
 
