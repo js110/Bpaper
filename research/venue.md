@@ -1,17 +1,48 @@
-# 期刊与模板
+# Target journal decision (2026-09-25)
 
-暂定匹配方向：Pervasive and Mobile Computing（移动群智感知、隐私、仿真与算法验证）。这只是稿件定位，不是已经确定的投稿承诺。创新性和现实假设仍需强化，不预设录用。
+## Primary target: Pervasive and Mobile Computing (PMC)
 
-模板来源：Elsevier 官方 LaTeX instructions，2026-09-15 再次打开确认其推荐 elsarticle。
+Primary target selected: **Pervasive and Mobile Computing** (Elsevier, ISSN 1574-1192).
+
+Reason for selection: the journal's current official scope explicitly includes **Urban Sensing and Mobile Crowdsensing**, **Positioning, Localization and Tracking Technologies**, **Location-based Services and Applications**, and **Trust, Reliability, Security, and Privacy in Pervasive and Mobile Computing Systems**. This manuscript studies sequential location inference from linkable mobile-crowdsensing task outcomes and a client-side participation mechanism, so the topic is directly aligned with the journal's stated scope.
+
+Official scope:
+https://shop.elsevier.com/journals/pervasive-and-mobile-computing/1574-1192
+
+Recent topical evidence includes privacy-preserving mobile-crowdsensing articles published by PMC, e.g.:
+- Montori and Bedogni, "Privacy preservation for spatio-temporal data in Mobile Crowdsensing scenarios", Pervasive and Mobile Computing 90 (2023), 101755.
+- Andola and Yadav, "A blockchain-assisted privacy-preserving framework for Mobile CrowdSensing", Pervasive and Mobile Computing 115 (2026), 102125.
+
+This is a scope decision, not a claim about acceptance probability.
+
+## Backup venues
+
+1. **Journal of Information Security and Applications (JISA)** — strong privacy/security fit and has published mobile-crowdsensing privacy work, but the manuscript would need to foreground the threat model, security guarantee, and robustness more strongly.
+   Official scope: https://shop.elsevier.com/journals/journal-of-information-security-and-applications/2214-2126
+
+2. **Computer Communications** — acceptable backup if the manuscript is repositioned toward mobile/ubiquitous network services and system simulation; current contribution is less communication-protocol-centric.
+   Official scope: https://shop.elsevier.com/journals/computer-communications/0140-3664
+
+## LaTeX and submission format
+
+Elsevier's current LaTeX instructions recommend the official `elsarticle` class. The working manuscript already uses `elsarticle`; the submission-preparation branch changes the journal declaration to `Pervasive and Mobile Computing` and restores the standard Elsevier first-page behavior.
+
+Official LaTeX instructions:
 https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions
-官方页面下载链接：
-https://assets.ctfassets.net/o78em1y1w4i4/4MpsJHO0MOJ2xZuwGTAbOZ/7bc64af36477c5d6cfce335a1f872363/elsarticle.zip
-原包保留为 paper/official_elsarticle.zip，提取未修改的 dtx/ins/bst，由 ins 生成 cls。正文选择官方 3p 单栏选项，不修改类文件。
 
-本轮 ScienceDirect 期刊 Guide for Authors 多次 403，不能认证当前期刊专属要求已满足。采用出版方官方通用模板先完成可审阅全文；最终投稿前按当时可取得的期刊说明复核。初稿时作者、单位、基金、伦理/利益冲突和贡献声明均待作者填写；之后收到的作者和基金信息见下方更新。不自动生成否定声明或提交。
+Elsevier states that Editorial Manager does not process LaTeX source bundles with subfolders. The repository build helper `src/package_paper.py` therefore creates a **flat** `manuscript_source.zip` and rewrites the two conceptual figure paths inside the archived `main.tex`. AI-generation provenance is packaged separately so it does not break the manuscript-source layout.
 
-## 2026-09-22 作者与基金更新
+The journal-specific ScienceDirect Guide for Authors returned HTTP 403 during this check, so journal-specific details that are not visible from the official public pages must still be verified manually in the submission portal before final submission.
 
-用户提供了四名作者、同一单位、Lei Zhang 通讯邮箱及四项基金，已按 elsarticle 的作者/地址/通讯作者命令和独立 Funding 节录入。期刊仍只是暂定的 Pervasive and Mobile Computing；其 [最新 Guide for Authors](https://www.sciencedirect.com/journal/pervasive-and-mobile-computing/publish/guide-for-authors) 本次访问返回 403，因此不能确认该刊专属的匿名审稿、首页脚注或单独声明文件规则。查验日期：2026-09-22。
+## Current submission status
 
-可核实的出版方通用来源：[Elsevier LaTeX instructions](https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions) 支持 elsarticle 前置作者信息；[Elsevier Funding Source Declarations](https://www.elsevier.support/publishing/answer/what-are-conflict-of-interest-statements-funding-source-declarations-author-agreementsdeclarations-and-permission-notes) 说明期刊可能要求基金声明、具体以各刊指南为准；[Editorial Manager guide](https://www.elsevier.support/publishing/answer/author-guide-to-editorial-managers-new-submission-experience) 提示基金机构、获资助作者与号码可能还需在投稿系统逐项录入。用户随后明确确认基金号 `D2O25O185` 中的疑似 0 字符为字母 O，稿件保持该写法。作者顺序、贡献、利益冲突、资助方作用及最终投稿格式仍须四名作者确认。
+The manuscript is **not yet scientifically submission-ready** solely because the template is correct. The main unresolved items are:
+
+- the robustness gap exposed by the better-informed attacker;
+- weak/approximate prior assumptions in the replay attack;
+- test-selected exploratory policy envelopes;
+- utility dominated by large-region tasks;
+- only 11 references for a 20+ page paper;
+- final author verification of declarations and the exact generative-AI disclosure.
+
+See `research/reviews/reviewer_report_2026-09-25.md` and `paper/PMC_SUBMISSION_CHECKLIST.md`.
