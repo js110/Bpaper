@@ -38,25 +38,35 @@ jobs:
         run: |
           cat results/robust_informed/analysis/summary.csv
           cat results/robust_informed/analysis/paired.json
+      - name: Commit reproducible stress-test evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/robust_informed
+          if git diff --cached --quiet; then
+            echo "No result changes"
+          else
+            git commit -m "Record R-BSP exploratory stress results [skip ci]"
+            git pull --rebase origin submission/pmc-2026-09-26
+            git push origin HEAD:submission/pmc-2026-09-26
+          fi
       - name: Install LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended cm-super poppler-utils
       - name: Compile manuscript
         run: |
           cd paper
           latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
           grep -E "Overfull|Undefined control sequence|undefined references" main.log && exit 1 || true
           pdfinfo main.pdf | grep Pages
-      - name: Commit reproducible stress-test evidence and PDF
+      - name: Commit compiled manuscript
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add results/robust_informed paper/main.pdf paper/main.bbl
+          git add paper/main.pdf paper/main.bbl
           if git diff --cached --quiet; then
-            echo "No result changes"
+            echo "No PDF changes"
           else
-            git commit -m "Record R-BSP exploratory stress results and compiled manuscript [skip ci]"
+            git commit -m "Compile PMC manuscript with R-BSP results [skip ci]"
             git pull --rebase origin submission/pmc-2026-09-26
             git push origin HEAD:submission/pmc-2026-09-26
           fi
