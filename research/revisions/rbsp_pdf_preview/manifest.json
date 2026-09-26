@@ -1,0 +1,10 @@
+{
+  "pdf": "paper/main.pdf",
+  "pages": {
+    "first_page": 1,
+    "robust_method": 13,
+    "robust_results": 35,
+    "conclusion": 42,
+    "last_page": 47
+  }
+}
