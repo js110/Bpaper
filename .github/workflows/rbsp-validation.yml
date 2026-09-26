@@ -6,10 +6,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: rbsp-validation-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  validate:
+  robust-experiment:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,7 +24,7 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-      - name: Run full unit tests
+      - name: Run unit tests before experiment
         run: python -m unittest discover -s tests -v
       - name: Run frozen robust stress test
         run: |
@@ -40,26 +44,6 @@ jobs:
             echo "No result changes"
           else
             git commit -m "Record R-BSP exploratory stress results [skip ci]"
-            git pull --rebase origin submission/pmc-2026-09-26
-            git push origin HEAD:submission/pmc-2026-09-26
-          fi
-      - name: Install LaTeX
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended cm-super poppler-utils
-      - name: Compile manuscript
-        run: |
-          cd paper
-          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-          grep -E "Overfull|Undefined control sequence|undefined references" main.log && exit 1 || true
-          pdfinfo main.pdf | grep Pages
-      - name: Commit compiled manuscript
-        run: |
-          git add paper/main.pdf paper/main.bbl
-          if git diff --cached --quiet; then
-            echo "No PDF changes"
-          else
-            git commit -m "Compile PMC manuscript with R-BSP results [skip ci]"
             git pull --rebase origin submission/pmc-2026-09-26
             git push origin HEAD:submission/pmc-2026-09-26
           fi
