@@ -1,0 +1,58 @@
+[
+  {
+    "mismatch": "alpha_mid_unlisted",
+    "param": 0.1,
+    "bsp_hit": 0.059201941757605826,
+    "rbsp_hit": 0.033700097139550265,
+    "hit_delta_rbsp_minus_bsp": -0.02550184461805556,
+    "bsp_utility": 0.5256410256410257,
+    "rbsp_utility": 0.36324786324786323,
+    "utility_delta_rbsp_minus_bsp": -0.16239316239316243,
+    "bsp_local_violation_rate": 0.011458333333333333,
+    "rbsp_local_violation_rate": 0.0,
+    "bsp_client_violation_rate": 0.0,
+    "rbsp_client_violation_rate": 0.0
+  },
+  {
+    "mismatch": "alpha_outside_high",
+    "param": 0.1,
+    "bsp_hit": 0.11427499793320103,
+    "rbsp_hit": 0.07275807084986771,
+    "hit_delta_rbsp_minus_bsp": -0.04151692708333332,
+    "bsp_utility": 0.5,
+    "rbsp_utility": 0.4036697247706422,
+    "utility_delta_rbsp_minus_bsp": -0.09633027522935778,
+    "bsp_local_violation_rate": 0.18333333333333332,
+    "rbsp_local_violation_rate": 0.06927083333333334,
+    "bsp_client_violation_rate": 0.0,
+    "rbsp_client_violation_rate": 0.0
+  },
+  {
+    "mismatch": "move_mid_unlisted",
+    "param": 0.1,
+    "bsp_hit": 0.06273197751322751,
+    "rbsp_hit": 0.03719564318783068,
+    "hit_delta_rbsp_minus_bsp": -0.02553633432539683,
+    "bsp_utility": 0.5441696113074205,
+    "rbsp_utility": 0.36395759717314485,
+    "utility_delta_rbsp_minus_bsp": -0.18021201413427562,
+    "bsp_local_violation_rate": 0.006510416666666667,
+    "rbsp_local_violation_rate": 0.0005208333333333333,
+    "bsp_client_violation_rate": 0.0,
+    "rbsp_client_violation_rate": 0.0
+  },
+  {
+    "mismatch": "move_outside_high",
+    "param": 0.1,
+    "bsp_hit": 0.04035995887070106,
+    "rbsp_hit": 0.033528671668320104,
+    "hit_delta_rbsp_minus_bsp": -0.006831287202380958,
+    "bsp_utility": 0.5555555555555556,
+    "rbsp_utility": 0.3541666666666667,
+    "utility_delta_rbsp_minus_bsp": -0.2013888888888889,
+    "bsp_local_violation_rate": 0.006510416666666667,
+    "rbsp_local_violation_rate": 0.00026041666666666666,
+    "bsp_client_violation_rate": 0.0,
+    "rbsp_client_violation_rate": 0.0
+  }
+]
