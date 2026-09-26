@@ -39,11 +39,6 @@ L.~Grosse, S.~Saeidian, T.~J. Oechtering, {Extremal Mechanisms for Pointwise
 \newblock \href {https://doi.org/10.1109/tifs.2024.3449556}
   {\path{doi:10.1109/tifs.2024.3449556}}.
 
-\bibitem{bayesian}
-R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
-  (2021) 1557--1603.
-\newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
-
 \bibitem{adaptive2023}
 J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
   \href{https://proceedings.mlr.press/v202/whitehouse23a.html}{{Fully-Adaptive
@@ -51,6 +46,26 @@ J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
   International Conference on Machine Learning, Vol. 202 of Proceedings of
   Machine Learning Research, 2023, pp. 36990--37007.
 \newline\urlprefix\url{https://proceedings.mlr.press/v202/whitehouse23a.html}
+
+\bibitem{mtadprh2025}
+Y.~Fu, J.~Chen, H.~Lu, B.~Huang, W.~Han, {A multi-objective task allocation
+  scheme with privacy-preserving and regional heat in mobile crowdsensing},
+  Computer Communications 234 (2025) 108085.
+\newblock \href {https://doi.org/10.1016/j.comcom.2025.108085}
+  {\path{doi:10.1016/j.comcom.2025.108085}}.
+
+\bibitem{p2taskmp2025}
+Z.~Xie, T.~Peng, W.~You, G.~Wang, Q.~Liu, E.~Luo, {P2-TaskMP:
+  Privacy-Preserving Task Allocation Optimization Based on Mobility
+  Prediction}, Future Generation Computer Systems 167 (2025) 107720.
+\newblock \href {https://doi.org/10.1016/j.future.2025.107720}
+  {\path{doi:10.1016/j.future.2025.107720}}.
+
+\bibitem{blockchainpmc2026}
+N.~Andola, V.~K. Yadav, {A blockchain-assisted privacy-preserving framework for
+  Mobile CrowdSensing}, Pervasive and Mobile Computing 115 (2026) 102125.
+\newblock \href {https://doi.org/10.1016/j.pmcj.2025.102125}
+  {\path{doi:10.1016/j.pmcj.2025.102125}}.
 
 \bibitem{inference2026}
 R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
@@ -60,6 +75,11 @@ R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
   verified record.
 \newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
   {\path{doi:10.1109/tmc.2026.3721057}}.
+
+\bibitem{bayesian}
+R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
+  (2021) 1557--1603.
+\newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
 
 \bibitem{geolife2009}
 Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel

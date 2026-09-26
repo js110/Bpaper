@@ -1,0 +1,6 @@
+Highlights
+
+• A two-branch filter limits inference from both reports and silence.
+• R-BSP enforces a posterior cap across a finite public model set.
+• Informed-attacker stress removes nominal mismatch violations at a utility cost.
+• Boundary tests show violations can reappear outside the declared model set.

@@ -1,20 +1,21 @@
 {
-  "stage": "complete_research_draft",
+  "stage": "complete_research_draft_with_posthoc_rbsp",
   "submission_ready": false,
-  "date": "2026-09-22",
+  "date": "2026-09-26",
   "human_verified": false,
-  "pages": 20,
+  "pages": 47,
   "references": 11,
   "figures_in_manuscript": 8,
-  "tables_in_manuscript": 6,
-  "tests_passed": 21,
-  "completed_conditions": 352,
-  "trajectory_executions": 23929,
+  "tables_in_manuscript": 7,
+  "tests_passed": 23,
+  "completed_conditions": 392,
+  "trajectory_executions": 27129,
   "audited_events": 1148592,
   "open_items": [
-    "current venue-specific author instructions",
+    "final PMC-specific author instructions and submission-system checks",
     "author confirmation of names, order, affiliation, grants and remaining declarations",
-    "broader novelty and practical utility validation"
+    "data-driven ambiguity-set construction and independent validation",
+    "practical utility for fine-region tasks"
   ],
   "not_performed": [
     "hardware experiment",
@@ -33,5 +34,14 @@
   "funding_information_supplied": true,
   "grant_D2O25O185_letter_O_confirmed_by_user": true,
   "closest_work_full_text_checked": true,
-  "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md"
+  "closest_work_comparison": "research/revisions/review1/duan_fulltext_comparison.md",
+  "robust_extension": {
+    "method": "finite-model R-BSP",
+    "ambiguity_models": 9,
+    "exploratory_conditions": 40,
+    "exploratory_trajectories": 3200,
+    "exploratory_events": 153600,
+    "status": "post-hoc exploratory mechanism validation, not confirmatory",
+    "primary_endpoint": "attacker local-cap violation rate"
+  }
 }

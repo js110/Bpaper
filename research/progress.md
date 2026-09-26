@@ -36,3 +36,27 @@
 ## 2026-09-23 事实核查与仓库接入
 
 完成代码/公式/元数据/结果一致性复核；7 类修正记录在 revisions/factual_audit/report_zh.md，主结果不变。21 项测试通过、352 条件共 1,148,592 个事件审计无差异，近期方法 486,288 个事件公开后验重算一致。当前 PDF 21 页，无未定义引用、溢出或重复锚点，源码包独立编译且文本一致。依用户要求初始化 Bpaper 仓库，纳入可复现材料并保留外部全文/原始压缩包的来源清单；Git 推送结果由提交记录核验。
+
+## 2026-09-26 R-BSP 方法升级
+
+- 根据第二轮内部审稿，将旧 informed stress 的模型失配失败从 limitation 升级为有限模型鲁棒机制问题。实现 `robust_bsp_gates` 与 `RobustPublicBelief`：候选模型共享公开任务/输出历史，各自维护后验；同一任务的 R-BSP gate 为各模型 nominal BSP 最大 gate 的最小值。
+- 新增有限模型“最大公共 scalar gate”命题并写入论文。该结论只覆盖给定 finite ambiguity set；不声称任意先验、任意辅助知识或 differential privacy。
+- 新增 2 项 R-BSP 测试后完整测试套件为 23 项。GitHub Actions/Python 3.12.14 上 23 项全部通过；随机多模型交集、分支约束、最大性与包含 informed attacker 的集成条件均通过。
+- 新增 `configs/robust_informed.json`：9 模型网格 `v∈{0.05,0.3,0.8}` × `alpha∈{0.3,0.648,0.9}`，20 个新 synthetic seeds、4 users/seed、40 条件、3,200 条轨迹；分析按 seed cluster bootstrap 1,000 次。
+- 已真实执行该 stress。rho=0.1 时，nominal BSP 在 alpha_low/alpha_high/move_low/move_high 下 informed-attacker local-cap violation 分别约 12.6%/2.6%/2.8%/14.6%；R-BSP 五组条件均为 0，因为 attacker 的精确模型被显式包含。R-BSP retention 约 39.7%，而 BSP 为约 46.9%--55.2%，说明鲁棒性代价明显。
+- 上述模型集合是在旧失配结果已知后设计，因此全部标记 post-hoc exploratory；没有把它包装成预注册或独立确认。论文标题、摘要、方法、实验、结果、讨论和结论已据此重构，保留 utility cost 和集合外无保证的边界。
+
+## 2026-09-26 R-BSP 边界实验与 CI 拆分
+
+- 修复之前的重型流水线：代码单测、R-BSP 实验、LaTeX 编译彻底拆开。快速代码测试和 checkpoint PDF 编译均已在 GitHub Actions 成功验证；cm-super 修复了此前 pdfTeX scalable-font 错误。
+- paper-build 不再随普通论文文字改动自动触发；R-BSP 主实验也不再随每次 commit 重跑。
+- 新增 post-hoc boundary characterization：固定原 9-model ambiguity set，用新 seeds 4000--4019 测 4 个不属于集合的正确 attacker/generating models，共 8 条件 / 640 trajectories。
+- rho=0.1 时，R-BSP 对 unlisted interior alpha=0.50 为 0 local-cap violation；对 unlisted interior v=0.50 为 2/3840 (0.052%)；对 outside alpha=0.98 为 6.93% [5.70%, 8.31%]；对 outside v=0.95 为 1/3840 (0.026%)。结果已写入正文和新表，明确 finite-set 保证不能外推。
+- Related Work 新增 3 篇 2025--2026 MCS 隐私/任务分配文献，用于区分坐标/匹配/交易隐私接口与本文 linkable report/silence channel。
+
+## 2026-09-26 最终 checkpoint 编译
+
+- 轻量 CI 拆分后的最终论文 checkpoint 编译成功。
+- 当前 `paper/main.pdf` 为 50 页；最终 LaTeX 日志无 Overfull、无 Float-too-large、无未解析引用、无 Undefined control sequence。
+- 新 R-BSP boundary 表的横向溢出已通过紧凑列标题修复；主结果表通过轻微压缩 `arraystretch` 消除了页面高度警告，未删减实验数据。
+- GitHub Actions 只在显式 `paper/.build-request` checkpoint 下编译论文；普通正文修改不再触发 TeX 安装或实验。
