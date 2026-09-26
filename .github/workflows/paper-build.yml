@@ -1,15 +1,12 @@
 name: paper-build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - submission/pmc-2026-09-26
     paths:
-      - 'paper/**'
-      - '!paper/main.pdf'
-      - '!paper/main.bbl'
-      - '.github/workflows/paper-build.yml'
-  workflow_dispatch:
+      - 'paper/.build-request'
 
 permissions:
   contents: write
