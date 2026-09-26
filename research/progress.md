@@ -53,3 +53,10 @@
 - 新增 post-hoc boundary characterization：固定原 9-model ambiguity set，用新 seeds 4000--4019 测 4 个不属于集合的正确 attacker/generating models，共 8 条件 / 640 trajectories。
 - rho=0.1 时，R-BSP 对 unlisted interior alpha=0.50 为 0 local-cap violation；对 unlisted interior v=0.50 为 2/3840 (0.052%)；对 outside alpha=0.98 为 6.93% [5.70%, 8.31%]；对 outside v=0.95 为 1/3840 (0.026%)。结果已写入正文和新表，明确 finite-set 保证不能外推。
 - Related Work 新增 3 篇 2025--2026 MCS 隐私/任务分配文献，用于区分坐标/匹配/交易隐私接口与本文 linkable report/silence channel。
+
+## 2026-09-26 最终 checkpoint 编译
+
+- 轻量 CI 拆分后的最终论文 checkpoint 编译成功。
+- 当前 `paper/main.pdf` 为 50 页；最终 LaTeX 日志无 Overfull、无 Float-too-large、无未解析引用、无 Undefined control sequence。
+- 新 R-BSP boundary 表的横向溢出已通过紧凑列标题修复；主结果表通过轻微压缩 `arraystretch` 消除了页面高度警告，未删减实验数据。
+- GitHub Actions 只在显式 `paper/.build-request` checkpoint 下编译论文；普通正文修改不再触发 TeX 安装或实验。
