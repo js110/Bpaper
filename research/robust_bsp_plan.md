@@ -1,4 +1,4 @@
-# R-BSP 实施计划（不伪造结果）
+# R-BSP 实施状态与后续计划（不伪造结果）
 
 ## 目标
 
@@ -65,3 +65,20 @@ Validation 用于选择 ensemble 大小和任何 uncertainty radius。
 这条命题虽然简单，但与实验中对 informed attacker 的鲁棒性直接对应，且比当前单模型 Proposition 更能支持论文主问题。
 
 后续若需要更强创新，再把有限集合扩为 polyhedral / divergence ambiguity set。
+
+
+## 2026-09-26 已完成
+
+- Phase 1 finite-model gate 已完成：`src/model.py`、`src/experiment.py` 已接入；真实位置不进入模型集合状态。
+- 理论命题已写入 `paper/main.tex`：有限模型每个 feasible set 均为 `[0,q_k^*]`，公共最大 gate 为 `min_k q_k^*`。
+- 新增 2 项 R-BSP 测试，完整 23 项测试在 GitHub Actions 上通过。
+- 完成第一轮 post-hoc synthetic stress：40 conditions / 3,200 trajectories。rho=0.1 下，旧 BSP 在四类失配产生 2.6%--14.6% attacker local-cap violations；包含 attacker 精确模型的 9-model R-BSP 为 0，但 retention 降至约 39.7%。
+- 该结果只验证 finite-set 机制和代价。由于模型网格是看到旧失败后确定的，不能称 confirmatory。
+
+## 尚未完成、也是下一轮真正能继续抬高论文质量的部分
+
+1. 用 development/validation 数据给 ambiguity set 一个数据驱动的构造规则，而不是永久使用手工 3×3 网格。
+2. 预先冻结模型集合选择规则后，再做未参与选模的验证；现有 GeoLife test 已被其他探索分析使用，不能重新包装成 pristine confirmatory set。
+3. 增加 ambiguity set 外攻击者 / 插值模型测试，明确 finite-grid 保证的失效边界。
+4. 研究更紧的 structured/polyhedral ambiguity set，降低当前 9-model intersection 的保守性。
+5. 将 task-size-aware utility 正式纳入 robust 选模目标，而不仅报告等值 opportunity retention。
