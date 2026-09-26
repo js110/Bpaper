@@ -1,0 +1,57 @@
+name: pdf-preview-audit
+
+on:
+  push:
+    branches:
+      - submission/pmc-2026-09-26
+    paths:
+      - '.github/workflows/pdf-preview-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF tools
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Locate and render audit pages
+        run: |
+          rm -rf research/revisions/rbsp_pdf_preview
+          mkdir -p research/revisions/rbsp_pdf_preview
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          pdf=Path('paper/main.pdf')
+          raw=subprocess.check_output(['pdftotext','-layout',str(pdf),'-']).decode('utf-8','replace')
+          pages=raw.split('\f')
+          targets={
+              'first_page': None,
+              'robust_method': 'Finite-model robust extension',
+              'robust_results': 'Finite-model robustness stress',
+              'conclusion': 'Conclusion',
+          }
+          selected={'first_page':1}
+          for key,needle in targets.items():
+              if key=='first_page': continue
+              matches=[i+1 for i,p in enumerate(pages) if needle in p]
+              if not matches:
+                  raise SystemExit(f'missing PDF text target: {needle}')
+              selected[key]=matches[0]
+          selected['last_page']=len([p for p in pages if p.strip()])
+          out=Path('research/revisions/rbsp_pdf_preview')
+          for key,page in selected.items():
+              subprocess.run(['pdftoppm','-f',str(page),'-l',str(page),'-singlefile','-png','-r','130',str(pdf),str(out/key)],check=True)
+          (out/'manifest.json').write_text(json.dumps({'pdf':'paper/main.pdf','pages':selected},indent=2))
+          print(selected)
+          PY
+      - name: Commit preview audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/revisions/rbsp_pdf_preview
+          git commit -m "Add R-BSP manuscript visual-audit pages [skip ci]"
+          git push
