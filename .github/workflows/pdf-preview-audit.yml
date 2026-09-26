@@ -41,6 +41,8 @@ jobs:
               if not matches:
                   raise SystemExit(f'missing PDF text target: {needle}')
               selected[key]=matches[0]
+          selected['robust_method_next']=min(selected['robust_method']+1,len(pages))
+          selected['robust_results_next']=min(selected['robust_results']+1,len(pages))
           selected['last_page']=len([p for p in pages if p.strip()])
           out=Path('research/revisions/rbsp_pdf_preview')
           for key,page in selected.items():
