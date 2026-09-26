@@ -22,14 +22,21 @@ Do not invent any of the following. The responsible authors must confirm them:
 5. CRediT author contributions, if requested;
 6. funders' roles;
 7. data-use / ethics determination for the secondary GeoLife data;
-8. final generative-AI disclosure wording under the journal's current policy;
+8. final generative-AI disclosure wording under Elsevier's current policy; substantive AI use requires a separate declaration immediately before the references, and AI-generated/AI-altered figures require tool disclosure in the relevant captions;
 9. whether the repository will remain a working GitHub repository or be archived in an immutable release.
 
 ## Scientific items that remain more important than formatting
 
-- Robustness to attacker/model mismatch;
+- Robustness to attacker/model mismatch: finite-set R-BSP and outside-set boundary tests are now implemented, but ambiguity-set construction is still post-hoc and needs a defensible development/validation rule;
 - independent parameter selection instead of test-set policy-envelope selection;
 - practical utility for small-region tasks;
 - a stronger novelty statement relative to inference-resistant MCS task-allocation work.
 
 The paper should not be marked submission-ready until these points are resolved or explicitly bounded in the claims.
+
+## Current validation workflow
+
+- `code-tests.yml`: automatic, source/config/test changes only; superseded runs are cancelled.
+- `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
+- `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
+- `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
