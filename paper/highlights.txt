@@ -1,6 +1,6 @@
 Highlights
 
-• A filter limits location inference after both task reports and silence.
-• A closed-form gate maximizes participation under a posterior-risk cap.
-• GeoLife replay shows privacy bounds depend strongly on model accuracy.
-• Recent optimization baselines show gains vary across mobility scenarios.
+• A two-branch filter limits inference from both reports and silence.
+• R-BSP enforces a posterior cap across a finite public model set.
+• Informed-attacker stress removes nominal mismatch violations at a utility cost.
+• Boundary tests show violations can reappear outside the declared model set.
