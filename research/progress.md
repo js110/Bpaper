@@ -45,3 +45,11 @@
 - 新增 `configs/robust_informed.json`：9 模型网格 `v∈{0.05,0.3,0.8}` × `alpha∈{0.3,0.648,0.9}`，20 个新 synthetic seeds、4 users/seed、40 条件、3,200 条轨迹；分析按 seed cluster bootstrap 1,000 次。
 - 已真实执行该 stress。rho=0.1 时，nominal BSP 在 alpha_low/alpha_high/move_low/move_high 下 informed-attacker local-cap violation 分别约 12.6%/2.6%/2.8%/14.6%；R-BSP 五组条件均为 0，因为 attacker 的精确模型被显式包含。R-BSP retention 约 39.7%，而 BSP 为约 46.9%--55.2%，说明鲁棒性代价明显。
 - 上述模型集合是在旧失配结果已知后设计，因此全部标记 post-hoc exploratory；没有把它包装成预注册或独立确认。论文标题、摘要、方法、实验、结果、讨论和结论已据此重构，保留 utility cost 和集合外无保证的边界。
+
+## 2026-09-26 R-BSP 边界实验与 CI 拆分
+
+- 修复之前的重型流水线：代码单测、R-BSP 实验、LaTeX 编译彻底拆开。快速代码测试和 checkpoint PDF 编译均已在 GitHub Actions 成功验证；cm-super 修复了此前 pdfTeX scalable-font 错误。
+- paper-build 不再随普通论文文字改动自动触发；R-BSP 主实验也不再随每次 commit 重跑。
+- 新增 post-hoc boundary characterization：固定原 9-model ambiguity set，用新 seeds 4000--4019 测 4 个不属于集合的正确 attacker/generating models，共 8 条件 / 640 trajectories。
+- rho=0.1 时，R-BSP 对 unlisted interior alpha=0.50 为 0 local-cap violation；对 unlisted interior v=0.50 为 2/3840 (0.052%)；对 outside alpha=0.98 为 6.93% [5.70%, 8.31%]；对 outside v=0.95 为 1/3840 (0.026%)。结果已写入正文和新表，明确 finite-set 保证不能外推。
+- Related Work 新增 3 篇 2025--2026 MCS 隐私/任务分配文献，用于区分坐标/匹配/交易隐私接口与本文 linkable report/silence channel。
