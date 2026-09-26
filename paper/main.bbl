@@ -39,11 +39,6 @@ L.~Grosse, S.~Saeidian, T.~J. Oechtering, {Extremal Mechanisms for Pointwise
 \newblock \href {https://doi.org/10.1109/tifs.2024.3449556}
   {\path{doi:10.1109/tifs.2024.3449556}}.
 
-\bibitem{bayesian}
-R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
-  (2021) 1557--1603.
-\newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
-
 \bibitem{adaptive2023}
 J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
   \href{https://proceedings.mlr.press/v202/whitehouse23a.html}{{Fully-Adaptive
@@ -60,6 +55,11 @@ R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
   verified record.
 \newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
   {\path{doi:10.1109/tmc.2026.3721057}}.
+
+\bibitem{bayesian}
+R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
+  (2021) 1557--1603.
+\newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
 
 \bibitem{geolife2009}
 Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel
