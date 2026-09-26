@@ -32,6 +32,7 @@ jobs:
               'first_page': None,
               'robust_method': 'Finite-model robust extension',
               'robust_results': 'Finite-model robustness stress',
+              'robust_table': 'Client model',
               'conclusion': 'Conclusion',
           }
           selected={'first_page':1}
