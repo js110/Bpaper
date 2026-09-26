@@ -3,7 +3,7 @@ import argparse,csv,gzip,hashlib,json,platform,time
 from pathlib import Path
 import numpy as np
 from functools import lru_cache
-from .model import Task,Observation,PublicBelief,predict,gates,choose_probe,posterior_metrics
+from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,gates,choose_probe,posterior_metrics
 
 @lru_cache(maxsize=64)
 def load_channel(path):
@@ -56,33 +56,52 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     legitimate_schedule=rng.random(slots)<condition.get('legitimate_fraction',.75)
     belief=PublicBelief(side,move_model,alpha_model)
     attacker=PublicBelief(side,condition.get('attacker_move',move_model),condition.get('attacker_alpha',alpha_model))
+    robust=None
+    if method=='rbsp':
+        robust_models=condition.get('robust_models') or [dict(move=move_model,alpha=alpha_model)]
+        robust=RobustPublicBelief(side,robust_models)
     prior=np.full(side*side,1/(side*side))
     sums={k:0. for k in ['hit','error_cells','peak','logloss','covered95','credible95','entropy']}
-    prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0;op_cells=set();done_cells=set()
+    prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0
+    attacker_local_cap_violations=0;attacker_absolute_cap_violations=0;op_cells=set();done_cells=set()
     gate_times=[];rows=[];bin_counts=np.zeros(10);bin_hits=np.zeros(10);bin_peaks=np.zeros(10);error_m=0.
     for t in range(slots):
         # Identity resetting is an ideal control: discard past target-specific evidence.
         if condition.get('reset_every',0) and t%condition['reset_every']==0:
             belief.b=prior.copy()
             attacker.b=prior.copy()
+            if robust:robust.reset()
         if t:
             belief.b=predict(belief.b,side,move_model)
             attacker.b=predict(attacker.b,side,attacker.move)
+            if robust:robust.predict()
             prior=predict(prior,side,move_model)
         is_legit=bool(legitimate_schedule[t])
         if is_legit: idx=int(normal_ids[t])
         elif attack=='adaptive':
             from .model import binary_entropy
-            qs=privic_qs if channel is not None else gates(belief.b,masks,alpha_model,method,param,t,rects)[:,None]
+            if channel is not None:
+                qs=privic_qs
+            elif robust is not None:
+                qs=robust.gates(masks,param,t,rects)[:,None]
+            else:
+                qs=gates(belief.b,masks,alpha_model,method,param,t,rects)[:,None]
             likelihood=masks*(attacker.alpha*qs)
             information=binary_entropy((likelihood*attacker.b).sum(axis=1))-(binary_entropy(likelihood)*attacker.b).sum(axis=1)
             idx=int(np.argmax(information))
         else:idx=int(random_probe_ids[t])
         task=Task(f'{t}',t,t,rects[idx],is_legit)
         start=time.perf_counter_ns()
-        q=gate_scale*(channel@masks[idx]) if channel is not None else float(gates(belief.b,masks[idx],alpha_model,method,param,t,[rects[idx]])[0])
+        if channel is not None:
+            q=gate_scale*(channel@masks[idx])
+        elif robust is not None:
+            q=float(robust.gates(masks[idx],param,t,[rects[idx]])[0])
+        else:
+            q=float(gates(belief.b,masks[idx],alpha_model,method,param,t,[rects[idx]])[0])
         gate_times.append((time.perf_counter_ns()-start)/1000)
-        bprior=belief.b.copy();mask=masks[idx].astype(bool);truth=int(path[t])
+        bprior=belief.b.copy();attacker_prior_peak=float(attacker.b.max())
+        robust_prior_peaks=np.asarray([m.b.max() for m in robust.members],float) if robust else None
+        mask=masks[idx].astype(bool);truth=int(path[t])
         eligible=bool(mask[truth])
         available=bool(ext[t,0]<delivery and ext[t,1]<willing and ext[t,2]<on_time)
         q_at_state=float(q[truth]) if channel is not None else q
@@ -90,7 +109,17 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         observation=Observation(task.task_id,t,reported)
         belief.observe(task,observation,q)
         attacker.observe(task,observation,q)
-        if np.max(belief.b)>max(param,np.max(bprior))+1e-9 and method=='bsp':cap_violations+=1
+        if robust:robust.observe(task,observation,q)
+        if method=='bsp' and np.max(belief.b)>max(param,np.max(bprior))+1e-9:
+            cap_violations+=1
+        elif method=='rbsp':
+            if any(m.b.max()>max(float(param),float(p))+1e-9 for m,p in zip(robust.members,robust_prior_peaks)):
+                cap_violations+=1
+        if method in ('bsp','rbsp'):
+            if attacker.b.max()>max(float(param),attacker_prior_peak)+1e-9:
+                attacker_local_cap_violations+=1
+            if attacker.b.max()>float(param)+1e-9:
+                attacker_absolute_cap_violations+=1
         metrics=posterior_metrics(attacker.b,truth,side)
         for k,v in metrics.items():sums[k]+=v
         bn=min(9,int(metrics['peak']*10));bin_counts[bn]+=1;bin_hits[bn]+=metrics['hit'];bin_peaks[bn]+=metrics['peak']
@@ -108,7 +137,9 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         if log:
             rows.append(dict(slot=t,task_id=task.task_id,rectangle=rects[idx],legitimate=is_legit,
                              reported=reported,q=q.tolist() if channel is not None else q,alpha_model=alpha_model,prior_peak=float(bprior.max()),
-                             belief=attacker.b.tolist(),client_peak=float(belief.b.max()),evaluator_truth=truth,eligible=eligible,available=available,**metrics))
+                             attacker_prior_peak=attacker_prior_peak,belief=attacker.b.tolist(),client_peak=float(belief.b.max()),
+                             robust_peak_max=float(max(m.b.max() for m in robust.members)) if robust else None,
+                             evaluator_truth=truth,eligible=eligible,available=available,**metrics))
     out={k:v/slots for k,v in sums.items()}
     out.update(ece=float(np.abs(bin_hits-bin_peaks).sum()/slots),error_m=error_m/slots,seed=seed,user=str(user),scenario=condition['scenario'],condition=condition['id'],
                method=method,param=param,attack=attack,side=side,prior_hit=prior_hit/slots,
@@ -117,7 +148,10 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                raw_completion=complete/legit,coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
                reward=complete,latency_slots=1.0 if reports else float('nan'),
                gate_us_p50=float(np.median(gate_times)),gate_us_p95=float(np.quantile(gate_times,.95)),
-               cap_violations=cap_violations,alpha_true=alpha_true,alpha_model=alpha_model,move_model=move_model)
+               cap_violations=cap_violations,attacker_local_cap_violations=attacker_local_cap_violations,
+               attacker_absolute_cap_violations=attacker_absolute_cap_violations,
+               robust_model_count=len(robust.members) if robust else 0,
+               alpha_true=alpha_true,alpha_model=alpha_model,move_model=move_model)
     return out,rows
 
 def run(config_path):
