@@ -79,6 +79,13 @@ Validation 用于选择 ensemble 大小和任何 uncertainty radius。
 
 1. 用 development/validation 数据给 ambiguity set 一个数据驱动的构造规则，而不是永久使用手工 3×3 网格。
 2. 预先冻结模型集合选择规则后，再做未参与选模的验证；现有 GeoLife test 已被其他探索分析使用，不能重新包装成 pristine confirmatory set。
-3. 增加 ambiguity set 外攻击者 / 插值模型测试，明确 finite-grid 保证的失效边界。
+3. ~~增加 ambiguity set 外攻击者 / 插值模型测试，明确 finite-grid 保证的失效边界。~~ 已完成：新 seeds 4000--4019 的 8 条件边界实验表明，R-BSP 对未枚举的 interior alpha=0.50 为 0 违规，对 v=0.50 为 2/3840；当正确 alpha=0.98 超出集合上界 0.9 时，R-BSP local-cap violation 为 6.93%，明确证明集合外不能外推保证。
 4. 研究更紧的 structured/polyhedral ambiguity set，降低当前 9-model intersection 的保守性。
 5. 将 task-size-aware utility 正式纳入 robust 选模目标，而不仅报告等值 opportunity retention。
+
+## 2026-09-26 流水线修复
+
+- 自动 CI 仅保留轻量 code-tests.yml，只在 src/、tests/、configs/、依赖文件变化时触发，并取消过期运行。
+- rbsp-validation.yml 改为手动重跑，不再与 LaTeX 安装/论文编译绑定。
+- paper-build.yml 改为 checkpoint-only：仅手动或修改 paper/.build-request 时编译；普通 paper/main.tex 修改不触发。
+- 新增独立 rbsp-boundary.yml，仅显式哨兵触发；实验结果提交不会递归触发自身。
