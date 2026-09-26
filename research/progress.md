@@ -36,3 +36,12 @@
 ## 2026-09-23 事实核查与仓库接入
 
 完成代码/公式/元数据/结果一致性复核；7 类修正记录在 revisions/factual_audit/report_zh.md，主结果不变。21 项测试通过、352 条件共 1,148,592 个事件审计无差异，近期方法 486,288 个事件公开后验重算一致。当前 PDF 21 页，无未定义引用、溢出或重复锚点，源码包独立编译且文本一致。依用户要求初始化 Bpaper 仓库，纳入可复现材料并保留外部全文/原始压缩包的来源清单；Git 推送结果由提交记录核验。
+
+## 2026-09-26 R-BSP 方法升级
+
+- 根据第二轮内部审稿，将旧 informed stress 的模型失配失败从 limitation 升级为有限模型鲁棒机制问题。实现 `robust_bsp_gates` 与 `RobustPublicBelief`：候选模型共享公开任务/输出历史，各自维护后验；同一任务的 R-BSP gate 为各模型 nominal BSP 最大 gate 的最小值。
+- 新增有限模型“最大公共 scalar gate”命题并写入论文。该结论只覆盖给定 finite ambiguity set；不声称任意先验、任意辅助知识或 differential privacy。
+- 新增 2 项 R-BSP 测试后完整测试套件为 23 项。GitHub Actions/Python 3.12.14 上 23 项全部通过；随机多模型交集、分支约束、最大性与包含 informed attacker 的集成条件均通过。
+- 新增 `configs/robust_informed.json`：9 模型网格 `v∈{0.05,0.3,0.8}` × `alpha∈{0.3,0.648,0.9}`，20 个新 synthetic seeds、4 users/seed、40 条件、3,200 条轨迹；分析按 seed cluster bootstrap 1,000 次。
+- 已真实执行该 stress。rho=0.1 时，nominal BSP 在 alpha_low/alpha_high/move_low/move_high 下 informed-attacker local-cap violation 分别约 12.6%/2.6%/2.8%/14.6%；R-BSP 五组条件均为 0，因为 attacker 的精确模型被显式包含。R-BSP retention 约 39.7%，而 BSP 为约 46.9%--55.2%，说明鲁棒性代价明显。
+- 上述模型集合是在旧失配结果已知后设计，因此全部标记 post-hoc exploratory；没有把它包装成预注册或独立确认。论文标题、摘要、方法、实验、结果、讨论和结论已据此重构，保留 utility cost 和集合外无保证的边界。
