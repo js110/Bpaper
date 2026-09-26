@@ -1,6 +1,13 @@
 name: rbsp-validation
 
 on:
+  push:
+    branches:
+      - submission/pmc-2026-09-26
+    paths-ignore:
+      - 'results/robust_informed/**'
+      - 'paper/main.pdf'
+      - 'paper/main.bbl'
   workflow_dispatch:
 
 permissions:
