@@ -390,6 +390,26 @@ A separate boundary run shows why the finite-set qualifier is substantive rather
 
 The stress run also exposes computational cost. On the GitHub-hosted Ubuntu/Python 3.12 validation runner, the mean trajectory-median gate time at $\rho=0.1$ is about 417--423 microseconds for the nine-model R-BSP and 51--52 microseconds for BSP. These timings come from a different machine and software environment than the main-study timing batch, so only the within-run order of magnitude is informative; they are not smartphone measurements or a controlled cross-platform benchmark.
 
+\subsection{Data-driven robustness and fine-region service}
+\label{sec:data-driven-results}
+Table~\ref{tab:data-driven} first shows that a defensible model-set construction does not remove the strict-cap utility problem. Against the stronger replay attacker described above, nominal BSP exceeds the attacker's own local cap on 24.8\% of slots and the earlier hand-grid R-BSP on 20.0\%. The six-model data-driven R-BSP records no local-cap violation in this run and lowers MAP hit rate to 25.7\%, but retains only 5.4\% of opportunities and 0.7\% inverse-area-weighted utility. All three strict policies retain zero 1--8-cell opportunities. The data-driven set is therefore better grounded than the hand grid but substantially more conservative; model-set provenance and service viability are separate problems.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Post-hoc GeoLife data-driven robustness at $\rho=0.1$. The replay attacker uses the development-only smoothed population prior and validation point mobility estimate. ``Local viol.'' tests the attacker's pre-output local cap. Weighted retention is Eq.~\eqref{eq:weighted-utility}; small retention covers 1--8-cell opportunities.}
+\label{tab:data-driven}\input{data_driven_table}
+\end{table}
+
+Table~\ref{tab:dfbsp} quantifies the service alternative. On 20 new synthetic walk seeds, ordinary BSP retains no small-region opportunities and has weighted retention 12.3\%. DF-BSP with $\tau=0.5$ raises small-region retention to 61.8\% (cluster-bootstrap 95\% interval 48.1--74.1\%) and weighted retention to 47.5\%, while producing no observed violation of its task-specific effective cap. This improvement is purchased by relaxing the original local $\rho=0.1$ requirement: the original local cap is exceeded on 25.6\% of slots, and MAP hit rate rises from 4.9\% under BSP to 13.9\%.
+
+The stronger replay experiment shows the same trade-off under prior and mobility mismatch. At $\tau=0.5$, non-robust DF-BSP retains 46.9\% of small-region opportunities and 38.1\% weighted utility but violates its own effective cap on 2.1\% of slots. Data-driven RDF-BSP reduces the observed effective-cap violation rate to zero in this run, with 10.2\% small-region retention (95\% interval 3.2--18.2\%) and 22.0\% weighted utility. Its original-$\rho$ local cap is nevertheless exceeded on 30.6\% of slots. At $\tau=1$, both DF variants approach full weighted service, but the positive-report ceiling becomes vacuous; that endpoint is a service control, not a privacy achievement. No tested $\tau$ is declared optimal.
+
+\begin{table}[tbp]
+\centering\footnotesize
+\caption{Disclosure-floor-aware service frontier at $\rho=0.1$. ``$\rho$ exceed.'' reports exceedance of the original local BSP cap; ``DF viol.'' reports violation of the task-specific effective cap in Eq.~\eqref{eq:dfcap}. Weighted and small-region retention emphasize fine-grained service. RDF-BSP uses the six validation-selected models.}
+\label{tab:dfbsp}\input{dfbsp_table}
+\end{table}
+
 \subsection{Measured computation}
 For the 64-cell main grid, the mean of per-trajectory median BSP gate times is approximately 16.8--16.9 microseconds; the mean of per-trajectory 95th percentiles is 18.2--18.7 microseconds. The iterative KL implementation has median summaries of about 326--341 microseconds. These are local Python gate timings, excluding probe search, posterior metrics, loading, and communication. Methods ran in separate batches, so the numbers are descriptive implementation costs, not controlled cross-device speedups. Smartphone latency, energy consumption, and cryptographic execution time were not measured. In the recent extension, condition means of trajectory-median gate times range from 12.1 to 14.0 microseconds for PML-T and 2.0 to 3.0 microseconds for PRIVIC-T. PRIVIC training across all 24 channels takes 182.3 seconds separately; online timings exclude that offline fitting. These batch-specific measurements do not establish a controlled speedup.
 
