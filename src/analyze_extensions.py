@@ -80,8 +80,9 @@ def main():
 
     geo=[s for s in summary if s['scenario']=='geolife']
     selected=[next(s for s in geo if s['condition']==cid) for cid in
-              ['geolife_dd_nominal_bsp','geolife_hand_rbsp','geolife_data_rbsp']]
-    names={'geolife_dd_nominal_bsp':'Nominal BSP','geolife_hand_rbsp':'Hand-grid R-BSP','geolife_data_rbsp':'Data-driven R-BSP'}
+              ['geolife_dd_nominal_bsp','geolife_data_single_bsp','geolife_hand_rbsp','geolife_data_rbsp']]
+    names={'geolife_dd_nominal_bsp':'Uniform-prior BSP','geolife_data_single_bsp':'Validation-best single BSP',
+           'geolife_hand_rbsp':'Hand-grid R-BSP','geolife_data_rbsp':'Data-driven R-BSP'}
     lines=[r'\begin{tabular}{lrrrrr}',r'\toprule',
            r'Policy & MAP hit & Local viol. & Ret. & Weighted ret. & Small ret. \\',r'\midrule']
     for s in selected:
