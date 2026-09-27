@@ -1,0 +1,84 @@
+name: pmc-final-package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - submission/pmc-2026-09-26
+    paths:
+      - 'paper/.package-request'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pmc-final-package-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Python dependencies
+        run: |
+          python -m pip install -r requirements-lock.txt
+          python -m pip install python-docx
+      - name: Run full test suite
+        run: python -m unittest discover -s tests -v
+      - name: Install LaTeX and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended cm-super poppler-utils zip
+      - name: Build flat Editorial Manager source
+        run: python -m src.build_submission_package --paper paper --stage build/pmc_submission_flat
+      - name: Compile development manuscript
+        run: |
+          cd paper
+          latexmk -C
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' main.log; then exit 1; fi
+          pdfinfo main.pdf | grep Pages
+      - name: Compile flat submission source
+        run: |
+          cd build/pmc_submission_flat
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' main.log; then exit 1; fi
+          pdfinfo main.pdf | grep Pages
+      - name: Verify flat package text equivalence
+        run: |
+          pdftotext -layout paper/main.pdf build/development.txt
+          pdftotext -layout build/pmc_submission_flat/main.pdf build/flat.txt
+          diff -u build/development.txt build/flat.txt
+      - name: Build Elsevier Highlights Word file
+        run: python -m src.build_highlights_docx
+      - name: Create flat submission zip
+        run: |
+          cp build/pmc_submission_flat/SUBMISSION_MANIFEST.json paper/PMC_submission_manifest.json
+          cd build/pmc_submission_flat
+          rm -f main.pdf main.aux main.log main.out main.blg main.fdb_latexmk main.fls main.synctex.gz
+          zip -9 -r ../../paper/PMC_submission_source.zip .
+      - name: Commit final package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/main.pdf paper/main.bbl paper/highlights.docx paper/PMC_submission_source.zip paper/PMC_submission_manifest.json
+          if git diff --cached --quiet; then
+            echo "No generated package changes"
+            exit 0
+          fi
+          git commit -m "Build final PMC submission package [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin submission/pmc-2026-09-26
+            if git push origin HEAD:submission/pmc-2026-09-26; then exit 0; fi
+            echo "Push raced with another commit; retrying ($attempt/3)"
+            sleep 2
+          done
+          exit 1
