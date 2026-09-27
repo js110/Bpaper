@@ -1,12 +1,33 @@
-# Manuscript source bundle
+# Manuscript source and submission bundle
 
-This is a complete research draft, not an approved submission.
-Build with a TeX Live installation containing common LaTeX mathematics, graphics, font, and bibliography packages:
+The working manuscript targets *Pervasive and Mobile Computing* and uses Elsevier's `elsarticle` review layout.
+
+Development build:
 
     latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-The included elsarticle class and bibliography style originate from Elsevier's official template. The generated figures and tables correspond to the saved project results. Full code, experiment logs, provenance, source audit, and reproduction instructions are in the parent crowdsensing_task_privacy project. Author, affiliation, and funding text was supplied for this draft and still requires author verification; other declarations and final venue checks remain pending.
+The repository keeps a convenient development layout, including the `figures/` subdirectory. Elsevier Editorial Manager does not process LaTeX submissions with subfolders, so the development folder itself should not be uploaded as the final LaTeX source package.
 
-Updated 2026-09-26 after the finite-model R-BSP extension: the PMC review-layout manuscript compiles to 47 pages with 11 references, eight figures and seven tables. The complete unit-test suite now has 23 tests. A post-hoc 40-condition / 3,200-trajectory synthetic stress test is stored under `results/robust_informed/`; it was motivated by previously observed model-mismatch failures and is explicitly not described as confirmatory. The nine-model R-BSP set contains the informed attacker's generating model in that stress, eliminating observed local-cap violations at the cost of lower opportunity retention and roughly an order-of-magnitude larger Python gate time. The two PNG schematics remain image-model-generated conceptual figures; quantitative plots and tables derive from archived experiment logs. The closest 2026 task-allocation paper remains a model-level comparison, not a numerical reproduction or independent novelty certification.
+The final checkpoint workflow `.github/workflows/pmc-final-package.yml` builds a separate flat source package:
+- `PMC_submission_source.zip`: one-level LaTeX source and all referenced figures/tables;
+- `PMC_submission_manifest.json`: exact packaged-file manifest;
+- `highlights.docx`: Elsevier Highlights upload file generated from `highlights.txt`;
+- `main.pdf`: compiled review manuscript.
 
-Working repository: https://github.com/js110/Bpaper . The latest factual audit corrects implementation-validation wording, PML bound attainment, KL gate approximation, tie handling, and official PMLR author metadata without changing saved experimental results.
+The workflow independently compiles both the development source and the flat source, rejects unresolved references, undefined controls, overfull boxes, or oversized floats, and compares their extracted PDF text.
+
+Current scientific contents include nominal BSP, finite-model R-BSP, development/validation-derived R-BSP, asymmetric DF-BSP/RDF-BSP, informed-attacker and ambiguity-boundary stress tests, region-size-aware utility, and recent PML-T/PRIVIC-T task-channel comparisons. The ambiguity and disclosure-floor extensions are explicitly post-hoc and are not presented as independent confirmatory evidence.
+
+Current static inventory before the final packaging checkpoint:
+- 21 cited references;
+- 8 figures;
+- 10 tables;
+- 28 automated tests;
+- 417 completed experimental conditions across the archived main/extensions;
+- 28,973 trajectory executions and 1,390,704 slot-level events when the added robust, boundary, and data-driven extension runs are included.
+
+Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
+
+Author-owned declarations remain separate in `AUTHOR_CONFIRMATION.md`. The repository must not claim final author approval, competing-interest status, CRediT roles, funder roles, data-use/ethics wording, or other submission declarations until the responsible authors confirm them.
+
+Working repository: https://github.com/js110/Bpaper
