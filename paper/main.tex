@@ -63,7 +63,7 @@ Two recent methods provide stronger optimization-based comparators. PRIVIC, publ
 Figure~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
 \begin{figure}[tbp]
 \centering\includegraphics[width=\linewidth]{figures/system_architecture.png}
-\caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual, image-model-generated schematic, not an experimental result.}
+\caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This conceptual schematic was initially generated with OpenAI image generation via ChatGPT and subsequently checked and edited for consistency with the stated model; it is not an experimental result.}
 \label{fig:architecture}
 \end{figure}
 \subsection{Tasks and private state}
@@ -157,25 +157,23 @@ Strict BSP can make fine-region service impossible for a reason that scalar thin
 \end{equation}
 when the denominator is positive. The common availability factor $\alpha$ and any positive scalar gate cancel from this conditional posterior. Hence every truthful successful report from $S$ has posterior peak $\phi(b,S)$, regardless of how small a nonzero $q$ is. Under a uniform prior and an $m$-cell region, $\phi=1/m$; a strict $\rho=0.1$ rule therefore cannot release a truthful success for fewer than ten cells.
 
-To express rather than conceal this service limitation, let $\tau\in[\rho,1]$ be a declared maximum accepted positive-report floor. Disclosure-floor-aware BSP (DF-BSP) rejects the task when
+To express rather than conceal this service limitation, let $\tau\in[\rho,1]$ be a declared maximum positive-report peak. DF-BSP uses asymmetric branch caps
 \begin{equation}
- \phi(b,S)>\max\{\tau,\|b\|_\infty\}.
-\end{equation}
-Otherwise it uses the task-specific effective cap
-\begin{equation}
- c_{\mathrm{DF}}=\max\{\rho,\|b\|_\infty,\phi(b,S)\}
+ c^+_{\mathrm{DF}}=\max\{\tau,\|b\|_\infty\},
+ \qquad
+ c^-_{\mathrm{DF}}=\max\{\rho,\|b\|_\infty\}.
  \label{eq:dfcap}
 \end{equation}
-and applies the same silence-branch inequalities as Proposition~1 with $c=c_{\mathrm{DF}}$. Thus a report is admitted only when its unavoidable disclosure is within the declared ceiling (or no worse than an already more concentrated prior), while silence is prevented from exceeding the same task-specific cap.
+It rejects the task when $\phi(b,S)>c^+_{\mathrm{DF}}$. Otherwise, the positive branch is admissible by construction and the gate is maximized subject to the original BSP silence constraint $\|b^-\|_\infty\le c^-_{\mathrm{DF}}$. Thus the structural relaxation applies only to truthful reports; silence is not allowed to inherit the larger report ceiling.
 
-\begin{proposition}[Maximal disclosure-floor-aware scalar gate]
-For fixed $(b,S,\alpha,\rho,\tau)$ with $\tau\ge\rho$, DF-BSP returns the largest scalar $q\in[0,1]$ satisfying the positive-report admissibility condition above and $\|b^-\|_\infty\le c_{\mathrm{DF}}$ for every positive-probability silence branch. When $\tau=\rho$, DF-BSP reduces exactly to BSP.
+\begin{proposition}[Maximal asymmetric disclosure-floor-aware scalar gate]
+For fixed $(b,S,\alpha,\rho,\tau)$ with $\tau\ge\rho$, DF-BSP returns the largest scalar $q\in[0,1]$ satisfying $\|b^+\|_\infty\le c^+_{\mathrm{DF}}$ for every positive-probability report branch and $\|b^-\|_\infty\le c^-_{\mathrm{DF}}$ for every positive-probability silence branch. When $\tau=\rho$, DF-BSP reduces exactly to BSP.
 \end{proposition}
 \begin{proof}
-If the report floor exceeds $\max\{\tau,\|b\|_\infty\}$, every $q>0$ yields the same inadmissible positive posterior, so only $q=0$ is feasible. Otherwise the report posterior already has peak at most $c_{\mathrm{DF}}$. The remaining silence constraints have the same linear form as Proposition~1 after replacing $c$ by $c_{\mathrm{DF}}$, so their intersection is again $[0,q^*]$. For $\tau=\rho$, report admissibility and $c_{\mathrm{DF}}$ coincide with the BSP conditions.
+For every $q>0$, the report posterior is independent of $q$ and has peak $\phi(b,S)$. If this exceeds $c^+_{\mathrm{DF}}$, no positive gate is feasible. Otherwise the positive constraint is satisfied for every $q>0$. The remaining silence inequalities are exactly those of Proposition~1 with $c=c^-_{\mathrm{DF}}$, so their intersection with $[0,1]$ is $[0,q^*]$ and the closed-form BSP bound remains maximal. Setting $\tau=\rho$ makes $c^+_{\mathrm{DF}}=c^-_{\mathrm{DF}}=\max\{\rho,\|b\|_\infty\}$ and recovers BSP.
 \end{proof}
 
-Robust DF-BSP (RDF-BSP) applies this construction independently to every $M_k\in\mathcal M$ and takes the minimum member-wise gate. It is therefore the maximal common scalar gate for the corresponding finite collection of task-specific effective caps. Importantly, $\tau>\rho$ is a declared privacy relaxation, not evidence that the original $\rho$ cap is preserved. We consequently report both exceedance of the original local $\rho$ cap and violation of the DF effective cap.
+Robust DF-BSP (RDF-BSP) applies this asymmetric construction independently to every $M_k\in\mathcal M$ and takes the minimum member-wise gate. It is therefore the maximal common scalar gate satisfying all member-specific report ceilings and strict silence caps. Importantly, $\tau>\rho$ relaxes only the truthful-report branch; it is not evidence that the original $\rho$ cap is preserved after reports. We consequently report both exceedance of the original local $\rho$ cap and violation of the declared branch-specific caps.
 
 \subsection{Why reports and silence both matter}
 Equation~\eqref{eq:positive} gives a basic limitation: reducing a scalar participation probability does not weaken the conditional evidence of a report that actually occurs. Thinning reduces how often that report occurs. If a task identifies a single cell, every truthful successful report identifies that cell regardless of how small $q$ is. BSP must reject tasks whose positive branch violates the cap.
@@ -188,7 +186,7 @@ There is a separate support obstruction to pure location differential privacy. F
 Figure~\ref{fig:workflow} summarizes the two-branch check and the illustrative silence calculation.
 \begin{figure}[tbp]
 \centering\includegraphics[width=\linewidth]{figures/bsp_workflow.png}
-\caption{BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With $q=0$ the gate never passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts $q=1$, although silence raises the outside-cell posterior to about 0.870. BSP sets $q=0$ for this example. Image-model-generated schematic; numbers follow the stated calculation, not simulated measurements.}
+\caption{BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With $q=0$ the gate never passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts $q=1$, although silence raises the outside-cell posterior to about 0.870. BSP sets $q=0$ for this example. Initial schematic generated with OpenAI image generation via ChatGPT and subsequently checked against the stated calculation; the numbers are analytical, not simulated measurements.}
 \label{fig:workflow}
 \end{figure}
 At each slot the client predicts its belief, reads the public region and deadline, and computes $q^*$. It samples the gate independently of its location, attempts the task only if permitted, and releases any valid report at the common deadline. The public posterior is updated using either Eq.~\eqref{eq:positive} or Eq.~\eqref{eq:silence}. The platform can reproduce $q^*$ from the same declared model and history without receiving the gate coin. No extra refusal message is sent.
