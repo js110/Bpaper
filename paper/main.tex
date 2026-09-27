@@ -63,7 +63,7 @@ Two recent methods provide stronger optimization-based comparators. PRIVIC, publ
 Figure~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
 \begin{figure}[tbp]
 \centering\includegraphics[width=\linewidth]{figures/system_architecture.png}
-\caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This conceptual schematic was initially generated with OpenAI image generation via ChatGPT and subsequently checked and edited for consistency with the stated model; it is not an experimental result.}
+\caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual schematic of the stated system model, not an experimental result.}
 \label{fig:architecture}
 \end{figure}
 \subsection{Tasks and private state}
@@ -186,7 +186,7 @@ There is a separate support obstruction to pure location differential privacy. F
 Figure~\ref{fig:workflow} summarizes the two-branch check and the illustrative silence calculation.
 \begin{figure}[tbp]
 \centering\includegraphics[width=\linewidth]{figures/bsp_workflow.png}
-\caption{BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With $q=0$ the gate never passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts $q=1$, although silence raises the outside-cell posterior to about 0.870. BSP sets $q=0$ for this example. Initial schematic generated with OpenAI image generation via ChatGPT and subsequently checked against the stated calculation; the numbers are analytical, not simulated measurements.}
+\caption{BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With $q=0$ the gate never passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts $q=1$, although silence raises the outside-cell posterior to about 0.870. BSP sets $q=0$ for this example. The schematic summarizes the stated analytical workflow; the numbers are analytical, not simulated measurements.}
 \label{fig:workflow}
 \end{figure}
 At each slot the client predicts its belief, reads the public region and deadline, and computes $q^*$. It samples the gate independently of its location, attempts the task only if permitted, and releases any valid report at the common deadline. The public posterior is updated using either Eq.~\eqref{eq:positive} or Eq.~\eqref{eq:silence}. The platform can reproduce $q^*$ from the same declared model and history without receiving the gate coin. No extra refusal message is sent.
