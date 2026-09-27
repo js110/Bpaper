@@ -1,4 +1,4 @@
-\documentclass[review,12pt]{elsarticle}
+\documentclass[review,11pt,times]{elsarticle}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,microtype}
@@ -161,23 +161,12 @@ For every $q>0$, the report posterior is independent of $q$ and has peak $\phi(b
 
 Robust DF-BSP (RDF-BSP) applies this asymmetric construction independently to every $M_k\in\mathcal M$ and takes the minimum member-wise gate. It is therefore the maximal common scalar gate satisfying all member-specific report ceilings and strict silence caps. Importantly, $\tau>\rho$ relaxes only the truthful-report branch; it is not evidence that the original $\rho$ cap is preserved after reports. We consequently report both exceedance of the original local $\rho$ cap and violation of the declared branch-specific caps.
 
-\subsection{Why reports and silence both matter}
-Equation~\eqref{eq:positive} gives a basic limitation: reducing a scalar participation probability does not weaken the conditional evidence of a report that actually occurs. Thinning reduces how often that report occurs. If a task identifies a single cell, every truthful successful report identifies that cell regardless of how small $q$ is. BSP must reject tasks whose positive branch violates the cap.
+\subsection{Operational implications}
+Equation~\eqref{eq:positive} explains why both report and silence must be checked. Scalar thinning changes the probability that a successful report occurs but not its conditional posterior. A single-cell truthful report therefore identifies that cell whenever it is released. Conversely, a report-safe task can still make silence informative because the absence of a report reweights inside and outside states differently. BSP thins only through the public-history scalar gate and sends no separate refusal message.
 
-Checking only successful reports is nevertheless insufficient. Consider $b=(0.2,0.2,0.2,0.4)$, $S=\{1,2,3\}$, $\alpha=0.9$, and $c=0.4$. The report posterior has peak $1/3$, so a success-only rule allows $q=1$. After silence, the fourth cell has probability $0.4/0.46\approx0.870$, violating the cap. BSP instead sets $q=0$. This example also illustrates a potential utility cost when the current belief already has a cell at the cap.
+The same support property rules out interpreting BSP as pure location differential privacy: for a proper region and any nonzero truthful reporting probability, the report event has positive probability inside the region and zero probability outside. Other privacy definitions or mechanisms with altered report semantics remain possible, but they are outside the present guarantee.
 
-There is a separate support obstruction to pure location differential privacy. For any proper region and any nonzero truthful reporting probability inside it, the report event has positive probability inside and zero probability outside. No finite multiplicative likelihood-ratio bound can hold between those two states for that event. This elementary observation does not rule out other privacy definitions, altered report semantics, or mechanisms with false positives. It explains why the present filter must not be described as a differentially private coordinate-release mechanism.
-
-\subsection{Execution procedure}
-Figure~\ref{fig:workflow} summarizes the two-branch check and the illustrative silence calculation.
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{figures/bsp_workflow.png}
-\caption{BSP workflow and a four-state analytical example. Both positive-probability branches must satisfy the cap. With $q=0$ the gate never passes and only silence can occur; a zero-probability report branch needs no check. In panel (b), a success-only rule accepts $q=1$, although silence raises the outside-cell posterior to about 0.870. BSP sets $q=0$ for this example. The schematic summarizes the stated analytical workflow; the numbers are analytical, not simulated measurements.}
-\label{fig:workflow}
-\end{figure}
-At each slot the client predicts its belief, reads the public region and deadline, and computes $q^*$. It samples the gate independently of its location, attempts the task only if permitted, and releases any valid report at the common deadline. The public posterior is updated using either Eq.~\eqref{eq:positive} or Eq.~\eqref{eq:silence}. The platform can reproduce $q^*$ from the same declared model and history without receiving the gate coin. No extra refusal message is sent.
-
-The implementation uses half-open rectangles. It rejects repeated task identifiers, checks agreement between task and observation identifiers and sampling slots, and rejects task deadlines preceding their sampling slots. It does not implement arrival-time validation for late network messages; timely completion is represented by the Bernoulli variable in Eq.~\eqref{eq:output}. True locations are consulted only by the response simulator and evaluation metrics. Archived evaluation logs contain ground truth for auditing, but the attack receives only public tasks, outcomes, model parameters, and the gate determined by public history.
+At each slot the client predicts its declared-model belief, computes the applicable BSP/R-BSP/DF/RDF gate from public history and task metadata, samples the gate coin locally, and releases only a valid report at the common deadline. The attacker updates from the same public report or silence. A worked silence example and the original workflow schematic are provided in the Supplementary Material.
 
 \section{Experimental design}
 \label{sec:experiments}
