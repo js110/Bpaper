@@ -259,29 +259,8 @@ Sequential regional task outputs can reveal location despite local storage of pr
 \section*{Funding}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
 
-\clearpage
-\appendix
-\setcounter{figure}{0}
-\setcounter{table}{0}
-\renewcommand{\theHfigure}{appendix.\arabic{figure}}
-\renewcommand{\theHtable}{appendix.\arabic{table}}
-\section{Task composition and expanded comparison}
-\label{sec:diagnostics}
-Table~\ref{tab:task-area} records all normal tasks from the representative BSP settings. Its opportunity counts use simulator eligibility and the shared external-availability draw, whereas completion additionally requires admission. Counts describe the stored finite sample; slots are not independent replicates and no slot-level confidence interval is claimed.
-\begin{table}[htbp]
-\centering\small
-\caption{Post-review task-area breakdown for executed BSP $\rho=0.1$ under adaptive probes. Area is the number of cells in the original 64-cell region library. Retention is completed/opportunities. Counts are pooled over 80 synthetic trajectories or 67 replay users; these are not policy-envelope mixtures.}
-\label{tab:task-area}\input{task_area_table}
-\end{table}
 
-Figure~\ref{fig:commute-zoom} retains every method setting from the Commute panel of Fig.~\ref{fig:recent}, with a different vertical range to make the low-risk portion readable. It does not change the estimates, interval construction, or inconclusive interpretation of the matched-retention differences.
-\begin{figure}[htbp]
-\centering\includegraphics[width=.84\linewidth]{recent_commute_zoom.pdf}
-\caption{Expanded Commute comparison (vertical range 0--0.10 rather than 0--0.65). Markers and colors identify methods; faint points are executed settings and lines are test-selected lower envelopes. Vertex error bars are pointwise cluster-bootstrap intervals conditional on fixed training. The dotted line marks uniform-prior expected accuracy.}
-\label{fig:commute-zoom}
-\end{figure}
 
-\clearpage
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
 \end{document}
