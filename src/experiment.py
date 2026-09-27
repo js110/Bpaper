@@ -137,17 +137,20 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             if any(m.b.max()>max(float(param),float(p))+1e-9 for m,p in zip(robust.members,robust_prior_peaks)):
                 cap_violations+=1
         elif method=='dfbsp':
-            c_eff=max(float(param),float(np.max(bprior)),disclosure_floor(bprior,mask))
+            c_eff=max(float(positive_cap),float(np.max(bprior))) if reported else max(float(param),float(np.max(bprior)))
             if np.max(belief.b)>c_eff+1e-9:cap_violations+=1
         elif method=='rdfbsp':
             for m,pb in zip(robust.members,robust_bpriors):
-                c_eff=max(float(param),float(pb.max()),disclosure_floor(pb,mask))
+                c_eff=max(float(positive_cap),float(pb.max())) if reported else max(float(param),float(pb.max()))
                 if m.b.max()>c_eff+1e-9:
                     cap_violations+=1;break
         if method in ('bsp','rbsp','dfbsp','rdfbsp'):
             if attacker.b.max()>max(float(param),attacker_prior_peak)+1e-9:
                 attacker_local_cap_violations+=1
-            attacker_eff=max(float(param),attacker_prior_peak,attacker_positive_floor) if method in ('dfbsp','rdfbsp') else max(float(param),attacker_prior_peak)
+            if method in ('dfbsp','rdfbsp'):
+                attacker_eff=max(float(positive_cap),attacker_prior_peak) if reported else max(float(param),attacker_prior_peak)
+            else:
+                attacker_eff=max(float(param),attacker_prior_peak)
             if attacker.b.max()>attacker_eff+1e-9:
                 attacker_effective_cap_violations+=1
             if attacker.b.max()>float(param)+1e-9:
