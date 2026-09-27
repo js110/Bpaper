@@ -117,12 +117,12 @@ def disclosure_floor(b,mask):
 
 
 def df_bsp_gates(b,masks,alpha,rho,positive_cap,slot=0,rectangles=None):
-    """Disclosure-floor-aware BSP.
+    """Asymmetric disclosure-floor-aware BSP.
 
-    rho remains the baseline local cap. A task whose truthful positive branch
-    exceeds positive_cap (unless the prior is already that concentrated) is
-    rejected. Otherwise the unavoidable positive-branch peak is admitted into
-    the task-specific cap and the silence branch is maximized subject to it.
+    Only the truthful report branch is relaxed: its peak may reach
+    max(positive_cap, prior_peak). Silence retains the original BSP cap
+    max(rho, prior_peak). This isolates the unavoidable truthful-report
+    disclosure instead of weakening both branches.
     """
     b=normalize(b);masks=np.atleast_2d(masks).astype(float)
     tau=float(positive_cap);rho=float(rho)
@@ -132,10 +132,10 @@ def df_bsp_gates(b,masks,alpha,rho,positive_cap,slot=0,rectangles=None):
     joint=h*b[None,:];mass=joint.sum(axis=1)
     pos=np.divide(joint.max(axis=1),mass,out=np.zeros(len(masks)),where=mass>0)
     allowed=pos<=max(tau,prior_peak)+1e-12
-    cap=np.maximum(np.maximum(rho,prior_peak),pos)
+    silence_cap=max(rho,prior_peak)
     q=allowed.astype(float)
-    denom=cap[:,None]*mass[:,None]-joint
-    limits=np.divide(cap[:,None]-b[None,:],denom,out=np.full_like(denom,np.inf),where=denom>1e-14)
+    denom=silence_cap*mass[:,None]-joint
+    limits=np.divide(silence_cap-b[None,:],denom,out=np.full_like(denom,np.inf),where=denom>1e-14)
     q=np.minimum(q,np.minimum(1,limits.min(axis=1)))
     return np.clip(q,0,1)
 
