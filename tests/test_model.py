@@ -103,4 +103,26 @@ class ChannelTests(unittest.TestCase):
         masks=np.array([[1,1,1,0],[0,1,1,1]],float);alphas=[.5,.8]
         member=np.vstack([df_bsp_gates(b,masks,a,.2,.5) for b,a in zip(beliefs,alphas)])
         np.testing.assert_allclose(robust_df_bsp_gates(beliefs,masks,alphas,.2,.5),member.min(axis=0))
+    def test_df_bsp_random_branch_bounds_and_maximality(self):
+        rng=np.random.default_rng(92727)
+        for _ in range(200):
+            b=rng.dirichlet(np.ones(16)*2);mask=(rng.random(16)<.5).astype(float)
+            if not mask.any():mask[int(rng.integers(16))]=1
+            alpha=float(rng.uniform(.2,.95));rho=float(rng.uniform(.06,.3));tau=float(rng.uniform(rho,1))
+            q=float(df_bsp_gates(b,mask,alpha,rho,tau)[0])
+            prior=float(b.max());mass=float(np.dot(b,mask))
+            pos=disclosure_floor(b,mask)
+            if q>1e-12 and mass>0:
+                self.assertLessEqual(pos,max(tau,prior)+1e-9)
+            psil=1-q*alpha*mass
+            if psil>1e-12:
+                self.assertLessEqual(update(b,mask,alpha,q,False).max(),max(rho,prior)+1e-9)
+            if q<.999999:
+                q2=min(1.,q+1e-5)
+                positive_bad=(q2>0 and mass>0 and pos>max(tau,prior)+1e-10)
+                silence_bad=False
+                psil2=1-q2*alpha*mass
+                if psil2>1e-12:
+                    silence_bad=update(b,mask,alpha,q2,False).max()>max(rho,prior)-1e-10
+                self.assertTrue(positive_bad or silence_bad)
 if __name__=='__main__':unittest.main()
