@@ -14,7 +14,7 @@
 \makeatletter\let\ps@pprintTitle\ps@plain\makeatother
 \begin{document}
 \begin{frontmatter}
-\title{Branch-Safe Participation under Model Uncertainty\\for Sequential Mobile Crowdsensing}
+\title{Robust Branch-Safe Participation for Sequential Mobile Crowdsensing:\\Model Uncertainty and Disclosure Floors}
 \author[aff1]{Lili He}
 \author[aff1]{Sheng Jiang}
 \author[aff1]{Linghui Lyu}
@@ -26,7 +26,7 @@
 Keeping precise coordinates on a mobile device does not eliminate the location information carried by successful region-constrained sensing tasks, while silence can also update an observer's belief. We study this binary channel for linkable accounts under uncertain delivery, participation, and timely completion. Branch-safe participation (BSP) chooses the maximal scalar gate that bounds posterior peak after both outputs under a declared model. Robust BSP (R-BSP) intersects these feasible gates across a finite public ambiguity set. We further expose a structural service limit: for truthful reports, the posterior after a successful region task has an unavoidable peak independent of the thinning probability. Disclosure-floor-aware BSP (DF-BSP) therefore introduces an explicit positive-report ceiling $\tau\ge\rho$ rather than silently relaxing the original cap; its robust form (RDF-BSP) intersects the resulting task-specific constraints across models. A post-hoc data-driven extension uses 23 GeoLife development users to generate mobility/prior candidates and 17 validation users to select a 95\%-bootstrap-support set, leaving 67 test users out of model construction. Under a stronger population-prior replay attacker, strict data-driven R-BSP removes observed local-cap violations but retains only 5.4\% of opportunities, demonstrating the cost of robust strict caps. In contrast, at $\tau=0.5$, RDF-BSP retains 10.2\% of 1--8-cell opportunities and 22.0\% inverse-area-weighted utility with zero observed violations of its task-specific effective cap; the original $\rho=0.1$ local cap is exceeded on 30.6\% of slots, making the privacy relaxation explicit. Independent synthetic walks show the same service frontier. The guarantees remain channel- and model-set-specific and do not cover arbitrary auxiliary knowledge.
 \end{abstract}
 \begin{keyword}
-Mobile crowdsensing \sep location privacy \sep Bayesian inference \sep adaptive tasks \sep participation filtering \sep reproducible simulation
+Mobile crowdsensing \sep location privacy \sep Bayesian inference \sep robust participation \sep disclosure floor \sep adaptive tasks
 \end{keyword}
 \end{frontmatter}
 \section{Introduction}
