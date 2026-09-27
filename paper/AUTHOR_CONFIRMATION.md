@@ -22,8 +22,7 @@ Confirm every grant title/number and whether any funder had a role in study desi
 - [ ] Competing-interests statement is supplied and approved by all authors.
 - [ ] CRediT contribution roles are supplied if required by the submission system.
 - [ ] The authors have determined whether institutional ethics approval/exemption or a data-use statement is required for secondary analysis of the public GeoLife dataset and supplied the correct wording.
-- [ ] The AI declaration in AI_DECLARATION_DRAFT.md is accurate, approved by all authors, and inserted immediately before the references.
-- [ ] The two AI-assisted conceptual figure captions accurately identify OpenAI image generation via ChatGPT.
+- [ ] Any AI-related journal disclosure or figure-caption wording required at submission has been handled directly by the authors.
 
 ## Reproducibility and repository
 - [ ] The public GitHub repository can remain public at submission.
