@@ -4,6 +4,7 @@ import numpy as np
 from src.model import gates,update
 from src.experiment import simulate,candidates,path_for
 from src.prepare_data import minute_window
+from src.fit_ambiguity import fit_move_coarsened
 
 class PipelineTests(unittest.TestCase):
     def test_kl_branches_and_maximality(self):
@@ -44,4 +45,9 @@ class PipelineTests(unittest.TestCase):
         for a,b in zip(events,old):
             self.assertEqual(a['reported'],b['reported']);self.assertEqual(tuple(a['rectangle']),tuple(b['rectangle']))
             np.testing.assert_allclose(a['belief'],b['belief'],rtol=1e-13,atol=1e-14)
+    def test_coarsened_move_fit_recovers_reflecting_walk(self):
+        paths=np.vstack([path_for(9100,u,8,240,'walk',.3) for u in range(48)])
+        self.assertLess(abs(fit_move_coarsened(paths,8)-.3),.04)
+        static=np.vstack([path_for(9200,u,8,80,'static',0) for u in range(8)])
+        self.assertEqual(fit_move_coarsened(static,8),0.0)
 if __name__=='__main__':unittest.main()
