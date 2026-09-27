@@ -80,4 +80,26 @@ class ChannelTests(unittest.TestCase):
         self.assertEqual(out['cap_violations'],0)
         self.assertEqual(out['attacker_local_cap_violations'],0)
         self.assertEqual(out['attacker_absolute_cap_violations'],0)
+    def test_df_bsp_reduces_to_bsp_at_same_cap(self):
+        rng=np.random.default_rng(927)
+        for _ in range(100):
+            b=rng.dirichlet(np.ones(16)*2);mask=rng.random(16)<.6
+            rho=.25
+            q0=gates(b,mask,.648,'bsp',rho,0)[0]
+            q1=df_bsp_gates(b,mask,.648,rho,rho)[0]
+            self.assertAlmostEqual(q0,q1,places=12)
+    def test_df_bsp_admits_only_declared_positive_exposure(self):
+        b=np.full(16,1/16);small=np.zeros(16);small[:4]=1
+        self.assertAlmostEqual(disclosure_floor(b,small),.25)
+        self.assertEqual(df_bsp_gates(b,small,.648,.1,.2)[0],0)
+        q=df_bsp_gates(b,small,.648,.1,.25)[0]
+        self.assertGreater(q,0)
+        for reported in [True,False]:
+            p=q*.648*np.dot(b,small);p=p if reported else 1-p
+            if p>1e-12:self.assertLessEqual(update(b,small,.648,q,reported).max(),.25+1e-9)
+    def test_robust_df_is_memberwise_minimum(self):
+        beliefs=np.array([[.1,.2,.3,.4],[.4,.3,.2,.1]])
+        masks=np.array([[1,1,1,0],[0,1,1,1]],float);alphas=[.5,.8]
+        member=np.vstack([df_bsp_gates(b,masks,a,.2,.5) for b,a in zip(beliefs,alphas)])
+        np.testing.assert_allclose(robust_df_bsp_gates(beliefs,masks,alphas,.2,.5),member.min(axis=0))
 if __name__=='__main__':unittest.main()
