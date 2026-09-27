@@ -56,6 +56,29 @@ def smoothed_prior(paths,side,pseudocount=.5):
     return (counts/counts.sum()).tolist()
 
 
+def per_user_loglik(paths,side,move,prior):
+    paths=np.asarray(paths,dtype=int);prior=np.asarray(prior,float)
+    out=np.zeros(len(paths),float)
+    for j,path in enumerate(paths):
+        src=path[:-1];changed=(path[1:]!=path[:-1])
+        e=state_exposure(src,side);p=np.clip(float(move)*e,1e-12,1-1e-12)
+        out[j]=np.log(max(prior[int(path[0])],1e-300))+np.where(changed,np.log(p),np.log1p(-p)).sum()
+    return out
+
+
+def validation_bootstrap_support(paths,candidates,side,reps,seed,mass=.95):
+    scores=np.column_stack([per_user_loglik(paths,side,c['move'],c['prior']) for c in candidates])
+    rng=np.random.default_rng(seed);wins=np.zeros(len(candidates),int)
+    for _ in range(reps):
+        idx=rng.integers(len(paths),size=len(paths))
+        total=scores[idx].sum(axis=0);wins[int(np.argmax(total))]+=1
+    freq=wins/reps;order=np.argsort(-freq,kind='stable');keep=[];cum=0.
+    for i in order:
+        if freq[i]<=0 and keep:break
+        keep.append(int(i));cum+=float(freq[i])
+        if cum>=mass-1e-12:break
+    return freq,keep,float(cum)
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--development',default='data/geolife_development.npz')
@@ -65,9 +88,11 @@ def main():
     ap.add_argument('--alpha',type=float,default=.648)
     ap.add_argument('--bootstrap',type=int,default=2000)
     ap.add_argument('--confidence',type=float,default=.95)
+    ap.add_argument('--selection-mass',type=float,default=.95)
     ap.add_argument('--seed',type=int,default=270926)
     a=ap.parse_args()
     if not (0<a.alpha<=1):raise ValueError('alpha must lie in (0,1]')
+    if not (0<a.selection_mass<=1):raise ValueError('selection mass must lie in (0,1]')
     dev=np.load(a.development);val=np.load(a.validation)
     dp=np.asarray(dev['paths']);vp=np.asarray(val['paths'])
     dev_hat=fit_move_coarsened(dp,a.side);val_hat=fit_move_coarsened(vp,a.side)
@@ -76,33 +101,42 @@ def main():
     vb=user_bootstrap(vp,a.side,a.bootstrap,a.seed+1)
     tail=(1-a.confidence)/2
     dci=np.quantile(db,[tail,1-tail]);vci=np.quantile(vb,[tail,1-tail])
-    lo=float(min(dci[0],vci[0]));hi=float(max(dci[1],vci[1]))
+    move_q=np.quantile(db,[.025,.25,.5,.75,.975])
     moves=[]
-    for x in [lo,pooled_hat,hi]:
-        if not any(abs(x-y)<1e-10 for y in moves):moves.append(float(x))
-    pooled=np.concatenate([dp,vp])
-    pop_prior=smoothed_prior(pooled,a.side,.5)
+    for x in list(move_q)+[dev_hat]:
+        if not any(abs(float(x)-y)<1e-10 for y in moves):moves.append(float(x))
+    pop_prior=smoothed_prior(dp,a.side,.5)
     uniform=(np.ones(a.side*a.side)/(a.side*a.side)).tolist()
+    candidates=[]
+    for move in sorted(moves):
+        candidates.append(dict(move=move,alpha=a.alpha,prior=uniform,prior_type='uniform'))
+        candidates.append(dict(move=move,alpha=a.alpha,prior=pop_prior,prior_type='population_smoothed'))
+    freq,keep,cum=validation_bootstrap_support(vp,candidates,a.side,a.bootstrap,a.seed+2,a.selection_mass)
     models=[]
-    for move in moves:
-        models.append(dict(move=move,alpha=a.alpha,prior=uniform,prior_type='uniform'))
-        models.append(dict(move=move,alpha=a.alpha,prior=pop_prior,prior_type='population_smoothed'))
+    candidate_records=[]
+    for i,m in enumerate(candidates):
+        rec=dict(index=i,move=m['move'],prior_type=m['prior_type'],validation_selection_frequency=float(freq[i]),selected=i in keep)
+        candidate_records.append(rec)
+        if i in keep:models.append(m)
     out=dict(
-        schema='data-driven-rbsp-v1',
-        construction='union of development and validation user-bootstrap mobility intervals; pooled center; uniform and smoothed population priors',
+        schema='data-driven-rbsp-v2',
+        construction='development user-bootstrap candidates; validation user-bootstrap predictive-likelihood support set',
         side=a.side,alpha=a.alpha,
         alpha_provenance='externally specified protocol parameter; GeoLife has trajectories but no real task availability logs',
         fit_model='coarsened reflecting-walk change likelihood P(change|state)=v*degree(state)/4; destination direction and jump distance ignored',
-        development=dict(users=int(len(dp)),estimate=dev_hat,ci=dci.tolist()),
+        development=dict(users=int(len(dp)),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
         validation=dict(users=int(len(vp)),estimate=val_hat,ci=vci.tolist()),
-        pooled=dict(users=int(len(pooled)),estimate=pooled_hat),
+        pooled=dict(users=int(len(dp)+len(vp)),estimate=pooled_hat),
         confidence=a.confidence,bootstrap_replicates=a.bootstrap,bootstrap_seed=a.seed,
-        move_interval=[lo,hi],move_candidates=moves,
-        priors=['uniform','population_smoothed'],prior_pseudocount=.5,
+        selection_mass_target=a.selection_mass,selection_mass_achieved=cum,
+        move_candidates=sorted(moves),candidate_models=candidate_records,
+        priors=['uniform','population_smoothed_development_only'],prior_pseudocount=.5,
         population_prior=pop_prior,models=models,
         test_data_used=False)
     p=Path(a.output);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(out,indent=2)+'\n')
-    print(json.dumps({k:out[k] for k in ['development','validation','pooled','move_interval','move_candidates']},indent=2))
+    print(json.dumps(dict(development=out['development'],validation=out['validation'],
+                          selected_models=[candidate_records[i] for i in keep],
+                          selection_mass_achieved=cum),indent=2))
 
 
 if __name__=='__main__':main()
