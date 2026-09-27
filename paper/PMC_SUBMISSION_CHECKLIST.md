@@ -22,7 +22,7 @@ Do not invent any of the following. The responsible authors must confirm them:
 5. CRediT author contributions, if requested;
 6. funders' roles;
 7. data-use / ethics determination for the secondary GeoLife data;
-8. final generative-AI disclosure wording under Elsevier's current policy; substantive AI use requires a separate declaration immediately before the references, and AI-generated/AI-altered figures require tool disclosure in the relevant captions;
+8. any AI-related disclosure or figure-caption wording required by the journal, to be handled by the authors before submission;
 9. whether the repository will remain a working GitHub repository or be archived in an immutable release.
 
 ## Scientific items that remain more important than formatting
@@ -43,6 +43,6 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 
 ## Final author-owned blockers
 
-- Approve the factual AI disclosure draft in `paper/AI_DECLARATION_DRAFT.md` and insert the approved statement before the references.
+- Complete any AI-related journal disclosure/caption requirements before submission; this is intentionally left for the authors to handle.
 - Confirm competing interests, CRediT contributions, funder roles, author names/order/affiliation/corresponding details, and the GeoLife ethics/data-use determination.
 - Decide whether to cite a versioned GitHub release or an immutable archive/DOI rather than only the moving repository URL.
