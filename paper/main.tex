@@ -204,26 +204,10 @@ At opportunity retention 0.5 in the static scenario, exploratory envelope interp
 \subsection{Model mismatch}
 Nominal BSP is fragile when the attacker knows a better model. In the informed synthetic stress at \(\rho=0.1\), local-cap violations reach 12.6\% when the client underestimates availability, 2.6\% when it overestimates availability, 2.8\% when it underestimates movement, and 14.6\% when it overestimates movement. These failures motivate the robust extension rather than contradicting its model-conditional theorem.
 
-\subsection{Finite-model robustness stress}
-Table~\ref{tab:robust} evaluates the new finite-model extension at $\rho=0.1$. Under the nominal client model, both BSP and R-BSP have zero observed attacker local-cap violations. Under all four declared-model mismatches, nominal BSP violates the informed attacker's local cap: 12.6\% of slots when $\alpha$ is underestimated, 2.6\% when it is overestimated, 2.8\% when movement is underestimated, and 14.6\% when movement is overestimated. The corresponding cluster-bootstrap 95\% intervals are $[10.4,15.0]$, $[1.8,3.5]$, $[2.0,3.6]$, and $[13.4,15.8]$ percentage points.
+\subsection{Finite-model robustness}
+A nine-model hand-grid R-BSP stress contains the informed attacker's exact \((v,\alpha)=(0.3,0.648)\) model. At \(\rho=0.1\), it removes the observed local-cap violations from the four misspecified nominal BSP conditions, as expected from the finite-set construction, but retains only about 39.7\% of externally completable normal-task opportunities. This run validates implementation and exposes robustness cost; it is not evidence of generalization beyond the set.
 
-R-BSP records zero local-cap violations in every one of these five conditions because the informed attacker's exact model is included in the nine-member ambiguity set. This is an expected consequence of Proposition~2 and therefore tests implementation and sequential bookkeeping more than it demonstrates generalization beyond the set. The cost is material: R-BSP retains 39.7\% of externally completable normal-task opportunities, compared with 50.9\% for nominal BSP and 46.9--55.2\% for the four misspecified BSP conditions. Its MAP hit rate is 3.47\% versus 4.75--8.49\% for the mismatched nominal policies at this threshold. The robust rule is deliberately conservative; these post-hoc results do not identify an optimal ambiguity set.
-
-\begin{table}[tbp]
-\centering\small
-\caption{Post-hoc finite-model stress at $\rho=0.1$, 20 synthetic seed clusters and 80 trajectories per row. Viol. is the fraction of 3,840 slot-level outputs per condition for which the informed attacker's posterior exceeds its own local cap. R-BSP contains the attacker's exact $(v,\alpha)=(0.3,0.648)$ model. Retention is Eq.~\eqref{eq:utility}.}
-\label{tab:robust}\input{robust_table}
-\end{table}
-
-A separate boundary run shows why the finite-set qualifier is substantive rather than cosmetic. Table~\ref{tab:robust-boundary} uses new seeds and correct attacker models that are not members of $\mathcal M$. For the unlisted interior value $\alpha=0.50$, R-BSP has no observed local-cap violation; for $v=0.50$, two of 3,840 slots violate the local cap (0.052\%, cluster-bootstrap 95\% interval $[0,0.156]$). This empirical interpolation should not be mistaken for a theorem. More importantly, when the correct availability rises outside the ambiguity set to $\alpha=0.98$, R-BSP violates the attacker's local cap on 6.93\% of slots, with interval $[5.70,8.31]$ percentage points. At the outside movement value $v=0.95$, one of 3,840 slots violates (0.026\%, interval $[0,0.078]$). Thus finite-model R-BSP can reduce mismatch sensitivity beyond nominal BSP, but protection is not guaranteed for models outside the declared set.
-
-\begin{table}[tbp]
-\centering\small
-\caption{Post-hoc boundary characterization at $\rho=0.1$, with 20 new synthetic seed clusters and 80 trajectories per row. ``Interior'' means the correct scalar lies between enumerated ambiguity values but is not itself a member; ``outside'' exceeds the corresponding listed range. Viol. is the informed attacker's local-cap violation rate over 3,840 slots per row.}
-\label{tab:robust-boundary}\input{robust_boundary_table}
-\end{table}
-
-The stress run also exposes computational cost. On the GitHub-hosted Ubuntu/Python 3.12 validation runner, the mean trajectory-median gate time at $\rho=0.1$ is about 417--423 microseconds for the nine-model R-BSP and 51--52 microseconds for BSP. These timings come from a different machine and software environment than the main-study timing batch, so only the within-run order of magnitude is informative; they are not smartphone measurements or a controlled cross-platform benchmark.
+A separate boundary run fixes the same model set and changes the correct attacker model. An outside-set availability value \(\alpha=0.98\) restores a 6.93\% local-cap violation rate (95\% cluster-bootstrap interval 5.70--8.31\%). Interior unlisted values produce zero or rare violations in this finite sample. The guarantee is therefore explicitly finite-model. Full stress tables and boundary conditions are in the Supplementary Material.
 
 \subsection{Data-driven robustness and fine-region service}
 \label{sec:data-driven-results}
