@@ -27,12 +27,12 @@ Do not invent any of the following. The responsible authors must confirm them:
 
 ## Scientific items that remain more important than formatting
 
-- Robustness to attacker/model mismatch: finite-set R-BSP and outside-set boundary tests are now implemented, but ambiguity-set construction is still post-hoc and needs a defensible development/validation rule;
-- independent parameter selection instead of test-set policy-envelope selection;
-- practical utility for small-region tasks;
-- a stronger novelty statement relative to inference-resistant MCS task-allocation work.
+- Robustness to attacker/model mismatch: finite-set R-BSP, outside-set boundary tests, and a development/validation-derived replay ambiguity-set construction are implemented. The extension remains post-hoc because the test users had been inspected in earlier analyses; the manuscript states this limitation explicitly.
+- Fine-region service: strict BSP/R-BSP still has a structural truthful-report floor. DF-BSP/RDF-BSP now exposes a separate report ceiling while retaining the strict BSP silence cap, and reports inverse-area-weighted and 1--8-cell retention.
+- Test-selected recent-baseline envelopes remain exploratory and are labeled as such; no confirmatory claim is made from them.
+- Novelty claims remain bounded to the visible truthful report/silence channel, finite-model robustness, and explicit disclosure-floor service trade-off.
 
-The paper should not be marked submission-ready until these points are resolved or explicitly bounded in the claims.
+Scientific issues above are now either implemented or explicitly bounded in the claims. The remaining submission blockers are author-owned declarations/approvals and a final compiled-file check.
 
 ## Current validation workflow
 
@@ -40,3 +40,9 @@ The paper should not be marked submission-ready until these points are resolved 
 - `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
 - `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
 - `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
+
+## Final author-owned blockers
+
+- Approve the factual AI disclosure draft in `paper/AI_DECLARATION_DRAFT.md` and insert the approved statement before the references.
+- Confirm competing interests, CRediT contributions, funder roles, author names/order/affiliation/corresponding details, and the GeoLife ethics/data-use determination.
+- Decide whether to cite a versioned GitHub release or an immutable archive/DOI rather than only the moving repository URL.
