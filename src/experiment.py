@@ -3,11 +3,16 @@ import argparse,csv,gzip,hashlib,json,platform,time
 from pathlib import Path
 import numpy as np
 from functools import lru_cache
-from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,gates,choose_probe,posterior_metrics
+from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,gates,df_bsp_gates,disclosure_floor,choose_probe,posterior_metrics
 
 @lru_cache(maxsize=64)
 def load_channel(path):
     return np.load(path)['channel']
+
+@lru_cache(maxsize=16)
+def load_robust_models(path):
+    d=json.loads(Path(path).read_text())
+    return d['models'] if isinstance(d,dict) else d
 
 def candidates(side):
     rects=set()
@@ -44,6 +49,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     alpha_model=condition.get('alpha_model',alpha_true)
     move_model=condition['move_model']
     method=condition['method'];param=condition['param'];attack=condition['attack']
+    positive_cap=condition.get('positive_cap')
     channel=load_channel(condition['channel_file']) if method=='privic' else None
     # This public map contains a gate probability for EVERY possible location.
     # The attacker never receives the probability indexed by the true location.
@@ -55,15 +61,24 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     ext=rng.random((slots,4))
     legitimate_schedule=rng.random(slots)<condition.get('legitimate_fraction',.75)
     belief=PublicBelief(side,move_model,alpha_model)
+    if condition.get('client_prior') is not None:
+        belief.b=np.asarray(condition['client_prior'],float);belief.b=belief.b/belief.b.sum()
     attacker=PublicBelief(side,condition.get('attacker_move',move_model),condition.get('attacker_alpha',alpha_model))
+    if condition.get('attacker_prior') is not None:
+        attacker.b=np.asarray(condition['attacker_prior'],float);attacker.b=attacker.b/attacker.b.sum()
     robust=None
-    if method=='rbsp':
-        robust_models=condition.get('robust_models') or [dict(move=move_model,alpha=alpha_model)]
+    if method in ('rbsp','rdfbsp'):
+        robust_models=condition.get('robust_models')
+        if robust_models is None and condition.get('robust_models_file'):
+            robust_models=load_robust_models(condition['robust_models_file'])
+        robust_models=robust_models or [dict(move=move_model,alpha=alpha_model)]
         robust=RobustPublicBelief(side,robust_models)
-    prior=np.full(side*side,1/(side*side))
+    prior=belief.b.copy()
     sums={k:0. for k in ['hit','error_cells','peak','logloss','covered95','credible95','entropy']}
     prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0
-    attacker_local_cap_violations=0;attacker_absolute_cap_violations=0;op_cells=set();done_cells=set()
+    attacker_local_cap_violations=0;attacker_effective_cap_violations=0;attacker_absolute_cap_violations=0;op_cells=set();done_cells=set()
+    weighted_opportunities=0.;weighted_complete=0.
+    area_opp={'small':0,'medium':0,'large':0};area_done={'small':0,'medium':0,'large':0}
     gate_times=[];rows=[];bin_counts=np.zeros(10);bin_hits=np.zeros(10);bin_peaks=np.zeros(10);error_m=0.
     for t in range(slots):
         # Identity resetting is an ideal control: discard past target-specific evidence.
@@ -83,7 +98,9 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             if channel is not None:
                 qs=privic_qs
             elif robust is not None:
-                qs=robust.gates(masks,param,t,rects)[:,None]
+                qs=robust.gates(masks,param,t,rects,positive_cap if method=='rdfbsp' else None)[:,None]
+            elif method=='dfbsp':
+                qs=df_bsp_gates(belief.b,masks,alpha_model,param,positive_cap,t,rects)[:,None]
             else:
                 qs=gates(belief.b,masks,alpha_model,method,param,t,rects)[:,None]
             likelihood=masks*(attacker.alpha*qs)
@@ -95,13 +112,17 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         if channel is not None:
             q=gate_scale*(channel@masks[idx])
         elif robust is not None:
-            q=float(robust.gates(masks[idx],param,t,[rects[idx]])[0])
+            q=float(robust.gates(masks[idx],param,t,[rects[idx]],positive_cap if method=='rdfbsp' else None)[0])
+        elif method=='dfbsp':
+            q=float(df_bsp_gates(belief.b,masks[idx],alpha_model,param,positive_cap,t,[rects[idx]])[0])
         else:
             q=float(gates(belief.b,masks[idx],alpha_model,method,param,t,[rects[idx]])[0])
         gate_times.append((time.perf_counter_ns()-start)/1000)
-        bprior=belief.b.copy();attacker_prior_peak=float(attacker.b.max())
+        bprior=belief.b.copy();attacker_bprior=attacker.b.copy();attacker_prior_peak=float(attacker.b.max())
+        robust_bpriors=np.vstack([m.b.copy() for m in robust.members]) if robust else None
         robust_prior_peaks=np.asarray([m.b.max() for m in robust.members],float) if robust else None
-        mask=masks[idx].astype(bool);truth=int(path[t])
+        mask=masks[idx].astype(bool);truth=int(path[t]);task_area=int(mask.sum())
+        attacker_positive_floor=disclosure_floor(attacker_bprior,mask)
         eligible=bool(mask[truth])
         available=bool(ext[t,0]<delivery and ext[t,1]<willing and ext[t,2]<on_time)
         q_at_state=float(q[truth]) if channel is not None else q
@@ -115,9 +136,20 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         elif method=='rbsp':
             if any(m.b.max()>max(float(param),float(p))+1e-9 for m,p in zip(robust.members,robust_prior_peaks)):
                 cap_violations+=1
-        if method in ('bsp','rbsp'):
+        elif method=='dfbsp':
+            c_eff=max(float(param),float(np.max(bprior)),disclosure_floor(bprior,mask))
+            if np.max(belief.b)>c_eff+1e-9:cap_violations+=1
+        elif method=='rdfbsp':
+            for m,pb in zip(robust.members,robust_bpriors):
+                c_eff=max(float(param),float(pb.max()),disclosure_floor(pb,mask))
+                if m.b.max()>c_eff+1e-9:
+                    cap_violations+=1;break
+        if method in ('bsp','rbsp','dfbsp','rdfbsp'):
             if attacker.b.max()>max(float(param),attacker_prior_peak)+1e-9:
                 attacker_local_cap_violations+=1
+            attacker_eff=max(float(param),attacker_prior_peak,attacker_positive_floor) if method in ('dfbsp','rdfbsp') else max(float(param),attacker_prior_peak)
+            if attacker.b.max()>attacker_eff+1e-9:
+                attacker_effective_cap_violations+=1
             if attacker.b.max()>float(param)+1e-9:
                 attacker_absolute_cap_violations+=1
         metrics=posterior_metrics(attacker.b,truth,side)
@@ -131,26 +163,38 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         prior_hit+=posterior_metrics(prior,truth,side)['hit']
         if is_legit:
             legit+=1
-            if eligible and available:opportunities+=1;op_cells.add(truth)
-            if reported:complete+=1;done_cells.add(truth)
+            area_bin='small' if task_area<=8 else ('medium' if task_area<=31 else 'large')
+            weight=1.0/task_area
+            if eligible and available:
+                opportunities+=1;op_cells.add(truth);weighted_opportunities+=weight;area_opp[area_bin]+=1
+            if reported:
+                complete+=1;done_cells.add(truth);weighted_complete+=weight;area_done[area_bin]+=1
         reports+=reported
         if log:
             rows.append(dict(slot=t,task_id=task.task_id,rectangle=rects[idx],legitimate=is_legit,
                              reported=reported,q=q.tolist() if channel is not None else q,alpha_model=alpha_model,prior_peak=float(bprior.max()),
-                             attacker_prior_peak=attacker_prior_peak,belief=attacker.b.tolist(),client_peak=float(belief.b.max()),
+                             attacker_prior_peak=attacker_prior_peak,attacker_positive_floor=attacker_positive_floor,
+                             belief=attacker.b.tolist(),client_peak=float(belief.b.max()),
                              robust_peak_max=float(max(m.b.max() for m in robust.members)) if robust else None,
+                             task_area=task_area,positive_cap=positive_cap,
                              evaluator_truth=truth,eligible=eligible,available=available,**metrics))
     out={k:v/slots for k,v in sums.items()}
     out.update(ece=float(np.abs(bin_hits-bin_peaks).sum()/slots),error_m=error_m/slots,seed=seed,user=str(user),scenario=condition['scenario'],condition=condition['id'],
                method=method,param=param,attack=attack,side=side,prior_hit=prior_hit/slots,
                legitimate=legit,opportunities=opportunities,complete=complete,reports=reports,
                utility=complete/opportunities if opportunities else float('nan'),
+               weighted_utility=weighted_complete/weighted_opportunities if weighted_opportunities else float('nan'),
+               weighted_opportunities=weighted_opportunities,weighted_complete=weighted_complete,
+               small_opportunities=area_opp['small'],small_complete=area_done['small'],
+               medium_opportunities=area_opp['medium'],medium_complete=area_done['medium'],
+               large_opportunities=area_opp['large'],large_complete=area_done['large'],
                raw_completion=complete/legit,coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
                reward=complete,latency_slots=1.0 if reports else float('nan'),
                gate_us_p50=float(np.median(gate_times)),gate_us_p95=float(np.quantile(gate_times,.95)),
                cap_violations=cap_violations,attacker_local_cap_violations=attacker_local_cap_violations,
+               attacker_effective_cap_violations=attacker_effective_cap_violations,
                attacker_absolute_cap_violations=attacker_absolute_cap_violations,
-               robust_model_count=len(robust.members) if robust else 0,
+               positive_cap=positive_cap,robust_model_count=len(robust.members) if robust else 0,
                alpha_true=alpha_true,alpha_model=alpha_model,move_model=move_model)
     return out,rows
 
