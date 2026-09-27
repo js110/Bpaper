@@ -60,3 +60,18 @@
 - 当前 `paper/main.pdf` 为 50 页；最终 LaTeX 日志无 Overfull、无 Float-too-large、无未解析引用、无 Undefined control sequence。
 - 新 R-BSP boundary 表的横向溢出已通过紧凑列标题修复；主结果表通过轻微压缩 `arraystretch` 消除了页面高度警告，未删减实验数据。
 - GitHub Actions 只在显式 `paper/.build-request` checkpoint 下编译论文；普通正文修改不再触发 TeX 安装或实验。
+
+
+## 2026-09-27 数据驱动鲁棒性与细粒度服务扩展
+
+- 将 hand-grid R-BSP 的主要审稿缺口改为可复现的数据驱动构造：23 名 GeoLife development 用户做 user-level bootstrap 生成 mobility/prior candidates，17 名 validation 用户用 bootstrap predictive-likelihood winner frequency 选择 95% support set，67 名 test 用户不进入集合构造。
+- 最终 development move MLE 为 0.0514，95% user-bootstrap interval [0.0318, 0.0734]；validation point estimate 为 0.0573。validation 支持覆盖 6 个 population-prior mobility candidates；uniform-prior candidates 的 winner frequency 为 0。
+- 增加 validation-best single-model BSP control。GeoLife replay 下：uniform BSP local-cap violation 24.8%，validation-best single BSP 2.9%，hand-grid R-BSP 20.0%，data-driven R-BSP 0.0%。严格 data-driven R-BSP 的代价是 opportunity retention 仅 5.4%，weighted retention 0.7%，1--8-cell retention 仍为 0。
+- 形式化 truthful positive-report disclosure floor phi(b,S)=max_{i in S} b_i / sum_{j in S} b_j，说明 scalar thinning q 无法降低成功报告的条件位置泄露。uniform prior 下 m-cell region 的 floor 为 1/m。
+- DF-BSP/RDF-BSP 最终改为 asymmetric branch contract：positive report 允许 ceiling tau，silence 始终保持原 BSP cap max(rho, prior peak)。tau=rho 时严格退化为 BSP。新增随机化 branch feasibility/maximality tests。
+- 最终 synthetic walk tau=0.5：small-region retention 56.4% [41.7%, 69.8%]，inverse-area weighted retention 43.1%，declared branch-cap violation 0%，original-rho exceedance 8.4%。
+- 最终 GeoLife data-driven RDF-BSP tau=0.5：small-region retention 14.3% [5.6%, 25.7%]，weighted retention 20.8%，declared branch-cap violation 0.16% [0.03%, 0.31%]，original-rho exceedance 14.3%。非鲁棒 DF-BSP 在相同 tau 下 branch violation 为 16.4%，说明 robust model set 仍有实质作用。
+- 论文已同步标题、摘要、方法、命题、实验、Results、Discussion、Conclusion；不存在旧版 10.2% / 22.0% / 30.6% 等残留数字。
+- Related Work 扩展至 21 篇实际引用，补 iTAM、task-location privacy、PMTA、PPUR、LRPP-STA、2024--2026 task-allocation privacy 工作；不把不同安全接口的方法伪装成同一数值 baseline。
+- 当前自动化测试为 28 项；最终内部审稿结论记录于 research/reviews/final_submission_audit_2026-09-27/review_zh.md。
+- 投稿工程新增 flat Editorial Manager source builder、Highlights Word builder 和 final package workflow；最终作者声明仍由 responsible authors 确认。
