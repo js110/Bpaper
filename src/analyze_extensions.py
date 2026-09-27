@@ -99,7 +99,12 @@ def main():
             base=0 if s['method']=='bsp' else (1 if s['method']=='dfbsp' else 2)
             return (float('inf') if s['positive_cap'] is None else float(s['positive_cap']),base)
         for s in sorted(subset,key=order):
-            policy={'bsp':'BSP','dfbsp':'DF-BSP','rdfbsp':'RDF-BSP'}[s['method']]
+            if s['method']=='bsp':
+                policy={'geolife_dd_nominal_bsp':'Uniform BSP',
+                        'geolife_data_single_bsp':'Val.-best BSP',
+                        'walk_new_bsp':'BSP'}.get(s['condition'],'BSP')
+            else:
+                policy={'dfbsp':'DF-BSP','rdfbsp':'RDF-BSP'}[s['method']]
             tau='--' if s['positive_cap'] is None else f"{float(s['positive_cap']):.3g}"
             lines.append(f"{scenario.capitalize()} & {policy} & {tau} & {pct(s['local_violation_rate'])}\% & "
                          f"{pct(s['effective_violation_rate'])}\% & {pct(s['weighted_utility'])}\% & {pct(s['small_retention'])}\% " + r'\\')
