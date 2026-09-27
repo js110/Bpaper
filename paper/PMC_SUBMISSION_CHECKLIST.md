@@ -9,7 +9,7 @@ Prepared on 2026-09-26 for branch `submission/pmc-2026-09-26`.
 - The journal field is set to `Pervasive and Mobile Computing`.
 - The author-facing "Draft status" paragraph was removed from the submission copy.
 - Keep all LaTeX submission files at one folder level when packaging for Editorial Manager; Elsevier's current LaTeX instructions state that subfolders are not supported by its processing workflow.
-- A separate `highlights.txt` file has been added. Elsevier's general highlights guidance specifies 3--5 bullets, no more than 85 characters each. Journal-specific requirements still need a final check in the live Guide for Authors.
+- `highlights.txt` is the editable source; the final packaging workflow generates `highlights.docx` for upload as the Elsevier Highlights file. It contains 5 acronym-free bullets, each <=85 characters.
 
 ## Items that must be author-confirmed before submission
 
@@ -40,6 +40,7 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 - `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
 - `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
 - `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
+- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compares extracted PDF text with the development build, and generates `highlights.docx`.
 
 ## Final author-owned blockers
 
