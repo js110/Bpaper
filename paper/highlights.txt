@@ -1,7 +1,7 @@
 Highlights
 
-• A two-branch filter accounts for both truthful reports and silence.
-• Development/validation data construct a finite robust Bayesian model set.
-• Truthful positive reports have an unavoidable region-dependent disclosure floor.
-• DF/RDF-BSP expose the privacy relaxation needed for fine-region service.
-• Fine-region retention rises from zero while original-cap exceedance is reported.
+• A two-branch filter limits location inference from reports and silence.
+• Development and validation data define a finite set of location models.
+• Truthful reports reveal an unavoidable amount of region-specific location detail.
+• A separate report ceiling restores fine-region service while silence stays strict.
+• Experiments expose the utility cost and limits of model-set robustness.
