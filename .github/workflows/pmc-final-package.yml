@@ -52,6 +52,12 @@ jobs:
           latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
           if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' main.log; then exit 1; fi
           pdfinfo main.pdf | grep Pages
+      - name: Compile supplementary technical material
+        run: |
+          cd paper
+          latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' supplement.log; then exit 1; fi
+          pdfinfo supplement.pdf | grep Pages
       - name: Verify flat package text equivalence
         run: |
           pdftotext -layout paper/main.pdf build/development.txt
@@ -69,7 +75,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add paper/main.pdf paper/main.bbl paper/highlights.docx paper/PMC_submission_source.zip paper/PMC_submission_manifest.json
+          git add paper/main.pdf paper/main.bbl paper/supplement.pdf paper/highlights.docx paper/PMC_submission_source.zip paper/PMC_submission_manifest.json
           if git diff --cached --quiet; then
             echo "No generated package changes"
             exit 0
