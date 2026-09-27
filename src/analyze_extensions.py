@@ -108,7 +108,9 @@ def main():
     if a.paper_assets:
         for name in ['data_driven_table.tex','dfbsp_table.tex']:
             shutil.copyfile(out/name,Path('paper')/name)
-    print(json.dumps({'ambiguity':{'moves':fit['move_candidates'],'interval':fit['move_interval'],'models':len(fit['models'])},
+    print(json.dumps({'ambiguity':{'candidate_moves':fit['move_candidates'],
+                                   'selected_models':len(fit['models']),
+                                   'selection_mass':fit.get('selection_mass_achieved')},
                       'conditions':len(summary)},indent=2))
 
 if __name__=='__main__':main()
