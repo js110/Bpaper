@@ -196,92 +196,13 @@ Synthetic intervals resample seed clusters and GeoLife intervals resample users;
 
 \section{Results}
 \label{sec:results}
-\subsection{Information beyond the specified uniform prior}
-A uniform prior gives expected MAP hit rate $1/64\approx1.56\%$ when ties are randomized uniformly. Under adaptive probes with no filtering, hit rates are \StaticNoneHit\% for static users, \WalkNoneHit\% for random walks, \CommuteNoneHit\% for periodic mobility, and \GeolifeNoneHit\% for replay. Outputs improve the specified uniform-prior estimator in these task processes. This demonstrates a possible mechanism under declared assumptions, not its observed prevalence on a deployed platform or the incremental leakage over every plausible prior.
+\subsection{Nominal filtering and recent comparators}
+Under the original uniform-prior attacker, BSP reduces declared-model posterior concentration while retaining nonzero service, but completed tasks are dominated by large regions. A development-only no-output modal-cell predictor already attains 25.75\% hit rate on test positions, showing that a uniform-prior attack is not a deployment upper bound. This motivates the stronger population-prior replay attacker used below.
 
-Table~\ref{tab:prior-diagnostic} shows why the prior qualification matters for replay. The most frequent development cell, index 34, has development mass \PopulationPriorPeak\%; always predicting it attains \PopulationPriorHit\% test accuracy without task outputs. This exceeds the uniform-prior attack's \GeolifeBspHit\% accuracy under BSP $\rho=0.1$. An observer with the development statistics could choose that no-output predictor instead, so the latter number is not an upper bound on its attainable accuracy. The diagnostic is not a rerun of a stronger adaptive attack and does not replace the original paired comparison. Nor does it refute the conditional sequential cap: this nonuniform initial peak already exceeds 0.1. A population-prior adaptive evaluation would require declaring a different belief model and interpreting the local cap accordingly.
+At opportunity retention 0.5 in the static scenario, exploratory envelope interpolation gives BSP MAP hit rate about 8.0\%, versus 16.7\% for PML-T and 18.6\% for PRIVIC-T; the paired differences are approximately \(-8.8\) and \(-10.6\) percentage points. Walk, commute, and replay comparisons do not show a consistent advantage over both recent comparators, and some matched-retention intervals cross zero. Because the policy envelopes are selected from evaluation results, these are exploratory comparisons rather than independently tuned superiority claims. Complete curves, calibration, ablations, and interpolation diagnostics are in the Supplementary Material.
 
-\begin{table}[tbp]
-\centering\small
-\caption{No-output replay diagnostics on 67 test users with 48 slots each. The modal cell is fitted only on 23 development users. Its pointwise interval resamples test users and conditions on that fixed predictor; the uniform row is an exact randomized-tie expectation. Neither row observes task outcomes.}
-\label{tab:prior-diagnostic}\input{prior_diagnostic_table}
-\end{table}
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{attacks.pdf}
-\caption{Fixed and defense-aware adaptive probes. Each main condition has 20 synthetic seed clusters or 67 replay users. The adaptive objective is expected information under the model, not realized MAP accuracy; it need not improve every empirical metric.}
-\label{fig:attacks}
-\end{figure}
-
-\subsection{Participation and inference}
-Figure~\ref{fig:tradeoff} shows all adaptive policy thresholds, including the exploratory KL extension. Table~\ref{tab:main} reports representative executed conditions. At $\rho=0.1$, BSP retains \StaticBspRetention\%, \WalkBspRetention\%, \CommuteBspRetention\%, and \GeolifeBspRetention\% of normal-task opportunities, with hit rates \StaticBspHit\%, \WalkBspHit\%, \CommuteBspHit\%, and \GeolifeBspHit\%, respectively. These are nonzero completions under the current region library and equal-reward convention; they do not establish preservation of fine-region sensing service.
-
-The task-size breakdown in Table~\ref{tab:task-area} shows that \LargeTaskShareMin--\LargeTaskShareMax\% of these completions come from regions covering at least 32 of 64 cells. None of the 1--8-cell opportunities is completed. This matches the support restriction: at posterior cap 0.1, any permitted positive report needs at least ten positive-probability cells. Raw completion over all normal tasks is only \RawCompletionMin--\RawCompletionMax\%, partly because many tasks are ineligible even before filtering. The approximately one-half opportunity retention therefore refers to a restricted denominator and favors large-region tasks. This descriptive breakdown concerns the executed $\rho=0.1$ conditions, not the matched-retention envelopes.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{tradeoff.pdf}
-\caption{Opportunity retention and MAP hit rate under adaptive probes. Symbols are executed settings; connecting lines are visual guides. Error bars are pointwise 95\% cluster-bootstrap intervals for hit rate, from 20 synthetic seed clusters or 67 users. The dotted line is the uniform-prior rate. Higher retention and lower hit rate are preferred.}
-\label{fig:tradeoff}
-\end{figure}
-\begin{table}[tbp]
-\centering\footnotesize\renewcommand{\arraystretch}{0.97}
-\caption{Representative executed adaptive conditions. Retention uses Eq.~\eqref{eq:utility}; raw completion divides summed completions by all normal tasks, including ineligible tasks. Both are fractions. Error is in grid cells, whose geographic sizes differ across synthetic and replay scenarios. Complete estimates and intervals are saved as CSV.}
-\label{tab:main}\input{main_table_revision}
-\end{table}
-
-At interpolated retention 0.5, BSP minus random participation has a hit-rate difference of $-13.62$ percentage points for static users, with pointwise 95\% interval $[-20.02,-7.51]$, and $-11.91$ points for replay, with interval $[-16.32,-6.07]$. Table~\ref{tab:matched} also shows lower risks than the KL adaptation in those two scenarios. In contrast, walk and periodic comparisons against both random participation and KL have intervals containing zero. They do not establish a consistent advantage.
-
-Several coarse-grid and periodic-limit comparisons have insufficient utility overlap for stable interpolation. In replay, periodic-limit settings do not bracket retention 0.5; we make no matched claim there. Lower risk at a substantially lower completion level is not evidence of a superior trade-off.
-
-\begin{table}[tbp]
-\centering\small
-\caption{Exploratory interpolation at retention 0.5. Hit rates and differences are in percentage points. Paired cluster-bootstrap intervals are pointwise. All displayed comparisons have 1,000 valid overlapping resamples.}
-\label{tab:matched}\input{matched_table}
-\end{table}
-
-\subsection{Comparison with 2024 mechanisms}
-Figure~\ref{fig:recent} and Table~\ref{tab:recent} use the strengthened policy envelopes, including the additional PRIVIC-T thinning settings. At retention 0.5, BSP's static hit-rate advantage is 8.77 percentage points over PML-T and 10.62 points over PRIVIC-T; the pointwise exploratory intervals exclude zero. For replay, the PML-T difference is $-7.30$ points, whereas the PRIVIC-T difference is $-4.28$ points with an interval containing zero. In the walk scenario, PRIVIC-T has the lower point estimate, while its difference interval also includes zero. Neither recent comparator establishes a clear periodic-mobility separation at this retention. These results narrow the evidence from comparisons against simple thinning: BSP has no consistent empirical advantage across the recent comparators and mobility models.
-
-At retention 0.7, the static envelope differences remain negative: $-10.85$ points against PML-T and $-15.43$ against PRIVIC-T. Walk and periodic intervals contain zero for both comparators. Replay has only 887 of 1,000 bootstrap samples with sufficient overlap, so no interval is reported there. These comparisons concern the declared task adapters and exploratory mixtures, not the complete original location-release systems. PML-T optimizes current completion under its per-step PML constraint, whereas BSP limits an absolute posterior peak. PRIVIC optimizes a different native utility; interface compatibility limits the interpretation of its task-adapted performance.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{recent_tradeoff.pdf}
-\caption{Recent-method comparison under defense-aware adaptive probes. Faint symbols show all executed settings, including PRIVIC-T thinning; solid lines are each method's lower convex envelope. Error bars at envelope vertices are pointwise 95\% cluster-bootstrap intervals for those executed settings. Envelope-mixture difference intervals are computed separately by paired resampling and envelope reselection, conditional on fixed training. These are exploratory comparisons on the simulated truthful-task interface. Figure~\ref{fig:commute-zoom} repeats the Commute panel on an expanded vertical scale.}
-\label{fig:recent}
-\end{figure}
-\begin{table}[tbp]
-\centering\small
-\caption{Recent-method envelope comparison at retention 0.5. Values are percentage points; negative differences favor BSP. All rows have 1,000 valid overlapping resamples. These pointwise intervals describe exploratory test-selected envelopes, conditional on the development data and fixed PRIVIC channels; they omit training variability and do not validate deployed policies.}
-\label{tab:recent}\input{recent_matched_table}
-\end{table}
-
-\subsection{Ablation and calibration}
-The main runs record no client branch-cap violations for BSP, consistent with its analytical rule and randomized tests. This does not validate the assumed model. The success-only ablation can violate the silence constraint analytically yet attain a smaller empirical hit rate in a finite sample. In replay its hit rate is \GeolifeAblationHit\% at retention \GeolifeAblationRetention\%, versus BSP's \GeolifeBspHit\% at \GeolifeBspRetention\%. The utility levels differ, and the favorable ablation result is retained rather than omitted.
-
-Figure~\ref{fig:calibration} distinguishes posterior concentration from empirical accuracy. BSP's nominal 95\% credible set covers the actual location on only \CommuteBspCoverage\% of periodic-mobility slots; the assumed random walk misses its deterministic structure. Replay coverage is \GeolifeBspCoverage\%. A small maximum in a misspecified posterior is not a distribution-free guarantee about actual location.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{calibration.pdf}
-\caption{Empirical credible-set coverage and mean posterior peak for representative policies. Random participation uses 0.5; BSP and the ablation use threshold 0.1. Scenario means are connected for readability. Nominal credible mass is not promised empirical coverage under mismatch.}
-\label{fig:calibration}
-\end{figure}
-
-\subsection{Sensitivity and an informed attacker}
-Figure~\ref{fig:sensitivity} presents selected sensitivity dimensions; all 72 conditions remain in the artifact. Reduced availability can allow more gate admissions, while movement can spread beliefs and permit later participation. Empirical hit rates need not vary monotonically. BSP retention is 0.109 for grid side 4 and 0.810 for grid side 16, but these are different resolutions and region libraries, not a free privacy improvement at fixed utility semantics. Ideal resets every slot give retention 0.746 and hit rate 0.020; every 12 slots give 0.652 and 0.041. Real identifier rotation may leave linkage clues, which this control assumes away.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{sensitivity.pdf}
-\caption{Selected exploratory sensitivity results. Ten seed clusters contain four users each; error bars are pointwise 95\% bootstrap intervals. Assumed availability is shared by client and attacker in this panel. Identity reset is ideal history erasure. Grid changes alter the target resolution.}
-\label{fig:sensitivity}
-\end{figure}
-
-Table~\ref{tab:informed} exposes a stronger limitation. With client availability underestimated as 0.3, the informed attacker's peak exceeds 0.1 on 30.0\% of evaluated slots and reaches 0.246, while the client's peak remains capped. When client move probability is overestimated as 0.8, the informed peak exceeds the cap on 41.4\% of slots and reaches 0.263. These findings do not contradict the conditional corollary: shared correct knowledge is absent. They show that a safe-looking client posterior is insufficient against a better-informed observer.
-
-\begin{table}[tbp]
-\centering\small
-\caption{BSP under better-informed attack. Actual $\alpha=0.648$ and $v=0.3$; one client parameter changes at a time. ``Above cap'' is the descriptive fraction of 1,920 evaluated slots exceeding 0.1, not an independent-sample interval. Client peaks remain within numerical tolerance of 0.1.}
-\label{tab:informed}\input{informed_table}
-\end{table}
+\subsection{Model mismatch}
+Nominal BSP is fragile when the attacker knows a better model. In the informed synthetic stress at \(\rho=0.1\), local-cap violations reach 12.6\% when the client underestimates availability, 2.6\% when it overestimates availability, 2.8\% when it underestimates movement, and 14.6\% when it overestimates movement. These failures motivate the robust extension rather than contradicting its model-conditional theorem.
 
 \subsection{Finite-model robustness stress}
 Table~\ref{tab:robust} evaluates the new finite-model extension at $\rho=0.1$. Under the nominal client model, both BSP and R-BSP have zero observed attacker local-cap violations. Under all four declared-model mismatches, nominal BSP violates the informed attacker's local cap: 12.6\% of slots when $\alpha$ is underestimated, 2.6\% when it is overestimated, 2.8\% when movement is underestimated, and 14.6\% when movement is overestimated. The corresponding cluster-bootstrap 95\% intervals are $[10.4,15.0]$, $[1.8,3.5]$, $[2.0,3.6]$, and $[13.4,15.8]$ percentage points.
