@@ -1,11 +1,11 @@
 # Pervasive and Mobile Computing submission preparation
 
-Prepared on 2026-09-26 for branch `submission/pmc-2026-09-26`.
+Prepared on 2026-09-28 for branch `submission/pmc-2026-09-26`.
 
 ## Template and file format
 
 - The manuscript uses Elsevier's official `elsarticle` class.
-- The review branch uses `\documentclass[review,12pt]{elsarticle}`.
+- The final review manuscript uses `\documentclass[review,11pt,times]{elsarticle}`.
 - The journal field is set to `Pervasive and Mobile Computing`.
 - The author-facing "Draft status" paragraph was removed from the submission copy.
 - Keep all LaTeX submission files at one folder level when packaging for Editorial Manager; Elsevier's current LaTeX instructions state that subfolders are not supported by its processing workflow.
@@ -32,7 +32,7 @@ Do not invent any of the following. The responsible authors must confirm them:
 - Test-selected recent-baseline envelopes remain exploratory and are labeled as such; no confirmatory claim is made from them.
 - Novelty claims remain bounded to the visible truthful report/silence channel, finite-model robustness, and explicit disclosure-floor service trade-off.
 
-Scientific issues above are now either implemented or explicitly bounded in the claims. The remaining submission blockers are author-owned declarations/approvals and a final compiled-file check.
+Scientific issues above are now either implemented or explicitly bounded in the claims. Final technical QA is complete: the 27-page development manuscript, 27-page flat-source rebuild, and 58-page supplementary technical material compile cleanly; the flat and development PDFs are text-equivalent. The remaining blockers are author-owned declarations/approvals.
 
 ## Current validation workflow
 
@@ -40,7 +40,7 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 - `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
 - `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
 - `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
-- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compares extracted PDF text with the development build, and generates `highlights.docx`.
+- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compiles the supplement, compares extracted PDF text with the development build, and generates `highlights.docx`. Final run 36369413681 passed all steps.
 
 ## Final author-owned blockers
 
