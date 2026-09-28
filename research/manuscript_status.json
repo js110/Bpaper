@@ -25,7 +25,6 @@
     "paper/supplement.pdf"
   ],
   "open_items": [
-    "author confirmation of names, order, affiliation and corresponding-author details",
     "all-author approval of the final manuscript",
     "competing-interests statement",
     "CRediT roles if requested by the submission system",
@@ -83,5 +82,22 @@
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
   "author_confirmation_file": "paper/AUTHOR_CONFIRMATION.md",
-  "cover_letter_draft": "paper/COVER_LETTER_DRAFT.md"
+  "cover_letter_draft": "paper/COVER_LETTER_DRAFT.md",
+  "metadata_confirmed_from_supplied_reference": {
+    "authors": [
+      "Lili He",
+      "Sheng Jiang",
+      "Linghui Lyu",
+      "Lei Zhang"
+    ],
+    "corresponding_author": "Lei Zhang",
+    "corresponding_email": "8213662@163.com",
+    "affiliation": "College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China",
+    "funding": [
+      "Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941",
+      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002",
+      "National Foreign Expert Key Support Project — D2O25O185",
+      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
+    ]
+  }
 }
