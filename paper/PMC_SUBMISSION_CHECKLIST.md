@@ -15,15 +15,13 @@ Prepared on 2026-09-28 for branch `submission/pmc-2026-09-26`.
 
 Do not invent any of the following. The responsible authors must confirm them:
 
-1. final author order and spelling;
-2. affiliation and corresponding-author details;
-3. all grant names and numbers;
-4. declaration of competing interests;
-5. CRediT author contributions, if requested;
-6. funders' roles;
-7. data-use / ethics determination for the secondary GeoLife data;
-8. any AI-related disclosure or figure-caption wording required by the journal, to be handled by the authors before submission;
-9. whether the repository will remain a working GitHub repository or be archived in an immutable release.
+1. all-author approval of the final manuscript;
+2. declaration of competing interests;
+3. CRediT author contributions, if requested;
+4. funders' roles;
+5. data-use / ethics determination for the secondary GeoLife data;
+6. any AI-related disclosure or figure-caption wording required by the journal, to be handled by the authors before submission;
+7. whether the repository will remain a working GitHub repository or be archived in an immutable release.
 
 ## Scientific items that remain more important than formatting
 
@@ -45,5 +43,5 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 ## Final author-owned blockers
 
 - Complete any AI-related journal disclosure/caption requirements before submission; this is intentionally left for the authors to handle.
-- Confirm competing interests, CRediT contributions, funder roles, author names/order/affiliation/corresponding details, and the GeoLife ethics/data-use determination.
+- Author names/order/affiliation/corresponding details and the four grant names/numbers have been copied from the supplied reference paper. Confirm competing interests, CRediT contributions, funder roles, and the GeoLife ethics/data-use determination.
 - Decide whether to cite a versioned GitHub release or an immutable archive/DOI rather than only the moving repository URL.
