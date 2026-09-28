@@ -20,11 +20,11 @@ Current scientific contents include nominal BSP, finite-model R-BSP, development
 
 Final validated inventory:
 - main manuscript: 27 pages, 1 figure, 2 tables;
-- supplementary technical material: 58 pages;
+- supplementary technical material: 11 pages;
 - 21 cited references;
 - 28 automated tests;
 - final flat Editorial Manager source independently compiles to the same 27-page text as the development source;
-- final packaging workflow: GitHub Actions run 36369413681, successful.
+- final packaging workflow: GitHub Actions run 36370913452, successful.
 
 Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
 
