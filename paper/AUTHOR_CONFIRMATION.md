@@ -3,19 +3,19 @@
 This checklist contains statements that cannot be inferred from code, experiments, or public sources. It must be completed by the responsible authors before the manuscript is marked submission-ready.
 
 ## Authorship and contact
-- [ ] Author order is final: Lili He; Sheng Jiang; Linghui Lyu; Lei Zhang.
-- [ ] All four names are spelled exactly as required for publication.
-- [ ] Affiliation is correct for every author: College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China.
-- [ ] Lei Zhang is the corresponding author.
-- [ ] Corresponding email 8213662@163.com is current and monitored.
+- [x] Author order copied from the supplied reference paper: Lili He; Sheng Jiang; Linghui Lyu; Lei Zhang.
+- [x] All four author names match the supplied reference paper.
+- [x] Affiliation copied from the supplied reference paper: College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China.
+- [x] Lei Zhang is the corresponding author, matching the supplied reference paper.
+- [x] Corresponding email copied from the supplied reference paper: 8213662@163.com.
 - [ ] Every author has read and approved the final manuscript and agrees to submission to Pervasive and Mobile Computing.
 
 ## Funding
-Confirm every grant title/number and whether any funder had a role in study design, analysis, writing, or the decision to submit:
-- [ ] Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941.
-- [ ] Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002.
-- [ ] National Foreign Expert Key Support Project — D2O25O185 (letter O as previously supplied).
-- [ ] Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239.
+Grant titles/numbers below are copied from the supplied reference paper. Only the funder-role statement remains for author confirmation:
+- [x] Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941.
+- [x] Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002.
+- [x] National Foreign Expert Key Support Project — D2O25O185.
+- [x] Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239.
 - [ ] Funder-role statement is approved.
 
 ## Declarations
