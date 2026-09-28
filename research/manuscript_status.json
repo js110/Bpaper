@@ -6,7 +6,7 @@
   "submission_ready": false,
   "human_verified": false,
   "main_manuscript_pages": 27,
-  "supplementary_pages": 58,
+  "supplementary_pages": 11,
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
@@ -16,7 +16,7 @@
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36369413681,
+  "final_package_workflow_run": 36370913452,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -78,7 +78,7 @@
     "no_final_undefined_control_sequence": true,
     "main_pages": 27,
     "flat_main_pages": 27,
-    "supplement_pages": 58
+    "supplement_pages": 11
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
