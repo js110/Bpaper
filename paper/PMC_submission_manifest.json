@@ -2,54 +2,24 @@
   "journal": "Pervasive and Mobile Computing",
   "source": "paper/main.tex",
   "flat_files": [
-    "attacks.pdf",
-    "bsp_workflow.png",
-    "calibration.pdf",
     "data_driven_table.tex",
     "dfbsp_table.tex",
     "elsarticle-num.bst",
     "elsarticle.cls",
-    "informed_table.tex",
     "main.tex",
-    "main_table_revision.tex",
-    "matched_table.tex",
     "numbers.tex",
-    "prior_diagnostic_table.tex",
-    "recent_commute_zoom.pdf",
-    "recent_matched_table.tex",
-    "recent_tradeoff.pdf",
     "references.bib",
     "review_numbers.tex",
-    "robust_boundary_table.tex",
-    "robust_table.tex",
-    "sensitivity.pdf",
-    "system_architecture.png",
-    "task_area_table.tex",
-    "tradeoff.pdf"
+    "system_architecture.png"
   ],
   "graphics": [
-    "system_architecture.png",
-    "bsp_workflow.png",
-    "attacks.pdf",
-    "tradeoff.pdf",
-    "recent_tradeoff.pdf",
-    "calibration.pdf",
-    "sensitivity.pdf",
-    "recent_commute_zoom.pdf"
+    "system_architecture.png"
   ],
   "inputs": [
     "numbers.tex",
     "review_numbers.tex",
-    "prior_diagnostic_table.tex",
-    "main_table_revision.tex",
-    "matched_table.tex",
-    "recent_matched_table.tex",
-    "informed_table.tex",
-    "robust_table.tex",
-    "robust_boundary_table.tex",
     "data_driven_table.tex",
-    "dfbsp_table.tex",
-    "task_area_table.tex"
+    "dfbsp_table.tex"
   ],
   "no_subfolders": true
 }

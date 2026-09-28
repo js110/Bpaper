@@ -5,13 +5,6 @@
 \expandafter\ifx\csname href\endcsname\relax
   \def\href#1#2{#2} \def\path#1{#1}\fi
 
-\bibitem{fedsense2025}
-Z.~You, X.~Dong, X.~Liu, S.~Gao, Y.~Wang, Y.~Shen, {Location Privacy
-  Preservation Crowdsensing With Federated Reinforcement Learning}, IEEE
-  Transactions on Dependable and Secure Computing 22~(3) (2025) 1877--1894.
-\newblock \href {https://doi.org/10.1109/tdsc.2024.3398994}
-  {\path{doi:10.1109/tdsc.2024.3398994}}.
-
 \bibitem{tmarkov}
 G.~Qiu, Y.~Shen, K.~Cheng, L.~Liu, S.~Zeng, {Mobility-Aware Privacy-Preserving
   Mobile Crowdsourcing}, Sensors 21~(7) (2021) 2474.
@@ -38,14 +31,6 @@ L.~Grosse, S.~Saeidian, T.~J. Oechtering, {Extremal Mechanisms for Pointwise
   (2024) 7952--7967.
 \newblock \href {https://doi.org/10.1109/tifs.2024.3449556}
   {\path{doi:10.1109/tifs.2024.3449556}}.
-
-\bibitem{adaptive2023}
-J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
-  \href{https://proceedings.mlr.press/v202/whitehouse23a.html}{{Fully-Adaptive
-  Composition in Differential Privacy}}, in: Proceedings of the 40th
-  International Conference on Machine Learning, Vol. 202 of Proceedings of
-  Machine Learning Research, 2023, pp. 36990--37007.
-\newline\urlprefix\url{https://proceedings.mlr.press/v202/whitehouse23a.html}
 
 \bibitem{itam2021}
 B.~Zhao, S.~Tang, X.~Liu, X.~Zhang, W.-N. Chen, {iTAM: Bilateral
@@ -110,6 +95,13 @@ Z.~Chen, M.~Xu, C.~Su, {Online quality-based privacy-preserving task allocation
 \newblock \href {https://doi.org/10.1016/j.comnet.2024.110613}
   {\path{doi:10.1016/j.comnet.2024.110613}}.
 
+\bibitem{fedsense2025}
+Z.~You, X.~Dong, X.~Liu, S.~Gao, Y.~Wang, Y.~Shen, {Location Privacy
+  Preservation Crowdsensing With Federated Reinforcement Learning}, IEEE
+  Transactions on Dependable and Secure Computing 22~(3) (2025) 1877--1894.
+\newblock \href {https://doi.org/10.1109/tdsc.2024.3398994}
+  {\path{doi:10.1109/tdsc.2024.3398994}}.
+
 \bibitem{blockchainpmc2026}
 N.~Andola, V.~K. Yadav, {A blockchain-assisted privacy-preserving framework for
   Mobile CrowdSensing}, Pervasive and Mobile Computing 115 (2026) 102125.
@@ -130,15 +122,23 @@ R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
   (2021) 1557--1603.
 \newblock \href {https://doi.org/10.3982/te4390} {\path{doi:10.3982/te4390}}.
 
-\bibitem{geolife2009}
-Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel
-  Sequences from GPS Trajectories}, in: Proceedings of the 18th International
-  Conference on World Wide Web, 2009, pp. 791--800.
+\bibitem{adaptive2023}
+J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
+  \href{https://proceedings.mlr.press/v202/whitehouse23a.html}{{Fully-Adaptive
+  Composition in Differential Privacy}}, in: Proceedings of the 40th
+  International Conference on Machine Learning, Vol. 202 of Proceedings of
+  Machine Learning Research, 2023, pp. 36990--37007.
+\newline\urlprefix\url{https://proceedings.mlr.press/v202/whitehouse23a.html}
 
 \bibitem{geolife2008}
 Y.~Zheng, Q.~Li, Y.~Chen, X.~Xie, W.-Y. Ma, {Understanding Mobility Based on
   GPS Data}, in: Proceedings of the 10th International Conference on Ubiquitous
   Computing, 2008, pp. 312--321.
+
+\bibitem{geolife2009}
+Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel
+  Sequences from GPS Trajectories}, in: Proceedings of the 18th International
+  Conference on World Wide Web, 2009, pp. 791--800.
 
 \bibitem{geolife2010}
 Y.~Zheng, X.~Xie, W.-Y. Ma,
