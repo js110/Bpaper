@@ -32,7 +32,7 @@ Do not invent any of the following. The responsible authors must confirm them:
 - Test-selected recent-baseline envelopes remain exploratory and are labeled as such; no confirmatory claim is made from them.
 - Novelty claims remain bounded to the visible truthful report/silence channel, finite-model robustness, and explicit disclosure-floor service trade-off.
 
-Scientific issues above are now either implemented or explicitly bounded in the claims. Final technical QA is complete: the 27-page development manuscript, 27-page flat-source rebuild, and 58-page supplementary technical material compile cleanly; the flat and development PDFs are text-equivalent. The remaining blockers are author-owned declarations/approvals.
+Scientific issues above are now either implemented or explicitly bounded in the claims. Final technical QA is complete: the 27-page development manuscript, 27-page flat-source rebuild, and 11-page supplementary technical material compile cleanly; the flat and development PDFs are text-equivalent. The remaining blockers are author-owned declarations/approvals.
 
 ## Current validation workflow
 
@@ -40,7 +40,7 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 - `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
 - `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
 - `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
-- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compiles the supplement, compares extracted PDF text with the development build, and generates `highlights.docx`. Final run 36369413681 passed all steps.
+- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compiles the supplement, compares extracted PDF text with the development build, and generates `highlights.docx`. Final run 36370913452 passed all steps.
 
 ## Final author-owned blockers
 
