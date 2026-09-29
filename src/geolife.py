@@ -34,12 +34,11 @@ def _read_npz(path):
 def effective_geolife_splits(paths=None):
     """Return effective splits with no repeated model-input path across splits.
 
-    Split precedence is development, then validation, then test. A complete
-    discrete state path is assigned to the earliest split in which it occurs;
-    later-split windows with the same model input are excluded from effective
-    analysis, even when their GPS coordinates differ. Within the owning split,
-    distinct users/windows are retained so the procedure is group-wise rather
-    than silently collapsing observations inside a split.
+    Split precedence is development, then validation, then test. Each complete
+    discrete state path is represented by its first encountered window only;
+    all later windows with the same model input are excluded, including repeats
+    inside the same split. This keeps model-input paths unique both within and
+    across effective splits, even when their GPS coordinates differ.
 
     Exact coordinate duplicates are also recorded separately for provenance.
     """
