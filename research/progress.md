@@ -75,3 +75,12 @@
 - Related Work 扩展至 21 篇实际引用，补 iTAM、task-location privacy、PMTA、PPUR、LRPP-STA、2024--2026 task-allocation privacy 工作；不把不同安全接口的方法伪装成同一数值 baseline。
 - 当前自动化测试为 28 项；最终内部审稿结论记录于 research/reviews/final_submission_audit_2026-09-27/review_zh.md。
 - 投稿工程新增 flat Editorial Manager source builder、Highlights Word builder 和 final package workflow；最终作者声明仍由 responsible authors 确认。
+
+
+## 2026-09-29 六章结构重构
+
+- 按隐私/安全方法论文的叙事方式将主稿收束为 6 个编号章节：Introduction；Related Work；Proposed Branch-Safe Participation Framework；Privacy Guarantees and Robustness Analysis；Experimental Evaluation；Conclusion。
+- 原 System/Observation/Threat、Branch-Safe Participation、Experimental Design、Results、Discussion、Reproducibility 不再各占一级章节；系统/信道与机制定义并入第 III 章，威胁模型、命题证明、模型失配与保证边界集中到第 IV 章，实验设计、结果、讨论和复现集中到第 V 章。
+- Abstract 不计编号章节；Data and Code Availability 与 Funding 保持无编号。
+- 结构改写前的 27 页版本保存为 paper/pre_six_section_main_2026-09-29.tex。
+- 最终六章版 GitHub Actions run 36507948107 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
