@@ -138,7 +138,7 @@ def main():
         fit_model='coarsened reflecting-walk change likelihood P(change|state)=v*degree(state)/4; destination direction and jump distance ignored',
         development=dict(users=int(len(dp)),windows=int(len(dp)),unique_model_input_paths=int(len(state_path_groups(dp))),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
         validation=dict(users=int(len(vp)),windows=int(len(vp)),unique_model_input_paths=int(len(state_path_groups(vp))),estimate=val_hat,ci=vci.tolist()),
-        pooled=dict(users=int(len(dp)+len(vp)),windows=int(len(dp)+len(vp)),unique_model_input_paths=int(len(state_path_groups(np.concatenate([dp,vp]))),estimate=pooled_hat),
+        pooled=dict(users=int(len(dp)+len(vp)),windows=int(len(dp)+len(vp)),unique_model_input_paths=int(len(state_path_groups(np.concatenate([dp,vp])))),estimate=pooled_hat),
         confidence=a.confidence,bootstrap_replicates=a.bootstrap,bootstrap_seed=a.seed,
         selection_mass_target=a.selection_mass,selection_mass_achieved=cum,
         move_candidates=sorted(moves),candidate_models=candidate_records,
