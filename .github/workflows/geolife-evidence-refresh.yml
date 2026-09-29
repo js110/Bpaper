@@ -93,7 +93,7 @@ jobs:
           status['stage']='geolife_model_input_group_refreshed_package_pending'
           status['technical_ready']=False
           status['submission_ready']=False
-          status['tests_passed']=30
+          status['tests_passed']=31
           status.setdefault('data_status',{})['refresh_required']=False
           status.setdefault('robust_extension',{})['status']='post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits'
           status['final_qa']={
@@ -121,15 +121,15 @@ jobs:
             exit 0
           fi
           git commit -m "Refresh model-input-isolated GeoLife evidence"
-          for attempt in 1 2 3; do
-            if ! git diff --quiet || ! git diff --cached --quiet; then
-              echo "Refusing rebase with dirty worktree"
-              git status --short
-              exit 1
-            fi
-            git pull --rebase origin main
-            if git push origin HEAD:main; then exit 0; fi
-            echo "Push raced with another commit; retrying ($attempt/3)"
-            sleep 2
-          done
-          exit 1
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Refusing publish with dirty worktree"
+            git status --short
+            exit 1
+          fi
+          git fetch origin main
+          remote_sha="$(git rev-parse origin/main)"
+          if [ "$remote_sha" != "$GITHUB_SHA" ]; then
+            echo "main advanced from source SHA $GITHUB_SHA to $remote_sha; refusing to publish stale generated evidence"
+            exit 1
+          fi
+          git push origin HEAD:main
