@@ -92,7 +92,7 @@ def main():
     (out/'data_driven_table.tex').write_text('\n'.join(lines)+'\n')
 
     lines=[r'\begin{tabular}{llrrrrr}',r'\toprule',
-           r'Scenario & Policy & $\tau$ & $\rho$ exceed. & Branch viol. & Weighted ret. & Small ret. \\',r'\midrule']
+           r'Scenario & Policy & $\tau$ & BSP local viol. & Branch viol. & Weighted ret. & Small ret. \\',r'\midrule']
     for scenario in ['walk','geolife']:
         subset=[s for s in summary if s['scenario']==scenario and s['method'] in ('bsp','dfbsp','rdfbsp')]
         def order(s):
