@@ -25,6 +25,6 @@ Do not upload the raw GeoLife archive or third-party article full texts.
 
 ## Technical status
 
-The validated main and flat-source builds are both 28 pages and text-equivalent. The supplement is 5 pages. All 30 automated tests pass, and the final LaTeX quality gate has no unresolved references, undefined control sequences, oversized floats, or overfull boxes.
+The validated main and flat-source builds are both 28 pages and text-equivalent. The supplement is 5 pages. All 31 automated tests pass, and the final LaTeX quality gate has no unresolved references, undefined control sequences, oversized floats, or overfull boxes.
 
 The repository remains technical_ready=true and submission_ready=false until the responsible authors complete the remaining declarations and approvals listed in AUTHOR_CONFIRMATION.md.
