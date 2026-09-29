@@ -29,15 +29,25 @@ def clusters(rows):
     out=[]
     for key in keys:
         a=[r for r in rows if cluster_key(r)==key]
-        d={k:float(np.nanmean([r[k] for r in a])) if any(np.isfinite(r[k]) for r in a) else float('nan') for k in METRICS}
+        d={}
+        for k in METRICS:
+            vals=np.asarray([r[k] for r in a],dtype=float)
+            finite=np.isfinite(vals)
+            d[k]=float(np.mean(vals[finite])) if finite.any() else float('nan')
+            d['__n_'+k]=int(finite.sum())
         d['complete']=sum(r['complete'] for r in a);d['opportunities']=sum(r['opportunities'] for r in a)
+        d['__n_rows']=len(a)
         out.append(d)
     return keys,out
 
 def aggregate(cs,indices=None):
     if indices is None:indices=np.arange(len(cs))
     a=[cs[i] for i in indices]
-    out={k:float(np.nanmean([r[k] for r in a])) if any(np.isfinite(r[k]) for r in a) else float('nan') for k in METRICS}
+    out={}
+    for k in METRICS:
+        weighted=[(r[k],r.get('__n_'+k,r.get('__n_rows',1))) for r in a if np.isfinite(r[k])]
+        denom=sum(n for _,n in weighted)
+        out[k]=sum(v*n for v,n in weighted)/denom if denom else float('nan')
     denom=sum(r['opportunities'] for r in a)
     out['utility']=sum(r['complete'] for r in a)/denom if denom else float('nan')
     return out
@@ -133,7 +143,7 @@ def main():
     (out/'matched_utility.json').write_text(json.dumps([{k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in r.items()} for r in matched(rows,cache,summaries)],indent=2,allow_nan=False))
     figures(summaries,out);write_tables(summaries,out)
     (out/'provenance.json').write_text(json.dumps(dict(input_sha256=hashlib.sha256((run/'rows.csv').read_bytes()).hexdigest(),bootstrap=1000,
-        unit='synthetic: seed with four users; GeoLife: complete 48-slot state-path group',estimator='cluster mean for risks; ratio of summed completions to opportunities for utility',
+        unit='point estimates: trajectory/window rows; uncertainty clusters: synthetic seed or GeoLife complete 48-slot state-path group',estimator='window-weighted mean for risk metrics; ratio of summed completions to opportunities for utility; cluster bootstrap for intervals',
         figure_files=['tradeoff','calibration','attacks'],interval='percentile cluster bootstrap 95%, pointwise; no multiplicity correction'),indent=2))
     print('Analyzed',len(rows),'rows and',len(summaries),'conditions')
 if __name__=='__main__':main()

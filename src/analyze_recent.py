@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from .analyze import load,clusters,METRICS
+from .analyze import load,clusters,METRICS,aggregate
 
 def lower_hull(points):
     """Lower convex envelope of measured (utility, risk) policy points."""
@@ -34,18 +34,17 @@ def main():
     summaries=[];boots={};keysets={};nboot=1000
     for cid in dict.fromkeys(r['condition'] for r in rows):
         group=[r for r in rows if r['condition']==cid];keys,cs=clusters(group);keysets[cid]=keys
-        cols=METRICS+['complete','opportunities'];matrix=np.array([[r[k] for k in cols] for r in cs])
         rng=np.random.default_rng(92026);indices=rng.integers(len(cs),size=(nboot,len(cs)))
-        with np.errstate(invalid='ignore'):
-            draws=np.nanmean(matrix[indices],axis=1);central=np.nanmean(matrix,axis=0)
-        u=np.divide(draws[:,-2],draws[:,-1],out=np.full(nboot,np.nan),where=draws[:,-1]>0)
-        central_u=central[-2]/central[-1] if central[-1]>0 else float('nan')
+        samples=[aggregate(cs,idx) for idx in indices]
+        central=aggregate(cs)
         s={k:group[0][k] for k in ['condition','scenario','method','param','attack','side']}
         s.update(n_clusters=len(cs),n_trajectories=len(group))
-        for j,k in enumerate(METRICS):
-            s[k]=central[j];s[k+'_low'],s[k+'_high']=np.nanquantile(draws[:,j],[.025,.975])
-        s['utility']=central_u;s['utility_low'],s['utility_high']=np.nanquantile(u,[.025,.975])
-        summaries.append(s);boots[cid]=(u,draws[:,METRICS.index('hit')])
+        for k in METRICS:
+            vals=np.asarray([x[k] for x in samples],dtype=float)
+            s[k]=central[k];s[k+'_low'],s[k+'_high']=np.nanquantile(vals,[.025,.975])
+        u=np.asarray([x['utility'] for x in samples],dtype=float)
+        s['utility']=central['utility'];s['utility_low'],s['utility_high']=np.nanquantile(u,[.025,.975])
+        summaries.append(s);boots[cid]=(u,np.asarray([x['hit'] for x in samples],dtype=float))
     with (out/'summary.csv').open('w') as f:
         w=csv.DictWriter(f,fieldnames=summaries[0]);w.writeheader();w.writerows(summaries)
     matched=[];raw_matched=[]
@@ -93,7 +92,7 @@ def main():
         lines.append(f"{r['scenario'].capitalize()} & "+('PML-T' if r['comparator']=='pml' else 'PRIVIC-T')+f" & {v('bsp_hit')} & {v('comparator_hit')} & {interval} "+r'\\')
     lines += [r'\bottomrule',r'\end{tabular}'];(out/'recent_matched_table.tex').write_text('\n'.join(lines))
     provenance=dict(inputs={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},bootstrap=nboot,seed=92026,
-                    unit='synthetic seed or GeoLife complete 48-slot state-path group; duplicate model-input paths are one resampling cluster',ci='paired percentile, pointwise, no multiplicity correction',
+                    unit='point estimates average trajectory/window rows; uncertainty resamples synthetic seeds or GeoLife complete 48-slot state-path groups',ci='paired cluster-percentile, pointwise, no multiplicity correction',
                     interpolation='lower convex envelope, reselected within each bootstrap; inside observed range only; require 95% overlap; exploratory oracle mixtures, no deployed-policy claim',conditions=len(summaries),trajectory_rows=len(rows))
     (out/'provenance.json').write_text(json.dumps(provenance,indent=2))
     if a.paper_assets:

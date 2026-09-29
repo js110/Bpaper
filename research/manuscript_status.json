@@ -1,8 +1,8 @@
 {
-  "stage": "pmc_submission_package_technical_ready",
+  "stage": "statistical_estimand_refresh_pending",
   "target_journal": "Pervasive and Mobile Computing",
   "date": "2026-09-29",
-  "technical_ready": true,
+  "technical_ready": false,
   "submission_ready": false,
   "human_verified": false,
   "main_manuscript_pages": 28,
@@ -10,13 +10,13 @@
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
-  "tests_passed": 30,
+  "tests_passed": 31,
   "completed_conditions": 417,
   "trajectory_executions": 28973,
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36550604036,
+  "final_package_workflow_run": null,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -65,17 +65,13 @@
     "data_driven_models": 2,
     "data_driven_extension_conditions": 17,
     "data_driven_extension_trajectories": 1204,
-    "status": "post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits",
+    "status": "post-hoc exploratory; evidence refresh pending for unified window-weighted point estimand",
     "data_driven_selection_mass": 0.9695,
     "data_driven_selection_mass_target": 0.95
   },
   "final_qa": {
-    "status": "passed_on_current_sources",
-    "development_main_compiles": true,
-    "flat_submission_main_compiles": true,
-    "supplement_compiles": true,
-    "flat_and_development_pdf_text_equivalent": true,
-    "zip_manifest_membership_verified": true
+    "status": "evidence_refresh_pending",
+    "note": "GeoLife point estimates are being standardized to effective-window weighting with complete state-path-group cluster bootstrap; final manuscript/package validation must be rerun after refreshed evidence."
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
@@ -122,6 +118,6 @@
     },
     "effective_rule": "complete 48-slot 8x8 state-path groups assigned to earliest development -> validation -> test split",
     "effective_counts_source": "results/geolife_decontamination.json",
-    "refresh_required": false
+    "refresh_required": true
   }
 }

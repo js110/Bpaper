@@ -23,7 +23,7 @@ Final validated inventory:
 - main manuscript: 28 pages, 1 figure, 2 tables;
 - supplementary technical material: 5 pages;
 - 21 cited references;
-- 30 automated tests;
+- 31 automated tests;
 - final flat Editorial Manager source independently compiles to the same 28-page text as the development source;
 - final packaging workflow: GitHub Actions run 36550604036, successful.
 

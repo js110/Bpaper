@@ -49,15 +49,19 @@ def main():
     test_groups={}
     for i,path in enumerate(test):
         test_groups.setdefault(state_path_fingerprint(path),[]).append(i)
-    per_group=np.array([per_user[idx].mean() for idx in test_groups.values()])
+    group_members=list(test_groups.values())
     rng = np.random.default_rng(170926)
-    draws = per_group[rng.integers(len(per_group), size=(1000, len(per_group)))].mean(axis=1)
+    draws=[]
+    for selected in rng.integers(len(group_members), size=(1000, len(group_members))):
+        idx=np.concatenate([np.asarray(group_members[j],dtype=int) for j in selected])
+        draws.append(float(per_user[idx].mean()))
+    draws=np.asarray(draws,dtype=float)
     prior = dict(fit_split='development', evaluate_split='test', map_cells=modes.tolist(),
                  development_peak=float(counts.max() / counts.sum()),
-                 hit=float(per_group.mean()), low=float(np.quantile(draws, .025)),
-                 high=float(np.quantile(draws, .975)), users=len(test), state_path_groups=len(per_group), slots=test.shape[1],
+                 hit=float(per_user.mean()), low=float(np.quantile(draws, .025)),
+                 high=float(np.quantile(draws, .975)), users=len(test), state_path_groups=len(group_members), slots=test.shape[1],
                  uniform_hit=1 / 64, bootstrap_seed=170926, bootstrap_replicates=1000,
-                 interval='percentile state-path-group bootstrap conditional on fixed development predictor; pointwise',
+                 interval='window-weighted point estimate with percentile state-path-group cluster bootstrap conditional on fixed development predictor; pointwise',
                  interpretation='No task outputs; fixed cell predictor; not a rerun of an adaptive attack')
     mobility = {s: dict(users=len(a['paths']), static_windows=int(np.all(np.diff(a['paths']) == 0, axis=1).sum()),
                        unique_cells_median=float(np.median([len(set(row)) for row in a['paths']])),
@@ -185,7 +189,7 @@ def main():
     provenance = dict(inputs={str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
                       region_bins=bins, region_condition='adaptive BSP rho=0.1; not envelope mixtures',
                       raw_completion='sum completions / sum all normal tasks; not mean per-user ratio',
-                      prior_interpretation=prior['interpretation'], test_use='descriptive evaluation only; predictor fitted on development',
+                      prior_interpretation=prior['interpretation'], prior_estimator='effective test-window/position-weighted point estimate; complete state-path-group cluster bootstrap', test_use='descriptive evaluation only; predictor fitted on development',
                       zoom='same saved points and envelope as main recent-method figure; expanded vertical scale',
                       numpy=np.__version__, matplotlib=matplotlib.__version__)
     (out / 'provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')

@@ -3,5 +3,5 @@ Highlights
 • A two-branch filter limits location inference from reports and silence.
 • Development and validation data define a finite set of location models.
 • Truthful reports reveal an unavoidable amount of region-specific location detail.
-• A separate report ceiling restores fine-region service while silence stays strict.
+• A separate report ceiling improves fine-region service while silence stays strict.
 • Experiments expose the utility cost and limits of model-set robustness.

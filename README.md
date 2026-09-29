@@ -8,7 +8,7 @@ This repository contains the current manuscript and reproducibility record for t
 - Main manuscript: 28 pages, 6 numbered sections, 1 main figure, 2 main tables.
 - Supplementary material: 5 pages.
 - References: 21 cited entries.
-- Automated tests: 30.
+- Automated tests: 31.
 - Recorded experiment executions: 28,973 trajectories and 1,390,704 audited slot events.
 - Technical package status: **technically validated**; author-owned declarations and approvals remain outstanding before submission.
 - Journal submission status: not submitted; author-owned declarations and approvals remain outstanding.
