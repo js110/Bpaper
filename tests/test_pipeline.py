@@ -28,6 +28,7 @@ class PipelineTests(unittest.TestCase):
     def test_data_split_disjoint(self):
         splits,_=effective_geolife_splits()
         names=['development','validation','test']
+        self.assertEqual([len(splits[s]['users']) for s in names],[22,17,60])
         users=[set(map(int,splits[s]['users'])) for s in names]
         coords=[{coordinate_fingerprint(x) for x in splits[s]['coords']} for s in names]
         for i in range(3):

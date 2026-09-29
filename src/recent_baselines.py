@@ -8,6 +8,7 @@ import argparse, hashlib, json, time
 from pathlib import Path
 import numpy as np
 from .model import normalize
+from .geolife import load_effective_geolife
 
 def distances(side):
     xy=np.array(np.unravel_index(np.arange(side*side),(side,side))).T
@@ -97,7 +98,7 @@ def prepare(config_path='configs/recent_baselines.json',output=None):
     out.mkdir(parents=True,exist_ok=True);side=cfg['side'];manifest=[]
     for scenario in ['static','walk','commute','geolife']:
         if scenario=='geolife':
-            data=np.load('data/geolife_development.npz');samples=data['paths'].ravel();ids=data['users'].tolist()
+            data=load_effective_geolife('data/geolife_development.npz');samples=data['paths'].ravel();ids=data['users'].tolist()
         else:
             samples=np.concatenate([path_for(s,u,side,48,scenario,0 if scenario=='static' else .3)
                                     for s in range(4000,4020) for u in range(4)])

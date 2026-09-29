@@ -1,0 +1,90 @@
+name: geolife-evidence-refresh
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/geolife.py'
+      - 'src/experiment.py'
+      - 'src/recent_baselines.py'
+      - 'src/refresh_geolife_configs.py'
+      - 'data/geolife_*.npz'
+      - '.github/workflows/geolife-evidence-refresh.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: geolife-evidence-refresh-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements-lock.txt
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Audit effective GeoLife data and refresh fitted config values
+        run: |
+          mkdir -p results
+          python -m src.geolife > results/geolife_decontamination.json
+          python -m src.refresh_geolife_configs
+      - name: Refresh primary and comparator evidence
+        run: |
+          rm -rf results/final results/kl_baseline results/combined
+          rm -rf results/privic_training results/recent_baselines results/recent_privic_thinning results/recent_comparison
+          python -m src.experiment --config configs/final.json
+          python -m src.experiment --config configs/kl_baseline.json
+          python - <<'PY'
+          import csv,hashlib,json
+          from pathlib import Path
+          out=Path('results/combined');out.mkdir(parents=True,exist_ok=True)
+          rows=[];inputs={}
+          for name in ['final','kl_baseline']:
+              path=Path('results')/name/'rows.csv'
+              rows.extend(csv.DictReader(path.open()))
+              inputs[name]=hashlib.sha256(path.read_bytes()).hexdigest()
+          with (out/'rows.csv').open('w') as f:
+              w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
+          (out/'inputs.json').write_text(json.dumps(inputs,indent=2))
+          PY
+          python -m src.analyze --run results/combined
+          python -m src.recent_baselines --config configs/recent_baselines.json --output results/privic_training
+          python -m src.experiment --config configs/recent_baselines.json
+          python -m src.experiment --config configs/recent_privic_thinning.json
+          python -m src.analyze_recent --recent-run results/recent_baselines --reference-run results/final --output results/recent_comparison --extra-run results/recent_privic_thinning --paper-assets
+          cp results/combined/analysis/tradeoff.pdf paper/tradeoff.pdf
+          cp results/combined/analysis/calibration.pdf paper/calibration.pdf
+      - name: Commit refreshed evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add configs/final.json configs/kl_baseline.json configs/recent_baselines.json configs/recent_privic_thinning.json
+          git add results/geolife_decontamination.json results/final results/kl_baseline results/combined
+          git add results/privic_training results/recent_baselines results/recent_privic_thinning results/recent_comparison
+          git add paper/tradeoff.pdf paper/calibration.pdf paper/recent_tradeoff.pdf
+          if git diff --cached --quiet; then
+            echo "No GeoLife evidence changes"
+            exit 0
+          fi
+          git commit -m "Refresh decontaminated GeoLife evidence [skip ci]"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Push raced with another commit; retrying ($attempt/3)"
+            sleep 2
+          done
+          exit 1
