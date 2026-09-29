@@ -1,8 +1,8 @@
 {
-  "stage": "geolife_model_input_group_refreshed_package_pending",
+  "stage": "pmc_submission_package_technical_ready",
   "target_journal": "Pervasive and Mobile Computing",
   "date": "2026-09-29",
-  "technical_ready": false,
+  "technical_ready": true,
   "submission_ready": false,
   "human_verified": false,
   "main_manuscript_pages": 28,
@@ -16,7 +16,7 @@
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": null,
+  "final_package_workflow_run": 36540394206,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -25,7 +25,6 @@
     "paper/supplement.pdf"
   ],
   "open_items": [
-    "regenerate final manuscript/supplement/package from refreshed evidence",
     "all-author approval of the final manuscript",
     "competing-interests statement",
     "CRediT roles if requested by the submission system",
@@ -69,8 +68,12 @@
     "status": "post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits"
   },
   "final_qa": {
-    "status": "package_pending_after_refreshed_evidence",
-    "note": "GeoLife evidence was refreshed on model-input-group-isolated splits; final manuscript/package validation must run on the refreshed generated assets."
+    "status": "passed_on_current_sources",
+    "development_main_compiles": true,
+    "flat_submission_main_compiles": true,
+    "supplement_compiles": true,
+    "flat_and_development_pdf_text_equivalent": true,
+    "zip_manifest_membership_verified": true
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
