@@ -19,12 +19,13 @@ The workflow independently compiles both the development source and the flat sou
 Current scientific contents include nominal BSP, finite-model R-BSP, development/validation-derived R-BSP, asymmetric DF-BSP/RDF-BSP, informed-attacker and ambiguity-boundary stress tests, region-size-aware utility, and recent PML-T/PRIVIC-T task-channel comparisons. The ambiguity and disclosure-floor extensions are explicitly post-hoc and are not presented as independent confirmatory evidence.
 
 Final validated inventory:
-- main manuscript: 27 pages, 1 figure, 2 tables;
+- six numbered sections: Introduction; Related Work; Proposed Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion;
+- main manuscript: 28 pages, 1 figure, 2 tables;
 - supplementary technical material: 11 pages;
 - 21 cited references;
 - 28 automated tests;
-- final flat Editorial Manager source independently compiles to the same 27-page text as the development source;
-- final packaging workflow: GitHub Actions run 36370913452, successful.
+- final flat Editorial Manager source independently compiles to the same 28-page text as the development source;
+- final packaging workflow: GitHub Actions run 36507948107, successful.
 
 Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
 
