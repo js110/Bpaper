@@ -1,16 +1,16 @@
 # Bpaper：Sequential Mobile Crowdsensing Location Privacy
 
-This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. A GeoLife model-input-group isolation refresh is currently required before the submission package should be treated as technically final.
+This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. The current submission package has been rebuilt on the model-input-group-isolated GeoLife evidence and has passed the technical validation workflow.
 
 ## Current manuscript
 
 - Target journal: *Pervasive and Mobile Computing*.
 - Main manuscript: 28 pages, 6 numbered sections, 1 main figure, 2 main tables.
-- Supplementary material: 11 pages.
+- Supplementary material: 5 pages.
 - References: 21 cited entries.
 - Automated tests: 30.
 - Recorded experiment executions: 28,973 trajectories and 1,390,704 audited slot events.
-- Technical package status: **not final** pending the model-input-group-isolated GeoLife evidence refresh and a new package build.
+- Technical package status: **technically validated**; author-owned declarations and approvals remain outstanding before submission.
 - Journal submission status: not submitted; author-owned declarations and approvals remain outstanding.
 
 Primary files:

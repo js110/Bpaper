@@ -6,7 +6,7 @@
   "submission_ready": false,
   "human_verified": false,
   "main_manuscript_pages": 28,
-  "supplementary_pages": 11,
+  "supplementary_pages": 5,
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
@@ -92,10 +92,10 @@
     "corresponding_email": "8213662@163.com",
     "affiliation": "College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China",
     "funding": [
-      "Heilongjiang Provincial University Teacher Scientific Research Business Fee \u2014 2018-KYYWF0941",
-      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project \u2014 PL2024F002",
-      "National Foreign Expert Key Support Project \u2014 D2O25O185",
-      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan \u2014 YQJH2024239"
+      "Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941",
+      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002",
+      "National Foreign Expert Key Support Project — D2O25O185",
+      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
     ]
   },
   "manuscript_structure": [
