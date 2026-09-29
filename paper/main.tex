@@ -44,15 +44,15 @@ HECTA is a close recent precedent because it addresses inference from task-selec
 
 Bayesian privacy measures prior-to-posterior change~\cite{bayesian}. Adaptive differential privacy concerns a different formal guarantee~\cite{adaptive2023}, while PRIVIC protects randomized location releases under geo-indistinguishability~\cite{privic2024}. BSP instead limits posterior concentration under an explicit mobility and availability model. Because a truthful successful report has zero support outside its task region, BSP is not a differentially private coordinate-release mechanism. PML provides a useful optimization-based channel comparator~\cite{pml2024}. Complete comparator derivations and implementation checks are moved to the Supplementary Material to keep the submission within the journal's conservative page budget.
 
-\section{System, observation, and threat models}
-\label{sec:model}
+\section{Proposed Branch-Safe Participation Framework}
+\label{sec:model}\label{sec:method}
 Figure~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
 \begin{figure}[tbp]
 \centering\includegraphics[width=\linewidth]{figures/system_architecture.png}
 \caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. The platform selects normal tasks and adaptive probes from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual schematic of the stated system model, not an experimental result.}
 \label{fig:architecture}
 \end{figure}
-\subsection{Tasks and private state}
+\subsection{System and Observation Model}
 Let $X_t\in\mathcal X$ denote a user's location cell at the sampling instant in slot $t$, where $|\mathcal X|=N$. A task specifies a public region $S_t\subseteq\mathcal X$, a sampling slot, and a deadline. A valid report requires an observation collected inside $S_t$ at that sampling instant and submitted by the deadline. Receiving or accepting a task is not sufficient. All timely reports are released at the slot boundary, giving a fixed one-slot reporting delay in the simulator.
 
 Let $D_t,W_t,L_t$ denote successful delivery, willingness to participate, and timely completion. In the baseline model these are independent Bernoulli variables, independent of location conditional on public history, with product probability $\alpha_t$. The filter additionally samples $G_t\sim\mathrm{Bernoulli}(q_t)$ independently. The only published outcome is
@@ -64,12 +64,7 @@ Here $Y_t=0$ means that no valid report appeared by the deadline. There are no s
 
 This design represents opportunistic sampling at a specified instant, not continuous movement toward a newly assigned destination. Users do not change their paths in response to tasks. The simulated normal task stream is public and exogenous. Probe tasks share the same completion requirements and cannot be recognized by the client as probes.
 
-\subsection{Attacker knowledge and capabilities}
-The platform links outcomes to an account, knows the task regions, deadlines, filtering algorithm, and its parameters, and retains the account's public history. At designated probe slots, it may choose a task region from a finite public library using that history. It does not observe the simulator's actual location, future trajectory, delivery draws, willingness, or deadline-success draws. A prior-only estimator receives no outcomes. A fixed attack uses independently selected regions. An adaptive attack selects the next probe to maximize one-step mutual information under its current belief and the known gate. This greedy attack is a reproducible adversary, not a proof of optimal sequential inference or task selection.
-
-The principal analytical model assumes that client and attacker use the same correct mobility and observation models. The main replay experiment relaxes correctness: both use the same approximate model. Separate stress tests give the attacker the correct generating probabilities while leaving the client's probabilities misspecified. Auxiliary information about an individual's home, routines, network attachment, or other accounts is outside the main model.
-
-\subsection{Bayesian observation channel}
+\subsection{Privacy Objective and Bayesian Observation Channel}
 Let $b_t(i)=\Pr(X_t=i\mid H_{t-1},S_t)$ be the predicted belief before the current output, and abbreviate $b=b_t$, $h_i=\alpha_t\ind\{i\in S_t\}$, and $m=\sum_i b_i h_i$. A gate is a deterministic function of public history and the current task; its random coin is private. For $q>0$ and $m>0$, the report posterior is
 \begin{equation}
  b_i^+=\frac{b_i h_i}{m}.
@@ -84,39 +79,21 @@ Zero-probability branches impose no condition. For example, when $q=0$, silence 
 
 We evaluate posterior concentration through $\|b\|_\infty$, as well as attack hit rate, error, log loss, and calibration. A count of plausible cells alone is not a probability bound. A posterior with many nonzero entries can still place nearly all probability on one cell.
 
-\section{Branch-safe participation}
-\label{sec:method}
-\subsection{Feasible gate and interpretation}
+\subsection{Branch-Safe Participation}
 Fix a desired posterior threshold $\rho$ and set $c=\max\{\rho,\|b\|_\infty\}$. The local objective is to maximize $q\in[0,1]$ subject to $\|b^y\|_\infty\le c$ for each positive-probability output $y$. Using $c$ prevents a request from being infeasible solely because the predicted belief already exceeds $\rho$. In that situation the rule prevents additional peak concentration relative to the current belief; it cannot restore a previously violated absolute threshold.
 
-\begin{proposition}[Maximal scalar gate]
-If $m>0$ and $\max_i b_i h_i/m>c$, the only feasible gate is $q^*=0$. Otherwise, define $d_i=cm-b_i h_i$. Then the maximal feasible scalar gate is
+If the report posterior in Eq.~\eqref{eq:positive} already exceeds $c$, no positive scalar gate can repair that branch and BSP sets $q=0$. Otherwise, writing $d_i=cm-b_i h_i$, the gate is
 \begin{equation}
  q^*=\min\left\{1,\min_{i:d_i>0}\frac{c-b_i}{d_i}\right\},
  \label{eq:gate}
 \end{equation}
-where an empty inner minimum is $+\infty$. When $m=0$, this expression gives $q^*=1$ and the output is uninformative.
-\end{proposition}
-\begin{proof}
-For every $q>0$ with $m>0$, Eq.~\eqref{eq:positive} is independent of $q$. If its peak exceeds $c$, no positive gate can satisfy the report constraint. Otherwise only the silence constraints remain. For a nonzero silence probability, Eq.~\eqref{eq:silence} is at most $c$ exactly when
-\begin{equation}
- q(cm-b_i h_i)\le c-b_i\quad\text{for all }i.
-\end{equation}
-The right side is nonnegative. A nonpositive coefficient on the left imposes no upper bound on $q$; a positive coefficient gives the bound in Eq.~\eqref{eq:gate}. Their intersection with $[0,1]$ yields the stated maximum. If silence has zero probability, the corresponding constraint is vacuous and the same expression admits $q=1$. Finally, $q=0$ is always feasible because the resulting posterior equals $b$.
-\end{proof}
+where an empty inner minimum is $+\infty$; when $m=0$, the output is uninformative and $q^*=1$. Section~\ref{sec:analysis} proves that this is the maximal feasible scalar gate.
 
 The calculation takes $O(N)$ time for one task and stores an $N$-cell belief. Maximizing $q$ maximizes the current expected completion probability $qm$ within this scalar family. It does not optimize the utility of future tasks. In particular, consuming available posterior concentration now can restrict later participation. A nonmyopic scheduler or a mechanism whose gate depends on private location would be a different optimization problem.
 
-\begin{corollary}[Conditional sequential cap]
-Suppose the initial belief has peak at most $\rho$, the declared models are correct, all public signals are represented by Eq.~\eqref{eq:output}, and every location transition is doubly stochastic. Then BSP maintains posterior peak at most $\rho$ after every output, including under adaptive task selection measurable from public history.
-\end{corollary}
-\begin{proof}
-A doubly stochastic transition makes each predicted probability a convex combination of previous probabilities, so prediction cannot increase the maximum. The proposition bounds both possible observation branches by $\rho$. Induction over slots proves the result. Given the public history, the attacker's adaptive task choice supplies no additional private-state information under the stated measurability assumption.
-\end{proof}
 
-The corollary applies to the declared posterior, and to an attacker's posterior only when the knowledge and model assumptions coincide. It is not robust to arbitrary prior knowledge, location-dependent availability, undisclosed outputs, or an attacker with a more accurate mobility model. A reflecting symmetric grid walk satisfies the transition condition. A general learned human-mobility transition need not do so.
 
-\subsection{Finite-model robust extension}
+\subsection{Robust BSP under Model Uncertainty}
 \label{sec:robust}
 The informed-attacker failure motivates an explicit, limited form of model uncertainty rather than a distribution-free claim. Let $\mathcal M=\{M_1,\ldots,M_K\}$ be a finite public ambiguity set fixed independently of the current private state. Model $M_k$ maintains its own public-history belief $b_t^{(k)}$, transition rule, and availability probability $\alpha_t^{(k)}$. For the current task, let $q_k^*$ be the maximal BSP gate from Proposition~1 using that model and $c_k=\max\{\rho,\|b_t^{(k)}\|_\infty\}$. Robust BSP (R-BSP) uses
 \begin{equation}
@@ -125,16 +102,11 @@ The informed-attacker failure motivates an explicit, limited form of model uncer
 \end{equation}
 All member beliefs are updated from the same public task and report/silence history; none receives the true location or the gate coin.
 
-\begin{proposition}[Maximal common finite-model gate]
-Within the class of one scalar gate shared by all models, Eq.~\eqref{eq:robust-gate} is the largest $q\in[0,1]$ for which both positive-probability output branches satisfy $\|b_{t,k}^{y}(q)\|_\infty\le c_k$ for every $M_k\in\mathcal M$.
-\end{proposition}
-\begin{proof}
-For each fixed model, Proposition~1 gives the complete feasible scalar set as the interval $[0,q_k^*]$: if the positive branch is infeasible then $q_k^*=0$; otherwise the silence inequalities supply only upper bounds on $q$. Requiring all models simultaneously intersects these intervals, giving $[0,\min_k q_k^*]$. Its right endpoint is therefore the maximal common gate.
-\end{proof}
+
 
 R-BSP costs $O(KN)$ per task when each member uses the $N$-cell implementation above. If an attacker's exact Bayesian model is one member of $\mathcal M$, the corresponding branch constraint applies to that attacker as well; under the transition conditions of the corollary, its model-specific sequential cap is preserved. This statement does not cover an attacker outside the ambiguity set, unmodeled observations, or arbitrary auxiliary information. Enlarging $\mathcal M$ can only weakly decrease the feasible gate, so model-set construction is itself a privacy--utility design choice.
 
-\subsection{Disclosure-floor-aware participation}
+\subsection{Disclosure-Floor-Aware BSP}
 \label{sec:dfbsp}
 Strict BSP can make fine-region service impossible for a reason that scalar thinning cannot repair. For predicted belief $b$ and region $S$, define the truthful positive-report disclosure floor
 \begin{equation}
@@ -152,6 +124,61 @@ To express rather than conceal this service limitation, let $\tau\in[\rho,1]$ be
 \end{equation}
 It rejects the task when $\phi(b,S)>c^+_{\mathrm{DF}}$. Otherwise, the positive branch is admissible by construction and the gate is maximized subject to the original BSP silence constraint $\|b^-\|_\infty\le c^-_{\mathrm{DF}}$. Thus the structural relaxation applies only to truthful reports; silence is not allowed to inherit the larger report ceiling.
 
+
+
+Robust DF-BSP (RDF-BSP) applies this asymmetric construction independently to every $M_k\in\mathcal M$ and takes the minimum member-wise gate. It is therefore the maximal common scalar gate satisfying all member-specific report ceilings and strict silence caps. Importantly, $\tau>\rho$ relaxes only the truthful-report branch; it is not evidence that the original $\rho$ cap is preserved after reports. We consequently report both exceedance of the original local $\rho$ cap and violation of the declared branch-specific caps.
+
+Operationally, the client predicts its public-history belief, computes the applicable BSP/R-BSP/DF/RDF gate from public task metadata, samples the private gate coin locally, and releases only a valid report at the common deadline. The observer updates from the same report or silence. The next section establishes the formal guarantees and their scope.
+
+\section{Privacy Guarantees and Robustness Analysis}
+\label{sec:analysis}
+The mechanisms above are Bayesian output-channel controls rather than cryptographic protocols. Their security argument is therefore stated in terms of posterior branches, sequential model assumptions, model mismatch, and the unavoidable information in a truthful positive report.
+
+\subsection{Threat Model and Attack Surface}
+The platform links outcomes to an account, knows the task regions, deadlines, filtering algorithm, and its parameters, and retains the account's public history. At designated probe slots, it may choose a task region from a finite public library using that history. It does not observe the simulator's actual location, future trajectory, delivery draws, willingness, or deadline-success draws. A prior-only estimator receives no outcomes. A fixed attack uses independently selected regions. An adaptive attack selects the next probe to maximize one-step mutual information under its current belief and the known gate. This greedy attack is a reproducible adversary, not a proof of optimal sequential inference or task selection.
+
+The principal analytical model assumes that client and attacker use the same correct mobility and observation models. The main replay experiment relaxes correctness: both use the same approximate model. Separate stress tests give the attacker the correct generating probabilities while leaving the client's probabilities misspecified. Auxiliary information about an individual's home, routines, network attachment, or other accounts is outside the main model.
+
+\subsection{Branch-Wise Privacy and Maximality}
+\begin{proposition}[Maximal scalar gate]
+If $m>0$ and $\max_i b_i h_i/m>c$, the only feasible gate is $q^*=0$. Otherwise, define $d_i=cm-b_i h_i$. Then the maximal feasible scalar gate is
+\begin{equation}
+ q^*=\min\left\{1,\min_{i:d_i>0}\frac{c-b_i}{d_i}\right\},
+ \label{eq:gate}
+\end{equation}
+where an empty inner minimum is $+\infty$. When $m=0$, this expression gives $q^*=1$ and the output is uninformative.
+\end{proposition}
+\begin{proof}
+For every $q>0$ with $m>0$, Eq.~\eqref{eq:positive} is independent of $q$. If its peak exceeds $c$, no positive gate can satisfy the report constraint. Otherwise only the silence constraints remain. For a nonzero silence probability, Eq.~\eqref{eq:silence} is at most $c$ exactly when
+\begin{equation}
+ q(cm-b_i h_i)\le c-b_i\quad\text{for all }i.
+\end{equation}
+The right side is nonnegative. A nonpositive coefficient on the left imposes no upper bound on $q$; a positive coefficient gives the bound in Eq.~\eqref{eq:gate}. Their intersection with $[0,1]$ yields the stated maximum. If silence has zero probability, the corresponding constraint is vacuous and the same expression admits $q=1$. Finally, $q=0$ is always feasible because the resulting posterior equals $b$.
+\end{proof}
+
+\subsection{Sequential Privacy Guarantee}
+\begin{corollary}[Conditional sequential cap]
+Suppose the initial belief has peak at most $\rho$, the declared models are correct, all public signals are represented by Eq.~\eqref{eq:output}, and every location transition is doubly stochastic. Then BSP maintains posterior peak at most $\rho$ after every output, including under adaptive task selection measurable from public history.
+\end{corollary}
+\begin{proof}
+A doubly stochastic transition makes each predicted probability a convex combination of previous probabilities, so prediction cannot increase the maximum. The proposition bounds both possible observation branches by $\rho$. Induction over slots proves the result. Given the public history, the attacker's adaptive task choice supplies no additional private-state information under the stated measurability assumption.
+\end{proof}
+
+A reflecting symmetric grid walk satisfies the transition condition. A general learned human-mobility transition need not. The corollary applies to the attacker's posterior only when its knowledge and model coincide with the declared model.
+
+\subsection{Model-Mismatch Attack and Finite-Model Robustness}
+Let $M_C$ denote the client's declared inference model and $M_A$ the attacker's model. When $M_A\neq M_C$, a gate that is feasible for the client posterior need not satisfy the attacker's cap. Incorrect availability, mobility, or prior assumptions can therefore produce an apparently compliant client trace while the attacker's posterior becomes more concentrated. Section~\ref{sec:experiments} evaluates this failure with an informed attacker.
+
+\begin{proposition}[Maximal common finite-model gate]
+Within the class of one scalar gate shared by all models, Eq.~\eqref{eq:robust-gate} is the largest $q\in[0,1]$ for which both positive-probability output branches satisfy $\|b_{t,k}^{y}(q)\|_\infty\le c_k$ for every $M_k\in\mathcal M$.
+\end{proposition}
+\begin{proof}
+For each fixed model, Proposition~1 gives the complete feasible scalar set as the interval $[0,q_k^*]$: if the positive branch is infeasible then $q_k^*=0$; otherwise the silence inequalities supply only upper bounds on $q$. Requiring all models simultaneously intersects these intervals, giving $[0,\min_k q_k^*]$. Its right endpoint is therefore the maximal common gate.
+\end{proof}
+
+For each member model, Proposition~1 gives a downward-closed feasible interval. R-BSP intersects those intervals. If the attacker's exact Bayesian model is in $\mathcal M$, its branch constraint is therefore enforced; no such conclusion follows outside the set.
+
+\subsection{Disclosure-Floor Guarantee}
 \begin{proposition}[Maximal asymmetric disclosure-floor-aware scalar gate]
 For fixed $(b,S,\alpha,\rho,\tau)$ with $\tau\ge\rho$, DF-BSP returns the largest scalar $q\in[0,1]$ satisfying $\|b^+\|_\infty\le c^+_{\mathrm{DF}}$ for every positive-probability report branch and $\|b^-\|_\infty\le c^-_{\mathrm{DF}}$ for every positive-probability silence branch. When $\tau=\rho$, DF-BSP reduces exactly to BSP.
 \end{proposition}
@@ -159,32 +186,34 @@ For fixed $(b,S,\alpha,\rho,\tau)$ with $\tau\ge\rho$, DF-BSP returns the larges
 For every $q>0$, the report posterior is independent of $q$ and has peak $\phi(b,S)$. If this exceeds $c^+_{\mathrm{DF}}$, no positive gate is feasible. Otherwise the positive constraint is satisfied for every $q>0$. The remaining silence inequalities are exactly those of Proposition~1 with $c=c^-_{\mathrm{DF}}$, so their intersection with $[0,1]$ is $[0,q^*]$ and the closed-form BSP bound remains maximal. Setting $\tau=\rho$ makes $c^+_{\mathrm{DF}}=c^-_{\mathrm{DF}}=\max\{\rho,\|b\|_\infty\}$ and recovers BSP.
 \end{proof}
 
-Robust DF-BSP (RDF-BSP) applies this asymmetric construction independently to every $M_k\in\mathcal M$ and takes the minimum member-wise gate. It is therefore the maximal common scalar gate satisfying all member-specific report ceilings and strict silence caps. Importantly, $\tau>\rho$ relaxes only the truthful-report branch; it is not evidence that the original $\rho$ cap is preserved after reports. We consequently report both exceedance of the original local $\rho$ cap and violation of the declared branch-specific caps.
+The result also yields an impossibility within the truthful scalar-gate family: reducing a positive participation probability cannot lower the conditional posterior peak once a successful region report is observed. Fine-region service therefore requires an explicit report-side relaxation such as $\tau$ or a different output semantics.
 
-\subsection{Operational implications}
+\subsection{Scope of the Guarantees}
 Equation~\eqref{eq:positive} explains why both report and silence must be checked. Scalar thinning changes the probability that a successful report occurs but not its conditional posterior. A single-cell truthful report therefore identifies that cell whenever it is released. Conversely, a report-safe task can still make silence informative because the absence of a report reweights inside and outside states differently. BSP thins only through the public-history scalar gate and sends no separate refusal message.
 
 The same support property rules out interpreting BSP as pure location differential privacy: for a proper region and any nonzero truthful reporting probability, the report event has positive probability inside the region and zero probability outside. Other privacy definitions or mechanisms with altered report semantics remain possible, but they are outside the present guarantee.
 
 At each slot the client predicts its declared-model belief, computes the applicable BSP/R-BSP/DF/RDF gate from public history and task metadata, samples the gate coin locally, and releases only a valid report at the common deadline. The attacker updates from the same public report or silence. A worked silence example and the original workflow schematic are provided in the Supplementary Material.
 
-\section{Experimental design}
-\label{sec:experiments}
-\subsection{Data, tasks, and attacks}
+The guarantee is finite-model and channel-specific. If the attacker's exact model belongs to $\mathcal M$, its constraint is enforced by R-BSP; an attacker outside $\mathcal M$ is not covered. Likewise, $\tau>\rho$ explicitly relaxes only the truthful-report branch. It is not evidence that the original $\rho$ cap remains valid after a successful report.
+
+\section{Experimental Evaluation}
+\label{sec:experiments}\label{sec:results}
+\subsection{Experimental Setup}
 We use three synthetic mobility settings (static, reflecting random walk, and periodic commute) and Microsoft GeoLife trajectories~\cite{geolife2008,geolife2009,geolife2010}. GeoLife preprocessing selects the first eligible 48-minute in-bounds window per user without interpolating missing minutes. Users are split deterministically into 23 development, 17 validation, and 67 test users. Test users are not used to construct the later data-driven ambiguity set. The \(8\times8\) Beijing grid is intentionally coarse; the study evaluates cell inference, not address recovery.
 
 The public task library contains 152 rectangular regions. Normal tasks are exogenous; on probe slots, the attacker chooses the region with maximal one-step mutual information from the same public library. Delivery, willingness, and timely completion probabilities are \(0.9,0.8,0.9\), giving \(\alpha=0.648\). Normal tasks and exogenous random draws are shared across policies, while adaptive probes are recomputed because the public history changes.
 
 The main study includes no filtering, random and periodic participation, coarse-region controls, BSP, a success-only ablation, and a per-output KL adaptation of Bayesian privacy~\cite{bayesian}. We also implement task-channel specializations of PML~\cite{pml2024} and PRIVIC~\cite{privic2024}. PML-T optimizes a truthful binary channel under the published pointwise leakage constraints. PRIVIC-T fits its noisy-location channel with the published BA/IBU/GIBU updates and then maps it to truthful task completion; this adapter does not inherit the original geo-indistinguishability guarantee. Full equations, parameter grids, author-code checks, and optimization validation are in the Supplementary Material.
 
-\subsection{Data-driven model uncertainty}
+\subsection{Data-Driven Ambiguity Set}
 The original hand-grid R-BSP stress deliberately spans broad \((v,\alpha)\) misspecification, but it is post-hoc. For replay we construct \(\mathcal M\) using only development and validation users. A coarsened reflecting-walk likelihood uses
 \[
  \Pr(\text{cell change}\mid i)=v\,d_i/4,
 \]
 where \(d_i\) is the number of in-grid neighbors. Two thousand user-level bootstrap resamples of the development users generate candidate \(v\) values at the 2.5, 25, 50, 75, and 97.5 percentiles plus the development MLE. Each candidate is paired with a uniform or development-only smoothed population prior. On 2,000 validation-user bootstrap resamples, we retain the smallest set covering at least 95\% of predictive-likelihood winners. This yields six population-prior models. The development MLE is 0.0514 (95\% bootstrap interval 0.0318--0.0734); the validation point estimate is 0.0573. GeoLife has no real task-delivery, willingness, or deadline logs, so \(\alpha=0.648\) remains an explicit protocol parameter rather than a learned quantity.
 
-\subsection{Metrics and inference units}
+\subsection{Baselines, Metrics, and Inference Units}
 Privacy metrics are MAP cell hit rate, posterior peak, log loss, calibration, and cap-violation rates. Standard service utility is completed legitimate tasks divided by externally completable legitimate opportunities. To expose fine-region service, we additionally report retention for 1--8, 9--31, and 32--64 cell regions and inverse-area-weighted retention
 \begin{equation}
  U_{\mathrm{area}}=
@@ -194,22 +223,20 @@ Privacy metrics are MAP cell hit rate, posterior peak, log loss, calibration, an
 \end{equation}
 Synthetic intervals resample seed clusters and GeoLife intervals resample users; slots are not treated as independent replicates. Unless stated otherwise, percentile bootstrap intervals use 1,000 resamples. The data-driven and disclosure-floor experiments are post-hoc extensions because the replay test users had been inspected in earlier analyses; they are not presented as independent confirmatory validation.
 
-\section{Results}
-\label{sec:results}
-\subsection{Nominal filtering and recent comparators}
+\subsection{Effectiveness of BSP and Recent Comparators}
 Under the original uniform-prior attacker, BSP reduces declared-model posterior concentration while retaining nonzero service, but completed tasks are dominated by large regions. A development-only no-output modal-cell predictor already attains 25.75\% hit rate on test positions, showing that a uniform-prior attack is not a deployment upper bound. This motivates the stronger population-prior replay attacker used below.
 
 At opportunity retention 0.5 in the static scenario, exploratory envelope interpolation gives BSP MAP hit rate about 8.0\%, versus 16.7\% for PML-T and 18.6\% for PRIVIC-T; the paired differences are approximately \(-8.8\) and \(-10.6\) percentage points. Walk, commute, and replay comparisons do not show a consistent advantage over both recent comparators, and some matched-retention intervals cross zero. Because the policy envelopes are selected from evaluation results, these are exploratory comparisons rather than independently tuned superiority claims. Complete curves, calibration, ablations, and interpolation diagnostics are in the Supplementary Material.
 
-\subsection{Model mismatch}
+\subsection{Model-Mismatch Attack}
 Nominal BSP is fragile when the attacker knows a better model. In the informed synthetic stress at \(\rho=0.1\), local-cap violations reach 12.6\% when the client underestimates availability, 2.6\% when it overestimates availability, 2.8\% when it underestimates movement, and 14.6\% when it overestimates movement. These failures motivate the robust extension rather than contradicting its model-conditional theorem.
 
-\subsection{Finite-model robustness}
+\subsection{Finite-Model Robustness}
 A nine-model hand-grid R-BSP stress contains the informed attacker's exact \((v,\alpha)=(0.3,0.648)\) model. At \(\rho=0.1\), it removes the observed local-cap violations from the four misspecified nominal BSP conditions, as expected from the finite-set construction, but retains only about 39.7\% of externally completable normal-task opportunities. This run validates implementation and exposes robustness cost; it is not evidence of generalization beyond the set.
 
 A separate boundary run fixes the same model set and changes the correct attacker model. An outside-set availability value \(\alpha=0.98\) restores a 6.93\% local-cap violation rate (95\% cluster-bootstrap interval 5.70--8.31\%). Interior unlisted values produce zero or rare violations in this finite sample. The guarantee is therefore explicitly finite-model. Full stress tables and boundary conditions are in the Supplementary Material.
 
-\subsection{Data-driven robustness and fine-region service}
+\subsection{Data-Driven Robustness and Fine-Region Service}
 \label{sec:data-driven-results}
 Table~\ref{tab:data-driven} first shows that a defensible model-set construction does not remove the strict-cap utility problem. Against the stronger replay attacker described above, nominal BSP exceeds the attacker's own local cap on 24.8\% of slots and the earlier hand-grid R-BSP on 20.0\%. The six-model data-driven R-BSP records no local-cap violation in this run and lowers MAP hit rate to 25.7\%, but retains only 5.4\% of opportunities and 0.7\% inverse-area-weighted utility. All three strict policies retain zero 1--8-cell opportunities. The data-driven set is therefore better grounded than the hand grid but substantially more conservative; model-set provenance and service viability are separate problems.
 
@@ -229,10 +256,10 @@ The stronger replay experiment shows the same trade-off under prior and mobility
 \label{tab:dfbsp}{\scriptsize\setlength{\tabcolsep}{3pt}\input{dfbsp_table}}
 \end{table}
 
-\subsection{Measured computation}
+\subsection{Efficiency}
 For the 64-cell main grid, the mean of per-trajectory median BSP gate times is approximately 16.8--16.9 microseconds; the mean of per-trajectory 95th percentiles is 18.2--18.7 microseconds. The iterative KL implementation has median summaries of about 326--341 microseconds. These are local Python gate timings, excluding probe search, posterior metrics, loading, and communication. Methods ran in separate batches, so the numbers are descriptive implementation costs, not controlled cross-device speedups. Smartphone latency, energy consumption, and cryptographic execution time were not measured. In the recent extension, condition means of trajectory-median gate times range from 12.1 to 14.0 microseconds for PML-T and 2.0 to 3.0 microseconds for PRIVIC-T. PRIVIC training across all 24 channels takes 182.3 seconds separately; online timings exclude that offline fitting. These batch-specific measurements do not establish a controlled speedup.
 
-\section{Discussion and limitations}
+\subsection{Discussion and Limitations}
 The supported positive finding is narrow: a public-history participation rule can reduce the declared model's inference accuracy while retaining some large-region task opportunities. Checking both possible outputs before participation gives a clear model-conditional bound. Static comparisons provide the clearest recent-baseline evidence. Coarse replay improvements are specific to the uniform-prior inference model and do not bound practical observer accuracy; walk and periodic comparisons show no consistent advantage over both recent comparators.
 
 First, nominal BSP relies on one declared belief model. R-BSP turns this limitation into an explicit finite ambiguity-set guarantee by intersecting member-wise constraints, and the hand-grid stress test shows the expected removal of local-cap violations when the informed attacker's exact model is included. The later development/validation construction removes the arbitrary hand-grid choice for replay mobility and prior uncertainty, but it exposes a different limitation: all six population-prior mobility candidates are needed to cover 95\% of validation bootstrap winners, and strict data-driven R-BSP retains only 5.4\% of replay opportunities. Thus ``data-driven'' does not mean ``low cost.'' The boundary experiment also shows that an outside-set availability model at $\alpha=0.98$ can restore violations. Moreover, $\alpha$ itself is not learned because the trajectory dataset contains no task-availability observations. A deployment would need task-process data, distribution-shift handling, and prospective evaluation of the set-construction rule.
@@ -245,16 +272,16 @@ Fourth, the attack is greedy with a fixed probe budget. Longer-horizon task desi
 
 Finally, comparisons depend on finite parameter grids and exploratory interpolation. Bootstrap intervals condition on the selected traces, tasks, and clustering, without resolving distribution shift or multiple testing. The KL and recent-method extensions were added after the main run. Recent policy envelopes are selected on the evaluation set; their bootstrap intervals describe this exploratory selection procedure rather than validating an independently tuned policy. PRIVIC uses one noisy training seed and some IBU/GIBU loops reach their iteration limits; small likelihood gaps do not establish distribution recovery. Its true-eligibility task adapter changes the published output semantics. The full-text comparison with HECTA establishes differences in observations, trust assumptions, and privacy objectives, but does not provide a head-to-head system evaluation or an exhaustive novelty assessment.
 
-\section{Reproducibility and research record}
+\subsection{Reproducibility and Research Record}
 The local artifact contains configurations, deterministic preprocessing, user splits, hashes, seeds, compressed event logs, trajectory-level rows, analysis code, generated figures, and LaTeX sources. The public-observation module receives no ground truth or future positions. Evaluation logs retain simulator truth for auditing and are not the attack interface. Plots and tabulated numbers are generated from saved results. The additional prior diagnostic, task-area table, pooled raw completions, and expanded comparison plot are regenerated by the review-diagnostics script. Its input hashes, per-user values, and per-task area records are saved separately from the original simulations.
 
 The automated suite contains 28 tests. They cover posterior branches; nominal, robust, and disclosure-floor gate bounds and reductions; an informed-attacker R-BSP integration case; the coarsened mobility estimator; KL feasibility; transition conservation; unbiased ties; boundary cases; duplicate and expired tasks; missing minutes; split separation; paired normal tasks; numerical replay; author-code BA/IBU conformance; PML optimality against a general linear program; vector-valued observation channels; and policy-envelope agreement with a mixture linear program. The corrected pilot, interrupted KL run, and initial shorter PRIVIC training are retained separately and excluded from the final comparisons. Completed runs contain no recorded simulation failures.
 
-\section*{Data and code availability}
-Code, configurations, deterministic preprocessing, processed GeoLife split files, simulation outputs, analysis scripts, tests, and manuscript sources supporting the reported results are available in the project repository at \url{https://github.com/js110/Bpaper}. The original Microsoft GeoLife trajectory archive is obtained separately from its recorded public source and is not redistributed as part of the manuscript package. Third-party article full texts used for literature checking are likewise excluded from the distributable artifact. The repository is version controlled; a versioned release or immutable archival identifier can be associated with the submitted version separately.
-
 \section{Conclusion}
 Sequential regional task outputs can reveal location despite local storage of precise coordinates, and probabilistic silence must be included in that analysis. BSP provides a maximal scalar gate for both posterior branches under explicit model assumptions, while R-BSP extends the construction to a finite model set. Development/validation-based model selection makes that set more defensible but reveals that strict robust posterior caps can be prohibitively conservative: the replay experiment retains only 5.4\% of opportunities. This is linked to a structural truthful-report floor that scalar thinning cannot remove. DF-BSP and RDF-BSP therefore expose a separate report ceiling $\tau$ and recover measurable fine-region service while reporting, rather than hiding, exceedance of the original $\rho$ cap. At the illustrative $\tau=0.5$, robust replay filtering retains 14.3\% of small-region opportunities and 20.8\% inverse-area-weighted utility, with a 0.16\% observed branch-cap violation rate and original-$\rho$ exceedance on 14.3\% of slots. The contribution is consequently a channel-specific framework for strict and explicitly relaxed participation filtering under finite model uncertainty, not a guarantee against arbitrary auxiliary knowledge or a complete mobile-crowdsensing privacy system.
+
+\section*{Data and code availability}
+Code, configurations, deterministic preprocessing, processed GeoLife split files, simulation outputs, analysis scripts, tests, and manuscript sources supporting the reported results are available in the project repository at \url{https://github.com/js110/Bpaper}. The original Microsoft GeoLife trajectory archive is obtained separately from its recorded public source and is not redistributed as part of the manuscript package. Third-party article full texts used for literature checking are likewise excluded from the distributable artifact. The repository is version controlled; a versioned release or immutable archival identifier can be associated with the submitted version separately.
 
 \section*{Funding}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
