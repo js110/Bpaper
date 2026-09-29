@@ -7,7 +7,7 @@ explicit externally supplied protocol parameter.
 import argparse,json
 from pathlib import Path
 import numpy as np
-from .geolife import effective_geolife_splits
+from .geolife import effective_geolife_splits,state_path_fingerprint
 
 
 def state_exposure(states,side):
@@ -42,11 +42,19 @@ def fit_move_coarsened(paths,side=8):
     return float((lo+hi)/2)
 
 
-def path_bootstrap(paths,side,reps,seed):
+def state_path_groups(paths):
+    groups={}
+    for i,path in enumerate(np.asarray(paths)):
+        groups.setdefault(state_path_fingerprint(path),[]).append(i)
+    return list(groups.values())
+
+def group_bootstrap(paths,side,reps,seed):
     rng=np.random.default_rng(seed);paths=np.asarray(paths)
+    groups=state_path_groups(paths)
     out=np.empty(reps,float)
     for r in range(reps):
-        idx=rng.integers(len(paths),size=len(paths))
+        picked=rng.integers(len(groups),size=len(groups))
+        idx=np.concatenate([np.asarray(groups[j],dtype=int) for j in picked])
         out[r]=fit_move_coarsened(paths[idx],side)
     return out
 
@@ -69,9 +77,11 @@ def per_path_loglik(paths,side,move,prior):
 
 def validation_bootstrap_support(paths,candidates,side,reps,seed,mass=.95):
     scores=np.column_stack([per_path_loglik(paths,side,c['move'],c['prior']) for c in candidates])
+    groups=state_path_groups(paths)
     rng=np.random.default_rng(seed);wins=np.zeros(len(candidates),int)
     for _ in range(reps):
-        idx=rng.integers(len(paths),size=len(paths))
+        picked=rng.integers(len(groups),size=len(groups))
+        idx=np.concatenate([np.asarray(groups[j],dtype=int) for j in picked])
         total=scores[idx].sum(axis=0);wins[int(np.argmax(total))]+=1
     freq=wins/reps;order=np.argsort(-freq,kind='stable');keep=[];cum=0.
     for i in order:
@@ -99,8 +109,8 @@ def main():
     dp=np.asarray(dev['paths']);vp=np.asarray(val['paths'])
     dev_hat=fit_move_coarsened(dp,a.side);val_hat=fit_move_coarsened(vp,a.side)
     pooled_hat=fit_move_coarsened(np.concatenate([dp,vp]),a.side)
-    db=path_bootstrap(dp,a.side,a.bootstrap,a.seed)
-    vb=path_bootstrap(vp,a.side,a.bootstrap,a.seed+1)
+    db=group_bootstrap(dp,a.side,a.bootstrap,a.seed)
+    vb=group_bootstrap(vp,a.side,a.bootstrap,a.seed+1)
     tail=(1-a.confidence)/2
     dci=np.quantile(db,[tail,1-tail]);vci=np.quantile(vb,[tail,1-tail])
     move_q=np.quantile(db,[.025,.25,.5,.75,.975])
@@ -122,13 +132,13 @@ def main():
         if i in keep:models.append(m)
     out=dict(
         schema='data-driven-rbsp-v3',
-        construction='unique model-input-path development bootstrap candidates; unique model-input-path validation bootstrap predictive-likelihood support set',
+        construction='state-path-group development bootstrap candidates; state-path-group validation bootstrap predictive-likelihood support set',
         side=a.side,alpha=a.alpha,
         alpha_provenance='externally specified protocol parameter; GeoLife has trajectories but no real task availability logs',
         fit_model='coarsened reflecting-walk change likelihood P(change|state)=v*degree(state)/4; destination direction and jump distance ignored',
-        development=dict(users=int(len(dp)),windows=int(len(dp)),unique_model_input_paths=int(len(dp)),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
-        validation=dict(users=int(len(vp)),windows=int(len(vp)),unique_model_input_paths=int(len(vp)),estimate=val_hat,ci=vci.tolist()),
-        pooled=dict(users=int(len(dp)+len(vp)),windows=int(len(dp)+len(vp)),unique_model_input_paths=int(len(dp)+len(vp)),estimate=pooled_hat),
+        development=dict(users=int(len(dp)),windows=int(len(dp)),unique_model_input_paths=int(len(state_path_groups(dp))),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
+        validation=dict(users=int(len(vp)),windows=int(len(vp)),unique_model_input_paths=int(len(state_path_groups(vp))),estimate=val_hat,ci=vci.tolist()),
+        pooled=dict(users=int(len(dp)+len(vp)),windows=int(len(dp)+len(vp)),unique_model_input_paths=int(len(state_path_groups(np.concatenate([dp,vp])))),estimate=pooled_hat),
         confidence=a.confidence,bootstrap_replicates=a.bootstrap,bootstrap_seed=a.seed,
         selection_mass_target=a.selection_mass,selection_mass_achieved=cum,
         move_candidates=sorted(moves),candidate_models=candidate_records,

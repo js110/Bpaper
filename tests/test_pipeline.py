@@ -35,15 +35,17 @@ class PipelineTests(unittest.TestCase):
                 self.assertFalse(users[i]&users[j])
                 self.assertFalse(states[i]&states[j])
         self.assertTrue(all(len(splits[s]['users'])>0 for s in names))
-    def test_state_path_group_keeps_first_window(self):
+    def test_state_path_group_keeps_owning_split_members(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td);same=np.array([[39.9,116.3],[39.91,116.31]])
             other=np.array([[39.92,116.32],[39.93,116.33]])
             third=np.array([[39.94,116.34],[39.95,116.35]])
-            np.savez(root/'geolife_development.npz',users=np.array([70]),paths=np.array([[1,2]]),coords=np.array([same]))
+            fourth=np.array([[39.96,116.36],[39.97,116.37]])
+            np.savez(root/'geolife_development.npz',users=np.array([70,75]),paths=np.array([[1,2],[1,2]]),coords=np.array([same,fourth]))
             np.savez(root/'geolife_validation.npz',users=np.array([11]),paths=np.array([[1,2]]),coords=np.array([other]))
             np.savez(root/'geolife_test.npz',users=np.array([13,88]),paths=np.array([[1,2],[3,4]]),coords=np.array([third,other]))
             splits,dropped=effective_geolife_splits({s:root/f'geolife_{s}.npz' for s in ['development','validation','test']})
+            self.assertEqual(splits['development']['users'].tolist(),[70,75])
             self.assertEqual(splits['validation']['users'].tolist(),[])
             self.assertEqual(splits['test']['users'].tolist(),[88])
             self.assertEqual({d['user'] for d in dropped},{11,13})

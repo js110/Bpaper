@@ -10,12 +10,13 @@ Two distinct audits are maintained. Exact float64 GPS-coordinate fingerprints
 are retained for provenance and identify literal duplicate windows. Holdout
 isolation, however, follows the representation actually consumed by the
 models: the complete 48-slot 8x8 state sequence. A state-path group is assigned
-to the earliest split in development -> validation -> test order, and later
-split members of that group are excluded from effective analysis even when
-their GPS coordinates differ.
+to the earliest split in development -> validation -> test order. All members
+of that group in the owning split are retained, while later-split members are
+excluded even when their GPS coordinates differ.
 
-This rule prevents a model-input sequence from appearing in both construction
-and holdout splits. It deliberately does **not** claim that equal coarse paths
+This rule prevents a model-input group from appearing in both construction
+and holdout splits, while preserving repeated observations within its owning
+split. It deliberately does **not** claim that equal coarse paths
 are the same physical trip; rather, they are indistinguishable to the fitted
 and replay models used in this paper. The current effective counts, dropped
 later-split windows, cross-split state groups, and literal coordinate duplicate
