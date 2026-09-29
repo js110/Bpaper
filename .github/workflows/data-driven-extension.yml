@@ -2,6 +2,18 @@ name: data-driven-extension
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/geolife.py'
+      - 'src/prepare_data.py'
+      - 'src/fit_ambiguity.py'
+      - 'src/experiment.py'
+      - 'src/analyze_extensions.py'
+      - 'src/build_extension_config.py'
+      - 'data/geolife_*.npz'
+      - '.github/workflows/data-driven-extension.yml'
 
 permissions:
   contents: write
