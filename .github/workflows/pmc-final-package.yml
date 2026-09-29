@@ -75,18 +75,24 @@ jobs:
       - name: Create flat submission zip
         run: |
           cp build/pmc_submission_flat/SUBMISSION_MANIFEST.json paper/PMC_submission_manifest.json
-          rm -f build/pmc_submission_flat/main.pdf build/pmc_submission_flat/main.aux build/pmc_submission_flat/main.log build/pmc_submission_flat/main.out build/pmc_submission_flat/main.blg build/pmc_submission_flat/main.bbl build/pmc_submission_flat/main.fdb_latexmk build/pmc_submission_flat/main.fls build/pmc_submission_flat/main.synctex.gz
-          rm -f paper/PMC_submission_source.zip
-          (cd build/pmc_submission_flat && zip -9 -r ../../paper/PMC_submission_source.zip .)
           python - <<'PY'
           import json,zipfile
           from pathlib import Path
+          stage=Path('build/pmc_submission_flat')
+          target=Path('paper/PMC_submission_source.zip')
           manifest=json.loads(Path('paper/PMC_submission_manifest.json').read_text())
-          expected=set(manifest['flat_files'])|{'SUBMISSION_MANIFEST.json'}
-          with zipfile.ZipFile('paper/PMC_submission_source.zip') as z:
-              actual={Path(n).name for n in z.namelist() if not n.endswith('/')}
-          if actual!=expected:
-              raise SystemExit(f'ZIP membership mismatch: extra={sorted(actual-expected)}, missing={sorted(expected-actual)}')
+          members=list(manifest['flat_files'])+['SUBMISSION_MANIFEST.json']
+          target.unlink(missing_ok=True)
+          with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for name in members:
+                  source=stage/name
+                  if not source.is_file():
+                      raise SystemExit(f'Manifest member missing from staging: {name}')
+                  z.write(source,arcname=name)
+          with zipfile.ZipFile(target) as z:
+              actual=[n for n in z.namelist() if not n.endswith('/')]
+          if set(actual)!=set(members) or len(actual)!=len(members):
+              raise SystemExit(f'ZIP membership mismatch: actual={actual}, expected={members}')
           print(f'ZIP membership verified: {len(actual)} files')
           PY
       - name: Commit final package
