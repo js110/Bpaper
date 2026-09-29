@@ -42,7 +42,7 @@ def fit_move_coarsened(paths,side=8):
     return float((lo+hi)/2)
 
 
-def user_bootstrap(paths,side,reps,seed):
+def path_bootstrap(paths,side,reps,seed):
     rng=np.random.default_rng(seed);paths=np.asarray(paths)
     out=np.empty(reps,float)
     for r in range(reps):
@@ -57,7 +57,7 @@ def smoothed_prior(paths,side,pseudocount=.5):
     return (counts/counts.sum()).tolist()
 
 
-def per_user_loglik(paths,side,move,prior):
+def per_path_loglik(paths,side,move,prior):
     paths=np.asarray(paths,dtype=int);prior=np.asarray(prior,float)
     out=np.zeros(len(paths),float)
     for j,path in enumerate(paths):
@@ -68,7 +68,7 @@ def per_user_loglik(paths,side,move,prior):
 
 
 def validation_bootstrap_support(paths,candidates,side,reps,seed,mass=.95):
-    scores=np.column_stack([per_user_loglik(paths,side,c['move'],c['prior']) for c in candidates])
+    scores=np.column_stack([per_path_loglik(paths,side,c['move'],c['prior']) for c in candidates])
     rng=np.random.default_rng(seed);wins=np.zeros(len(candidates),int)
     for _ in range(reps):
         idx=rng.integers(len(paths),size=len(paths))
@@ -99,8 +99,8 @@ def main():
     dp=np.asarray(dev['paths']);vp=np.asarray(val['paths'])
     dev_hat=fit_move_coarsened(dp,a.side);val_hat=fit_move_coarsened(vp,a.side)
     pooled_hat=fit_move_coarsened(np.concatenate([dp,vp]),a.side)
-    db=user_bootstrap(dp,a.side,a.bootstrap,a.seed)
-    vb=user_bootstrap(vp,a.side,a.bootstrap,a.seed+1)
+    db=path_bootstrap(dp,a.side,a.bootstrap,a.seed)
+    vb=path_bootstrap(vp,a.side,a.bootstrap,a.seed+1)
     tail=(1-a.confidence)/2
     dci=np.quantile(db,[tail,1-tail]);vci=np.quantile(vb,[tail,1-tail])
     move_q=np.quantile(db,[.025,.25,.5,.75,.975])
@@ -121,14 +121,14 @@ def main():
         candidate_records.append(rec)
         if i in keep:models.append(m)
     out=dict(
-        schema='data-driven-rbsp-v2',
-        construction='development user-bootstrap candidates; validation user-bootstrap predictive-likelihood support set',
+        schema='data-driven-rbsp-v3',
+        construction='unique model-input-path development bootstrap candidates; unique model-input-path validation bootstrap predictive-likelihood support set',
         side=a.side,alpha=a.alpha,
         alpha_provenance='externally specified protocol parameter; GeoLife has trajectories but no real task availability logs',
         fit_model='coarsened reflecting-walk change likelihood P(change|state)=v*degree(state)/4; destination direction and jump distance ignored',
-        development=dict(users=int(len(dp)),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
-        validation=dict(users=int(len(vp)),estimate=val_hat,ci=vci.tolist()),
-        pooled=dict(users=int(len(dp)+len(vp)),estimate=pooled_hat),
+        development=dict(windows=int(len(dp)),unique_model_input_paths=int(len(dp)),estimate=dev_hat,ci=dci.tolist(),candidate_quantiles=[.025,.25,.5,.75,.975]),
+        validation=dict(windows=int(len(vp)),unique_model_input_paths=int(len(vp)),estimate=val_hat,ci=vci.tolist()),
+        pooled=dict(windows=int(len(dp)+len(vp)),unique_model_input_paths=int(len(dp)+len(vp)),estimate=pooled_hat),
         confidence=a.confidence,bootstrap_replicates=a.bootstrap,bootstrap_seed=a.seed,
         selection_mass_target=a.selection_mass,selection_mass_achieved=cum,
         move_candidates=sorted(moves),candidate_models=candidate_records,
