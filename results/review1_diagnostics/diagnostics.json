@@ -6,16 +6,16 @@
       34
     ],
     "development_peak": 0.223731884057971,
-    "hit": 0.16755319148936165,
-    "low": 0.09706338652482269,
-    "high": 0.2504543439716312,
+    "hit": 0.14937106918238993,
+    "low": 0.08670454545454548,
+    "high": 0.22509538013318536,
     "users": 53,
     "state_path_groups": 47,
     "slots": 48,
     "uniform_hit": 0.015625,
     "bootstrap_seed": 170926,
     "bootstrap_replicates": 1000,
-    "interval": "percentile state-path-group bootstrap conditional on fixed development predictor; pointwise",
+    "interval": "window-weighted point estimate with percentile state-path-group cluster bootstrap conditional on fixed development predictor; pointwise",
     "interpretation": "No task outputs; fixed cell predictor; not a rerun of an adaptive attack"
   },
   "mobility": {
@@ -356,7 +356,7 @@
     }
   ],
   "numeric_macros": {
-    "PopulationPriorHit": "16.76",
+    "PopulationPriorHit": "14.94",
     "PopulationPriorPeak": "22.37",
     "ReplayStaticWindows": "5",
     "ReplayMedianCells": "3",

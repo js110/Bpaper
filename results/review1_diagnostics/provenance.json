@@ -3,14 +3,14 @@
     "data/geolife_development.npz": "cf58efa066484a8896f5f8065925d673c4e5524b956cf066a851104b53eed116",
     "data/geolife_validation.npz": "8a2d6b189f8808f10eef47bf74a9d16a2b4d6deee3f5d1ba9bf261d9517de570",
     "data/geolife_test.npz": "46fea0dcc58bdca4dd85f509a66a18616d44cb05615c6951becef63777752410",
-    "results/final/static_adaptive_bsp_0.1.jsonl.gz": "b21fd529ff02012af956d7430e25ae5d1855438fe624ff7656be8582e7b1042a",
-    "results/final/walk_adaptive_bsp_0.1.jsonl.gz": "ea0b378a878da03060247b8d57dea85b071ccfed6b632875437c6c2110650499",
-    "results/final/commute_adaptive_bsp_0.1.jsonl.gz": "141a7748a3296ab8de7f4823a06130398a44ddd5be039e4e3dde2fc869e81b13",
-    "results/final/geolife_adaptive_bsp_0.1.jsonl.gz": "806a8f97498929fb614aed0cbb60bd19761c11f40b2a3e7ad171c4c6538480b8",
-    "results/combined/analysis/summary.csv": "9599d6dcb2a84a8d52c001b79d55ecf3bd1fa2c25996f3bd345517730260572e",
-    "results/final/rows.csv": "9202b98ff3a95dad3369d76c74b8e44f5488788272deeb48466bb675dcfef1ea",
-    "results/recent_comparison/summary.csv": "41a8c217c74ff07b0cfcb8301d35c614bb9dcd27467a10945500ca9d14647119",
-    "src/review_diagnostics.py": "bd10b22c569c6628904d5b9ade5a7f5c9645f5bf0ce0c2a3fbf3e1a633a0bcc1"
+    "results/final/static_adaptive_bsp_0.1.jsonl.gz": "0548a2f7896746d515627c913e667644c82b193c67f653185fc08b8191321180",
+    "results/final/walk_adaptive_bsp_0.1.jsonl.gz": "c7d75111243516e9e649b66bc877c15e9218e699f08716c203f435f84559d14e",
+    "results/final/commute_adaptive_bsp_0.1.jsonl.gz": "f94b1543329edefc513ac1a9389b8db3e363a43be19a54247a0a2e5649294f51",
+    "results/final/geolife_adaptive_bsp_0.1.jsonl.gz": "fed233f29d570c1541184989cb8d3cf3a8bbf5e3cfaec0064c0b677c36c20b86",
+    "results/combined/analysis/summary.csv": "b593295aa58f4d5a11d921d244efc89b0d09bc94979a34d4cebff6d82ee74315",
+    "results/final/rows.csv": "f29f592608f5e35bdb701c10c9b51c4c2525850d9fd1b9d32c9c41cebb54af12",
+    "results/recent_comparison/summary.csv": "54ee0834d176454228db0e58d348d98361f6655a9f3859c7ec20630b29639052",
+    "src/review_diagnostics.py": "049b603ba650190869bb7f57ffa3d336595850a3f4cbde18e609a01ff8beaa54"
   },
   "region_bins": [
     [
@@ -29,6 +29,7 @@
   "region_condition": "adaptive BSP rho=0.1; not envelope mixtures",
   "raw_completion": "sum completions / sum all normal tasks; not mean per-user ratio",
   "prior_interpretation": "No task outputs; fixed cell predictor; not a rerun of an adaptive attack",
+  "prior_estimator": "effective test-window/position-weighted point estimate; complete state-path-group cluster bootstrap",
   "test_use": "descriptive evaluation only; predictor fitted on development",
   "zoom": "same saved points and envelope as main recent-method figure; expanded vertical scale",
   "numpy": "2.4.1",

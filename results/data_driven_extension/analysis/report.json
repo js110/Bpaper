@@ -377,7 +377,7 @@
       "local_violation_rate": 0.24488993710691823,
       "effective_violation_rate": 0.24488993710691823,
       "absolute_violation_rate": 0.9469339622641509,
-      "gate_us_p50": 32.72327358490566,
+      "gate_us_p50": 32.24833018867925,
       "hit_low": 0.26639827806122446,
       "hit_high": 0.4096082589285715,
       "peak_low": 0.19119015751159282,
@@ -400,8 +400,8 @@
       "effective_violation_rate_high": 0.2613688973063973,
       "absolute_violation_rate_low": 0.9073206786030062,
       "absolute_violation_rate_high": 0.9732156895777179,
-      "gate_us_p50_low": 32.458911671401516,
-      "gate_us_p50_high": 33.09254898504273
+      "gate_us_p50_low": 31.96502843137255,
+      "gate_us_p50_high": 32.658038827742836
     },
     {
       "condition": "geolife_data_single_bsp",
@@ -423,7 +423,7 @@
       "local_violation_rate": 0.0007861635220125787,
       "effective_violation_rate": 0.0007861635220125787,
       "absolute_violation_rate": 0.3553459119496855,
-      "gate_us_p50": 32.41987735849056,
+      "gate_us_p50": 31.796509433962267,
       "hit_low": 0.06878526174620792,
       "hit_high": 0.18796367603645228,
       "peak_low": 0.10589867477577306,
@@ -446,8 +446,8 @@
       "effective_violation_rate_high": 0.0020833333333333333,
       "absolute_violation_rate_low": 0.3541666666666667,
       "absolute_violation_rate_high": 0.35751798115079364,
-      "gate_us_p50_low": 32.20943993644068,
-      "gate_us_p50_high": 32.657266870370364
+      "gate_us_p50_low": 31.595761500000002,
+      "gate_us_p50_high": 31.984215853432282
     },
     {
       "condition": "geolife_hand_rbsp",
@@ -469,7 +469,7 @@
       "local_violation_rate": 0.19103773584905662,
       "effective_violation_rate": 0.19103773584905662,
       "absolute_violation_rate": 0.8211477987421384,
-      "gate_us_p50": 268.75569811320753,
+      "gate_us_p50": 263.30812264150944,
       "hit_low": 0.16514854426619133,
       "hit_high": 0.2999233490566038,
       "peak_low": 0.16036403446909975,
@@ -492,8 +492,8 @@
       "effective_violation_rate_high": 0.20753314393939395,
       "absolute_violation_rate_low": 0.7758206699346406,
       "absolute_violation_rate_high": 0.8598484848484849,
-      "gate_us_p50_low": 268.4120657745098,
-      "gate_us_p50_high": 269.1442618846154
+      "gate_us_p50_low": 262.89649279684096,
+      "gate_us_p50_high": 263.80842491830066
     },
     {
       "condition": "geolife_data_rbsp",
@@ -515,7 +515,7 @@
       "local_violation_rate": 0.0019654088050314465,
       "effective_violation_rate": 0.0019654088050314465,
       "absolute_violation_rate": 0.3565251572327044,
-      "gate_us_p50": 97.08713207547169,
+      "gate_us_p50": 95.16385849056606,
       "hit_low": 0.07624444394049348,
       "hit_high": 0.19119616596638653,
       "peak_low": 0.10211283062533964,
@@ -538,8 +538,8 @@
       "effective_violation_rate_high": 0.004902517825311942,
       "absolute_violation_rate_low": 0.3541666666666667,
       "absolute_violation_rate_high": 0.3595833333333333,
-      "gate_us_p50_low": 96.53072638888888,
-      "gate_us_p50_high": 97.6753866419295
+      "gate_us_p50_low": 94.52855902033416,
+      "gate_us_p50_high": 95.87427267647058
     },
     {
       "condition": "geolife_dfbsp_tau_0.125",
@@ -561,7 +561,7 @@
       "local_violation_rate": 0.25707547169811323,
       "effective_violation_rate": 0.25275157232704404,
       "absolute_violation_rate": 0.9764150943396226,
-      "gate_us_p50": 39.391999999999996,
+      "gate_us_p50": 38.54608490566038,
       "hit_low": 0.24037782485875706,
       "hit_high": 0.38138433564915325,
       "peak_low": 0.2026860560354675,
@@ -584,8 +584,8 @@
       "effective_violation_rate_high": 0.266156462585034,
       "absolute_violation_rate_low": 0.9622641509433962,
       "absolute_violation_rate_high": 0.9871794871794872,
-      "gate_us_p50_low": 39.29468357371795,
-      "gate_us_p50_high": 39.49210749698916
+      "gate_us_p50_low": 38.465039972047514,
+      "gate_us_p50_high": 38.63890267857143
     },
     {
       "condition": "geolife_data_rdfbsp_tau_0.125",
@@ -607,7 +607,7 @@
       "local_violation_rate": 0.09237421383647798,
       "effective_violation_rate": 0.0023584905660377358,
       "absolute_violation_rate": 0.5275157232704403,
-      "gate_us_p50": 93.05354716981134,
+      "gate_us_p50": 91.05496226415096,
       "hit_low": 0.07514984402852051,
       "hit_high": 0.19391339869281046,
       "peak_low": 0.10994522090614854,
@@ -630,8 +630,8 @@
       "effective_violation_rate_high": 0.004810049019607842,
       "absolute_violation_rate_low": 0.5019579402515724,
       "absolute_violation_rate_high": 0.5516717687074829,
-      "gate_us_p50_low": 92.69710311170215,
-      "gate_us_p50_high": 93.38462972285065
+      "gate_us_p50_low": 90.7341827928322,
+      "gate_us_p50_high": 91.37988746998798
     },
     {
       "condition": "geolife_dfbsp_tau_0.25",
@@ -653,7 +653,7 @@
       "local_violation_rate": 0.2645440251572327,
       "effective_violation_rate": 0.20400943396226415,
       "absolute_violation_rate": 0.9465408805031447,
-      "gate_us_p50": 40.41327358490567,
+      "gate_us_p50": 39.85693396226416,
       "hit_low": 0.22766754850088183,
       "hit_high": 0.357314403748921,
       "peak_low": 0.20115766619705505,
@@ -676,8 +676,8 @@
       "effective_violation_rate_high": 0.2215216757999496,
       "absolute_violation_rate_low": 0.9195234461709212,
       "absolute_violation_rate_high": 0.966580065841195,
-      "gate_us_p50_low": 40.144451650943395,
-      "gate_us_p50_high": 40.70480793269231
+      "gate_us_p50_low": 39.51297696524063,
+      "gate_us_p50_high": 40.21941571350762
     },
     {
       "condition": "geolife_data_rdfbsp_tau_0.25",
@@ -699,7 +699,7 @@
       "local_violation_rate": 0.16470125786163523,
       "effective_violation_rate": 0.025157232704402517,
       "absolute_violation_rate": 0.7075471698113207,
-      "gate_us_p50": 92.99090566037736,
+      "gate_us_p50": 90.73045283018868,
       "hit_low": 0.10888264503914775,
       "hit_high": 0.1958453525641026,
       "peak_low": 0.13243674288729282,
@@ -722,8 +722,8 @@
       "effective_violation_rate_high": 0.03072033898305085,
       "absolute_violation_rate_low": 0.6454120710784313,
       "absolute_violation_rate_high": 0.7665112389295341,
-      "gate_us_p50_low": 92.6662945,
-      "gate_us_p50_high": 93.28665596256684
+      "gate_us_p50_low": 90.37308549528304,
+      "gate_us_p50_high": 91.08741188157896
     },
     {
       "condition": "geolife_dfbsp_tau_0.5",
@@ -745,7 +745,7 @@
       "local_violation_rate": 0.28773584905660377,
       "effective_violation_rate": 0.16666666666666666,
       "absolute_violation_rate": 0.8954402515723271,
-      "gate_us_p50": 40.588716981132066,
+      "gate_us_p50": 40.03840566037736,
       "hit_low": 0.2749049880368814,
       "hit_high": 0.4236142113095238,
       "peak_low": 0.21659673980486793,
@@ -768,8 +768,8 @@
       "effective_violation_rate_high": 0.19500904088050314,
       "absolute_violation_rate_low": 0.8545729166666667,
       "absolute_violation_rate_high": 0.9287696634806849,
-      "gate_us_p50_low": 40.38381752219756,
-      "gate_us_p50_high": 40.766864536199094
+      "gate_us_p50_low": 39.79697594339623,
+      "gate_us_p50_high": 40.264040344062145
     },
     {
       "condition": "geolife_data_rdfbsp_tau_0.5",
@@ -791,7 +791,7 @@
       "local_violation_rate": 0.1470125786163522,
       "effective_violation_rate": 0.020047169811320754,
       "absolute_violation_rate": 0.6529088050314465,
-      "gate_us_p50": 89.51082075471697,
+      "gate_us_p50": 87.43647169811322,
       "hit_low": 0.15563397233893556,
       "hit_high": 0.2666840277777778,
       "peak_low": 0.15615168954886186,
@@ -814,8 +814,8 @@
       "effective_violation_rate_high": 0.02644314236111111,
       "absolute_violation_rate_low": 0.6033155864197531,
       "absolute_violation_rate_high": 0.7022270114942529,
-      "gate_us_p50_low": 89.35914866727941,
-      "gate_us_p50_high": 89.64409085294119
+      "gate_us_p50_low": 87.12760896226415,
+      "gate_us_p50_high": 87.83312155585106
     },
     {
       "condition": "geolife_dfbsp_tau_1.0",
@@ -837,7 +837,7 @@
       "local_violation_rate": 0.37971698113207547,
       "effective_violation_rate": 0.24056603773584906,
       "absolute_violation_rate": 0.8938679245283019,
-      "gate_us_p50": 39.50349056603773,
+      "gate_us_p50": 38.64504716981132,
       "hit_low": 0.3043070409982175,
       "hit_high": 0.4477575386215092,
       "peak_low": 0.23401447006561307,
@@ -860,8 +860,8 @@
       "effective_violation_rate_high": 0.2781884628851541,
       "absolute_violation_rate_low": 0.8619778901143791,
       "absolute_violation_rate_high": 0.9233371212121212,
-      "gate_us_p50_low": 39.40946674999999,
-      "gate_us_p50_high": 39.598111510217116
+      "gate_us_p50_low": 38.56436916195856,
+      "gate_us_p50_high": 38.72753688461538
     },
     {
       "condition": "geolife_data_rdfbsp_tau_1.0",
@@ -883,7 +883,7 @@
       "local_violation_rate": 0.15723270440251572,
       "effective_violation_rate": 0.030660377358490566,
       "absolute_violation_rate": 0.6875,
-      "gate_us_p50": 89.06911320754718,
+      "gate_us_p50": 87.24408490566037,
       "hit_low": 0.20123177083333335,
       "hit_high": 0.3025040064102564,
       "peak_low": 0.18119656800995648,
@@ -906,8 +906,8 @@
       "effective_violation_rate_high": 0.03896846064814814,
       "absolute_violation_rate_low": 0.6352124183006536,
       "absolute_violation_rate_high": 0.7397662480063796,
-      "gate_us_p50_low": 88.8965190039913,
-      "gate_us_p50_high": 89.25746473589437
+      "gate_us_p50_low": 87.02868325,
+      "gate_us_p50_high": 87.45270208782743
     },
     {
       "condition": "walk_new_bsp",
@@ -929,7 +929,7 @@
       "local_violation_rate": 0.0,
       "effective_violation_rate": 0.0,
       "absolute_violation_rate": 0.0,
-      "gate_us_p50": 30.774006249999996,
+      "gate_us_p50": 30.847649999999998,
       "hit_low": 0.03306200529089296,
       "hit_high": 0.06657083314518723,
       "peak_low": 0.06907832213717674,
@@ -952,8 +952,8 @@
       "effective_violation_rate_high": 0.0,
       "absolute_violation_rate_low": 0.0,
       "absolute_violation_rate_high": 0.0,
-      "gate_us_p50_low": 30.691134062500005,
-      "gate_us_p50_high": 30.85508265625
+      "gate_us_p50_low": 30.690703125,
+      "gate_us_p50_high": 31.081367343749996
     },
     {
       "condition": "walk_new_dfbsp_tau_0.125",
@@ -975,7 +975,7 @@
       "local_violation_rate": 0.07760416666666667,
       "effective_violation_rate": 0.0,
       "absolute_violation_rate": 0.21145833333333333,
-      "gate_us_p50": 38.6808,
+      "gate_us_p50": 37.99564375,
       "hit_low": 0.06011799187186023,
       "hit_high": 0.09819523985875675,
       "peak_low": 0.07439208719262208,
@@ -998,8 +998,8 @@
       "effective_violation_rate_high": 0.0,
       "absolute_violation_rate_low": 0.18123046874999998,
       "absolute_violation_rate_high": 0.23907552083333333,
-      "gate_us_p50_low": 38.58263921875,
-      "gate_us_p50_high": 38.778670625000004
+      "gate_us_p50_low": 37.914818437499996,
+      "gate_us_p50_high": 38.07414421875001
     },
     {
       "condition": "walk_new_dfbsp_tau_0.25",
@@ -1021,7 +1021,7 @@
       "local_violation_rate": 0.0765625,
       "effective_violation_rate": 0.0,
       "absolute_violation_rate": 0.27708333333333335,
-      "gate_us_p50": 38.94137500000001,
+      "gate_us_p50": 38.1590875,
       "hit_low": 0.04996159648413481,
       "hit_high": 0.07862131252590462,
       "peak_low": 0.08527152445103142,
@@ -1044,8 +1044,8 @@
       "effective_violation_rate_high": 0.0,
       "absolute_violation_rate_low": 0.24294921875,
       "absolute_violation_rate_high": 0.3140625,
-      "gate_us_p50_low": 38.86141765625,
-      "gate_us_p50_high": 39.02687234375
+      "gate_us_p50_low": 38.0794021875,
+      "gate_us_p50_high": 38.23324890625
     },
     {
       "condition": "walk_new_dfbsp_tau_0.5",
@@ -1067,7 +1067,7 @@
       "local_violation_rate": 0.084375,
       "effective_violation_rate": 0.0,
       "absolute_violation_rate": 0.33932291666666664,
-      "gate_us_p50": 38.78745,
+      "gate_us_p50": 37.94584375,
       "hit_low": 0.08869320928622734,
       "hit_high": 0.1294415126088429,
       "peak_low": 0.1020839118212833,
@@ -1090,8 +1090,8 @@
       "effective_violation_rate_high": 0.0,
       "absolute_violation_rate_low": 0.30676432291666667,
       "absolute_violation_rate_high": 0.37370442708333335,
-      "gate_us_p50_low": 38.68381109375,
-      "gate_us_p50_high": 38.88440203125
+      "gate_us_p50_low": 37.888090156249994,
+      "gate_us_p50_high": 38.005089218749994
     },
     {
       "condition": "walk_new_dfbsp_tau_1.0",
@@ -1113,7 +1113,7 @@
       "local_violation_rate": 0.08619791666666667,
       "effective_violation_rate": 0.0,
       "absolute_violation_rate": 0.3611979166666667,
-      "gate_us_p50": 38.97580625,
+      "gate_us_p50": 38.1418625,
       "hit_low": 0.09559376536819034,
       "hit_high": 0.13993918122171445,
       "peak_low": 0.1092078415622298,
@@ -1136,8 +1136,8 @@
       "effective_violation_rate_high": 0.0,
       "absolute_violation_rate_low": 0.3268229166666667,
       "absolute_violation_rate_high": 0.39220703125,
-      "gate_us_p50_low": 38.922279374999995,
-      "gate_us_p50_high": 39.0293853125
+      "gate_us_p50_low": 38.05500281250001,
+      "gate_us_p50_high": 38.224460156250004
     }
   ],
   "weighted_utility": "sum(completed/area)/sum(opportunity/area)",
