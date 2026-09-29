@@ -16,7 +16,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from .analyze_recent import lower_hull
-from .geolife import effective_geolife_splits
+from .geolife import effective_geolife_splits,state_path_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 SCENARIOS = ['static', 'walk', 'commute', 'geolife']
@@ -46,14 +46,18 @@ def main():
     counts = np.bincount(development.ravel(), minlength=64)
     modes = np.flatnonzero(counts == counts.max())
     per_user = np.isin(test, modes).mean(axis=1) / len(modes)
+    test_groups={}
+    for i,path in enumerate(test):
+        test_groups.setdefault(state_path_fingerprint(path),[]).append(i)
+    per_group=np.array([per_user[idx].mean() for idx in test_groups.values()])
     rng = np.random.default_rng(170926)
-    draws = per_user[rng.integers(len(test), size=(1000, len(test)))].mean(axis=1)
+    draws = per_group[rng.integers(len(per_group), size=(1000, len(per_group)))].mean(axis=1)
     prior = dict(fit_split='development', evaluate_split='test', map_cells=modes.tolist(),
                  development_peak=float(counts.max() / counts.sum()),
-                 hit=float(per_user.mean()), low=float(np.quantile(draws, .025)),
-                 high=float(np.quantile(draws, .975)), users=len(test), slots=test.shape[1],
+                 hit=float(per_group.mean()), low=float(np.quantile(draws, .025)),
+                 high=float(np.quantile(draws, .975)), users=len(test), state_path_groups=len(per_group), slots=test.shape[1],
                  uniform_hit=1 / 64, bootstrap_seed=170926, bootstrap_replicates=1000,
-                 interval='percentile user bootstrap conditional on fixed development predictor; pointwise',
+                 interval='percentile state-path-group bootstrap conditional on fixed development predictor; pointwise',
                  interpretation='No task outputs; fixed cell predictor; not a rerun of an adaptive attack')
     mobility = {s: dict(users=len(a['paths']), static_windows=int(np.all(np.diff(a['paths']) == 0, axis=1).sum()),
                        unique_cells_median=float(np.median([len(set(row)) for row in a['paths']])),
