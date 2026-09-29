@@ -75,7 +75,7 @@ def main():
     report=dict(study_status=cfg['study_status'],ambiguity_fit=fit,conditions=summary,
                 weighted_utility='sum(completed/area)/sum(opportunity/area)',
                 area_bins={'small':'1-8','medium':'9-31','large':'32-64'},
-                df_interpretation='local_violation_rate tests the original rho cap on both outputs; effective_violation_rate uses max(tau, prior peak) for reports and max(rho, prior peak) for silence')
+                df_interpretation='local_violation_rate tests the original BSP local cap max(rho, prior peak); effective_violation_rate uses max(tau, prior peak) for reports and max(rho, prior peak) for silence')
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
 
     geo=[s for s in summary if s['scenario']=='geolife']
