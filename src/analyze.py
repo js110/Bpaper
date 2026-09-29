@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from .geolife import effective_state_group_by_user
 
 METRICS=['hit','error_cells','error_m','peak','logloss','covered95','credible95','entropy','prior_hit','raw_completion','coverage','reward','latency_slots','gate_us_p50','gate_us_p95','ece']
 COLORS={'none':'#222222','random':'#0072B2','rate':'#E69F00','coarse':'#009E73','bsp':'#D55E00','positive_only':'#CC79A7','kl':'#56B4E9'}
@@ -21,10 +22,13 @@ def load(path):
     return rows
 
 def clusters(rows):
-    keys=sorted(set(int(r['user']) if r['scenario']=='geolife' else int(r['seed']) for r in rows))
+    geo_map=effective_state_group_by_user("test") if rows and rows[0]["scenario"]=="geolife" else None
+    def cluster_key(r):
+        return geo_map[int(r["user"])] if geo_map is not None else int(r["seed"])
+    keys=sorted(set(cluster_key(r) for r in rows),key=str)
     out=[]
     for key in keys:
-        a=[r for r in rows if (int(r['user']) if r['scenario']=='geolife' else int(r['seed']))==key]
+        a=[r for r in rows if cluster_key(r)==key]
         d={k:float(np.nanmean([r[k] for r in a])) if any(np.isfinite(r[k]) for r in a) else float('nan') for k in METRICS}
         d['complete']=sum(r['complete'] for r in a);d['opportunities']=sum(r['opportunities'] for r in a)
         out.append(d)
@@ -129,7 +133,7 @@ def main():
     (out/'matched_utility.json').write_text(json.dumps([{k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in r.items()} for r in matched(rows,cache,summaries)],indent=2,allow_nan=False))
     figures(summaries,out);write_tables(summaries,out)
     (out/'provenance.json').write_text(json.dumps(dict(input_sha256=hashlib.sha256((run/'rows.csv').read_bytes()).hexdigest(),bootstrap=1000,
-        unit='synthetic: seed with four users; GeoLife: user',estimator='cluster mean for risks; ratio of summed completions to opportunities for utility',
+        unit='synthetic: seed with four users; GeoLife: complete 48-slot state-path group',estimator='cluster mean for risks; ratio of summed completions to opportunities for utility',
         figure_files=['tradeoff','calibration','attacks'],interval='percentile cluster bootstrap 95%, pointwise; no multiplicity correction'),indent=2))
     print('Analyzed',len(rows),'rows and',len(summaries),'conditions')
 if __name__=='__main__':main()
