@@ -35,10 +35,10 @@ def effective_geolife_splits(paths=None):
     """Return effective splits with no repeated model-input path across splits.
 
     Split precedence is development, then validation, then test. Each complete
-    discrete state path is represented by its first encountered window only;
-    all later windows with the same model input are excluded, including repeats
-    inside the same split. This keeps model-input paths unique both within and
-    across effective splits, even when their GPS coordinates differ.
+    discrete state-path group is assigned to the earliest split in which it
+    occurs. All members of that group in the owning split are retained, while
+    members in later splits are excluded. Thus model-input groups cannot cross
+    effective splits, without erasing repeated observations inside one split.
 
     Exact coordinate duplicates are also recorded separately for provenance.
     """
@@ -69,15 +69,16 @@ def effective_geolife_splits(paths=None):
                 first_coordinate[cfp]=dict(split=split,user=user)
 
             owner=owner_by_state.get(sfp)
-            if owner is not None:
+            if owner is None:
+                owner_by_state[sfp]={"split":split,"user":user}
+            elif owner["split"]!=split:
                 dropped.append(dict(
                     split=split,user=user,state_path_fingerprint=sfp,
-                    duplicate_of_split=owner["split"],
-                    duplicate_of_user=owner["user"],
+                    assigned_split=owner["split"],
+                    representative_user=owner["user"],
                     coordinate_fingerprint=cfp,
-                    reason="duplicate complete model-input path"))
+                    reason="model-input group assigned to earlier split"))
                 continue
-            owner_by_state[sfp]={"split":split,"user":user}
             keep.append(i)
         idx=np.asarray(keep,dtype=int)
         out[split]={k:v[idx] for k,v in data.items()}
@@ -145,7 +146,7 @@ def decontamination_audit(paths=None):
         if len({m["split"] for m in members})>1
     ]
     return {
-        "holdout_rule":"SHA-256 the complete discrete state path consumed by the model and retain only the first window in development -> validation -> test order. This makes model-input paths unique both within and across effective splits. Exact GPS-coordinate fingerprints are retained as a separate provenance audit.",
+        "holdout_rule":"Group by SHA-256 of the complete discrete state path consumed by the model and assign each group to its earliest development -> validation -> test split. Retain all group members in the owning split and exclude later-split members. Exact GPS-coordinate fingerprints are retained as a separate provenance audit.",
         "raw_counts":{s:int(len(raw[s]["users"])) for s in raw},
         "effective_counts":{s:int(len(effective[s]["users"])) for s in effective},
         "unique_model_input_paths":int(len(state_groups)),
