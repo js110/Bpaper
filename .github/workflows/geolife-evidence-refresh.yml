@@ -9,6 +9,10 @@ on:
       - 'src/geolife.py'
       - 'src/experiment.py'
       - 'src/recent_baselines.py'
+      - 'src/review_diagnostics.py'
+      - 'src/fit_ambiguity.py'
+      - 'src/build_extension_config.py'
+      - 'src/analyze_extensions.py'
       - 'src/refresh_geolife_configs.py'
       - 'data/geolife_*.npz'
       - '.github/workflows/geolife-evidence-refresh.yml'
@@ -24,7 +28,7 @@ jobs:
   refresh:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,14 +72,25 @@ jobs:
           python -m src.analyze_recent --recent-run results/recent_baselines --reference-run results/final --output results/recent_comparison --extra-run results/recent_privic_thinning --paper-assets
           cp results/combined/analysis/tradeoff.pdf paper/tradeoff.pdf
           cp results/combined/analysis/calibration.pdf paper/calibration.pdf
+      - name: Refresh GeoLife-dependent diagnostics and data-driven extension
+        run: |
+          rm -rf results/review1_diagnostics
+          python -m src.review_diagnostics --paper-assets
+          rm -rf results/data_driven_ambiguity results/data_driven_extension
+          python -m src.fit_ambiguity --output results/data_driven_ambiguity/models.json
+          python -m src.build_extension_config --models results/data_driven_ambiguity/models.json --output configs/data_driven_extension.json
+          python -m src.experiment --config configs/data_driven_extension.json
+          python -m src.analyze_extensions --run results/data_driven_extension --paper-assets
       - name: Commit refreshed evidence
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add configs/final.json configs/kl_baseline.json configs/recent_baselines.json configs/recent_privic_thinning.json
+          git add configs/final.json configs/kl_baseline.json configs/recent_baselines.json configs/recent_privic_thinning.json configs/data_driven_extension.json
           git add results/geolife_decontamination.json results/final results/kl_baseline results/combined
           git add results/privic_training results/recent_baselines results/recent_privic_thinning results/recent_comparison
-          git add paper/tradeoff.pdf paper/calibration.pdf paper/recent_tradeoff.pdf
+          git add results/review1_diagnostics results/data_driven_ambiguity results/data_driven_extension
+          git add paper/tradeoff.pdf paper/calibration.pdf paper/recent_tradeoff.pdf paper/recent_commute_zoom.pdf
+          git add paper/data_driven_table.tex paper/dfbsp_table.tex paper/current_numbers.tex paper/review_numbers.tex
           if git diff --cached --quiet; then
             echo "No GeoLife evidence changes"
             exit 0
