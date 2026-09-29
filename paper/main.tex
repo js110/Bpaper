@@ -95,7 +95,7 @@ The calculation takes $O(N)$ time for one task and stores an $N$-cell belief. Ma
 
 \subsection{Robust BSP under Model Uncertainty}
 \label{sec:robust}
-Model uncertainty motivates an explicit finite-set extension rather than a distribution-free claim. Let $\mathcal M=\{M_1,\ldots,M_K\}$ be a finite public ambiguity set fixed independently of the current private state. Model $M_k$ maintains its own public-history belief $b_t^{(k)}$, transition rule, and availability probability $\alpha_t^{(k)}$. For the current task, let $q_k^*$ be the maximal BSP gate from Proposition~1 using that model and $c_k=\max\{\rho,\|b_t^{(k)}\|_\infty\}$. Robust BSP (R-BSP) uses
+We model uncertainty through a finite public ambiguity set; no distribution-free guarantee is claimed. Let $\mathcal M=\{M_1,\ldots,M_K\}$ be fixed independently of the current private state. Model $M_k$ maintains its own public-history belief $b_t^{(k)}$, transition rule, and availability probability $\alpha_t^{(k)}$. For the current task, let $q_k^*$ be the BSP gate from Eq.~\eqref{eq:gate} under that model and let $c_k=\max\{\rho,\|b_t^{(k)}\|_\infty\}$. Robust BSP (R-BSP) uses
 \begin{equation}
  q_R^*=\min_{1\le k\le K} q_k^*.
  \label{eq:robust-gate}
