@@ -84,6 +84,12 @@ def effective_geolife_splits(paths=None):
         out[split]={k:v[idx] for k,v in data.items()}
     return out,dropped
 
+def effective_state_group_by_user(split="test",paths=None):
+    """Map effective-split user IDs to complete model-input state-path groups."""
+    splits,_=effective_geolife_splits(paths)
+    data=splits[split]
+    return {int(user):state_path_fingerprint(path) for user,path in zip(data["users"],data["paths"])}
+
 def load_effective_geolife(path):
     """Load one split, enforcing model-input group isolation against earlier splits."""
     p=Path(path)
