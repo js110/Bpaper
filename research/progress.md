@@ -90,7 +90,7 @@
 
 - 对六章主稿逐项核对语言逻辑、公式/命题与实现、正文数字与结果表、表格与生成脚本、GeoLife 预处理规则以及近期参考文献元数据。
 - 修正主要事实/表述问题：严格策略数量由 3 改为 4；data-driven R-BSP 的 25.7% MAP 改为中性陈述并补 validation-best single BSP 对照；删除未由实现支持的固定 one-slot delay；更新旧 replay threat-model 描述；将 tau 统一为 report-side threshold；将 DF 表及其生成器的误导性 `rho exceed` 表头更名为实际实现的 BSP local-cap violation；明确 ambiguity-set 95% 目标实际选中 6 个 population-prior 候选并达到 100% winner support；补充 coarsened likelihood 不拟合方向/跳距；修正 PMTA BibTeX 作者列表。
-- GeoLife 原始缓存仍记录 182 原始用户中 107 名满足窗口规则、23 development / 17 validation / 67 test；2026-09-29 技术复审发现两组跨 split 的 48 槽 GPS 坐标完全重复。有效分析加载器按 development→validation→test 优先级删除后续精确重复，因此当前 effective split 为 23 / 17 / 65。仅 8x8 栅格状态路径相同不作为去重依据；区域单元约 4.2 km x 4.3 km（研究纬度附近）。
+- GeoLife 原始缓存仍记录 182 原始用户中 107 名满足窗口规则、23 development / 17 validation / 67 test。完整精确坐标审计进一步识别了同 split 与跨 split 的重复窗口；有效分析加载器按 development→validation→test 优先级保留每个精确坐标簇的首个样本，因此当前 effective split 为 22 / 17 / 60。仅 8x8 栅格状态路径相同不作为去重依据；区域单元约 4.2 km x 4.3 km（研究纬度附近）。
 - 摘要压缩到约 235 词；六个编号章节保持不变；21 个 BibTeX 条目均被引用且无缺失 cite key；所有 label/ref 唯一且可解析。
 - 最终 GitHub Actions run 36511273191 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
 
@@ -114,3 +114,12 @@
 - 回归测试同时检查 user ID 与精确坐标指纹跨 split 均不交叉，并覆盖“开发/验证优先保留”和“近邻坐标不误去重”。
 - data-driven extension 在 split/实验/拟合逻辑进入 main 后自动重跑并刷新证据；在刷新完成前，旧 67-user data-driven 输出不再视为干净 holdout 证据。
 - PMC 投稿 ZIP 改为每次先删除旧 archive 再创建，并在 workflow 中核对 ZIP 成员与 manifest 精确一致，防止旧成员被 `zip -r` 保留。
+
+
+## 2026-09-29 去污染证据同步复核
+
+- 对技术复审后的 main 再核对，确认当前有效 GeoLife split 为 22 development / 17 validation / 60 test；已重跑的 `results/data_driven_ambiguity/` 与 `results/data_driven_extension/` 使用该 effective split。
+- 当前 data-driven mobility fit：development MLE 0.0538，95% user-bootstrap interval [0.0332, 0.0763]；validation point estimate 0.0573；6 个 population-prior candidate 全部保留以达到 100% winner support。
+- 严格 GeoLife replay：Uniform BSP / validation-best BSP / hand-grid R-BSP / data-driven R-BSP 的 local-cap violation 分别为 24.8% / 6.6% / 20.7% / 0.0%；data-driven R-BSP opportunity retention 为 8.1%，weighted retention 为 1.2%。
+- GeoLife RDF-BSP 在 tau=0.5 时：small-region retention 12.2% [3.2%, 23.4%]，weighted retention 20.4%，declared branch-cap violation 0.10% [0.00%, 0.21%]，original BSP local-cap violation 14.7%。同条件非鲁棒 DF-BSP branch violation 为 15.8%。
+- 主稿与 Supplement 已同步上述刷新数值，并显式区分 107 个原始候选窗口与 22/17/60 的去污染有效分析窗口；旧 23/17/67、5.4%、14.3% 等数字仅保留在有日期的历史记录中，不再作为当前论文结论。
