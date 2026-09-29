@@ -93,7 +93,7 @@ def main():
         lines.append(f"{r['scenario'].capitalize()} & "+('PML-T' if r['comparator']=='pml' else 'PRIVIC-T')+f" & {v('bsp_hit')} & {v('comparator_hit')} & {interval} "+r'\\')
     lines += [r'\bottomrule',r'\end{tabular}'];(out/'recent_matched_table.tex').write_text('\n'.join(lines))
     provenance=dict(inputs={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},bootstrap=nboot,seed=92026,
-                    unit='synthetic seed or GeoLife complete 48-slot state-path group',ci='paired percentile, pointwise, no multiplicity correction',
+                    unit='synthetic seed or GeoLife complete 48-slot state-path group; duplicate model-input paths are one resampling cluster',ci='paired percentile, pointwise, no multiplicity correction',
                     interpolation='lower convex envelope, reselected within each bootstrap; inside observed range only; require 95% overlap; exploratory oracle mixtures, no deployed-policy claim',conditions=len(summaries),trajectory_rows=len(rows))
     (out/'provenance.json').write_text(json.dumps(provenance,indent=2))
     if a.paper_assets:
