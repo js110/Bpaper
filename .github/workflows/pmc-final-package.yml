@@ -75,9 +75,20 @@ jobs:
       - name: Create flat submission zip
         run: |
           cp build/pmc_submission_flat/SUBMISSION_MANIFEST.json paper/PMC_submission_manifest.json
-          cd build/pmc_submission_flat
-          rm -f main.pdf main.aux main.log main.out main.blg main.bbl main.fdb_latexmk main.fls main.synctex.gz
-          zip -9 -r ../../paper/PMC_submission_source.zip .
+          rm -f build/pmc_submission_flat/main.pdf build/pmc_submission_flat/main.aux build/pmc_submission_flat/main.log build/pmc_submission_flat/main.out build/pmc_submission_flat/main.blg build/pmc_submission_flat/main.bbl build/pmc_submission_flat/main.fdb_latexmk build/pmc_submission_flat/main.fls build/pmc_submission_flat/main.synctex.gz
+          rm -f paper/PMC_submission_source.zip
+          (cd build/pmc_submission_flat && zip -9 -r ../../paper/PMC_submission_source.zip .)
+          python - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          manifest=json.loads(Path('paper/PMC_submission_manifest.json').read_text())
+          expected=set(manifest['flat_files'])|{'SUBMISSION_MANIFEST.json'}
+          with zipfile.ZipFile('paper/PMC_submission_source.zip') as z:
+              actual={Path(n).name for n in z.namelist() if not n.endswith('/')}
+          if actual!=expected:
+              raise SystemExit(f'ZIP membership mismatch: extra={sorted(actual-expected)}, missing={sorted(expected-actual)}')
+          print(f'ZIP membership verified: {len(actual)} files')
+          PY
       - name: Commit final package
         run: |
           git config user.name "github-actions[bot]"
