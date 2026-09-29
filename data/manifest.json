@@ -11,8 +11,7 @@
   "slots": 48,
   "slot_seconds": 60,
   "rule": "First lexicographic eligible file and first 48 consecutive minute bins per user; first in-bounds observation per minute; no interpolation.",
-  "split_rule": "user modulo 5: 0 development, 1 validation, 2/3/4 test",
-  "development_change_probability": 0.05087881591119333,
+  "split_rule": "raw user modulo 5: 0 development, 1 validation, 2/3/4 test",
   "fit_model": "Reflecting four-neighbour walk fitted only to development change rate; jump direction/distance not fitted.",
   "users_total": 182,
   "selected": [
@@ -966,7 +965,9 @@
     "validation": 17,
     "test": 67
   },
-  "holdout_rule": "Raw caches retain deterministic user-ID split candidates. Effective analysis groups windows by the complete 48-slot 8x8 state path consumed by the model and assigns each group to the earliest split in development -> validation -> test order. Exact GPS-coordinate hashes are provenance-only.",
+  "holdout_rule": "Effective analysis groups windows by the complete 48-slot 8x8 state path consumed by the model and assigns each group to its earliest development -> validation -> test split. All group members in the owning split are retained; later-split members are excluded. Exact GPS-coordinate hashes are provenance-only.",
   "effective_counts_source": "results/geolife_decontamination.json",
-  "manifest_scope": "raw deterministic processed-cache provenance; not the effective analysis split"
+  "manifest_scope": "raw deterministic processed-cache provenance; not the effective analysis split",
+  "raw_development_change_probability": 0.05087881591119333,
+  "effective_change_probability_source": "results/geolife_decontamination.json"
 }
