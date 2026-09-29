@@ -16,7 +16,7 @@ def load(path):
     for r in rows:
         for k in list(r):
             if k not in ['condition','scenario','method','attack','user']:
-                r[k]=float(r[k])
+                r[k]=float(r[k]) if r[k] not in ('',None) else float('nan')
     return rows
 
 def clusters(rows):
