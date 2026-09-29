@@ -6,29 +6,22 @@ recorded GeoLife source archive. They contain the original user-ID split
 candidates (23 development, 17 validation, 67 test); they are not, by
 themselves, the effective analysis split.
 
-The 2026-09-29 coordinate audit hashes the complete 48-slot float64 GPS window,
-not the coarse 8x8 state path. It found these exact-coordinate duplicate
-clusters in the committed caches:
+Two distinct audits are maintained. Exact float64 GPS-coordinate fingerprints
+are retained for provenance and identify literal duplicate windows. Holdout
+isolation, however, follows the representation actually consumed by the
+models: the complete 48-slot 8x8 state sequence. A state-path group is assigned
+to the earliest split in development -> validation -> test order, and later
+split members of that group are excluded from effective analysis even when
+their GPS coordinates differ.
 
-- development 55 / development 75;
-- development 70 / test 13;
-- validation 11 / test 88;
-- test 58 / test 59;
-- test 69 / test 129;
-- test 89 / test 144;
-- test 128 / test 153 / test 163.
+This rule prevents a model-input sequence from appearing in both construction
+and holdout splits. It deliberately does **not** claim that equal coarse paths
+are the same physical trip; rather, they are indistinguishable to the fitted
+and replay models used in this paper. The current effective counts, dropped
+later-split windows, cross-split state groups, and literal coordinate duplicate
+clusters are generated in `results/geolife_decontamination.json`.
 
-The effective loader processes development -> validation -> test and retains
-the first member of each exact-coordinate cluster. The resulting effective
-analysis split is therefore **22 development, 17 validation, and 60 test
-windows**. The dropped copies are development 75 and test 13, 59, 88, 129,
-144, 153, and 163.
-
-Coarse 8x8 state-path equality is deliberately **not** a duplicate criterion:
-distinct GPS paths can quantize to the same state sequence. All current
-analysis code that claims decontaminated GeoLife evidence must load through
-`src.geolife`. The machine-readable audit is generated as
-`results/geolife_decontamination.json`.
-
-Future regeneration through `src.prepare_data` applies the same exact
-coordinate-fingerprint rule before writing NPZ files.
+All analysis code that claims isolated GeoLife evidence must load through
+`src.geolife`. Future regeneration through `src.prepare_data` preserves the
+raw deterministic user-ID caches and records both coordinate and state-path
+fingerprints; effective isolation remains an analysis-time operation.

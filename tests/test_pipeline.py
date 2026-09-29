@@ -4,7 +4,7 @@ import numpy as np
 from src.model import gates,update
 from src.experiment import simulate,candidates,path_for
 from src.prepare_data import minute_window
-from src.geolife import coordinate_fingerprint,effective_geolife_splits
+from src.geolife import coordinate_fingerprint,state_path_fingerprint,effective_geolife_splits
 from src.fit_ambiguity import fit_move_coarsened
 
 class PipelineTests(unittest.TestCase):
@@ -28,23 +28,25 @@ class PipelineTests(unittest.TestCase):
     def test_data_split_disjoint(self):
         splits,_=effective_geolife_splits()
         names=['development','validation','test']
-        self.assertEqual([len(splits[s]['users']) for s in names],[22,17,60])
         users=[set(map(int,splits[s]['users'])) for s in names]
-        coords=[{coordinate_fingerprint(x) for x in splits[s]['coords']} for s in names]
+        states=[{state_path_fingerprint(x) for x in splits[s]['paths']} for s in names]
         for i in range(3):
             for j in range(i):
                 self.assertFalse(users[i]&users[j])
-                self.assertFalse(coords[i]&coords[j])
-    def test_exact_coordinate_dedup_keeps_earlier_split(self):
+                self.assertFalse(states[i]&states[j])
+        self.assertTrue(all(len(splits[s]['users'])>0 for s in names))
+    def test_state_path_group_keeps_first_window(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td);same=np.array([[39.9,116.3],[39.91,116.31]])
             other=np.array([[39.92,116.32],[39.93,116.33]])
+            third=np.array([[39.94,116.34],[39.95,116.35]])
             np.savez(root/'geolife_development.npz',users=np.array([70]),paths=np.array([[1,2]]),coords=np.array([same]))
             np.savez(root/'geolife_validation.npz',users=np.array([11]),paths=np.array([[1,2]]),coords=np.array([other]))
-            np.savez(root/'geolife_test.npz',users=np.array([13,88]),paths=np.array([[1,2],[1,2]]),coords=np.array([same,other]))
+            np.savez(root/'geolife_test.npz',users=np.array([13,88]),paths=np.array([[1,2],[3,4]]),coords=np.array([third,other]))
             splits,dropped=effective_geolife_splits({s:root/f'geolife_{s}.npz' for s in ['development','validation','test']})
-            self.assertEqual(splits['test']['users'].tolist(),[])
-            self.assertEqual({d['user'] for d in dropped},{13,88})
+            self.assertEqual(splits['validation']['users'].tolist(),[])
+            self.assertEqual(splits['test']['users'].tolist(),[88])
+            self.assertEqual({d['user'] for d in dropped},{11,13})
     def test_coordinate_fingerprint_does_not_collapse_nearby_points(self):
         a=np.array([[39.90000000,116.30000000],[39.91000000,116.31000000]])
         b=a.copy();b[0,0]+=1e-8

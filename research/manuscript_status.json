@@ -1,8 +1,8 @@
 {
-  "stage": "pmc_submission_package_technical_ready",
+  "stage": "geolife_model_input_group_refresh_pending",
   "target_journal": "Pervasive and Mobile Computing",
   "date": "2026-09-29",
-  "technical_ready": true,
+  "technical_ready": false,
   "submission_ready": false,
   "human_verified": false,
   "main_manuscript_pages": 28,
@@ -10,13 +10,13 @@
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
-  "tests_passed": 28,
+  "tests_passed": 30,
   "completed_conditions": 417,
   "trajectory_executions": 28973,
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36517619114,
+  "final_package_workflow_run": null,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -25,6 +25,8 @@
     "paper/supplement.pdf"
   ],
   "open_items": [
+    "complete model-input-group-isolated GeoLife evidence refresh and verify current HEAD CI",
+    "regenerate final manuscript/supplement/package from refreshed evidence",
     "all-author approval of the final manuscript",
     "competing-interests statement",
     "CRediT roles if requested by the submission system",
@@ -65,19 +67,11 @@
     "data_driven_models": 6,
     "data_driven_extension_conditions": 17,
     "data_driven_extension_trajectories": 1204,
-    "status": "post-hoc exploratory; development/validation model construction excludes test users, but test replay had been inspected earlier"
+    "status": "post-hoc exploratory; pending complete rerun on model-input-group-isolated GeoLife splits"
   },
   "final_qa": {
-    "development_main_compiles": true,
-    "flat_submission_main_compiles": true,
-    "supplement_compiles": true,
-    "no_final_overfull": true,
-    "no_final_oversized_float": true,
-    "no_final_undefined_references": true,
-    "no_final_undefined_control_sequence": true,
-    "main_pages": 28,
-    "flat_main_pages": 28,
-    "supplement_pages": 11
+    "status": "invalidated_by_pending_model_input_group_refresh",
+    "note": "Previous package compilation succeeded for the exact-coordinate-only split, but is not evidence for the current model-input-group isolation revision."
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
@@ -115,5 +109,15 @@
     "approximate_removed_mib": 35.66,
     "retained_current_result_evidence": true,
     "note": "Removed superseded drafts, failed/interrupted/pilot/validation/reprocheck outputs, duplicate diagnostics, preview images, stale packaging scripts, generated intermediates, and old branch sentinels from main; history remains recoverable through Git."
+  },
+  "data_status": {
+    "raw_user_id_split": {
+      "development": 23,
+      "validation": 17,
+      "test": 67
+    },
+    "effective_rule": "complete 48-slot 8x8 state-path groups assigned to earliest development -> validation -> test split",
+    "effective_counts_source": "results/geolife_decontamination.json",
+    "refresh_required": true
   }
 }

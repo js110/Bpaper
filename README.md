@@ -1,6 +1,6 @@
 # Bpaper：Sequential Mobile Crowdsensing Location Privacy
 
-This repository contains the current technically validated manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**.
+This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. A GeoLife model-input-group isolation refresh is currently required before the submission package should be treated as technically final.
 
 ## Current manuscript
 
@@ -8,9 +8,9 @@ This repository contains the current technically validated manuscript and reprod
 - Main manuscript: 28 pages, 6 numbered sections, 1 main figure, 2 main tables.
 - Supplementary material: 11 pages.
 - References: 21 cited entries.
-- Automated tests: 28.
+- Automated tests: 30.
 - Recorded experiment executions: 28,973 trajectories and 1,390,704 audited slot events.
-- Technical package status: ready.
+- Technical package status: **not final** pending the model-input-group-isolated GeoLife evidence refresh and a new package build.
 - Journal submission status: not submitted; author-owned declarations and approvals remain outstanding.
 
 Primary files:
@@ -56,7 +56,7 @@ The raw Microsoft GeoLife archive is not tracked. data/manifest.json records the
 python3 -m src.prepare_data
 ~~~
 
-The deterministic split contains 23 development, 17 validation, and 67 test users. Tasks and participation/report events are simulated; only the mobility traces are observational data.
+The raw deterministic user-ID split contains 23 development, 17 validation, and 67 test candidates. Effective analyses additionally isolate complete 48-slot 8×8 state-path groups across development/validation/test; current effective counts are recorded in `results/geolife_decontamination.json`. Tasks and participation/report events are simulated; only the mobility traces are observational data.
 
 ## Reproducing experiments
 

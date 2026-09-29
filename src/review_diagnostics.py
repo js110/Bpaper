@@ -16,6 +16,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from .analyze_recent import lower_hull
+from .geolife import effective_geolife_splits
 
 ROOT = Path(__file__).resolve().parents[1]
 SCENARIOS = ['static', 'walk', 'commute', 'geolife']
@@ -35,7 +36,9 @@ def main():
         sources.append(p)
         return p
 
-    splits = {s: np.load(source(f'data/geolife_{s}.npz')) for s in ['development', 'validation', 'test']}
+    for split in ['development','validation','test']:
+        source(f'data/geolife_{split}.npz')
+    splits, _ = effective_geolife_splits()
     assert all(not set(splits[a]['users']) & set(splits[b]['users'])
                for a, b in [('development', 'test'), ('development', 'validation'), ('validation', 'test')])
     development = splits['development']['paths']
@@ -182,7 +185,7 @@ def main():
                       zoom='same saved points and envelope as main recent-method figure; expanded vertical scale',
                       numpy=np.__version__, matplotlib=matplotlib.__version__)
     (out / 'provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')
-    assets = ['task_area_table.tex', 'recent_commute_zoom.pdf']
+    assets = ['task_area_table.tex', 'recent_commute_zoom.pdf', 'review_numbers.tex']
     if args.paper_assets:
         for name in assets:
             shutil.copyfile(out / name, ROOT / 'paper' / name)

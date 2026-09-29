@@ -11,6 +11,12 @@ on:
       - 'requirements.txt'
       - 'requirements-lock.txt'
       - '.github/workflows/code-tests.yml'
+      - 'paper/main.pdf'
+      - 'paper/supplement.pdf'
+      - 'paper/highlights.docx'
+      - 'paper/PMC_submission_source.zip'
+      - 'paper/PMC_submission_manifest.json'
+      - 'research/manuscript_status.json'
   pull_request:
     paths:
       - 'src/**'
