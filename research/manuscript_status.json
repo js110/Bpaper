@@ -1,5 +1,5 @@
 {
-  "stage": "geolife_model_input_group_refresh_pending",
+  "stage": "geolife_model_input_group_refreshed_package_pending",
   "target_journal": "Pervasive and Mobile Computing",
   "date": "2026-09-29",
   "technical_ready": false,
@@ -25,7 +25,6 @@
     "paper/supplement.pdf"
   ],
   "open_items": [
-    "complete model-input-group-isolated GeoLife evidence refresh and verify current HEAD CI",
     "regenerate final manuscript/supplement/package from refreshed evidence",
     "all-author approval of the final manuscript",
     "competing-interests statement",
@@ -67,11 +66,11 @@
     "data_driven_models": 6,
     "data_driven_extension_conditions": 17,
     "data_driven_extension_trajectories": 1204,
-    "status": "post-hoc exploratory; pending complete rerun on model-input-group-isolated GeoLife splits"
+    "status": "post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits"
   },
   "final_qa": {
-    "status": "invalidated_by_pending_model_input_group_refresh",
-    "note": "Previous package compilation succeeded for the exact-coordinate-only split, but is not evidence for the current model-input-group isolation revision."
+    "status": "package_pending_after_refreshed_evidence",
+    "note": "GeoLife evidence was refreshed on model-input-group-isolated splits; final manuscript/package validation must run on the refreshed generated assets."
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
@@ -88,10 +87,10 @@
     "corresponding_email": "8213662@163.com",
     "affiliation": "College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China",
     "funding": [
-      "Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941",
-      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002",
-      "National Foreign Expert Key Support Project — D2O25O185",
-      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
+      "Heilongjiang Provincial University Teacher Scientific Research Business Fee \u2014 2018-KYYWF0941",
+      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project \u2014 PL2024F002",
+      "National Foreign Expert Key Support Project \u2014 D2O25O185",
+      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan \u2014 YQJH2024239"
     ]
   },
   "manuscript_structure": [
@@ -118,6 +117,6 @@
     },
     "effective_rule": "complete 48-slot 8x8 state-path groups assigned to earliest development -> validation -> test split",
     "effective_counts_source": "results/geolife_decontamination.json",
-    "refresh_required": true
+    "refresh_required": false
   }
 }

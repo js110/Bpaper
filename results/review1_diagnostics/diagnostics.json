@@ -6,15 +6,16 @@
       34
     ],
     "development_peak": 0.223731884057971,
-    "hit": 0.2574626865671642,
-    "low": 0.17877021144278607,
-    "high": 0.3482664800995025,
-    "users": 67,
+    "hit": 0.16755319148936165,
+    "low": 0.09706338652482269,
+    "high": 0.2504543439716312,
+    "users": 53,
+    "state_path_groups": 47,
     "slots": 48,
     "uniform_hit": 0.015625,
     "bootstrap_seed": 170926,
     "bootstrap_replicates": 1000,
-    "interval": "percentile user bootstrap conditional on fixed development predictor; pointwise",
+    "interval": "percentile state-path-group bootstrap conditional on fixed development predictor; pointwise",
     "interpretation": "No task outputs; fixed cell predictor; not a rerun of an adaptive attack"
   },
   "mobility": {
@@ -26,18 +27,18 @@
       "adjacent_pairs": 1081
     },
     "validation": {
-      "users": 17,
-      "static_windows": 5,
-      "unique_cells_median": 3.0,
+      "users": 12,
+      "static_windows": 0,
+      "unique_cells_median": 4.0,
       "changes": 45,
-      "adjacent_pairs": 799
+      "adjacent_pairs": 564
     },
     "test": {
-      "users": 67,
-      "static_windows": 17,
+      "users": 53,
+      "static_windows": 5,
       "unique_cells_median": 3.0,
-      "changes": 180,
-      "adjacent_pairs": 3149
+      "changes": 174,
+      "adjacent_pairs": 2491
     }
   },
   "task_area": [
@@ -126,8 +127,8 @@
       "scenario": "geolife",
       "area_low": 1,
       "area_high": 8,
-      "tasks": 1829,
-      "opportunities": 49,
+      "tasks": 1437,
+      "opportunities": 34,
       "completed": 0,
       "retention": 0.0
     },
@@ -135,19 +136,19 @@
       "scenario": "geolife",
       "area_low": 9,
       "area_high": 31,
-      "tasks": 274,
-      "opportunities": 59,
-      "completed": 18,
-      "retention": 0.3050847457627119
+      "tasks": 228,
+      "opportunities": 47,
+      "completed": 16,
+      "retention": 0.3404255319148936
     },
     {
       "scenario": "geolife",
       "area_low": 32,
       "area_high": 64,
-      "tasks": 281,
-      "opportunities": 149,
-      "completed": 109,
-      "retention": 0.7315436241610739
+      "tasks": 227,
+      "opportunities": 121,
+      "completed": 90,
+      "retention": 0.743801652892562
     }
   ],
   "totals": {
@@ -176,12 +177,12 @@
       "large_region_completion_share": 0.8439716312056738
     },
     "geolife": {
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 127,
-      "retention": 0.49416342412451364,
-      "raw_completion": 0.05327181208053691,
-      "large_region_completion_share": 0.8582677165354331
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 106,
+      "retention": 0.5247524752475248,
+      "raw_completion": 0.056025369978858354,
+      "large_region_completion_share": 0.8490566037735849
     }
   },
   "main_table": [
@@ -313,56 +314,56 @@
     },
     {
       "condition": "geolife_adaptive_none_1",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 257,
-      "raw_completion": 0.1078020134228188
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 202,
+      "raw_completion": 0.10676532769556026
     },
     {
       "condition": "geolife_adaptive_random_0.5",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 143,
-      "raw_completion": 0.059983221476510064
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 113,
+      "raw_completion": 0.05972515856236787
     },
     {
       "condition": "geolife_adaptive_rate_2",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 110,
-      "raw_completion": 0.04614093959731544
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 90,
+      "raw_completion": 0.04756871035940803
     },
     {
       "condition": "geolife_adaptive_coarse_2",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 141,
-      "raw_completion": 0.05914429530201342
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 112,
+      "raw_completion": 0.05919661733615222
     },
     {
       "condition": "geolife_adaptive_positive_only_0.1",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 115,
-      "raw_completion": 0.04823825503355705
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 93,
+      "raw_completion": 0.04915433403805497
     },
     {
       "condition": "geolife_adaptive_bsp_0.1",
-      "tasks": 2384,
-      "opportunities": 257,
-      "completed": 127,
-      "raw_completion": 0.05327181208053691
+      "tasks": 1892,
+      "opportunities": 202,
+      "completed": 106,
+      "raw_completion": 0.056025369978858354
     }
   ],
   "numeric_macros": {
-    "PopulationPriorHit": "25.75",
+    "PopulationPriorHit": "16.76",
     "PopulationPriorPeak": "22.37",
-    "ReplayStaticWindows": "17",
+    "ReplayStaticWindows": "5",
     "ReplayMedianCells": "3",
     "LargeTaskShareMin": "83.7",
     "LargeTaskShareMax": "90.5",
     "RawCompletionMin": "4.69",
-    "RawCompletionMax": "5.33"
+    "RawCompletionMax": "5.60"
   },
   "study_status": "post-review descriptive diagnostics; unchanged simulation outputs"
 }

@@ -4,7 +4,7 @@
     "target_utility": 0.5,
     "comparator": "pml",
     "bsp_hit": 0.08522875584412697,
-    "comparator_hit": 0.16737569597239935
+    "comparator_hit": 0.16666475847239934
   },
   {
     "scenario": "static",
@@ -25,7 +25,7 @@
     "target_utility": 0.7,
     "comparator": "pml",
     "bsp_hit": 0.18618711997068635,
-    "comparator_hit": 0.28076668175225
+    "comparator_hit": 0.2804700070727628
   },
   {
     "scenario": "static",
@@ -87,21 +87,21 @@
     "scenario": "commute",
     "target_utility": 0.5,
     "comparator": "pml",
-    "bsp_hit": 0.03669117865531068,
+    "bsp_hit": 0.03669117865531067,
     "comparator_hit": 0.04341221819615374
   },
   {
     "scenario": "commute",
     "target_utility": 0.5,
     "comparator": "privic",
-    "bsp_hit": 0.03669117865531068,
+    "bsp_hit": 0.03669117865531067,
     "comparator_hit": 0.0432190144148151
   },
   {
     "scenario": "commute",
     "target_utility": 0.5,
     "comparator": "random",
-    "bsp_hit": 0.03669117865531068,
+    "bsp_hit": 0.03669117865531067,
     "comparator_hit": 0.04722144031224832
   },
   {
@@ -129,42 +129,42 @@
     "scenario": "geolife",
     "target_utility": 0.5,
     "comparator": "pml",
-    "bsp_hit": 0.02887931640674383,
-    "comparator_hit": 0.10540613459087253
+    "bsp_hit": 0.022372187974124474,
+    "comparator_hit": 0.09276943974192721
   },
   {
     "scenario": "geolife",
     "target_utility": 0.5,
     "comparator": "privic",
-    "bsp_hit": 0.02887931640674383,
-    "comparator_hit": 0.13333099355374026
+    "bsp_hit": 0.022372187974124474,
+    "comparator_hit": 0.131914801540853
   },
   {
     "scenario": "geolife",
     "target_utility": 0.5,
     "comparator": "random",
-    "bsp_hit": 0.02887931640674383,
-    "comparator_hit": 0.14796663994494183
+    "bsp_hit": 0.022372187974124474,
+    "comparator_hit": 0.13338483195779727
   },
   {
     "scenario": "geolife",
     "target_utility": 0.7,
     "comparator": "pml",
-    "bsp_hit": 0.19265172678877923,
-    "comparator_hit": 0.20285194017665886
+    "bsp_hit": 0.15796008901841413,
+    "comparator_hit": 0.1682997213559257
   },
   {
     "scenario": "geolife",
     "target_utility": 0.7,
     "comparator": "privic",
-    "bsp_hit": 0.19265172678877923,
-    "comparator_hit": 0.19327788443693641
+    "bsp_hit": 0.15796008901841413,
+    "comparator_hit": 0.2371920596756751
   },
   {
     "scenario": "geolife",
     "target_utility": 0.7,
     "comparator": "random",
-    "bsp_hit": 0.19265172678877923,
+    "bsp_hit": 0.15796008901841413,
     "comparator_hit": null
   }
 ]

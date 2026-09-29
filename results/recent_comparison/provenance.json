@@ -1,14 +1,14 @@
 {
   "inputs": {
-    "results/recent_baselines/rows.csv": "77f180c91860739df4e34cfa49a93332a6f0f54e6c6cf63758d743c41ff4260d",
-    "results/final/rows.csv": "bd5d25cadd5c0852c9d66ed71877d1e614280447e8ee908efbafb2c915a16edd",
-    "results/recent_privic_thinning/rows.csv": "2c3cef93892387911a99f093f497e886decb1e87e9b4884eecef7fc492ec9373"
+    "results/recent_baselines/rows.csv": "0377aaf6c764538e13572f796b9171a8a97fc51b5e0596c6d4dcf74c52da1ae0",
+    "results/final/rows.csv": "9202b98ff3a95dad3369d76c74b8e44f5488788272deeb48466bb675dcfef1ea",
+    "results/recent_privic_thinning/rows.csv": "619e8987232834168cefcc1f213814b00731587115a2adf20c90f05939f80dc6"
   },
   "bootstrap": 1000,
   "seed": 92026,
-  "unit": "synthetic seed or GeoLife user",
+  "unit": "synthetic seed or GeoLife complete 48-slot state-path group; duplicate model-input paths are one resampling cluster",
   "ci": "paired percentile, pointwise, no multiplicity correction",
   "interpolation": "lower convex envelope, reselected within each bootstrap; inside observed range only; require 95% overlap; exploratory oracle mixtures, no deployed-policy claim",
   "conditions": 168,
-  "trajectory_rows": 12894
+  "trajectory_rows": 12306
 }
