@@ -1,11 +1,11 @@
 {
   "stage": "pmc_submission_package_technical_ready",
   "target_journal": "Pervasive and Mobile Computing",
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "technical_ready": true,
   "submission_ready": false,
   "human_verified": false,
-  "main_manuscript_pages": 27,
+  "main_manuscript_pages": 28,
   "supplementary_pages": 11,
   "references": 21,
   "figures_in_main_manuscript": 1,
@@ -16,7 +16,7 @@
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36370913452,
+  "final_package_workflow_run": 36507948107,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -75,8 +75,8 @@
     "no_final_oversized_float": true,
     "no_final_undefined_references": true,
     "no_final_undefined_control_sequence": true,
-    "main_pages": 27,
-    "flat_main_pages": 27,
+    "main_pages": 28,
+    "flat_main_pages": 28,
     "supplement_pages": 11
   },
   "reference_policy": "research/reference_policy.md",
@@ -99,5 +99,13 @@
       "National Foreign Expert Key Support Project — D2O25O185",
       "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
     ]
-  }
+  },
+  "manuscript_structure": [
+    "Introduction",
+    "Related Work",
+    "Proposed Branch-Safe Participation Framework",
+    "Privacy Guarantees and Robustness Analysis",
+    "Experimental Evaluation",
+    "Conclusion"
+  ]
 }
