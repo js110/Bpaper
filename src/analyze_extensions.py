@@ -106,7 +106,7 @@ def main():
             else:
                 policy={'dfbsp':'DF-BSP','rdfbsp':'RDF-BSP'}[s['method']]
             tau='--' if s['positive_cap'] is None else f"{float(s['positive_cap']):.3g}"
-            lines.append(f"{scenario.capitalize()} & {policy} & {tau} & {pct(s['local_violation_rate'])}\% & "
+            lines.append(f"{('GeoLife' if scenario=='geolife' else scenario.capitalize())} & {policy} & {tau} & {pct(s['local_violation_rate'])}\% & "
                          f"{pct(s['effective_violation_rate'])}\% & {pct(s['weighted_utility'])}\% & {pct(s['small_retention'])}\% " + r'\\')
         if scenario!='geolife':lines.append(r'\addlinespace')
     lines += [r'\bottomrule',r'\end{tabular}']
