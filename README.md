@@ -68,19 +68,7 @@ A fresh run should use a new output directory rather than overwrite frozen evide
 python3 -m src.reproduce --output results/reproduction_01
 ~~~
 
-For the later robust extensions:
-
-~~~bash
-python3 -m src.experiment --config configs/robust_informed.json
-python3 -m src.analyze_robust --run results/robust_informed
-
-python3 -m src.fit_ambiguity --output results/data_driven_ambiguity/models.json
-python3 -m src.build_extension_config
-python3 -m src.experiment --config configs/data_driven_extension.json
-python3 -m src.analyze_extensions --run results/data_driven_extension
-~~~
-
-The checked-in result directories are frozen evidence. For an actual rerun, change each output directory or use the manual GitHub Actions workflows.
+The checked-in result directories are frozen evidence. Do not run a frozen config directly into its checked-in output directory. For the robust and data-driven extensions, either clone the config and change its output path, or use the manual rbsp-validation, rbsp-boundary, and data-driven-extension GitHub Actions workflows to intentionally refresh the tracked evidence.
 
 ## Regenerating manuscript assets
 
@@ -100,6 +88,6 @@ src.paper_assets only synchronizes assets used by the current manuscript; it doe
 
 ## Submission package
 
-The manual pmc-final-package GitHub Actions workflow runs the unit tests, compiles the development manuscript and supplement, builds and independently compiles the flat Editorial Manager source, verifies PDF text equivalence, and refreshes the final upload artifacts.
+The pmc-final-package GitHub Actions workflow runs on main manuscript-source changes and can also be started manually. It runs the unit tests, compiles the development manuscript and supplement, builds and independently compiles the flat Editorial Manager source, verifies PDF text equivalence, and refreshes the final upload artifacts.
 
 Before submission, complete the author-owned items in paper/AUTHOR_CONFIRMATION.md and paper/PMC_SUBMISSION_CHECKLIST.md.

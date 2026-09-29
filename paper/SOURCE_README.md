@@ -25,7 +25,7 @@ Final validated inventory:
 - 21 cited references;
 - 28 automated tests;
 - final flat Editorial Manager source independently compiles to the same 28-page text as the development source;
-- final packaging workflow: GitHub Actions run 36511273191, successful.
+- final packaging workflow: GitHub Actions run 36517619114, successful.
 
 Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
 

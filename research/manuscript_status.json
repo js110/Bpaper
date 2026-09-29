@@ -16,7 +16,7 @@
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36511273191,
+  "final_package_workflow_run": 36517619114,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -107,5 +107,13 @@
     "Privacy Guarantees and Robustness Analysis",
     "Experimental Evaluation",
     "Conclusion"
-  ]
+  ],
+  "main_cleanup": {
+    "date": "2026-09-29",
+    "commit": "4ef63f329baa9860cb196847bd69b88099c85f66",
+    "files_removed": 239,
+    "approximate_removed_mib": 35.66,
+    "retained_current_result_evidence": true,
+    "note": "Removed superseded drafts, failed/interrupted/pilot/validation/reprocheck outputs, duplicate diagnostics, preview images, stale packaging scripts, generated intermediates, and old branch sentinels from main; history remains recoverable through Git."
+  }
 }

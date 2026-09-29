@@ -20,5 +20,5 @@ Reference policy: prefer recent work where appropriate, retain necessary origina
 - main is the canonical branch.
 - code-tests.yml is the automatic source/config/test validation workflow on main.
 - data-driven-extension.yml, rbsp-validation.yml, and rbsp-boundary.yml are manual experiment checkpoints.
-- pmc-final-package.yml is the manual manuscript/package checkpoint and may refresh tracked final upload artifacts.
+- pmc-final-package.yml runs on main manuscript-source changes and is also manually dispatchable; it may refresh tracked final upload artifacts.
 - Generated evidence or package commits must not recursively trigger the workflow that produced them.

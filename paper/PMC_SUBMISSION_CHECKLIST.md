@@ -29,7 +29,7 @@ Current canonical branch: **main**.
 - data-driven-extension.yml — manual rerun of the data-driven ambiguity-set and DF/RDF extension.
 - rbsp-validation.yml — manual rerun of the finite-model robust stress.
 - rbsp-boundary.yml — manual rerun of the out-of-set boundary stress.
-- pmc-final-package.yml — manual final manuscript/package validation and artifact refresh.
+- pmc-final-package.yml — automatic on main manuscript-source changes and also manually dispatchable; performs final manuscript/package validation and artifact refresh.
 
 ## Author-owned items before submission
 

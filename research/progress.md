@@ -93,3 +93,14 @@
 - GeoLife 描述核对为 182 原始用户中 107 名满足窗口规则，最终 23 development / 17 validation / 67 test；8x8 区域单元约 4.2 km x 4.3 km（研究纬度附近）。
 - 摘要压缩到约 235 词；六个编号章节保持不变；21 个 BibTeX 条目均被引用且无缺失 cite key；所有 label/ref 唯一且可解析。
 - 最终 GitHub Actions run 36511273191 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
+
+
+## 2026-09-29 main 分支清理
+
+- 将 PMC 六章终稿合并后的 main 作为唯一主线，清除 239 个明确过时或重复文件，约 35.66 MiB；Git 历史保留可追溯版本。
+- 删除范围包括：27 页/长稿备份、旧系统图、未引用图表副本、旧 source bundle 入口、pilot/validation/reprocheck、KL 中断运行、PRIVIC pilot、recent comparison v1、重复 factual-audit diagnostics、构建日志和 PDF 预览截图。
+- 保留正文与 Supplement 当前结论所需的 final、KL、sensitivity、informed、recent baseline、robust、boundary、data-driven 和 review1 diagnostics 冻结证据。
+- 删除已被 build_submission_package.py 替代的 package_paper.py；移除六章终稿未使用的 numbers.tex/review_numbers.tex 和 main.bbl。
+- 收敛 paper/ 到正式稿、Supplement、投稿文件和当前实际引用的图表/表格；flat Editorial Manager 源重新生成后仅含 7 个必要文件。
+- GitHub Actions 已统一到 main：code-tests 自动；robust/data-driven 实验手动；pmc-final-package 对 main 稿件源变更自动验证且支持手动触发。
+- 清理后 code-tests run 36517514356 通过；最终 package run 36517619114 通过。主稿 28 页、flat source 28 页、Supplement 11 页，文本等价且最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
