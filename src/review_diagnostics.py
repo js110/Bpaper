@@ -182,8 +182,7 @@ def main():
                       zoom='same saved points and envelope as main recent-method figure; expanded vertical scale',
                       numpy=np.__version__, matplotlib=matplotlib.__version__)
     (out / 'provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')
-    assets = ['main_table_revision.tex', 'task_area_table.tex', 'prior_diagnostic_table.tex', 'review_numbers.tex',
-              'recent_commute_zoom.pdf', 'recent_commute_zoom.png']
+    assets = ['task_area_table.tex', 'recent_commute_zoom.pdf']
     if args.paper_assets:
         for name in assets:
             shutil.copyfile(out / name, ROOT / 'paper' / name)

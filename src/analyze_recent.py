@@ -97,7 +97,7 @@ def main():
                     interpolation='lower convex envelope, reselected within each bootstrap; inside observed range only; require 95% overlap; exploratory oracle mixtures, no deployed-policy claim',conditions=len(summaries),trajectory_rows=len(rows))
     (out/'provenance.json').write_text(json.dumps(provenance,indent=2))
     if a.paper_assets:
-        for name in ['recent_tradeoff.pdf','recent_tradeoff.png','recent_matched_table.tex']:shutil.copyfile(out/name,Path('paper')/name)
+        shutil.copyfile(out/'recent_tradeoff.pdf',Path('paper')/'recent_tradeoff.pdf')
     print(json.dumps(clean,indent=2))
 
 if __name__=='__main__':main()

@@ -2,11 +2,6 @@ name: pmc-final-package
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - submission/pmc-2026-09-26
-    paths:
-      - 'paper/.package-request'
 
 permissions:
   contents: write
@@ -17,6 +12,7 @@ concurrency:
 
 jobs:
   package:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -69,21 +65,21 @@ jobs:
         run: |
           cp build/pmc_submission_flat/SUBMISSION_MANIFEST.json paper/PMC_submission_manifest.json
           cd build/pmc_submission_flat
-          rm -f main.pdf main.aux main.log main.out main.blg main.fdb_latexmk main.fls main.synctex.gz
+          rm -f main.pdf main.aux main.log main.out main.blg main.bbl main.fdb_latexmk main.fls main.synctex.gz
           zip -9 -r ../../paper/PMC_submission_source.zip .
       - name: Commit final package
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add paper/main.pdf paper/main.bbl paper/supplement.pdf paper/highlights.docx paper/PMC_submission_source.zip paper/PMC_submission_manifest.json
+          git add paper/main.pdf paper/supplement.pdf paper/highlights.docx paper/PMC_submission_source.zip paper/PMC_submission_manifest.json
           if git diff --cached --quiet; then
             echo "No generated package changes"
             exit 0
           fi
           git commit -m "Build final PMC submission package [skip ci]"
           for attempt in 1 2 3; do
-            git pull --rebase origin submission/pmc-2026-09-26
-            if git push origin HEAD:submission/pmc-2026-09-26; then exit 0; fi
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
             echo "Push raced with another commit; retrying ($attempt/3)"
             sleep 2
           done

@@ -1,31 +1,30 @@
 # PMC submission upload guide
 
-Use this file to avoid uploading stale or development-only artifacts.
+Target journal: **Pervasive and Mobile Computing**
 
-## Primary manuscript
-- `main.pdf` — final review PDF generated from the validated main LaTeX source.
-- `PMC_submission_source.zip` — flat one-level LaTeX source package for Editorial Manager. This is the source archive to use; the older `manuscript_source.zip` has been removed.
-- `PMC_submission_manifest.json` — internal manifest listing every file contained in the flat source archive.
+Use the current files on main; do not reconstruct the package from historical commits.
 
-## Supplementary material
-- `supplement.pdf` — extended methods, comparator details, diagnostic figures/tables, model-mismatch/boundary results, task-size analysis, and reproducibility information.
-- `supplement.tex` — editable supplementary source retained in the repository. Upload the PDF unless the submission system explicitly requests supplementary source files.
+## Upload files
 
-## Other submission files
-- `highlights.docx` — five Highlights bullets generated from `highlights.txt`.
-- `COVER_LETTER_DRAFT.md` — cover-letter text; responsible authors must confirm any originality, conflict, ethics, funding-role, or approval statements before use.
-- `AUTHOR_CONFIRMATION.md` — internal author checklist; do not upload this file.
+- main.pdf — 28-page final review manuscript.
+- PMC_submission_source.zip — flat one-level LaTeX source for Editorial Manager.
+- supplement.pdf — 11-page supplementary technical material.
+- highlights.docx — five Elsevier Highlights bullets.
+- COVER_LETTER_DRAFT.md — author-reviewed text source for the cover letter.
 
-## Do not upload as the manuscript source
-- `full_research_record.tex` — archived pre-condensation research record.
-- development-only figures/tables not listed in `PMC_submission_manifest.json`.
-- raw GeoLife archives, third-party article full texts, result logs, or internal review files.
+PMC_submission_manifest.json is an internal package manifest and normally does not need to be uploaded.
 
-## Technical validation
-- final main manuscript: 27 pages;
-- flat source independently compiles and is text-equivalent to the development build;
-- 28 automated tests pass;
-- no final unresolved references, undefined control sequences, oversized floats, or overfull boxes;
-- final source package has no subfolders.
+## Internal files that are not submission items
 
-Repository state remains `technical_ready=true`, `submission_ready=false` until the responsible authors complete `AUTHOR_CONFIRMATION.md`.
+- AUTHOR_CONFIRMATION.md
+- PMC_SUBMISSION_CHECKLIST.md
+- SOURCE_README.md
+- raw results/, research/, literature/, workflows, and test files
+
+Do not upload the raw GeoLife archive or third-party article full texts.
+
+## Technical status
+
+The validated main and flat-source builds are both 28 pages and text-equivalent. The supplement is 11 pages. All 28 automated tests pass, and the final LaTeX quality gate has no unresolved references, undefined control sequences, oversized floats, or overfull boxes.
+
+The repository remains technical_ready=true and submission_ready=false until the responsible authors complete the remaining declarations and approvals listed in AUTHOR_CONFIRMATION.md.

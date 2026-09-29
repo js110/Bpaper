@@ -2,11 +2,6 @@ name: data-driven-extension
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - submission/pmc-2026-09-26
-    paths:
-      - 'research/.run-data-driven-extension'
 
 permissions:
   contents: write
@@ -16,7 +11,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  extension:
+  run:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -29,39 +25,25 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: python -m pip install -r requirements-lock.txt
-      - name: Run complete unit tests
+      - name: Run unit tests
         run: python -m unittest discover -s tests -v
-      - name: Fit ambiguity set from development and validation only
+      - name: Fit, run, and analyze the extension
         run: |
           rm -rf results/data_driven_ambiguity results/data_driven_extension
           python -m src.fit_ambiguity --output results/data_driven_ambiguity/models.json
-      - name: Freeze extension configuration
-        run: python -m src.build_extension_config --models results/data_driven_ambiguity/models.json --output configs/data_driven_extension.json
-      - name: Run data-driven and disclosure-floor experiments
-        run: python -m src.experiment --config configs/data_driven_extension.json
-      - name: Analyze extension and prepare manuscript tables
-        run: python -m src.analyze_extensions --run results/data_driven_extension --paper-assets
-      - name: Print fitted set and results
-        run: |
-          cat results/data_driven_ambiguity/models.json
-          cat results/data_driven_extension/analysis/summary.csv
-      - name: Commit reproducible extension evidence
+          python -m src.build_extension_config --models results/data_driven_ambiguity/models.json --output configs/data_driven_extension.json
+          python -m src.experiment --config configs/data_driven_extension.json
+          python -m src.analyze_extensions --run results/data_driven_extension --paper-assets
+
+      - name: Commit refreshed evidence
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add results/data_driven_ambiguity results/data_driven_extension configs/data_driven_extension.json paper/data_driven_table.tex paper/dfbsp_table.tex
           if git diff --cached --quiet; then
-            echo "No extension result changes"
-          else
-            git commit -m "Record data-driven R-BSP and DF-BSP results [skip ci]"
-            for attempt in 1 2 3; do
-              git pull --rebase origin submission/pmc-2026-09-26
-              if git push origin HEAD:submission/pmc-2026-09-26; then
-                exit 0
-              fi
-              echo "Push raced with another commit; retrying ($attempt/3)"
-              sleep 2
-            done
-            echo "Failed to publish extension evidence after 3 retries"
-            exit 1
+            echo "No evidence changes"
+            exit 0
           fi
+          git commit -m "Refresh data-driven R-BSP and DF-BSP evidence [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
