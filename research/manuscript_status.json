@@ -62,10 +62,12 @@
     "hand_grid_trajectories": 3200,
     "boundary_conditions": 8,
     "boundary_trajectories": 640,
-    "data_driven_models": 6,
+    "data_driven_models": 2,
     "data_driven_extension_conditions": 17,
     "data_driven_extension_trajectories": 1204,
-    "status": "post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits"
+    "status": "post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits",
+    "data_driven_selection_mass": 0.9695,
+    "data_driven_selection_mass_target": 0.95
   },
   "final_qa": {
     "status": "passed_on_current_sources",
@@ -90,10 +92,10 @@
     "corresponding_email": "8213662@163.com",
     "affiliation": "College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China",
     "funding": [
-      "Heilongjiang Provincial University Teacher Scientific Research Business Fee \u2014 2018-KYYWF0941",
-      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project \u2014 PL2024F002",
-      "National Foreign Expert Key Support Project \u2014 D2O25O185",
-      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan \u2014 YQJH2024239"
+      "Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941",
+      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002",
+      "National Foreign Expert Key Support Project — D2O25O185",
+      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
     ]
   },
   "manuscript_structure": [
