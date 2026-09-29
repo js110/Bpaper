@@ -104,7 +104,7 @@ jobs:
             echo "No generated package changes"
             exit 0
           fi
-          git commit -m "Build final PMC submission package [skip ci]"
+          git commit -m "Build final PMC submission package"
           for attempt in 1 2 3; do
             git pull --rebase origin main
             if git push origin HEAD:main; then exit 0; fi
