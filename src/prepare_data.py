@@ -71,12 +71,12 @@ def main():
         source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
         bounds=BOUNDS,side=8,slots=48,slot_seconds=60,
         rule='First lexicographic eligible file and first 48 consecutive minute bins per user; first in-bounds observation per minute; no interpolation.',
-        holdout_rule='Raw caches keep the deterministic user-ID split candidates. Effective analysis groups windows by SHA-256 of the complete 48-slot 8x8 state path consumed by the model and assigns each group to the earliest split in development -> validation -> test order. Exact GPS-coordinate fingerprints are recorded separately for provenance.',
+        holdout_rule='Raw caches keep deterministic user-ID split candidates. Effective analysis hashes the complete 48-slot 8x8 state path consumed by the model and retains only the first occurrence in development -> validation -> test order, making model inputs unique within and across effective splits. Exact GPS-coordinate fingerprints are recorded separately for provenance.',
         split_rule='user modulo 5: 0 development, 1 validation, 2/3/4 test; effective model-input groups are isolated by src.geolife at analysis time',
         raw_development_change_probability=raw_change,
         fit_model='Reflecting four-neighbour walk fitted only to development change rate; jump direction/distance not fitted.',
         users_total=len(byuser),
-        counts={s:sum(r['split']==s for r in selected) for s in ['development','validation','test']},
+        raw_counts={s:sum(r['split']==s for r in selected) for s in ['development','validation','test']},
         selected=[{k:v for k,v in r.items() if k not in ['path','coords']} for r in selected],
         excluded=excluded)
     audit=decontamination_audit()
@@ -85,5 +85,5 @@ def main():
     manifest['unique_model_input_paths']=audit['unique_model_input_paths']
     manifest['cross_split_model_input_group_count']=len(audit['cross_split_model_input_groups'])
     Path('data/manifest.json').write_text(json.dumps(manifest,indent=2))
-    print(json.dumps({k:manifest[k] for k in ['users_total','counts','effective_counts','development_change_probability']}))
+    print(json.dumps({k:manifest[k] for k in ['users_total','raw_counts','effective_counts','development_change_probability']}))
 if __name__=='__main__':main()
