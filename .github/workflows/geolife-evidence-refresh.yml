@@ -112,12 +112,21 @@ jobs:
           git add paper/tradeoff.pdf paper/calibration.pdf paper/recent_tradeoff.pdf paper/recent_commute_zoom.pdf
           git add paper/data_driven_table.tex paper/dfbsp_table.tex paper/current_numbers.tex paper/review_numbers.tex
           git add research/manuscript_status.json
+          # Capture every tracked generated-file change. The refresh rewrites
+          # some derived assets that are intentionally not enumerated above;
+          # leaving them unstaged makes a subsequent pull --rebase fail.
+          git add -u
           if git diff --cached --quiet; then
             echo "No GeoLife evidence changes"
             exit 0
           fi
           git commit -m "Refresh model-input-isolated GeoLife evidence"
           for attempt in 1 2 3; do
+            if ! git diff --quiet || ! git diff --cached --quiet; then
+              echo "Refusing rebase with dirty worktree"
+              git status --short
+              exit 1
+            fi
             git pull --rebase origin main
             if git push origin HEAD:main; then exit 0; fi
             echo "Push raced with another commit; retrying ($attempt/3)"
