@@ -1,9 +1,10 @@
-"""GeoLife split loading with exact-coordinate decontamination.
+"""GeoLife split loading with model-input-level decontamination.
 
-The committed NPZ files are treated as raw deterministic caches.  Effective
-development/validation/test splits are formed in that order and later exact
-48-slot coordinate duplicates are dropped.  Equality of coarse grid-state
-paths alone is deliberately not a duplicate criterion.
+The committed NPZ files are immutable deterministic caches of the original
+user-ID split candidates. Effective development/validation/test splits are
+formed in that order. Exact GPS-coordinate duplicates are tracked for
+provenance, while holdout isolation is enforced on the complete 48-slot
+coarse state path actually consumed by the fitted/replay models.
 """
 import hashlib
 import json
@@ -12,11 +13,18 @@ import numpy as np
 
 SPLIT_ORDER=("development","validation","test")
 
+def _sha256_array(values,dtype):
+    a=np.asarray(values,dtype=dtype)
+    a=np.ascontiguousarray(a.astype(dtype,copy=False))
+    return hashlib.sha256(a.tobytes()).hexdigest()
+
 def coordinate_fingerprint(coords):
     """Stable SHA-256 fingerprint for an exact coordinate window."""
-    a=np.asarray(coords,dtype=np.float64)
-    a=np.ascontiguousarray(a.astype(">f8",copy=False))
-    return hashlib.sha256(a.tobytes()).hexdigest()
+    return _sha256_array(coords,">f8")
+
+def state_path_fingerprint(path):
+    """Stable SHA-256 fingerprint for the full discrete model-input path."""
+    return _sha256_array(path,">i8")
 
 def _read_npz(path):
     p=Path(path)
@@ -24,39 +32,59 @@ def _read_npz(path):
         return {k:np.array(data[k],copy=True) for k in ("users","paths","coords")}
 
 def effective_geolife_splits(paths=None):
-    """Return decontaminated splits and records for dropped exact duplicates.
+    """Return effective splits with no repeated model-input path across splits.
 
-    Split precedence is development, then validation, then test.  If two users
-    have exactly the same 48-slot GPS coordinate window, only the earliest
-    split's copy is retained.  This prevents train/validation/test leakage
-    without treating coarse 8x8 state-path collisions as duplicate trajectories.
+    Split precedence is development, then validation, then test. A complete
+    discrete state path is assigned to the earliest split in which it occurs;
+    later-split windows with the same model input are excluded from effective
+    analysis, even when their GPS coordinates differ. Within the owning split,
+    distinct users/windows are retained so the procedure is group-wise rather
+    than silently collapsing observations inside a split.
+
+    Exact coordinate duplicates are also recorded separately for provenance.
     """
     if paths is None:
         paths={s:Path("data")/f"geolife_{s}.npz" for s in SPLIT_ORDER}
     else:
         paths={s:Path(p) for s,p in paths.items()}
     raw={s:_read_npz(paths[s]) for s in SPLIT_ORDER if s in paths}
-    seen={};out={};dropped=[]
+    owner_by_state={}
+    first_coordinate={}
+    out={}
+    dropped=[]
+    coordinate_duplicates=[]
     for split in SPLIT_ORDER:
         if split not in raw:continue
         data=raw[split];keep=[]
-        for i,(user,coords) in enumerate(zip(data["users"],data["coords"])):
-            fp=coordinate_fingerprint(coords)
-            if fp in seen:
-                prior=seen[fp]
-                dropped.append(dict(
-                    split=split,user=int(user),fingerprint=fp,
+        for i,(user,path,coords) in enumerate(zip(data["users"],data["paths"],data["coords"])):
+            user=int(user)
+            sfp=state_path_fingerprint(path)
+            cfp=coordinate_fingerprint(coords)
+            if cfp in first_coordinate:
+                prior=first_coordinate[cfp]
+                coordinate_duplicates.append(dict(
+                    split=split,user=user,coordinate_fingerprint=cfp,
                     duplicate_of_split=prior["split"],
                     duplicate_of_user=prior["user"]))
+            else:
+                first_coordinate[cfp]=dict(split=split,user=user)
+
+            owner=owner_by_state.get(sfp)
+            if owner is None:
+                owner_by_state[sfp]=split
+            elif owner!=split:
+                dropped.append(dict(
+                    split=split,user=user,state_path_fingerprint=sfp,
+                    assigned_split=owner,coordinate_fingerprint=cfp,
+                    reason="model-input path already assigned to earlier split"))
                 continue
-            seen[fp]=dict(split=split,user=int(user))
             keep.append(i)
         idx=np.asarray(keep,dtype=int)
         out[split]={k:v[idx] for k,v in data.items()}
     return out,dropped
 
 def load_effective_geolife(path):
-    """Load one split, decontaminating against all earlier standard splits."""
+    """Load one split, enforcing model-input group isolation against earlier splits."""
     p=Path(path)
     split=None
     for s in SPLIT_ORDER:
@@ -75,9 +103,8 @@ def load_effective_geolife(path):
     splits,_=effective_geolife_splits(paths)
     return splits[split]
 
-
 def effective_development_change_probability(paths=None):
-    """Mean per-window coarse-state change rate on the effective development split."""
+    """Mean per-window coarse-state change rate on effective development windows."""
     splits,_=effective_geolife_splits(paths)
     dev=np.asarray(splits["development"]["paths"])
     if len(dev)==0:
@@ -85,19 +112,47 @@ def effective_development_change_probability(paths=None):
     return float(np.mean([np.mean(np.diff(path)!=0) for path in dev]))
 
 def decontamination_audit(paths=None):
-    """Machine-readable audit of raw caches versus effective exact-coordinate splits."""
+    """Machine-readable audit of raw caches versus effective model-input groups."""
     if paths is None:
         paths={s:Path("data")/f"geolife_{s}.npz" for s in SPLIT_ORDER}
     else:
         paths={s:Path(p) for s,p in paths.items()}
     raw={s:_read_npz(paths[s]) for s in SPLIT_ORDER if s in paths}
     effective,dropped=effective_geolife_splits(paths)
+
+    coord_seen={}
+    coord_dups=[]
+    state_groups={}
+    for split in SPLIT_ORDER:
+        if split not in raw:continue
+        for user,path,coords in zip(raw[split]["users"],raw[split]["paths"],raw[split]["coords"]):
+            user=int(user)
+            cfp=coordinate_fingerprint(coords)
+            sfp=state_path_fingerprint(path)
+            if cfp in coord_seen:
+                prior=coord_seen[cfp]
+                coord_dups.append(dict(
+                    split=split,user=user,coordinate_fingerprint=cfp,
+                    duplicate_of_split=prior["split"],
+                    duplicate_of_user=prior["user"]))
+            else:
+                coord_seen[cfp]=dict(split=split,user=user)
+            state_groups.setdefault(sfp,[]).append(dict(split=split,user=user,coordinate_fingerprint=cfp))
+
+    cross_split_groups=[
+        dict(state_path_fingerprint=fp,members=members)
+        for fp,members in state_groups.items()
+        if len({m["split"] for m in members})>1
+    ]
     return {
-        "rule":"SHA-256 of the complete float64 GPS coordinate window; retain first occurrence in development -> validation -> test order; coarse 8x8 state-path equality alone is not a duplicate criterion.",
+        "holdout_rule":"Group by SHA-256 of the complete discrete state path consumed by the model; assign each group to its earliest split in development -> validation -> test order. Exact GPS-coordinate fingerprints are retained as a separate provenance audit.",
         "raw_counts":{s:int(len(raw[s]["users"])) for s in raw},
         "effective_counts":{s:int(len(effective[s]["users"])) for s in effective},
+        "unique_model_input_paths":int(len(state_groups)),
+        "cross_split_model_input_groups":cross_split_groups,
+        "dropped_later_split_windows":dropped,
+        "exact_coordinate_duplicates":coord_dups,
         "development_change_probability":effective_development_change_probability(paths),
-        "dropped":dropped,
     }
 
 if __name__=="__main__":
