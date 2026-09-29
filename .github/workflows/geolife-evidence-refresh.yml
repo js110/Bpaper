@@ -95,7 +95,7 @@ jobs:
           status['submission_ready']=False
           status['tests_passed']=31
           status.setdefault('data_status',{})['refresh_required']=False
-          status.setdefault('robust_extension',{})['status']='post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits'
+          status.setdefault('robust_extension',{})['status']='post-hoc exploratory; evaluated on model-input-group-isolated GeoLife splits'
           status['final_qa']={
               'status':'package_pending_after_refreshed_evidence',
               'note':'GeoLife evidence was refreshed on model-input-group-isolated splits; final manuscript/package validation must run on the refreshed generated assets.'
