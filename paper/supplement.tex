@@ -9,7 +9,7 @@
 \input{current_numbers}
 \input{review_numbers}
 \begin{frontmatter}
-\title{Supplementary Material for: Robust Branch-Safe Participation for Sequential Mobile Crowdsensing}
+\title{Supplementary Material for: Robust Branch-Safe Participation for Sequential Mobile Crowdsensing: Model Uncertainty and Disclosure Floors}
 \author[aff1]{Lili He}
 \author[aff1]{Sheng Jiang}
 \author[aff1]{Linghui Lyu}
@@ -18,7 +18,7 @@
 \cortext[cor1]{Corresponding author.}
 \address[aff1]{College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China}
 \begin{abstract}
-This supplement records implementation details that are useful for verification but not necessary for following the main argument: comparator adaptations, finite-model robustness and boundary tests, construction of the data-driven ambiguity set, and reproducibility information. It does not introduce additional primary claims. The post-hoc status of the replay extensions and the finite-model scope of the robustness guarantee are preserved.
+This supplement provides technical details supporting the main manuscript: comparator adaptations and validation, finite-model robustness and boundary tests, construction of the data-driven ambiguity set, and reproducibility information. It introduces no additional primary claims and preserves both the exploratory status of the replay analyses and the finite-model scope of the robustness guarantee.
 \end{abstract}
 \end{frontmatter}
 
@@ -58,9 +58,9 @@ A validation-best single-model BSP control is retained to separate improved mode
 \section{Reproducibility record}
 The repository stores deterministic preprocessing, split metadata, configuration files, seeds, trajectory-level summaries, bootstrap outputs, provenance records, analysis code, and manuscript sources. The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input-group isolation. User IDs and complete 48-slot discrete state-path fingerprints are disjoint across the effective splits.
 
-GeoLife uncertainty intervals resample complete state-path groups rather than treating slots or duplicate model-input paths as independent replicates. The current automated suite contains 30 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
+GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The current automated suite contains 31 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
 
-The data-driven replay extension remains labelled post-hoc because the test replay had been inspected in earlier project stages. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
+The data-driven replay is reported as exploratory because the test replay had been inspected in preceding analyses; it is not treated as independent confirmatory validation. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
 
 \section*{Funding}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
