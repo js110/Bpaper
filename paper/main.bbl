@@ -14,7 +14,7 @@ G.~Qiu, Y.~Shen, K.~Cheng, L.~Liu, S.~Zeng, {Mobility-Aware Privacy-Preserving
 \bibitem{fingerprint}
 C.~Wang, J.~Tao, S.~Su, D.~Chi, W.~Li, {Privacy-preserving task assignment in
   mobile crowdsensing: a bilateral location fingerprint-based approach},
-  Cybersecurity 9~(1) (2026) 105.
+  Cybersecurity 9 (2026) 105.
 \newblock \href {https://doi.org/10.1186/s42400-025-00539-2}
   {\path{doi:10.1186/s42400-025-00539-2}}.
 
@@ -47,7 +47,7 @@ X.~Dong, W.~Zhang, Y.~Zhang, Z.~You, S.~Gao, Y.~Shen, C.~Wang, {Optimizing Task
   {\path{doi:10.1109/TII.2021.3109437}}.
 
 \bibitem{pmta2024}
-T.~Peng, K.~Guan, E.~Luo, S.~Zhang, G.~Wang, T.~Wang, Y.~Wu,
+T.~Peng, W.~You, K.~Guan, E.~Luo, S.~Zhang, G.~Wang, T.~Wang, Y.~Wu,
   {Privacy-Preserving Multiobjective Task Assignment Scheme with Differential
   Obfuscation in Mobile Crowdsensing}, Journal of Network and Computer
   Applications 224 (2024) 103836.
@@ -112,8 +112,7 @@ N.~Andola, V.~K. Yadav, {A blockchain-assisted privacy-preserving framework for
 R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
   {Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based
   on Homomorphic Encryption and Reversible Obfuscation}, IEEE Transactions on
-  Mobile Computing (2026) 1--18, Early Access; volume not assigned in the
-  verified record.
+  Mobile ComputingEarly Access (2026).
 \newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
   {\path{doi:10.1109/tmc.2026.3721057}}.
 
