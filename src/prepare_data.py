@@ -2,7 +2,7 @@
 import csv,hashlib,json,zipfile
 from pathlib import Path
 import numpy as np
-from src.geolife import coordinate_fingerprint
+from src.geolife import coordinate_fingerprint,state_path_fingerprint,decontamination_audit
 
 BOUNDS=(39.8,40.1,116.2,116.6)
 
@@ -49,30 +49,13 @@ def main():
         split='development' if user%5==0 else ('validation' if user%5==1 else 'test')
         selected.append(dict(user=user,member=name,start_minute=start,path=path,coords=coords,split=split))
 
-    # Remove only exact 48-slot GPS-coordinate duplicates. Coarse 8x8 path
-    # equality is not sufficient because quantization can map distinct movement
-    # windows to the same state sequence. When an exact duplicate spans splits,
-    # retain the earliest analysis stage so later holdout data cannot duplicate
-    # development/validation evidence.
-    priority={'development':0,'validation':1,'test':2}
-    seen={};deduped=[]
-    for r in sorted(selected,key=lambda x:(priority[x['split']],x['user'])):
-        fp=coordinate_fingerprint(r['coords'])
-        if fp in seen:
-            prior=seen[fp]
-            excluded.append({
-                'user':r['user'],
-                'reason':'exact 48-slot GPS coordinate duplicate',
-                'duplicate_of_user':prior['user'],
-                'duplicate_of_split':prior['split'],
-                'duplicate_of_member':prior['member'],
-                'coordinate_sha256':fp,
-            })
-            continue
-        r['coordinate_sha256']=fp
-        seen[fp]=r
-        deduped.append(r)
-    selected=sorted(deduped,key=lambda r:r['user'])
+    # Preserve the deterministic user-ID split candidates as immutable raw
+    # processed caches. Holdout decontamination is applied by src.geolife at
+    # analysis time, using the complete discrete path actually consumed by
+    # the model. Fingerprints are recorded here for provenance only.
+    for r in selected:
+        r['coordinate_sha256']=coordinate_fingerprint(r['coords'])
+        r['state_path_sha256']=state_path_fingerprint(r['path'])
 
     for split in ['development','validation','test']:
         group=[r for r in selected if r['split']==split]
@@ -88,14 +71,18 @@ def main():
         source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
         bounds=BOUNDS,side=8,slots=48,slot_seconds=60,
         rule='First lexicographic eligible file and first 48 consecutive minute bins per user; first in-bounds observation per minute; no interpolation.',
-        deduplication_rule='SHA-256 of exact float64 GPS coordinate windows; retain development before validation before test; coarse 8x8 state-path equality alone is not treated as a duplicate.',
-        split_rule='user modulo 5: 0 development, 1 validation, 2/3/4 test; exact coordinate duplicates are then removed from later analysis stages',
+        holdout_rule='Raw caches keep the deterministic user-ID split candidates. Effective analysis groups windows by SHA-256 of the complete 48-slot 8x8 state path consumed by the model and assigns each group to the earliest split in development -> validation -> test order. Exact GPS-coordinate fingerprints are recorded separately for provenance.',
+        split_rule='user modulo 5: 0 development, 1 validation, 2/3/4 test; effective model-input groups are isolated by src.geolife at analysis time',
         development_change_probability=change,
         fit_model='Reflecting four-neighbour walk fitted only to development change rate; jump direction/distance not fitted.',
         users_total=len(byuser),
         counts={s:sum(r['split']==s for r in selected) for s in ['development','validation','test']},
         selected=[{k:v for k,v in r.items() if k not in ['path','coords']} for r in selected],
         excluded=excluded)
+    audit=decontamination_audit()
+    manifest['effective_counts']=audit['effective_counts']
+    manifest['unique_model_input_paths']=audit['unique_model_input_paths']
+    manifest['cross_split_model_input_group_count']=len(audit['cross_split_model_input_groups'])
     Path('data/manifest.json').write_text(json.dumps(manifest,indent=2))
-    print(json.dumps({k:manifest[k] for k in ['users_total','counts','development_change_probability']}))
+    print(json.dumps({k:manifest[k] for k in ['users_total','counts','effective_counts','development_change_probability']}))
 if __name__=='__main__':main()
