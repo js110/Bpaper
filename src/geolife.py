@@ -70,14 +70,15 @@ def effective_geolife_splits(paths=None):
                 first_coordinate[cfp]=dict(split=split,user=user)
 
             owner=owner_by_state.get(sfp)
-            if owner is None:
-                owner_by_state[sfp]=split
-            elif owner!=split:
+            if owner is not None:
                 dropped.append(dict(
                     split=split,user=user,state_path_fingerprint=sfp,
-                    assigned_split=owner,coordinate_fingerprint=cfp,
-                    reason="model-input path already assigned to earlier split"))
+                    duplicate_of_split=owner["split"],
+                    duplicate_of_user=owner["user"],
+                    coordinate_fingerprint=cfp,
+                    reason="duplicate complete model-input path"))
                 continue
+            owner_by_state[sfp]={"split":split,"user":user}
             keep.append(i)
         idx=np.asarray(keep,dtype=int)
         out[split]={k:v[idx] for k,v in data.items()}
@@ -145,7 +146,7 @@ def decontamination_audit(paths=None):
         if len({m["split"] for m in members})>1
     ]
     return {
-        "holdout_rule":"Group by SHA-256 of the complete discrete state path consumed by the model; assign each group to its earliest split in development -> validation -> test order. Exact GPS-coordinate fingerprints are retained as a separate provenance audit.",
+        "holdout_rule":"SHA-256 the complete discrete state path consumed by the model and retain only the first window in development -> validation -> test order. This makes model-input paths unique both within and across effective splits. Exact GPS-coordinate fingerprints are retained as a separate provenance audit.",
         "raw_counts":{s:int(len(raw[s]["users"])) for s in raw},
         "effective_counts":{s:int(len(effective[s]["users"])) for s in effective},
         "unique_model_input_paths":int(len(state_groups)),
