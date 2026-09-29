@@ -123,3 +123,13 @@
 - 严格 GeoLife replay：Uniform BSP / validation-best BSP / hand-grid R-BSP / data-driven R-BSP 的 local-cap violation 分别为 24.8% / 6.6% / 20.7% / 0.0%；data-driven R-BSP opportunity retention 为 8.1%，weighted retention 为 1.2%。
 - GeoLife RDF-BSP 在 tau=0.5 时：small-region retention 12.2% [3.2%, 23.4%]，weighted retention 20.4%，declared branch-cap violation 0.10% [0.00%, 0.21%]，original BSP local-cap violation 14.7%。同条件非鲁棒 DF-BSP branch violation 为 15.8%。
 - 主稿与 Supplement 已同步上述刷新数值，并显式区分 107 个原始候选窗口与 22/17/60 的去污染有效分析窗口；旧 23/17/67、5.4%、14.3% 等数字仅保留在有日期的历史记录中，不再作为当前论文结论。
+
+
+## 2026-09-29 模型输入级 GeoLife 隔离复修
+
+- 复核发现：精确 GPS 坐标去重仍不足以保证本文模型所见数据的 holdout 独立性，因为模型实际消费的是完整 48 槽 8x8 离散状态序列，跨 development/validation/test 仍存在相同状态路径。
+- 有效切分规则改为按完整离散 state-path SHA-256 分组，并按 development→validation→test 将每个路径组归给最早 split；后续 split 中同路径窗口排除。GPS coordinate fingerprint 继续保留作原始数据重复审计，但不再作为唯一 holdout 判据。
+- 原始 NPZ 明确恢复为 deterministic raw cache 语义；data/manifest.json 的 23/17/67 改标为 raw_counts，当前 effective counts 与丢弃记录统一由 results/geolife_decontamination.json 生成，避免 raw/effective 混淆。
+- 单测改为直接断言 complete state-path fingerprint 跨 effective split 不相交；测试总数按当前套件记为 30。
+- 主稿与 Supplement 的 GeoLife split、MLE/CI、data-driven R-BSP/RDF-BSP 数值改由 paper/current_numbers.tex 和 paper/review_numbers.tex 统一注入；刷新脚本从实际结果生成这些宏，避免表格与正文再次漂移。
+- research/manuscript_status.json 已降为 refresh pending；在完整 GeoLife evidence workflow、当前 HEAD CI 和新 submission package 全部成功前，不把当前稿标记为技术投稿终稿。
