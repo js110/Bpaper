@@ -1,9 +1,10 @@
-import copy,gzip,json,unittest
+import copy,gzip,json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 from src.model import gates,update
 from src.experiment import simulate,candidates,path_for
 from src.prepare_data import minute_window
+from src.geolife import coordinate_fingerprint,effective_geolife_splits
 from src.fit_ambiguity import fit_move_coarsened
 
 class PipelineTests(unittest.TestCase):
@@ -25,9 +26,28 @@ class PipelineTests(unittest.TestCase):
         self.assertIsNone(minute_window(fixture([1,2,4]),slots=3))
         self.assertIsNotNone(minute_window(fixture([1,2,3]),slots=3))
     def test_data_split_disjoint(self):
-        groups=[set(np.load(f'data/geolife_{s}.npz')['users']) for s in ['development','validation','test']]
+        splits,_=effective_geolife_splits()
+        names=['development','validation','test']
+        users=[set(map(int,splits[s]['users'])) for s in names]
+        coords=[{coordinate_fingerprint(x) for x in splits[s]['coords']} for s in names]
         for i in range(3):
-            for j in range(i):self.assertFalse(groups[i]&groups[j])
+            for j in range(i):
+                self.assertFalse(users[i]&users[j])
+                self.assertFalse(coords[i]&coords[j])
+    def test_exact_coordinate_dedup_keeps_earlier_split(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);same=np.array([[39.9,116.3],[39.91,116.31]])
+            other=np.array([[39.92,116.32],[39.93,116.33]])
+            np.savez(root/'geolife_development.npz',users=np.array([70]),paths=np.array([[1,2]]),coords=np.array([same]))
+            np.savez(root/'geolife_validation.npz',users=np.array([11]),paths=np.array([[1,2]]),coords=np.array([other]))
+            np.savez(root/'geolife_test.npz',users=np.array([13,88]),paths=np.array([[1,2],[1,2]]),coords=np.array([same,other]))
+            splits,dropped=effective_geolife_splits({s:root/f'geolife_{s}.npz' for s in ['development','validation','test']})
+            self.assertEqual(splits['test']['users'].tolist(),[])
+            self.assertEqual({d['user'] for d in dropped},{13,88})
+    def test_coordinate_fingerprint_does_not_collapse_nearby_points(self):
+        a=np.array([[39.90000000,116.30000000],[39.91000000,116.31000000]])
+        b=a.copy();b[0,0]+=1e-8
+        self.assertNotEqual(coordinate_fingerprint(a),coordinate_fingerprint(b))
     def test_shared_normal_tasks_and_exogenous_draws(self):
         c=json.loads(Path('configs/final.json').read_text())['conditions'][0]
         r,m=candidates(8);path=path_for(1000,0,8,48,c['scenario'],c['move_true'])

@@ -69,8 +69,8 @@
 - 增加 validation-best single-model BSP control。GeoLife replay 下：uniform BSP local-cap violation 24.8%，validation-best single BSP 2.9%，hand-grid R-BSP 20.0%，data-driven R-BSP 0.0%。严格 data-driven R-BSP 的代价是 opportunity retention 仅 5.4%，weighted retention 0.7%，1--8-cell retention 仍为 0。
 - 形式化 truthful positive-report disclosure floor phi(b,S)=max_{i in S} b_i / sum_{j in S} b_j，说明 scalar thinning q 无法降低成功报告的条件位置泄露。uniform prior 下 m-cell region 的 floor 为 1/m。
 - DF-BSP/RDF-BSP 最终改为 asymmetric branch contract：positive report 允许 ceiling tau，silence 始终保持原 BSP cap max(rho, prior peak)。tau=rho 时严格退化为 BSP。新增随机化 branch feasibility/maximality tests。
-- 最终 synthetic walk tau=0.5：small-region retention 56.4% [41.7%, 69.8%]，inverse-area weighted retention 43.1%，declared branch-cap violation 0%，original-rho exceedance 8.4%。
-- 最终 GeoLife data-driven RDF-BSP tau=0.5：small-region retention 14.3% [5.6%, 25.7%]，weighted retention 20.8%，declared branch-cap violation 0.16% [0.03%, 0.31%]，original-rho exceedance 14.3%。非鲁棒 DF-BSP 在相同 tau 下 branch violation 为 16.4%，说明 robust model set 仍有实质作用。
+- 最终 synthetic walk tau=0.5：small-region retention 56.4% [41.7%, 69.8%]，inverse-area weighted retention 43.1%，declared branch-cap violation 0%，original BSP local-cap violation 8.4%。
+- 最终 GeoLife data-driven RDF-BSP tau=0.5：small-region retention 14.3% [5.6%, 25.7%]，weighted retention 20.8%，declared branch-cap violation 0.16% [0.03%, 0.31%]，original BSP local-cap violation 14.3%。非鲁棒 DF-BSP 在相同 tau 下 branch violation 为 16.4%，说明 robust model set 仍有实质作用。
 - 论文已同步标题、摘要、方法、命题、实验、Results、Discussion、Conclusion；不存在旧版 10.2% / 22.0% / 30.6% 等残留数字。
 - Related Work 扩展至 21 篇实际引用，补 iTAM、task-location privacy、PMTA、PPUR、LRPP-STA、2024--2026 task-allocation privacy 工作；不把不同安全接口的方法伪装成同一数值 baseline。
 - 当前自动化测试为 28 项；最终内部审稿结论记录于 research/reviews/final_submission_audit_2026-09-27/review_zh.md。
@@ -89,8 +89,8 @@
 ## 2026-09-29 终稿事实与语言审校
 
 - 对六章主稿逐项核对语言逻辑、公式/命题与实现、正文数字与结果表、表格与生成脚本、GeoLife 预处理规则以及近期参考文献元数据。
-- 修正主要事实/表述问题：严格策略数量由 3 改为 4；data-driven R-BSP 的 25.7% MAP 改为中性陈述并补 validation-best single BSP 对照；删除未由实现支持的固定 one-slot delay；更新旧 replay threat-model 描述；将 tau 统一为 report-side threshold；将 DF 表的 rho exceed 指标更名为实际实现的 BSP local-cap violation；明确 ambiguity-set 95% 目标实际选中 6 个 population-prior 候选并达到 100% winner support；补充 coarsened likelihood 不拟合方向/跳距；修正 PMTA BibTeX 作者列表。
-- GeoLife 描述核对为 182 原始用户中 107 名满足窗口规则，最终 23 development / 17 validation / 67 test；8x8 区域单元约 4.2 km x 4.3 km（研究纬度附近）。
+- 修正主要事实/表述问题：严格策略数量由 3 改为 4；data-driven R-BSP 的 25.7% MAP 改为中性陈述并补 validation-best single BSP 对照；删除未由实现支持的固定 one-slot delay；更新旧 replay threat-model 描述；将 tau 统一为 report-side threshold；将 DF 表及其生成器的误导性 `rho exceed` 表头更名为实际实现的 BSP local-cap violation；明确 ambiguity-set 95% 目标实际选中 6 个 population-prior 候选并达到 100% winner support；补充 coarsened likelihood 不拟合方向/跳距；修正 PMTA BibTeX 作者列表。
+- GeoLife 原始缓存仍记录 182 原始用户中 107 名满足窗口规则、23 development / 17 validation / 67 test；2026-09-29 技术复审发现两组跨 split 的 48 槽 GPS 坐标完全重复。有效分析加载器按 development→validation→test 优先级删除后续精确重复，因此当前 effective split 为 23 / 17 / 65。仅 8x8 栅格状态路径相同不作为去重依据；区域单元约 4.2 km x 4.3 km（研究纬度附近）。
 - 摘要压缩到约 235 词；六个编号章节保持不变；21 个 BibTeX 条目均被引用且无缺失 cite key；所有 label/ref 唯一且可解析。
 - 最终 GitHub Actions run 36511273191 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
 
@@ -104,3 +104,13 @@
 - 收敛 paper/ 到正式稿、Supplement、投稿文件和当前实际引用的图表/表格；flat Editorial Manager 源重新生成后仅含 7 个必要文件。
 - GitHub Actions 已统一到 main：code-tests 自动；robust/data-driven 实验手动；pmc-final-package 对 main 稿件源变更自动验证且支持手动触发。
 - 清理后 code-tests run 36517514356 通过；最终 package run 36517619114 通过。主稿 28 页、flat source 28 页、Supplement 11 页，文本等价且最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
+
+
+## 2026-09-29 GeoLife 去污染与投稿包修复
+
+- 技术复审确认：用户 ID 分区互斥不足以保证轨迹独立；旧缓存中 development 70 / test 13 与 validation 11 / test 88 的 48 槽 GPS 坐标窗口完全相同。
+- 新增 `src/geolife.py` 作为统一 effective-split loader，以完整 float64 GPS 坐标窗口 SHA-256 去重，并按 development→validation→test 保留更早阶段样本；不把粗 8x8 状态序列碰撞误判为重复轨迹。
+- `src.prepare_data` 同步采用相同规则，未来从原始 GeoLife 包重建时会直接写出去污染后的 NPZ 和 manifest；当前仓库缺少原始 `data/geolife.zip`，因此已提交 NPZ 保留为 raw cache，分析入口负责去污染。
+- 回归测试同时检查 user ID 与精确坐标指纹跨 split 均不交叉，并覆盖“开发/验证优先保留”和“近邻坐标不误去重”。
+- data-driven extension 在 split/实验/拟合逻辑进入 main 后自动重跑并刷新证据；在刷新完成前，旧 67-user data-driven 输出不再视为干净 holdout 证据。
+- PMC 投稿 ZIP 改为每次先删除旧 archive 再创建，并在 workflow 中核对 ZIP 成员与 manifest 精确一致，防止旧成员被 `zip -r` 保留。

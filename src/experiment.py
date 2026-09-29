@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from functools import lru_cache
 from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,gates,df_bsp_gates,disclosure_floor,choose_probe,posterior_metrics
+from .geolife import load_effective_geolife
 
 @lru_cache(maxsize=64)
 def load_channel(path):
@@ -214,7 +215,7 @@ def run(config_path):
         if side not in cache:cache[side]=candidates(side)
         rects,masks=cache[side]
         if cond['scenario']=='geolife':
-            data=np.load(cfg['geolife_file'])
+            data=load_effective_geolife(cfg['geolife_file'])
             participants=[(int(data['users'][j]),int(data['users'][j]),data['paths'][j][:slots]) for j in range(len(data['users']))]
         else:
             participants=[(seed,u,path_for(seed,u,side,slots,cond['scenario'],cond['move_true'])) for seed in cfg['seeds'] for u in range(cfg['users_per_seed'])]
