@@ -95,7 +95,7 @@ jobs:
             echo "No GeoLife evidence changes"
             exit 0
           fi
-          git commit -m "Refresh decontaminated GeoLife evidence [skip ci]"
+          git commit -m "Refresh model-input-isolated GeoLife evidence"
           for attempt in 1 2 3; do
             git pull --rebase origin main
             if git push origin HEAD:main; then exit 0; fi
