@@ -6,6 +6,7 @@ development/validation/test splits are formed in that order and later exact
 paths alone is deliberately not a duplicate criterion.
 """
 import hashlib
+import json
 from pathlib import Path
 import numpy as np
 
@@ -73,3 +74,31 @@ def load_effective_geolife(path):
         paths[split]=p
     splits,_=effective_geolife_splits(paths)
     return splits[split]
+
+
+def effective_development_change_probability(paths=None):
+    """Mean per-window coarse-state change rate on the effective development split."""
+    splits,_=effective_geolife_splits(paths)
+    dev=np.asarray(splits["development"]["paths"])
+    if len(dev)==0:
+        raise ValueError("effective development split is empty")
+    return float(np.mean([np.mean(np.diff(path)!=0) for path in dev]))
+
+def decontamination_audit(paths=None):
+    """Machine-readable audit of raw caches versus effective exact-coordinate splits."""
+    if paths is None:
+        paths={s:Path("data")/f"geolife_{s}.npz" for s in SPLIT_ORDER}
+    else:
+        paths={s:Path(p) for s,p in paths.items()}
+    raw={s:_read_npz(paths[s]) for s in SPLIT_ORDER if s in paths}
+    effective,dropped=effective_geolife_splits(paths)
+    return {
+        "rule":"SHA-256 of the complete float64 GPS coordinate window; retain first occurrence in development -> validation -> test order; coarse 8x8 state-path equality alone is not a duplicate criterion.",
+        "raw_counts":{s:int(len(raw[s]["users"])) for s in raw},
+        "effective_counts":{s:int(len(effective[s]["users"])) for s in effective},
+        "development_change_probability":effective_development_change_probability(paths),
+        "dropped":dropped,
+    }
+
+if __name__=="__main__":
+    print(json.dumps(decontamination_audit(),indent=2))
