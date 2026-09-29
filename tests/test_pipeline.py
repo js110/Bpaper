@@ -35,7 +35,7 @@ class PipelineTests(unittest.TestCase):
                 self.assertFalse(users[i]&users[j])
                 self.assertFalse(states[i]&states[j])
         self.assertTrue(all(len(splits[s]['users'])>0 for s in names))
-    def test_exact_coordinate_dedup_keeps_earlier_split(self):
+    def test_state_path_group_keeps_first_window(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td);same=np.array([[39.9,116.3],[39.91,116.31]])
             other=np.array([[39.92,116.32],[39.93,116.33]])
