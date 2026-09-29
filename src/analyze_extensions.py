@@ -2,7 +2,7 @@
 import argparse,csv,json,shutil
 from pathlib import Path
 import numpy as np
-from .geolife import effective_geolife_splits
+from .geolife import effective_geolife_splits,effective_state_group_by_user
 
 def load_rows(run):
     rows=list(csv.DictReader((run/'rows.csv').open()))
@@ -39,8 +39,11 @@ def aggregate(rows,slots):
     )
 
 def bootstrap(group,slots,scenario,reps=1000,seed=270927):
-    keys=sorted(set(r['user'] if scenario=='geolife' else int(r['seed']) for r in group),key=str)
-    by={k:[r for r in group if (r['user'] if scenario=='geolife' else int(r['seed']))==k] for k in keys}
+    geo_map=effective_state_group_by_user("test") if scenario=="geolife" else None
+    def cluster_key(r):
+        return geo_map[int(r["user"])] if geo_map is not None else int(r["seed"])
+    keys=sorted(set(cluster_key(r) for r in group),key=str)
+    by={k:[r for r in group if cluster_key(r)==k] for k in keys}
     rng=np.random.default_rng(seed);metrics={}
     for _ in range(reps):
         sample=[]

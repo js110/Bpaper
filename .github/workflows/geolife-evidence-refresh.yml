@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - 'src/geolife.py'
+      - 'src/analyze.py'
+      - 'src/analyze_recent.py'
       - 'src/experiment.py'
       - 'src/recent_baselines.py'
       - 'src/review_diagnostics.py'
@@ -83,6 +85,24 @@ jobs:
           python -m src.analyze_extensions --run results/data_driven_extension --paper-assets
       - name: Commit refreshed evidence
         run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/manuscript_status.json')
+          status=json.loads(p.read_text())
+          status['stage']='geolife_model_input_group_refreshed_package_pending'
+          status['technical_ready']=False
+          status['submission_ready']=False
+          status['tests_passed']=30
+          status.setdefault('data_status',{})['refresh_required']=False
+          status.setdefault('robust_extension',{})['status']='post-hoc exploratory; rerun on model-input-group-isolated GeoLife splits'
+          status['final_qa']={
+              'status':'package_pending_after_refreshed_evidence',
+              'note':'GeoLife evidence was refreshed on model-input-group-isolated splits; final manuscript/package validation must run on the refreshed generated assets.'
+          }
+          status['open_items']=[x for x in status.get('open_items',[]) if not x.startswith('complete model-input-group-isolated')]
+          p.write_text(json.dumps(status,indent=2)+'\n')
+          PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add configs/final.json configs/kl_baseline.json configs/recent_baselines.json configs/recent_privic_thinning.json configs/data_driven_extension.json
@@ -91,6 +111,7 @@ jobs:
           git add results/review1_diagnostics results/data_driven_ambiguity results/data_driven_extension
           git add paper/tradeoff.pdf paper/calibration.pdf paper/recent_tradeoff.pdf paper/recent_commute_zoom.pdf
           git add paper/data_driven_table.tex paper/dfbsp_table.tex paper/current_numbers.tex paper/review_numbers.tex
+          git add research/manuscript_status.json
           if git diff --cached --quiet; then
             echo "No GeoLife evidence changes"
             exit 0
