@@ -153,10 +153,10 @@ The right side is nonnegative. A nonpositive coefficient on the left imposes no 
 
 \subsection{Sequential Privacy Guarantee}
 \begin{corollary}[Conditional sequential cap]
-Suppose the initial belief has peak at most $\rho$, the declared models are correct, all public signals are represented by Eq.~\eqref{eq:output}, and every location transition is doubly stochastic. Then BSP maintains posterior peak at most $\rho$ after every output, including under adaptive task selection measurable from public history.
+Suppose the initial belief has peak at most $\rho$, the declared mobility and observation models are correct, all public signals are represented by Eq.~\eqref{eq:output}, and every location transition is doubly stochastic. Then BSP maintains posterior peak at most $\rho$ after every output, including under adaptive task selection measurable from public history.
 \end{corollary}
 \begin{proof}
-A doubly stochastic transition makes each predicted probability a convex combination of previous probabilities, so prediction cannot increase the maximum. The proposition bounds both possible observation branches by $\rho$. Induction over slots proves the result. Given the public history, the attacker's adaptive task choice supplies no additional private-state information under the stated measurability assumption.
+A doubly stochastic transition makes each predicted probability a convex combination of previous probabilities, so prediction cannot increase the maximum. Proposition~1 bounds every positive-probability observation branch by $\rho$. Induction over slots proves the result. Given the public history, the attacker's adaptive task choice supplies no additional private-state information under the stated measurability assumption.
 \end{proof}
 
 A reflecting symmetric grid walk satisfies the transition condition. A general learned human-mobility transition need not. The corollary applies to the attacker's posterior only when its knowledge and model coincide with the declared model.
@@ -171,7 +171,7 @@ Within the class of one scalar gate shared by all models, Eq.~\eqref{eq:robust-g
 For each fixed model, Proposition~1 gives the complete feasible scalar set as the interval $[0,q_k^*]$: if the positive branch is infeasible then $q_k^*=0$; otherwise the silence inequalities supply only upper bounds on $q$. Requiring all models simultaneously intersects these intervals, giving $[0,\min_k q_k^*]$. Its right endpoint is therefore the maximal common gate.
 \end{proof}
 
-For each member model, Proposition~1 gives a downward-closed feasible interval. R-BSP intersects those intervals. If the attacker's exact Bayesian model is in $\mathcal M$, its branch constraint is therefore enforced; no such conclusion follows outside the set.
+Consequently, if the attacker's exact Bayesian model is in $\mathcal M$, its branch constraint is enforced as one member of the intersection; no such conclusion follows for an attacker outside the set.
 
 \subsection{Disclosure-Floor Guarantee}
 \begin{proposition}[Maximal asymmetric disclosure-floor-aware scalar gate]
@@ -190,7 +190,7 @@ The same support property rules out interpreting BSP as pure location differenti
 
 A worked report/silence example and the original workflow schematic are provided in the Supplementary Material.
 
-The guarantee is finite-model and channel-specific. If the attacker's exact model belongs to $\mathcal M$, its constraint is enforced by R-BSP; an attacker outside $\mathcal M$ is not covered. Likewise, $\tau>\rho$ explicitly relaxes only the truthful-report branch. It is not evidence that the original $\rho$ cap remains valid after a successful report.
+The robust guarantee is finite-model, and all guarantees here are channel-specific. If the attacker's exact model belongs to $\mathcal M$, its constraint is enforced by R-BSP; an attacker outside $\mathcal M$ is not covered. Likewise, $\tau>\rho$ explicitly relaxes only the truthful-report branch. It is not evidence that the original $\rho$ cap remains valid after a successful report.
 
 \section{Experimental Evaluation}
 \label{sec:experiments}\label{sec:results}
