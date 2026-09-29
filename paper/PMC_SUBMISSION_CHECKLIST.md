@@ -15,9 +15,9 @@ Current canonical branch: **main**.
 
 - Main manuscript: 28 pages.
 - Flat source rebuild: 28 pages and text-equivalent to the development build.
-- Supplement: 11 pages.
+- Supplement: 5 pages.
 - References: 21 cited entries.
-- Automated tests: 28.
+- Automated tests: 31.
 - No final unresolved references, undefined control sequences, oversized floats, or overfull boxes.
 - Robustness is explicitly limited to the declared finite model set.
 - The GeoLife ambiguity-set/disclosure-floor extension is explicitly post-hoc.
