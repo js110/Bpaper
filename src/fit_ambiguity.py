@@ -7,6 +7,7 @@ explicit externally supplied protocol parameter.
 import argparse,json
 from pathlib import Path
 import numpy as np
+from .geolife import effective_geolife_splits
 
 
 def state_exposure(states,side):
@@ -93,7 +94,8 @@ def main():
     a=ap.parse_args()
     if not (0<a.alpha<=1):raise ValueError('alpha must lie in (0,1]')
     if not (0<a.selection_mass<=1):raise ValueError('selection mass must lie in (0,1]')
-    dev=np.load(a.development);val=np.load(a.validation)
+    splits,_=effective_geolife_splits({'development':a.development,'validation':a.validation})
+    dev=splits['development'];val=splits['validation']
     dp=np.asarray(dev['paths']);vp=np.asarray(val['paths'])
     dev_hat=fit_move_coarsened(dp,a.side);val_hat=fit_move_coarsened(vp,a.side)
     pooled_hat=fit_move_coarsened(np.concatenate([dp,vp]),a.side)
