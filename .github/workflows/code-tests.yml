@@ -4,13 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
-      - 'tests/**'
-      - 'configs/**'
-      - 'requirements.txt'
-      - 'requirements-lock.txt'
-      - '.github/workflows/code-tests.yml'
       - 'paper/main.pdf'
       - 'paper/supplement.pdf'
       - 'paper/highlights.docx'
