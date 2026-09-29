@@ -2,18 +2,22 @@
   "journal": "Pervasive and Mobile Computing",
   "source": "paper/main.tex",
   "flat_files": [
+    "current_numbers.tex",
     "data_driven_table.tex",
     "dfbsp_table.tex",
     "elsarticle-num.bst",
     "elsarticle.cls",
     "main.tex",
     "references.bib",
+    "review_numbers.tex",
     "system_architecture.png"
   ],
   "graphics": [
     "system_architecture.png"
   ],
   "inputs": [
+    "current_numbers.tex",
+    "review_numbers.tex",
     "data_driven_table.tex",
     "dfbsp_table.tex"
   ],
