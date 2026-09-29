@@ -2,6 +2,7 @@
 import argparse,csv,json,shutil
 from pathlib import Path
 import numpy as np
+from .geolife import effective_geolife_splits
 
 def load_rows(run):
     rows=list(csv.DictReader((run/'rows.csv').open()))
@@ -111,8 +112,50 @@ def main():
         if scenario!='geolife':lines.append(r'\addlinespace')
     lines += [r'\bottomrule',r'\end{tabular}']
     (out/'dfbsp_table.tex').write_text('\n'.join(lines)+'\n')
+    # Generate manuscript macros from the same fitted model and replay summary
+    # used for the tables, so prose cannot drift from regenerated evidence.
+    splits,_=effective_geolife_splits()
+    def row(cid):
+        return next(x for x in summary if x['condition']==cid)
+    strict=row('geolife_data_rbsp')
+    rdf=row('geolife_data_rdfbsp_tau_0.5')
+    df=row('geolife_dfbsp_tau_0.5')
+    nominal=row('geolife_dd_nominal_bsp')
+    single=row('geolife_data_single_bsp')
+    hand=row('geolife_hand_rbsp')
+    dev=fit['development'];val=fit['validation']
+    macros={
+        'GeoDevN':len(splits['development']['users']),
+        'GeoValN':len(splits['validation']['users']),
+        'GeoTestN':len(splits['test']['users']),
+        'GeoDevMLE':f"{dev['estimate']:.4f}",
+        'GeoDevCILow':f"{dev['ci'][0]:.4f}",
+        'GeoDevCIHigh':f"{dev['ci'][1]:.4f}",
+        'GeoValMLE':f"{val['estimate']:.4f}",
+        'GeoNominalLocal':pct(nominal['local_violation_rate']),
+        'GeoSingleLocal':pct(single['local_violation_rate']),
+        'GeoSingleRet':pct(single['utility']),
+        'GeoHandLocal':pct(hand['local_violation_rate']),
+        'GeoStrictHit':pct(strict['hit']),
+        'GeoStrictRet':pct(strict['utility']),
+        'GeoStrictWeighted':pct(strict['weighted_utility']),
+        'GeoStrictLocal':pct(strict['local_violation_rate']),
+        'GeoRDFSmall':pct(rdf['small_retention']),
+        'GeoRDFSmallLow':pct(rdf['small_retention_low']),
+        'GeoRDFSmallHigh':pct(rdf['small_retention_high']),
+        'GeoRDFWeighted':pct(rdf['weighted_utility']),
+        'GeoRDFBranch':f"{100*rdf['effective_violation_rate']:.2f}",
+        'GeoRDFBranchLow':f"{100*rdf['effective_violation_rate_low']:.2f}",
+        'GeoRDFBranchHigh':f"{100*rdf['effective_violation_rate_high']:.2f}",
+        'GeoRDFLocal':pct(rdf['local_violation_rate']),
+        'GeoDFSmall':pct(df['small_retention']),
+        'GeoDFWeighted':pct(df['weighted_utility']),
+        'GeoDFBranch':pct(df['effective_violation_rate']),
+    }
+    macro_text='\n'.join('\\newcommand{\\%s}{%s}'%(k,v) for k,v in macros.items())+'\n'
+    (out/'current_numbers.tex').write_text(macro_text)
     if a.paper_assets:
-        for name in ['data_driven_table.tex','dfbsp_table.tex']:
+        for name in ['data_driven_table.tex','dfbsp_table.tex','current_numbers.tex']:
             shutil.copyfile(out/name,Path('paper')/name)
     print(json.dumps({'ambiguity':{'candidate_moves':fit['move_candidates'],
                                    'selected_models':len(fit['models']),
