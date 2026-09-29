@@ -36,7 +36,7 @@ We model that visible channel and develop branch-safe participation (BSP), a pub
 
 The paper makes four contributions. First, it specifies the report/silence observation boundary and derives a maximal scalar gate with a conditional sequential bound. Second, it derives the maximal common gate for finite model sets and evaluates model-set failures rather than assuming a correct attacker model. Third, it formalizes the positive-report disclosure floor and an asymmetric privacy--service contract for fine-region tasks. Fourth, it evaluates these mechanisms on synthetic mobility and disjoint GeoLife development/validation/test users, including informed-attacker stress, boundary cases, size-aware utility, and task-channel adaptations of PRIVIC~\cite{privic2024} and pointwise maximal leakage (PML)~\cite{pml2024}. Negative results---including severe utility loss under strict robust caps---are retained in the main analysis.
 
-\section{Related work and scope}
+\section{Related Work}
 \label{sec:related}
 MCS privacy mechanisms mostly protect information before or during assignment. Bilateral and task-location schemes protect worker/requester or task coordinates~\cite{itam2021,taskloc2022}; later work uses differential obfuscation~\cite{pmta2024}, secret-sharing recruitment~\cite{ppur2024}, encrypted location/reward optimization~\cite{lrppsta2025}, local differential privacy and geo-indistinguishability~\cite{mtadprh2025}, temporal--spatial differential privacy~\cite{tasp2025}, mobility-prediction-aware perturbation~\cite{p2taskmp2025}, encrypted quality-aware allocation~\cite{qpta2024}, federated local task selection~\cite{fedsense2025}, or blockchain/ZKP protocols~\cite{blockchainpmc2026}. These mechanisms protect coordinate, matching, recruitment, or transaction interfaces. Their guarantees and reported overhead cannot be transferred directly to a visible truthful report/silence channel.
 
@@ -95,7 +95,7 @@ The calculation takes $O(N)$ time for one task and stores an $N$-cell belief. Ma
 
 \subsection{Robust BSP under Model Uncertainty}
 \label{sec:robust}
-The informed-attacker failure motivates an explicit, limited form of model uncertainty rather than a distribution-free claim. Let $\mathcal M=\{M_1,\ldots,M_K\}$ be a finite public ambiguity set fixed independently of the current private state. Model $M_k$ maintains its own public-history belief $b_t^{(k)}$, transition rule, and availability probability $\alpha_t^{(k)}$. For the current task, let $q_k^*$ be the maximal BSP gate from Proposition~1 using that model and $c_k=\max\{\rho,\|b_t^{(k)}\|_\infty\}$. Robust BSP (R-BSP) uses
+Model uncertainty motivates an explicit finite-set extension rather than a distribution-free claim. Let $\mathcal M=\{M_1,\ldots,M_K\}$ be a finite public ambiguity set fixed independently of the current private state. Model $M_k$ maintains its own public-history belief $b_t^{(k)}$, transition rule, and availability probability $\alpha_t^{(k)}$. For the current task, let $q_k^*$ be the maximal BSP gate from Proposition~1 using that model and $c_k=\max\{\rho,\|b_t^{(k)}\|_\infty\}$. Robust BSP (R-BSP) uses
 \begin{equation}
  q_R^*=\min_{1\le k\le K} q_k^*.
  \label{eq:robust-gate}
@@ -104,7 +104,7 @@ All member beliefs are updated from the same public task and report/silence hist
 
 
 
-R-BSP costs $O(KN)$ per task when each member uses the $N$-cell implementation above. If an attacker's exact Bayesian model is one member of $\mathcal M$, the corresponding branch constraint applies to that attacker as well; under the transition conditions of the corollary, its model-specific sequential cap is preserved. This statement does not cover an attacker outside the ambiguity set, unmodeled observations, or arbitrary auxiliary information. Enlarging $\mathcal M$ can only weakly decrease the feasible gate, so model-set construction is itself a privacy--utility design choice.
+R-BSP costs $O(KN)$ per task when each member uses the $N$-cell implementation above. Enlarging $\mathcal M$ can only weakly decrease the feasible gate, so model-set construction is itself a privacy--utility design choice. The formal finite-model guarantee and its out-of-set limitation are analyzed in Section~\ref{sec:analysis}.
 
 \subsection{Disclosure-Floor-Aware BSP}
 \label{sec:dfbsp}
@@ -141,12 +141,7 @@ The principal analytical model assumes that client and attacker use the same cor
 
 \subsection{Branch-Wise Privacy and Maximality}
 \begin{proposition}[Maximal scalar gate]
-If $m>0$ and $\max_i b_i h_i/m>c$, the only feasible gate is $q^*=0$. Otherwise, define $d_i=cm-b_i h_i$. Then the maximal feasible scalar gate is
-\begin{equation}
- q^*=\min\left\{1,\min_{i:d_i>0}\frac{c-b_i}{d_i}\right\},
- \label{eq:gate}
-\end{equation}
-where an empty inner minimum is $+\infty$. When $m=0$, this expression gives $q^*=1$ and the output is uninformative.
+If $m>0$ and $\max_i b_i h_i/m>c$, the only feasible gate is $q^*=0$. Otherwise, Eq.~\eqref{eq:gate} is the largest scalar $q\in[0,1]$ for which every positive-probability report and silence posterior has peak at most $c$. When $m=0$, the output is uninformative and $q^*=1$.
 \end{proposition}
 \begin{proof}
 For every $q>0$ with $m>0$, Eq.~\eqref{eq:positive} is independent of $q$. If its peak exceeds $c$, no positive gate can satisfy the report constraint. Otherwise only the silence constraints remain. For a nonzero silence probability, Eq.~\eqref{eq:silence} is at most $c$ exactly when
@@ -246,6 +241,7 @@ Table~\ref{tab:data-driven} first shows that a defensible model-set construction
 \label{tab:data-driven}{\scriptsize\setlength{\tabcolsep}{3pt}\input{data_driven_table}}
 \end{table}
 
+\subsection{Fine-Grained Service under Disclosure Floors}
 Table~\ref{tab:dfbsp} quantifies the service alternative. On 20 new synthetic walk seeds, ordinary BSP retains no small-region opportunities and has weighted retention 12.3\%. Asymmetric DF-BSP with $\tau=0.5$ raises small-region retention to 56.4\% (cluster-bootstrap 95\% interval 41.7--69.8\%) and weighted retention to 43.1\%, with no observed violation of its declared branch-specific caps. The silence branch continues to use the original BSP cap. The original local $\rho=0.1$ cap is nevertheless exceeded on 8.4\% of all slots because successful reports may use the declared $\tau$ ceiling, and MAP hit rate rises from 4.9\% under BSP to 10.8\%.
 
 The stronger replay experiment shows the same trade-off under prior and mobility mismatch. At $\tau=0.5$, non-robust DF-BSP retains 32.7\% of small-region opportunities and 30.4\% weighted utility, but violates its declared branch-specific cap on 16.4\% of slots because the stronger replay attacker is outside the client model. Data-driven RDF-BSP lowers that violation rate to 0.16\% (cluster-bootstrap 95\% interval 0.03--0.31\%), with 14.3\% small-region retention (95\% interval 5.6--25.7\%) and 20.8\% weighted utility. Its original-$\rho$ cap is exceeded on 14.3\% of slots. At $\tau=1$, the report ceiling is vacuous and should be read as a service control rather than a privacy operating point. No tested $\tau$ is declared optimal.
