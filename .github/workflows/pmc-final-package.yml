@@ -2,6 +2,17 @@ name: pmc-final-package
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'paper/main.tex'
+      - 'paper/supplement.tex'
+      - 'paper/references.bib'
+      - 'paper/*.tex'
+      - 'paper/figures/**'
+      - 'src/build_submission_package.py'
+      - '.github/workflows/pmc-final-package.yml'
 
 permissions:
   contents: write
