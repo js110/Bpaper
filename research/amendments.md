@@ -9,3 +9,4 @@
 7. 正式计时是本机 Python 函数耗时，且 KL 与早期方法分批运行。不能把差异说成实现无关或移动设备上优势。无密码学实现，也无密码学性能数字。
 8. 2026-09-18 内部审稿后增加描述性诊断：开发众数先验、粗粒度静止窗口、任务面积分层和 pooled raw completion；区域分组与新增 bootstrap 属于审稿后分析，不是原始预注册内容。脚本、输入哈希及逐条回应见 revisions/review1/ 和 results/review1_diagnostics/。
 9. 更正“测试集不用于参数选择”的笼统表述：训练用户隔离仍成立，但近期 gamma 扩展和下凸包选择使用测试结果。现有区间是探索性、固定训练条件下的逐点区间。没有重训或新增模拟，不把这些文字修正计成新实验条件。
+10. 2026-09-26 根据第二轮内部审稿增加 R-BSP（Robust Branch-Safe Participation）探索扩展。该方向由既有 informed stress test 中“攻击者模型更准确时 nominal BSP cap 可被突破”的负结果直接触发，因此不是原始预注册贡献。有限模型集合固定为 move∈{0.05,0.3,0.8} 与 alpha∈{0.3,0.648,0.9} 的 3×3 公开模型网格；同一 scalar gate 必须同时满足全部模型的 report/silence 分支约束，故取各模型 nominal BSP 最大 gate 的最小值。新配置 `configs/robust_informed.json` 使用全新 synthetic seeds 3000–3019，对 nominal、alpha 低/高估、move 低/高估五种条件及 rho∈{0.05,0.1,0.2,0.4} 比较 BSP/R-BSP，共 40 条件。该实验明确标为 post-hoc exploratory stress test；不能替代独立 validation 选模 + held-out GeoLife confirmatory evaluation。

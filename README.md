@@ -17,6 +17,7 @@
 - `results/review1_diagnostics/`：开发先验诊断、任务尺寸分层、原始完成率及放大图的来源与结果。
 - `results/combined/analysis/summary.csv`：120 个主条件加 16 个 KL 扩展条件。
 - `results/sensitivity/analysis/summary.csv`、`results/informed/analysis/summary.csv`：稳健性与更知情攻击者实验。
+- `results/robust_informed/analysis/`：R-BSP 有限模型集合的 post-hoc 探索性 stress 结果；模型集合、失配条件和统计边界见 `research/amendments.md`。
 
 ## 环境
 
@@ -30,6 +31,10 @@ python3 -m pip install -r requirements-lock.txt
 export MPLCONFIGDIR="$PWD/.cache/matplotlib"
 python3 -m unittest discover -s tests -v
 python3 -m src.audit
+
+# R-BSP post-hoc stress（输出目录必须不存在）
+python3 -m src.experiment --config configs/robust_informed.json
+python3 -m src.analyze_robust --run results/robust_informed
 ```
 
 ## 数据
@@ -75,7 +80,7 @@ python3 -m src.reproduce --output results/reproduction_01
 
 `model.py`：公开任务、观测、贝叶斯更新与 gate；`experiment.py`：轨迹、任务、用户响应、攻击和评估；`prepare_data.py`：轨迹输入；`analyze*.py`：统计与绘图。真实位置只传入用户响应与评估，攻击不接收未来轨迹。审计日志包含 truth 字段用于查证，不能把整份审计日志当作攻击 API。
 
-共有 23,929 次主/扩展/敏感性轨迹执行，含重复使用的轨迹，不是独立受试者数。每次 48 槽。Pilot、validation 和中断运行不计入正文主结论。固定截止释放使延迟恒为一槽；没有把仿真延迟、Python 时间或零密码实现描述成手机实测。
+原主实验、近期扩展和敏感性部分共有 23,929 次轨迹执行；2026-09-26 新增 R-BSP post-hoc stress 的 3,200 次独立合成轨迹后，当前正文涉及 27,129 次轨迹执行。它们含重复实验单元，不是独立受试者数。每次 48 槽。Pilot、validation 和中断运行不计入正文主结论；R-BSP stress 明确标为探索性机制验证。固定截止释放使延迟恒为一槽；没有把仿真延迟、Python 时间或零密码实现描述成手机实测。
 
 ## 投稿前仍需解决
 
@@ -121,3 +126,10 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 默认不加 `--paper-assets` 时只生成指定结果目录，不修改论文。当前主表采用 `main_table_revision.tex`，附加数字在 `review_numbers.tex`；旧 `main_table.tex` 保留但不再被正文引用。新 raw completion 为 pooled ratio，与旧汇总的逐轨迹比率平均不混用。预测先验仅用开发用户拟合，新增区间条件于该固定预测器；任务尺寸计数是描述性结果。逐条回应见 `research/revisions/review1/response_zh.md`，最近邻全文比较已在 `research/revisions/review1/duan_fulltext_comparison.md` 补齐。
+
+
+## 2026-09-26：有限模型 R-BSP 扩展
+
+针对旧 informed stress 已发现的“客户端模型错误而攻击者模型更准确时 nominal BSP cap 可被突破”，新增 finite-model Robust BSP (R-BSP)。每个公开候选模型独立维护后验并计算 nominal BSP 最大 gate，R-BSP 取所有候选 gate 的最小值。对同一 scalar gate，这等于全部候选模型两分支可行区间的交集右端点，因此是有限模型集合内的最大公共可行 gate。
+
+当前探索性 ambiguity set 为 `move={0.05,0.3,0.8} × alpha={0.3,0.648,0.9}` 共 9 个模型。新 stress 使用 synthetic seeds 3000--3019、每 seed 4 用户、40 条件、3,200 次轨迹。以 `rho=0.1` 为例，四个失配 nominal BSP 的知情攻击者局部 cap 违反率为约 2.6%--14.6%；R-BSP 在攻击者精确模型被包含于集合时为 0。其机会保留率为约 39.7%，低于 nominal/misspecified BSP 的约 46.9%--55.2%，且 9 模型 Python gate 明显更慢。该扩展由既有负结果触发，属于 post-hoc 探索性机制验证，不写成独立确认性证据，也不外推到 ambiguity set 之外。

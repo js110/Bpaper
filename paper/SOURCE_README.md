@@ -1,12 +1,34 @@
-# Manuscript source bundle
+# Manuscript source and submission bundle
 
-This is a complete research draft, not an approved submission.
-Build with a TeX Live installation containing common LaTeX mathematics, graphics, font, and bibliography packages:
+The working manuscript targets *Pervasive and Mobile Computing* and uses Elsevier's `elsarticle` review layout.
+
+Development build:
 
     latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-The included elsarticle class and bibliography style originate from Elsevier's official template. The generated figures and tables correspond to the saved project results. Full code, experiment logs, provenance, source audit, and reproduction instructions are in the parent crowdsensing_task_privacy project. Author, affiliation, and funding text was supplied for this draft and still requires author verification; other declarations and final venue checks remain pending.
+The repository keeps a convenient development layout, including the `figures/` subdirectory. Elsevier Editorial Manager does not process LaTeX submissions with subfolders, so the development folder itself should not be uploaded as the final LaTeX source package.
 
-Updated 2026-09-23 after internal review and author details: 21 pages, 11 references, eight figures and six tables. The two PNG schematics were created with the built-in image generation tool; their prompts and provenance are included under imagegen/. Quantitative plots and the added task-area, prior-predictor, and expanded Commute displays derive from archived experiment data. The 2024 PML and PRIVIC comparisons are explicitly task-channel adaptations. The source uses the xurl package to wrap long reference URLs. The closest 2026 task-allocation paper has now been compared using the user-supplied accepted author version. This is a model-level comparison, not a numerical reproduction or an independent novelty certification.
+The final checkpoint workflow `.github/workflows/pmc-final-package.yml` builds a separate flat source package:
+- `PMC_submission_source.zip`: one-level LaTeX source and all referenced figures/tables;
+- `PMC_submission_manifest.json`: exact packaged-file manifest;
+- `highlights.docx`: Elsevier Highlights upload file generated from `highlights.txt`;
+- `main.pdf`: compiled review manuscript.
 
-Working repository: https://github.com/js110/Bpaper . The latest factual audit corrects implementation-validation wording, PML bound attainment, KL gate approximation, tie handling, and official PMLR author metadata without changing saved experimental results.
+The workflow independently compiles both the development source and the flat source, rejects unresolved references, undefined controls, overfull boxes, or oversized floats, and compares their extracted PDF text.
+
+Current scientific contents include nominal BSP, finite-model R-BSP, development/validation-derived R-BSP, asymmetric DF-BSP/RDF-BSP, informed-attacker and ambiguity-boundary stress tests, region-size-aware utility, and recent PML-T/PRIVIC-T task-channel comparisons. The ambiguity and disclosure-floor extensions are explicitly post-hoc and are not presented as independent confirmatory evidence.
+
+Final validated inventory:
+- six numbered sections: Introduction; Related Work; Proposed Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion;
+- main manuscript: 28 pages, 1 figure, 2 tables;
+- supplementary technical material: 11 pages;
+- 21 cited references;
+- 28 automated tests;
+- final flat Editorial Manager source independently compiles to the same 28-page text as the development source;
+- final packaging workflow: GitHub Actions run 36511273191, successful.
+
+Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
+
+Author-owned declarations remain separate in `AUTHOR_CONFIRMATION.md`. The repository must not claim final author approval, competing-interest status, CRediT roles, funder roles, data-use/ethics wording, or other submission declarations until the responsible authors confirm them.
+
+Working repository: https://github.com/js110/Bpaper

@@ -36,3 +36,60 @@
 ## 2026-09-23 事实核查与仓库接入
 
 完成代码/公式/元数据/结果一致性复核；7 类修正记录在 revisions/factual_audit/report_zh.md，主结果不变。21 项测试通过、352 条件共 1,148,592 个事件审计无差异，近期方法 486,288 个事件公开后验重算一致。当前 PDF 21 页，无未定义引用、溢出或重复锚点，源码包独立编译且文本一致。依用户要求初始化 Bpaper 仓库，纳入可复现材料并保留外部全文/原始压缩包的来源清单；Git 推送结果由提交记录核验。
+
+## 2026-09-26 R-BSP 方法升级
+
+- 根据第二轮内部审稿，将旧 informed stress 的模型失配失败从 limitation 升级为有限模型鲁棒机制问题。实现 `robust_bsp_gates` 与 `RobustPublicBelief`：候选模型共享公开任务/输出历史，各自维护后验；同一任务的 R-BSP gate 为各模型 nominal BSP 最大 gate 的最小值。
+- 新增有限模型“最大公共 scalar gate”命题并写入论文。该结论只覆盖给定 finite ambiguity set；不声称任意先验、任意辅助知识或 differential privacy。
+- 新增 2 项 R-BSP 测试后完整测试套件为 23 项。GitHub Actions/Python 3.12.14 上 23 项全部通过；随机多模型交集、分支约束、最大性与包含 informed attacker 的集成条件均通过。
+- 新增 `configs/robust_informed.json`：9 模型网格 `v∈{0.05,0.3,0.8}` × `alpha∈{0.3,0.648,0.9}`，20 个新 synthetic seeds、4 users/seed、40 条件、3,200 条轨迹；分析按 seed cluster bootstrap 1,000 次。
+- 已真实执行该 stress。rho=0.1 时，nominal BSP 在 alpha_low/alpha_high/move_low/move_high 下 informed-attacker local-cap violation 分别约 12.6%/2.6%/2.8%/14.6%；R-BSP 五组条件均为 0，因为 attacker 的精确模型被显式包含。R-BSP retention 约 39.7%，而 BSP 为约 46.9%--55.2%，说明鲁棒性代价明显。
+- 上述模型集合是在旧失配结果已知后设计，因此全部标记 post-hoc exploratory；没有把它包装成预注册或独立确认。论文标题、摘要、方法、实验、结果、讨论和结论已据此重构，保留 utility cost 和集合外无保证的边界。
+
+## 2026-09-26 R-BSP 边界实验与 CI 拆分
+
+- 修复之前的重型流水线：代码单测、R-BSP 实验、LaTeX 编译彻底拆开。快速代码测试和 checkpoint PDF 编译均已在 GitHub Actions 成功验证；cm-super 修复了此前 pdfTeX scalable-font 错误。
+- paper-build 不再随普通论文文字改动自动触发；R-BSP 主实验也不再随每次 commit 重跑。
+- 新增 post-hoc boundary characterization：固定原 9-model ambiguity set，用新 seeds 4000--4019 测 4 个不属于集合的正确 attacker/generating models，共 8 条件 / 640 trajectories。
+- rho=0.1 时，R-BSP 对 unlisted interior alpha=0.50 为 0 local-cap violation；对 unlisted interior v=0.50 为 2/3840 (0.052%)；对 outside alpha=0.98 为 6.93% [5.70%, 8.31%]；对 outside v=0.95 为 1/3840 (0.026%)。结果已写入正文和新表，明确 finite-set 保证不能外推。
+- Related Work 新增 3 篇 2025--2026 MCS 隐私/任务分配文献，用于区分坐标/匹配/交易隐私接口与本文 linkable report/silence channel。
+
+## 2026-09-26 最终 checkpoint 编译
+
+- 轻量 CI 拆分后的最终论文 checkpoint 编译成功。
+- 当前 `paper/main.pdf` 为 50 页；最终 LaTeX 日志无 Overfull、无 Float-too-large、无未解析引用、无 Undefined control sequence。
+- 新 R-BSP boundary 表的横向溢出已通过紧凑列标题修复；主结果表通过轻微压缩 `arraystretch` 消除了页面高度警告，未删减实验数据。
+- GitHub Actions 只在显式 `paper/.build-request` checkpoint 下编译论文；普通正文修改不再触发 TeX 安装或实验。
+
+
+## 2026-09-27 数据驱动鲁棒性与细粒度服务扩展
+
+- 将 hand-grid R-BSP 的主要审稿缺口改为可复现的数据驱动构造：23 名 GeoLife development 用户做 user-level bootstrap 生成 mobility/prior candidates，17 名 validation 用户用 bootstrap predictive-likelihood winner frequency 选择 95% support set，67 名 test 用户不进入集合构造。
+- 最终 development move MLE 为 0.0514，95% user-bootstrap interval [0.0318, 0.0734]；validation point estimate 为 0.0573。validation 支持覆盖 6 个 population-prior mobility candidates；uniform-prior candidates 的 winner frequency 为 0。
+- 增加 validation-best single-model BSP control。GeoLife replay 下：uniform BSP local-cap violation 24.8%，validation-best single BSP 2.9%，hand-grid R-BSP 20.0%，data-driven R-BSP 0.0%。严格 data-driven R-BSP 的代价是 opportunity retention 仅 5.4%，weighted retention 0.7%，1--8-cell retention 仍为 0。
+- 形式化 truthful positive-report disclosure floor phi(b,S)=max_{i in S} b_i / sum_{j in S} b_j，说明 scalar thinning q 无法降低成功报告的条件位置泄露。uniform prior 下 m-cell region 的 floor 为 1/m。
+- DF-BSP/RDF-BSP 最终改为 asymmetric branch contract：positive report 允许 ceiling tau，silence 始终保持原 BSP cap max(rho, prior peak)。tau=rho 时严格退化为 BSP。新增随机化 branch feasibility/maximality tests。
+- 最终 synthetic walk tau=0.5：small-region retention 56.4% [41.7%, 69.8%]，inverse-area weighted retention 43.1%，declared branch-cap violation 0%，original-rho exceedance 8.4%。
+- 最终 GeoLife data-driven RDF-BSP tau=0.5：small-region retention 14.3% [5.6%, 25.7%]，weighted retention 20.8%，declared branch-cap violation 0.16% [0.03%, 0.31%]，original-rho exceedance 14.3%。非鲁棒 DF-BSP 在相同 tau 下 branch violation 为 16.4%，说明 robust model set 仍有实质作用。
+- 论文已同步标题、摘要、方法、命题、实验、Results、Discussion、Conclusion；不存在旧版 10.2% / 22.0% / 30.6% 等残留数字。
+- Related Work 扩展至 21 篇实际引用，补 iTAM、task-location privacy、PMTA、PPUR、LRPP-STA、2024--2026 task-allocation privacy 工作；不把不同安全接口的方法伪装成同一数值 baseline。
+- 当前自动化测试为 28 项；最终内部审稿结论记录于 research/reviews/final_submission_audit_2026-09-27/review_zh.md。
+- 投稿工程新增 flat Editorial Manager source builder、Highlights Word builder 和 final package workflow；最终作者声明仍由 responsible authors 确认。
+
+
+## 2026-09-29 六章结构重构
+
+- 按隐私/安全方法论文的叙事方式将主稿收束为 6 个编号章节：Introduction；Related Work；Proposed Branch-Safe Participation Framework；Privacy Guarantees and Robustness Analysis；Experimental Evaluation；Conclusion。
+- 原 System/Observation/Threat、Branch-Safe Participation、Experimental Design、Results、Discussion、Reproducibility 不再各占一级章节；系统/信道与机制定义并入第 III 章，威胁模型、命题证明、模型失配与保证边界集中到第 IV 章，实验设计、结果、讨论和复现集中到第 V 章。
+- Abstract 不计编号章节；Data and Code Availability 与 Funding 保持无编号。
+- 结构改写前的 27 页版本保存为 paper/pre_six_section_main_2026-09-29.tex。
+- 最终六章版 GitHub Actions run 36507948107 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
+
+
+## 2026-09-29 终稿事实与语言审校
+
+- 对六章主稿逐项核对语言逻辑、公式/命题与实现、正文数字与结果表、表格与生成脚本、GeoLife 预处理规则以及近期参考文献元数据。
+- 修正主要事实/表述问题：严格策略数量由 3 改为 4；data-driven R-BSP 的 25.7% MAP 改为中性陈述并补 validation-best single BSP 对照；删除未由实现支持的固定 one-slot delay；更新旧 replay threat-model 描述；将 tau 统一为 report-side threshold；将 DF 表的 rho exceed 指标更名为实际实现的 BSP local-cap violation；明确 ambiguity-set 95% 目标实际选中 6 个 population-prior 候选并达到 100% winner support；补充 coarsened likelihood 不拟合方向/跳距；修正 PMTA BibTeX 作者列表。
+- GeoLife 描述核对为 182 原始用户中 107 名满足窗口规则，最终 23 development / 17 validation / 67 test；8x8 区域单元约 4.2 km x 4.3 km（研究纬度附近）。
+- 摘要压缩到约 235 词；六个编号章节保持不变；21 个 BibTeX 条目均被引用且无缺失 cite key；所有 label/ref 唯一且可解析。
+- 最终 GitHub Actions run 36511273191 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。

@@ -47,4 +47,82 @@ class ChannelTests(unittest.TestCase):
         self.assertNotIn('truth',PublicBelief(2,0,.5).__dict__)
     def test_seed_reproducibility(self):
         np.testing.assert_array_equal(path_for(1,2,8,64,'walk',.3),path_for(1,2,8,64,'walk',.3))
+    def test_robust_bsp_bounds_intersection_and_maximality(self):
+        rng=np.random.default_rng(826)
+        for _ in range(200):
+            beliefs=np.vstack([rng.dirichlet(np.ones(16)*3) for _ in range(4)])
+            alphas=rng.uniform(.2,.95,size=4);mask=rng.random(16)<.55;rho=float(rng.uniform(.08,.35))
+            member_q=np.array([gates(b,mask,a,'bsp',rho,0)[0] for b,a in zip(beliefs,alphas)])
+            q=robust_bsp_gates(beliefs,mask,alphas,rho)[0]
+            self.assertAlmostEqual(q,float(member_q.min()),places=12)
+            for b,a in zip(beliefs,alphas):
+                cap=max(rho,float(b.max()))
+                for reported in [True,False]:
+                    pr=q*a*np.dot(b,mask);pr=pr if reported else 1-pr
+                    if pr>1e-12:self.assertLessEqual(update(b,mask,a,q,reported).max(),cap+1e-9)
+            if q<.999:
+                q2=min(1.,q+1e-5);violated=False
+                for b,a in zip(beliefs,alphas):
+                    cap=max(rho,float(b.max()))
+                    for reported in [True,False]:
+                        pr=q2*a*np.dot(b,mask);pr=pr if reported else 1-pr
+                        if pr>1e-12 and update(b,mask,a,q2,reported).max()>cap-1e-10:
+                            violated=True
+                self.assertTrue(violated)
+    def test_rbsp_contains_informed_attacker_model(self):
+        models=[dict(move=m,alpha=a) for m in [.05,.3,.8] for a in [.3,.648,.9]]
+        c=dict(delivery=.9,willing=.8,on_time=.9,move_true=.3,move_model=.05,side=8,
+               scenario='walk',attack='adaptive',method='rbsp',param=.1,id='rbsp_unit',
+               alpha_model=.3,attacker_move=.3,attacker_alpha=.648,robust_models=models)
+        r,m=candidates(8);path=path_for(826,0,8,48,'walk',.3)
+        out,_=simulate(c,826,0,path,r,m,48,8,False)
+        self.assertEqual(out['robust_model_count'],9)
+        self.assertEqual(out['cap_violations'],0)
+        self.assertEqual(out['attacker_local_cap_violations'],0)
+        self.assertEqual(out['attacker_absolute_cap_violations'],0)
+    def test_df_bsp_reduces_to_bsp_at_same_cap(self):
+        rng=np.random.default_rng(927)
+        for _ in range(100):
+            b=rng.dirichlet(np.ones(16)*2);mask=rng.random(16)<.6
+            rho=.25
+            q0=gates(b,mask,.648,'bsp',rho,0)[0]
+            q1=df_bsp_gates(b,mask,.648,rho,rho)[0]
+            self.assertAlmostEqual(q0,q1,places=12)
+    def test_df_bsp_admits_only_declared_positive_exposure(self):
+        b=np.full(16,1/16);small=np.zeros(16);small[:4]=1
+        self.assertAlmostEqual(disclosure_floor(b,small),.25)
+        self.assertEqual(df_bsp_gates(b,small,.648,.1,.2)[0],0)
+        q=df_bsp_gates(b,small,.648,.1,.25)[0]
+        self.assertGreater(q,0)
+        ppos=q*.648*np.dot(b,small)
+        if ppos>1e-12:self.assertLessEqual(update(b,small,.648,q,True).max(),.25+1e-9)
+        psil=1-ppos
+        if psil>1e-12:self.assertLessEqual(update(b,small,.648,q,False).max(),.1+1e-9)
+    def test_robust_df_is_memberwise_minimum(self):
+        beliefs=np.array([[.1,.2,.3,.4],[.4,.3,.2,.1]])
+        masks=np.array([[1,1,1,0],[0,1,1,1]],float);alphas=[.5,.8]
+        member=np.vstack([df_bsp_gates(b,masks,a,.2,.5) for b,a in zip(beliefs,alphas)])
+        np.testing.assert_allclose(robust_df_bsp_gates(beliefs,masks,alphas,.2,.5),member.min(axis=0))
+    def test_df_bsp_random_branch_bounds_and_maximality(self):
+        rng=np.random.default_rng(92727)
+        for _ in range(200):
+            b=rng.dirichlet(np.ones(16)*2);mask=(rng.random(16)<.5).astype(float)
+            if not mask.any():mask[int(rng.integers(16))]=1
+            alpha=float(rng.uniform(.2,.95));rho=float(rng.uniform(.06,.3));tau=float(rng.uniform(rho,1))
+            q=float(df_bsp_gates(b,mask,alpha,rho,tau)[0])
+            prior=float(b.max());mass=float(np.dot(b,mask))
+            pos=disclosure_floor(b,mask)
+            if q>1e-12 and mass>0:
+                self.assertLessEqual(pos,max(tau,prior)+1e-9)
+            psil=1-q*alpha*mass
+            if psil>1e-12:
+                self.assertLessEqual(update(b,mask,alpha,q,False).max(),max(rho,prior)+1e-9)
+            if q<.999999:
+                q2=min(1.,q+1e-5)
+                positive_bad=(q2>0 and mass>0 and pos>max(tau,prior)+1e-10)
+                silence_bad=False
+                psil2=1-q2*alpha*mass
+                if psil2>1e-12:
+                    silence_bad=update(b,mask,alpha,q2,False).max()>max(rho,prior)-1e-10
+                self.assertTrue(positive_bad or silence_bad)
 if __name__=='__main__':unittest.main()

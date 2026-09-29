@@ -5,13 +5,6 @@
 \expandafter\ifx\csname href\endcsname\relax
   \def\href#1#2{#2} \def\path#1{#1}\fi
 
-\bibitem{fedsense2025}
-Z.~You, X.~Dong, X.~Liu, S.~Gao, Y.~Wang, Y.~Shen, {Location Privacy
-  Preservation Crowdsensing With Federated Reinforcement Learning}, IEEE
-  Transactions on Dependable and Secure Computing 22~(3) (2025) 1877--1894.
-\newblock \href {https://doi.org/10.1109/tdsc.2024.3398994}
-  {\path{doi:10.1109/tdsc.2024.3398994}}.
-
 \bibitem{tmarkov}
 G.~Qiu, Y.~Shen, K.~Cheng, L.~Liu, S.~Zeng, {Mobility-Aware Privacy-Preserving
   Mobile Crowdsourcing}, Sensors 21~(7) (2021) 2474.
@@ -21,7 +14,7 @@ G.~Qiu, Y.~Shen, K.~Cheng, L.~Liu, S.~Zeng, {Mobility-Aware Privacy-Preserving
 \bibitem{fingerprint}
 C.~Wang, J.~Tao, S.~Su, D.~Chi, W.~Li, {Privacy-preserving task assignment in
   mobile crowdsensing: a bilateral location fingerprint-based approach},
-  Cybersecurity 9~(1) (2026) 105.
+  Cybersecurity 9 (2026) 105.
 \newblock \href {https://doi.org/10.1186/s42400-025-00539-2}
   {\path{doi:10.1186/s42400-025-00539-2}}.
 
@@ -39,6 +32,90 @@ L.~Grosse, S.~Saeidian, T.~J. Oechtering, {Extremal Mechanisms for Pointwise
 \newblock \href {https://doi.org/10.1109/tifs.2024.3449556}
   {\path{doi:10.1109/tifs.2024.3449556}}.
 
+\bibitem{itam2021}
+B.~Zhao, S.~Tang, X.~Liu, X.~Zhang, W.-N. Chen, {iTAM: Bilateral
+  Privacy-Preserving Task Assignment for Mobile Crowdsensing}, IEEE
+  Transactions on Mobile Computing 20~(12) (2021) 3351--3366.
+\newblock \href {https://doi.org/10.1109/TMC.2020.2999923}
+  {\path{doi:10.1109/TMC.2020.2999923}}.
+
+\bibitem{taskloc2022}
+X.~Dong, W.~Zhang, Y.~Zhang, Z.~You, S.~Gao, Y.~Shen, C.~Wang, {Optimizing Task
+  Location Privacy in Mobile Crowdsensing Systems}, IEEE Transactions on
+  Industrial Informatics 18~(4) (2022) 2762--2772.
+\newblock \href {https://doi.org/10.1109/TII.2021.3109437}
+  {\path{doi:10.1109/TII.2021.3109437}}.
+
+\bibitem{pmta2024}
+T.~Peng, W.~You, K.~Guan, E.~Luo, S.~Zhang, G.~Wang, T.~Wang, Y.~Wu,
+  {Privacy-Preserving Multiobjective Task Assignment Scheme with Differential
+  Obfuscation in Mobile Crowdsensing}, Journal of Network and Computer
+  Applications 224 (2024) 103836.
+\newblock \href {https://doi.org/10.1016/j.jnca.2024.103836}
+  {\path{doi:10.1016/j.jnca.2024.103836}}.
+
+\bibitem{ppur2024}
+R.~Lin, Y.~Huang, Y.~Zhang, R.~Bi, J.~Xiong, {Achieving lightweight, efficient,
+  privacy-preserving user recruitment in mobile crowdsensing}, Journal of
+  Information Security and Applications 85 (2024) 103854.
+\newblock \href {https://doi.org/10.1016/j.jisa.2024.103854}
+  {\path{doi:10.1016/j.jisa.2024.103854}}.
+
+\bibitem{lrppsta2025}
+Z.~Li, W.~Shi, Y.-J. Choi, H.~Sekiya, Q.~Deng, {Location and Reward
+  Privacy-Preserving Based Secure Task Allocation in Mobile Crowdsensing}, IEEE
+  Transactions on Mobile Computing 24~(10) (2025) 9951--9964.
+\newblock \href {https://doi.org/10.1109/TMC.2025.3564404}
+  {\path{doi:10.1109/TMC.2025.3564404}}.
+
+\bibitem{mtadprh2025}
+Y.~Fu, J.~Chen, H.~Lu, B.~Huang, W.~Han, {A multi-objective task allocation
+  scheme with privacy-preserving and regional heat in mobile crowdsensing},
+  Computer Communications 234 (2025) 108085.
+\newblock \href {https://doi.org/10.1016/j.comcom.2025.108085}
+  {\path{doi:10.1016/j.comcom.2025.108085}}.
+
+\bibitem{tasp2025}
+Y.~Liu, H.~Chen, X.~Liu, W.~Wei, H.~Xue, O.~Alfarraj, Z.~Almakhadmeh,
+  {Optimizing task allocation with temporal-spatial privacy protection in
+  mobile crowdsensing}, Expert Systems 42~(2) (2025) e13717.
+\newblock \href {https://doi.org/10.1111/exsy.13717}
+  {\path{doi:10.1111/exsy.13717}}.
+
+\bibitem{p2taskmp2025}
+Z.~Xie, T.~Peng, W.~You, G.~Wang, Q.~Liu, E.~Luo, {P2-TaskMP:
+  Privacy-Preserving Task Allocation Optimization Based on Mobility
+  Prediction}, Future Generation Computer Systems 167 (2025) 107720.
+\newblock \href {https://doi.org/10.1016/j.future.2025.107720}
+  {\path{doi:10.1016/j.future.2025.107720}}.
+
+\bibitem{qpta2024}
+Z.~Chen, M.~Xu, C.~Su, {Online quality-based privacy-preserving task allocation
+  in mobile crowdsensing}, Computer Networks 251 (2024) 110613.
+\newblock \href {https://doi.org/10.1016/j.comnet.2024.110613}
+  {\path{doi:10.1016/j.comnet.2024.110613}}.
+
+\bibitem{fedsense2025}
+Z.~You, X.~Dong, X.~Liu, S.~Gao, Y.~Wang, Y.~Shen, {Location Privacy
+  Preservation Crowdsensing With Federated Reinforcement Learning}, IEEE
+  Transactions on Dependable and Secure Computing 22~(3) (2025) 1877--1894.
+\newblock \href {https://doi.org/10.1109/tdsc.2024.3398994}
+  {\path{doi:10.1109/tdsc.2024.3398994}}.
+
+\bibitem{blockchainpmc2026}
+N.~Andola, V.~K. Yadav, {A blockchain-assisted privacy-preserving framework for
+  Mobile CrowdSensing}, Pervasive and Mobile Computing 115 (2026) 102125.
+\newblock \href {https://doi.org/10.1016/j.pmcj.2025.102125}
+  {\path{doi:10.1016/j.pmcj.2025.102125}}.
+
+\bibitem{inference2026}
+R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
+  {Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based
+  on Homomorphic Encryption and Reversible Obfuscation}, IEEE Transactions on
+  Mobile ComputingEarly Access (2026).
+\newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
+  {\path{doi:10.1109/tmc.2026.3721057}}.
+
 \bibitem{bayesian}
 R.~Eilat, K.~Eliaz, X.~Mu, {Bayesian privacy}, Theoretical Economics 16~(4)
   (2021) 1557--1603.
@@ -52,24 +129,15 @@ J.~Whitehouse, A.~Ramdas, R.~Rogers, S.~Wu,
   Machine Learning Research, 2023, pp. 36990--37007.
 \newline\urlprefix\url{https://proceedings.mlr.press/v202/whitehouse23a.html}
 
-\bibitem{inference2026}
-R.~Duan, Q.~Yu, Y.~Zhang, C.~Xu, C.~Chen, X.~Zheng, Y.~Luo,
-  {Inference-Resistant Task Allocation Mechanism for Mobile Crowdsensing Based
-  on Homomorphic Encryption and Reversible Obfuscation}, IEEE Transactions on
-  Mobile Computing (2026) 1--18, Early Access; volume not assigned in the
-  verified record.
-\newblock \href {https://doi.org/10.1109/tmc.2026.3721057}
-  {\path{doi:10.1109/tmc.2026.3721057}}.
+\bibitem{geolife2008}
+Y.~Zheng, Q.~Li, Y.~Chen, X.~Xie, W.-Y. Ma, {Understanding Mobility Based on
+  GPS Data}, in: Proceedings of the 10th International Conference on Ubiquitous
+  Computing, 2008, pp. 312--321.
 
 \bibitem{geolife2009}
 Y.~Zheng, L.~Zhang, X.~Xie, W.-Y. Ma, {Mining Interesting Locations and Travel
   Sequences from GPS Trajectories}, in: Proceedings of the 18th International
   Conference on World Wide Web, 2009, pp. 791--800.
-
-\bibitem{geolife2008}
-Y.~Zheng, Q.~Li, Y.~Chen, X.~Xie, W.-Y. Ma, {Understanding Mobility Based on
-  GPS Data}, in: Proceedings of the 10th International Conference on Ubiquitous
-  Computing, 2008, pp. 312--321.
 
 \bibitem{geolife2010}
 Y.~Zheng, X.~Xie, W.-Y. Ma,

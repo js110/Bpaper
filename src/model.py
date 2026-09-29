@@ -88,6 +88,69 @@ def gates(b,masks,alpha,method,param,slot,rectangles=None):
     return np.clip(q,0,1)
 
 
+def robust_bsp_gates(beliefs,masks,alphas,rho,slot=0,rectangles=None):
+    """Largest scalar gates satisfying BSP branch constraints for every public model.
+
+    The feasible BSP gate set for each model is a downward-closed interval
+    [0, q_k^*]. Their intersection is therefore [0, min_k q_k^*].
+    """
+    beliefs=np.asarray(beliefs,dtype=float)
+    if beliefs.ndim==1:beliefs=beliefs[None,:]
+    alphas=np.asarray(alphas,dtype=float).reshape(-1)
+    if beliefs.ndim!=2 or len(alphas)!=len(beliefs) or len(beliefs)==0:
+        raise ValueError('robust BSP requires one alpha per nonempty belief ensemble')
+    if np.any(beliefs<0) or not np.all(np.isfinite(beliefs)) or np.any(beliefs.sum(axis=1)<=0):
+        raise ValueError('invalid robust-model belief')
+    beliefs=beliefs/beliefs.sum(axis=1,keepdims=True)
+    if np.any(alphas<0) or np.any(alphas>1) or not np.all(np.isfinite(alphas)):
+        raise ValueError('invalid robust-model alpha')
+    qs=[gates(b,masks,float(a),'bsp',rho,slot,rectangles) for b,a in zip(beliefs,alphas)]
+    return np.min(np.vstack(qs),axis=0)
+
+
+def disclosure_floor(b,mask):
+    """Unavoidable posterior peak after a truthful positive region report."""
+    b=normalize(b);mask=np.asarray(mask,dtype=float)
+    mass=float(np.dot(b,mask))
+    if mass<=0:return 0.0
+    return float(np.max(b*mask)/mass)
+
+
+def df_bsp_gates(b,masks,alpha,rho,positive_cap,slot=0,rectangles=None):
+    """Asymmetric disclosure-floor-aware BSP.
+
+    Only the truthful report branch is relaxed: its peak may reach
+    max(positive_cap, prior_peak). Silence retains the original BSP cap
+    max(rho, prior_peak). This isolates the unavoidable truthful-report
+    disclosure instead of weakening both branches.
+    """
+    b=normalize(b);masks=np.atleast_2d(masks).astype(float)
+    tau=float(positive_cap);rho=float(rho)
+    if not (0<tau<=1) or not (0<rho<=1) or tau+1e-15<rho:
+        raise ValueError('DF-BSP requires 0 < rho <= positive_cap <= 1')
+    prior_peak=float(np.max(b));h=float(alpha)*masks
+    joint=h*b[None,:];mass=joint.sum(axis=1)
+    pos=np.divide(joint.max(axis=1),mass,out=np.zeros(len(masks)),where=mass>0)
+    allowed=pos<=max(tau,prior_peak)+1e-12
+    silence_cap=max(rho,prior_peak)
+    q=allowed.astype(float)
+    denom=silence_cap*mass[:,None]-joint
+    limits=np.divide(silence_cap-b[None,:],denom,out=np.full_like(denom,np.inf),where=denom>1e-14)
+    q=np.minimum(q,np.minimum(1,limits.min(axis=1)))
+    return np.clip(q,0,1)
+
+
+def robust_df_bsp_gates(beliefs,masks,alphas,rho,positive_cap,slot=0,rectangles=None):
+    beliefs=np.asarray(beliefs,dtype=float)
+    if beliefs.ndim==1:beliefs=beliefs[None,:]
+    alphas=np.asarray(alphas,dtype=float).reshape(-1)
+    if beliefs.ndim!=2 or len(alphas)!=len(beliefs) or len(beliefs)==0:
+        raise ValueError('robust DF-BSP requires one alpha per nonempty belief ensemble')
+    qs=[df_bsp_gates(b,masks,float(a),rho,positive_cap,slot,rectangles)
+        for b,a in zip(beliefs,alphas)]
+    return np.min(np.vstack(qs),axis=0)
+
+
 def binary_entropy(p):
     p=np.asarray(p,float)
     return -(p*np.log2(np.maximum(p,1e-300))+(1-p)*np.log2(np.maximum(1-p,1e-300)))
@@ -125,3 +188,45 @@ class PublicBelief:
         if task.deadline<task.slot:raise ValueError('expired task')
         self.b=update(self.b,task.mask(self.side),self.alpha,q,observation.reported)
         self.seen.add(task.task_id)
+
+
+class RobustPublicBelief:
+    """Ensemble of public Bayesian models used by robust BSP.
+
+    Every member is driven only by the same public task/output history. Optional
+    priors are explicit model inputs; evaluator truth is never stored here.
+    """
+    def __init__(self,side,models):
+        if not models:raise ValueError('robust BSP requires at least one public model')
+        self.side=side;self.members=[];self._background=[]
+        for spec in models:
+            if 'move' not in spec or 'alpha' not in spec:
+                raise ValueError('each robust model requires move and alpha')
+            move=float(spec['move']);alpha=float(spec['alpha'])
+            if not (0<=move<=1 and 0<=alpha<=1):
+                raise ValueError('invalid robust model')
+            member=PublicBelief(side,move,alpha)
+            if spec.get('prior') is not None:
+                prior=normalize(spec['prior'])
+                if len(prior)!=side*side:raise ValueError('robust prior has wrong size')
+                member.b=prior.copy()
+            self.members.append(member);self._background.append(member.b.copy())
+    @property
+    def beliefs(self):
+        return np.vstack([m.b for m in self.members])
+    @property
+    def alphas(self):
+        return np.asarray([m.alpha for m in self.members],float)
+    def reset(self):
+        for m,p in zip(self.members,self._background):
+            m.b=p.copy();m.seen.clear()
+    def predict(self):
+        for j,m in enumerate(self.members):
+            m.b=predict(m.b,self.side,m.move)
+            self._background[j]=predict(self._background[j],self.side,m.move)
+    def gates(self,masks,rho,slot=0,rectangles=None,positive_cap=None):
+        if positive_cap is None:
+            return robust_bsp_gates(self.beliefs,masks,self.alphas,rho,slot,rectangles)
+        return robust_df_bsp_gates(self.beliefs,masks,self.alphas,rho,positive_cap,slot,rectangles)
+    def observe(self,task,observation,q):
+        for m in self.members:m.observe(task,observation,q)
