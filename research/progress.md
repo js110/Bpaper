@@ -84,3 +84,12 @@
 - Abstract 不计编号章节；Data and Code Availability 与 Funding 保持无编号。
 - 结构改写前的 27 页版本保存为 paper/pre_six_section_main_2026-09-29.tex。
 - 最终六章版 GitHub Actions run 36507948107 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
+
+
+## 2026-09-29 终稿事实与语言审校
+
+- 对六章主稿逐项核对语言逻辑、公式/命题与实现、正文数字与结果表、表格与生成脚本、GeoLife 预处理规则以及近期参考文献元数据。
+- 修正主要事实/表述问题：严格策略数量由 3 改为 4；data-driven R-BSP 的 25.7% MAP 改为中性陈述并补 validation-best single BSP 对照；删除未由实现支持的固定 one-slot delay；更新旧 replay threat-model 描述；将 tau 统一为 report-side threshold；将 DF 表的 rho exceed 指标更名为实际实现的 BSP local-cap violation；明确 ambiguity-set 95% 目标实际选中 6 个 population-prior 候选并达到 100% winner support；补充 coarsened likelihood 不拟合方向/跳距；修正 PMTA BibTeX 作者列表。
+- GeoLife 描述核对为 182 原始用户中 107 名满足窗口规则，最终 23 development / 17 validation / 67 test；8x8 区域单元约 4.2 km x 4.3 km（研究纬度附近）。
+- 摘要压缩到约 235 词；六个编号章节保持不变；21 个 BibTeX 条目均被引用且无缺失 cite key；所有 label/ref 唯一且可解析。
+- 最终 GitHub Actions run 36511273191 全部通过：28 tests；开发主稿 28 页；flat Editorial Manager 源独立编译 28 页且文本一致；Supplement 11 页；最终日志无 Overfull、Float-too-large、未解析引用或 Undefined control sequence。
