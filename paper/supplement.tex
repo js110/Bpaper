@@ -1,7 +1,7 @@
 \documentclass[review,11pt,times]{elsarticle}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,booktabs,graphicx,microtype}
+\usepackage{amsmath,amssymb,booktabs,microtype}
 \usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \journal{Supplementary Material}
@@ -18,95 +18,49 @@
 \cortext[cor1]{Corresponding author.}
 \address[aff1]{College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China}
 \begin{abstract}
-This supplement provides extended implementation details, complete diagnostic plots, comparator adaptations, model-mismatch stress tests, task-size analysis, and reproducibility information supporting the main manuscript. It does not introduce additional primary claims. The post-hoc status of the robustness extensions and all negative or boundary results are preserved.
+This supplement records implementation details that are useful for verification but not necessary for following the main argument: comparator adaptations, finite-model robustness and boundary tests, construction of the data-driven ambiguity set, and reproducibility information. It does not introduce additional primary claims. The post-hoc status of the replay extensions and the finite-model scope of the robustness guarantee are preserved.
 \end{abstract}
 \end{frontmatter}
 
-\section{Extended observation-channel example}
-For a predicted belief $b=(0.2,0.2,0.2,0.4)$, task region $S=\{1,2,3\}$, availability $\alpha=0.9$, and local cap $c=0.4$, the truthful report posterior has peak $1/3$, so a success-only check would permit full participation. If $q=1$, however, silence leaves the fourth state with posterior probability $0.4/(1-0.9\times0.6)\approx0.870$, violating the cap. BSP therefore rejects this task under the two-branch constraint. The example isolates the role of probabilistic silence without using simulator ground truth.
-\begin{figure}[htbp]
-\centering\includegraphics[width=.88\linewidth]{figures/bsp_workflow.png}
-\caption{Original BSP workflow and analytical report/silence example.}
-\end{figure}
-
 \section{Comparator adaptations and validation}
-\subsection{Pointwise maximal leakage task channel}
-Let $l_i=\Pr(Y=1\mid X=i)$ and $m=\sum_i b_i l_i$, with $0\le l_i\le\alpha\mathbf{1}\{i\in S\}$. The task-channel PML specialization maximizes report probability subject to the published pointwise leakage inequalities $l_i\le e^\epsilon m$ and $1-l_i\le e^\epsilon(1-m)$ for every state with positive prior mass~\cite{pml2024}. The implementation is checked against a general linear program over randomized instances. This is a channel specialization, not a reproduction of every component of the original application.
-\subsection{PRIVIC task adapter}
-PRIVIC learns a noisy location channel through Blahut--Arimoto and incremental Bayesian updates~\cite{privic2024}. We check our BA/IBU/GIBU updates against the authors' public implementation. The task adapter emits a truthful report only when the true state is eligible and the location-channel outcome satisfies the task predicate. Because this changes the output semantics, PRIVIC-T does not inherit the original geo-indistinguishability guarantee. Offline channel fitting is excluded from online gate timing.
-\subsection{Per-output KL comparator}
-The Bayesian-privacy comparator constrains each positive-probability posterior using $D_{\mathrm{KL}}(b^y\|b)\le\kappa$~\cite{bayesian}. The successful-report divergence is fixed by the task support; the silence bound is solved by bisection. It is a per-output diagnostic rather than a cumulative session guarantee.
+For the pointwise-maximal-leakage comparator, let \(l_i=\Pr(Y=1\mid X=i)\) and \(m=\sum_i b_i l_i\), with \(0\le l_i\le\alpha\mathbf{1}\{i\in S\}\). The task-channel specialization maximizes report probability subject to the published pointwise leakage constraints \(l_i\le e^\epsilon m\) and \(1-l_i\le e^\epsilon(1-m)\) for every state with positive prior mass~\cite{pml2024}. Randomized instances are checked against a general linear program. This is a task-channel specialization rather than a reproduction of every component of the original application.
 
-\section{Complete nominal and recent-method diagnostics}
-The main manuscript reports only the decision-relevant summary. Figures below retain the executed policy settings and exploratory envelope construction used during analysis. Envelope selection uses evaluation results and is therefore not presented as confirmatory tuning.
-\begin{figure}[htbp]
-\centering\includegraphics[width=.9\linewidth]{tradeoff.pdf}
-\caption{Original privacy--utility trade-off across the main policy grid.}
-\end{figure}
-\begin{figure}[htbp]
-\centering\includegraphics[width=.9\linewidth]{recent_tradeoff.pdf}
-\caption{Exploratory comparison with PML-T and PRIVIC-T. Faint points are executed settings; curves are evaluation-selected lower envelopes.}
-\end{figure}
-\begin{figure}[htbp]
-\centering\includegraphics[width=.9\linewidth]{calibration.pdf}
-\caption{Calibration diagnostics for selected attacks and defenses.}
-\end{figure}
-At opportunity retention 0.5 in the static setting, exploratory interpolation gives BSP MAP hit rate about 7.96\%, PML-T 16.74\%, and PRIVIC-T 18.58\%. Walk, commute, and GeoLife comparisons do not support a consistent superiority claim over both recent comparators. The development-fitted no-output modal predictor reaches \PopulationPriorHit\% isolated-test accuracy, demonstrating that the uniform-prior replay attack is not a practical upper bound.
+PRIVIC learns a noisy location channel through Blahut--Arimoto and incremental Bayesian updates~\cite{privic2024}. Our BA/IBU/GIBU updates are checked against the authors' public implementation. The task adapter emits a truthful report only when the true state is eligible and the sampled location-channel outcome satisfies the task predicate. Because the adapter changes the output semantics, PRIVIC-T does not inherit the original geo-indistinguishability guarantee. Offline fitting is excluded from online gate timing.
 
-\section{Sensitivity and stronger attacker knowledge}
-The sensitivity analysis varies availability, mobility assumptions, deadline success, grid resolution, and idealized history reset. Ten seed clusters contain four users each. These analyses are exploratory and are not used to retune the main operating points.
-\begin{figure}[htbp]
-\centering\includegraphics[width=.9\linewidth]{sensitivity.pdf}
-\caption{Selected sensitivity results with pointwise cluster-bootstrap intervals.}
-\end{figure}
-When the client assumes availability 0.3 while the informed attacker knows the generating $\alpha=0.648$, the attacker's posterior peak exceeds 0.1 on 30.0\% of evaluated slots and reaches 0.246. When the client assumes move probability 0.8 while the attacker knows the generating value 0.3, the informed peak exceeds 0.1 on 41.4\% of slots and reaches 0.263. In both cases the client-side belief can appear compliant, showing that nominal self-auditing is insufficient under model mismatch.
+The Bayesian-privacy comparator constrains each positive-probability output by \(D_{\mathrm{KL}}(b^y\|b)\le\kappa\)~\cite{bayesian}. The successful-report divergence is determined by task support, while the silence bound is solved by bisection. It is used as a per-output diagnostic rather than as a cumulative session guarantee.
+
+\section{Finite-model robustness and boundary characterization}
+The hand-grid ambiguity set uses \(v\in\{0.05,0.3,0.8\}\) and \(\alpha\in\{0.3,0.648,0.9\}\). Twenty new synthetic seeds, four users per seed, and 48 slots yield 80 trajectories per reported row at a fixed operating point. When the informed attacker's exact generating model is contained in the set, R-BSP records no local-cap violation in the reported in-set conditions, as expected from the finite-set construction, while retaining about 39.7\% of externally completable normal-task opportunities.
 \begin{table}[htbp]
 \centering\small
-\caption{Original informed-attacker stress table.}
-\input{informed_table}
-\end{table}
-
-\section{Finite-model robustness stress}
-The hand-grid ambiguity set uses $v\in\{0.05,0.3,0.8\}$ and $\alpha\in\{0.3,0.648,0.9\}$. Twenty new synthetic seeds, four users per seed, and 48 slots yield 80 trajectories per row at a fixed operating point. When the informed attacker's exact generating model is contained in the set, R-BSP records no local-cap violation in the five reported conditions, as expected from the finite-set construction, while retaining about 39.7\% of externally completable normal-task opportunities.
-\begin{table}[htbp]
-\centering\small
-\caption{Finite-model R-BSP stress at $\rho=0.1$.}
+\caption{Finite-model R-BSP stress at \(\rho=0.1\).}
 \input{robust_table}
 \end{table}
-A separate boundary study fixes the same set but evaluates correct attacker models that are not exact members. The outside-set value $\alpha=0.98$ yields a 6.93\% local-cap violation rate with a cluster-bootstrap 95\% interval of 5.70--8.31\%. Interior unlisted values yield zero or rare violations in this finite sample. These measurements are why the main manuscript states a finite-model rather than universal robustness guarantee.
+
+The same ambiguity set is then evaluated against correct attacker models that are not exact members. The outside-set value \(\alpha=0.98\) yields a 6.93\% local-cap violation rate with a cluster-bootstrap 95\% interval of 5.70--8.31\%. Interior unlisted values yield zero or rare violations in this finite sample. These results support only a finite-model guarantee and are not evidence of robustness to arbitrary distribution shift.
 \begin{table}[htbp]
 \centering\small
 \caption{Boundary characterization for attacker models not explicitly enumerated in the hand-grid ambiguity set.}
 \input{robust_boundary_table}
 \end{table}
 
-\section{Task-size composition and disclosure floor}
-The representative strict BSP traces show a strong dependence on task area. Opportunity counts use simulator eligibility and the shared external availability draw; completion additionally requires admission.
-\begin{table}[htbp]
-\centering\small
-\caption{Task-area breakdown for strict BSP at $\rho=0.1$.}
-\input{task_area_table}
-\end{table}
-For a uniform prior over an $m$-cell region, a truthful positive report has posterior peak $1/m$. Hence a strict $\rho=0.1$ report from fewer than ten cells cannot be made feasible by changing a scalar thinning probability. This structural floor motivates the asymmetric DF/RDF mechanisms rather than another threshold search.
-
 \section{Data-driven ambiguity construction}
-The replay ambiguity set is built without using the \GeoTestN{} isolated test windows. \GeoDevN{} development windows define a coarsened reflecting-walk likelihood $\Pr(\mathrm{change}\mid i)=v d_i/4$ and a development-only smoothed population prior; only change versus no-change events enter this likelihood, not destination direction or jump distance. Two thousand development state-path-group bootstraps produce mobility candidates, and 2,000 validation state-path-group bootstraps select the smallest set covering at least 95\% of predictive-likelihood winners. The validation-bootstrap winner distribution is concentrated on two population-prior candidates, with selection frequencies 84.15\% and 12.80\%, respectively. Retaining these two candidates yields 96.95\% cumulative validation selection mass, exceeding the prespecified 95\% target; the remaining candidates are therefore excluded from the final ambiguity set. The development MLE is \GeoDevMLE{} with a 95\% bootstrap interval \GeoDevCILow--\GeoDevCIHigh{}; the validation point estimate is \GeoValMLE{}. Availability remains externally specified because GeoLife contains trajectories rather than task-delivery, willingness, or deadline logs.
-A validation-best single-model BSP control separates improved model fit from finite-set robustness. Under the stronger replay attacker, its local-cap violation rate is \GeoSingleLocal\%, compared with \GeoStrictLocal\% observed local-cap violations for strict data-driven R-BSP, but the latter retains only \GeoStrictRet\% of opportunities.
+The replay ambiguity set is constructed without using the \GeoTestN{} isolated test windows. The \GeoDevN{} development windows define a coarsened reflecting-walk likelihood
+\[
+\Pr(\mathrm{change}\mid i)=v d_i/4,
+\]
+where \(d_i\) is the number of in-grid neighbors. Only change versus no-change events enter this likelihood; destination direction and jump distance are not fitted. Two thousand development state-path-group bootstrap replicates generate mobility candidates, and 2,000 validation state-path-group bootstrap replicates select the smallest set covering at least 95\% of predictive-likelihood winners.
 
-\section{Asymmetric disclosure-floor frontier}
-DF-BSP relaxes only the truthful report branch. Reports use $c^+_{\mathrm{DF}}=\max\{\tau,\|b\|_\infty\}$ while silence retains $c^-_{\mathrm{DF}}=\max\{\rho,\|b\|_\infty\}$. At $\tau=\rho$ the rule reduces exactly to BSP. Randomized tests check report admissibility, strict silence feasibility, robust member-wise intersection, and scalar maximality.
-On new synthetic walks, $\tau=0.5$ raises 1--8-cell retention from zero to 56.4\% and inverse-area-weighted retention from 12.3\% to 43.1\%, with no observed declared branch-cap violation. In the stronger GeoLife replay, non-robust DF-BSP has a \GeoDFBranch\% branch-cap violation rate at the same $\tau$, whereas data-driven RDF-BSP reduces it to \GeoRDFBranch\% while retaining \GeoRDFSmall\% of small-region opportunities and \GeoRDFWeighted\% inverse-area-weighted utility. The original BSP local cap is violated on \GeoRDFLocal\% of slots because the relaxed report-side threshold can permit greater posterior concentration on truthful reports.
+The validation winner distribution is concentrated on two development-only smoothed population-prior candidates, with selection frequencies 84.15\% and 12.80\%. Retaining these two models gives 96.95\% cumulative validation selection mass, above the prespecified 95\% target. The development MLE is \GeoDevMLE{} with a 95\% bootstrap interval \GeoDevCILow--\GeoDevCIHigh{}; the validation point estimate is \GeoValMLE{}. Availability remains externally specified because GeoLife contains trajectories rather than task-delivery, willingness, or deadline observations.
 
-\section{Expanded commute view}
-\begin{figure}[htbp]
-\centering\includegraphics[width=.8\linewidth]{recent_commute_zoom.pdf}
-\caption{Expanded commute comparison using the same saved estimates and intervals as the recent-method analysis.}
-\end{figure}
-The expanded view changes only the vertical scale. It does not alter the conclusion that the commute comparison is inconclusive.
+A validation-best single-model BSP control is retained to separate improved model fit from finite-set robustness. The strict data-driven R-BSP and the disclosure-floor-aware RDF-BSP service frontier are reported in the main manuscript rather than duplicated here.
 
 \section{Reproducibility record}
-The repository stores deterministic preprocessing, split manifests, configuration files, seeds, event-level compressed logs, trajectory-level summaries, bootstrap outputs, and provenance records. The current automated suite contains 30 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; GeoLife split/missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
-The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input group isolation; user IDs and complete discrete state-path fingerprints are disjoint across these effective splits. The data-driven extension is nevertheless labelled post-hoc because the test replay had already been inspected earlier in the project. No mobile-device energy measurement, production MCS task log, or independent external reproduction is claimed.
+The repository stores deterministic preprocessing, split metadata, configuration files, seeds, trajectory-level summaries, bootstrap outputs, provenance records, analysis code, and manuscript sources. The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input-group isolation. User IDs and complete 48-slot discrete state-path fingerprints are disjoint across the effective splits.
+
+GeoLife uncertainty intervals resample complete state-path groups rather than treating slots or duplicate model-input paths as independent replicates. The current automated suite contains 30 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
+
+The data-driven replay extension remains labelled post-hoc because the test replay had been inspected in earlier project stages. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
 
 \section*{Funding}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
