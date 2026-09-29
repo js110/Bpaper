@@ -65,7 +65,7 @@ def main():
             paths=np.array([r['path'] for r in group]),
             coords=np.array([r['coords'] for r in group]))
     dev=[r for r in selected if r['split']=='development']
-    change=float(np.mean([np.mean(np.diff(r['path'])!=0) for r in dev]))
+    raw_change=float(np.mean([np.mean(np.diff(r['path'])!=0) for r in dev]))
     manifest=dict(
         source_url='https://download.microsoft.com/download/F/4/8/F4894AA5-FDBC-481E-9285-D5F8C4C4F039/Geolife%20Trajectories%201.3.zip',
         source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
@@ -73,7 +73,7 @@ def main():
         rule='First lexicographic eligible file and first 48 consecutive minute bins per user; first in-bounds observation per minute; no interpolation.',
         holdout_rule='Raw caches keep the deterministic user-ID split candidates. Effective analysis groups windows by SHA-256 of the complete 48-slot 8x8 state path consumed by the model and assigns each group to the earliest split in development -> validation -> test order. Exact GPS-coordinate fingerprints are recorded separately for provenance.',
         split_rule='user modulo 5: 0 development, 1 validation, 2/3/4 test; effective model-input groups are isolated by src.geolife at analysis time',
-        development_change_probability=change,
+        raw_development_change_probability=raw_change,
         fit_model='Reflecting four-neighbour walk fitted only to development change rate; jump direction/distance not fitted.',
         users_total=len(byuser),
         counts={s:sum(r['split']==s for r in selected) for s in ['development','validation','test']},
@@ -81,6 +81,7 @@ def main():
         excluded=excluded)
     audit=decontamination_audit()
     manifest['effective_counts']=audit['effective_counts']
+    manifest['development_change_probability']=audit['development_change_probability']
     manifest['unique_model_input_paths']=audit['unique_model_input_paths']
     manifest['cross_split_model_input_group_count']=len(audit['cross_split_model_input_groups'])
     Path('data/manifest.json').write_text(json.dumps(manifest,indent=2))
