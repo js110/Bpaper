@@ -44,7 +44,7 @@ Scientific issues above are now either implemented or explicitly bounded in the 
 - `rbsp-validation.yml`: manual checkpoint for the full robust stress; no LaTeX work.
 - `rbsp-boundary.yml`: explicit sentinel/manual boundary experiment only.
 - `paper-build.yml`: manual or `paper/.build-request` checkpoint only; ordinary manuscript edits do not launch TeX installation.
-- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compiles the supplement, compares extracted PDF text with the development build, and generates `highlights.docx`. Final run 36507948107 passed all steps.
+- `pmc-final-package.yml`: final checkpoint only; builds a flat Editorial Manager source zip, recompiles it independently, compiles the supplement, compares extracted PDF text with the development build, and generates `highlights.docx`. Final run 36511273191 passed all steps.
 
 ## Final author-owned blockers
 
