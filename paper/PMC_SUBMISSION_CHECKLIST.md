@@ -4,7 +4,7 @@ Current canonical branch: **main**.
 
 ## Template and package
 
-- The manuscript uses Elsevier elsarticle with \documentclass[review,11pt,times]{elsarticle}.
+- The manuscript uses Elsevier elsarticle with \documentclass[review,11pt,times,letterpaper]{elsarticle}.
 - The target journal field is Pervasive and Mobile Computing.
 - The main manuscript has six numbered sections: Introduction; Related Work; Proposed Branch-Safe Participation Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion.
 - Data and Code Availability and Funding are unnumbered.
