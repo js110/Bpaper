@@ -1,18 +1,18 @@
-# Cover Letter Draft — Pervasive and Mobile Computing
+# Cover Letter Draft — IEEE Transactions on Mobile Computing
 
-Dear Editor,
+Dear Editor-in-Chief,
 
-Please consider our manuscript, **“Robust Branch-Safe Participation for Sequential Mobile Crowdsensing: Model Uncertainty and Disclosure Floors,”** for publication in *Pervasive and Mobile Computing*.
+Please consider our manuscript, **“Branch-Safe Participation for Location Privacy in Sequential Mobile Crowdsensing,”** for publication in *IEEE Transactions on Mobile Computing*.
 
-The manuscript studies a location-privacy problem that arises even when precise coordinates remain on a participant’s device: a linkable sequence of successful region-constrained sensing reports and silences can itself reveal location. We formalize this report/silence channel and develop Branch-Safe Participation (BSP), which computes the maximal scalar participation gate satisfying a posterior-concentration constraint on both observable branches under a declared Bayesian model.
+The manuscript studies a mobile-computing privacy problem that remains even when precise coordinates never leave a participant’s device. In region-constrained mobile crowdsensing, a linkable successful report certifies that the participant was eligible in the task region, while silence can also update the platform’s belief once delivery, willingness, timely completion, and privacy filtering are taken into account. Repeated task outcomes therefore create a sequential inference channel at the mobile sensing interface.
 
-The paper extends this mechanism in three directions. First, Robust BSP intersects the feasible gates of a finite ambiguity set and provides a maximal common scalar gate under model uncertainty. Second, a development/validation procedure constructs a replay ambiguity set from mobility and prior evidence rather than relying only on a hand-selected stress grid. Third, we identify an unavoidable disclosure floor for truthful positive reports: scalar thinning changes how often a successful report occurs but not its conditional location information. The resulting disclosure-floor-aware mechanisms expose a separate positive-report ceiling while keeping the silence branch at the original BSP cap, making the fine-region privacy–service trade-off explicit rather than hidden.
+We develop Branch-Safe Participation (BSP), a client-side online gate that maximizes participation while bounding posterior location concentration after every observable report or silence branch under an explicit mobility and completion model. We then extend the mechanism to finite model sets through Robust BSP, characterize an unavoidable disclosure floor for truthful positive reports, and introduce disclosure-floor-aware variants that separate the report-side floor from the strict silence constraint.
 
-The evaluation includes synthetic mobility and a model-input-group-isolated development/validation/test split of Microsoft GeoLife trajectories, informed-attacker and model-boundary stress tests, region-size-aware utility, and task-channel adaptations of recent optimization-based privacy mechanisms. The manuscript reports negative and boundary results alongside favorable ones; in particular, strict robust filtering can be highly conservative, and guarantees are explicitly limited to the declared observation channel and finite model set.
+The evaluation combines synthetic mobility with a model-input-group-isolated Microsoft GeoLife replay, informed model-mismatch attacks, outside-set boundary cases, adaptive probes, region-size-aware service metrics, and task-channel adaptations of recent privacy mechanisms. The results show both the benefit and the cost of robust filtering: strict finite-model protection substantially reduces model-mismatch violations but can sharply reduce service for fine-grained tasks, while an explicit report-side ceiling restores service only by making that relaxation visible.
 
-The topic falls directly within the journal’s scope in urban sensing and mobile crowdsensing, location-based services, and security and privacy in pervasive and mobile systems. We believe the work will be relevant to readers interested in privacy-aware mobile sensing, inference from repeated task interactions, and deployable privacy–utility controls.
+The work is aligned with TMC’s focus on mobile environments, security, online algorithm/protocol design, and location-dependent mobile applications. Its central contribution is not a generic privacy metric but an online participation mechanism for a concrete mobile sensing interaction: the report/silence sequence observed by a linkable platform.
 
-A reproducible research repository contains the configurations, implementation, tests, event-level simulation records, analysis scripts, and manuscript sources used for the reported results.
+The repository contains the implementation, deterministic preprocessing, frozen configurations, tests, analysis scripts, and processed evidence supporting the reported results.
 
 Sincerely,
 
@@ -27,4 +27,4 @@ Jiamusi University
 
 ## Author checks before upload
 
-The responsible authors should add or confirm any journal-required statements concerning originality/exclusive submission, conflicts of interest, author approval, ethics/data use, funding roles, and other declarations. This draft intentionally does not invent those statements.
+The responsible authors should confirm the final author list and approval, originality/exclusive submission, conflicts of interest, funding roles, any required GeoLife secondary-data wording, and any other IEEE/TMC declarations requested by the submission system. This draft intentionally does not invent author-owned declarations.
