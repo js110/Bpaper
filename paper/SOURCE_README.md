@@ -38,7 +38,7 @@ The mobile-computing problem and observation boundary are made explicit early in
 - installs the IEEE LaTeX publishers package;
 - compiles the main TMC manuscript and supplemental material;
 - rejects unresolved references, undefined commands, oversized/overfull layout problems, and an 18-page main-paper overflow;
-- packages a preview ZIP as a workflow artifact.
+- rebuilds the staged submission source independently to verify that no `\\input{}` dependency is missing;\n- uploads a `tmc-submission-package` ZIP containing source, PDFs, and a source-SHA manifest.
 
 The canonical scientific evidence remains the same model-input-isolated, window-weighted analysis used by the final PMC checkpoint. TMC conversion changes presentation and journal framing, not the underlying experimental record.
 
