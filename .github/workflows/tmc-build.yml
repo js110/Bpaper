@@ -1,0 +1,84 @@
+name: tmc-build
+
+on:
+  push:
+    branches: [tmc]
+    paths:
+      - 'paper/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'data/**'
+      - 'results/**'
+      - 'requirements-lock.txt'
+      - '.github/workflows/tmc-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements-lock.txt
+
+      - name: Run full test suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Install IEEE LaTeX and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-publishers texlive-fonts-recommended poppler-utils zip
+
+      - name: Compile TMC manuscript
+        run: |
+          cd paper
+          latexmk -C
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references|Citation .* undefined|Reference .* undefined' main.log; then
+            echo "LaTeX quality gate failed"
+            exit 1
+          fi
+          pages="$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')"
+          echo "TMC manuscript pages: $pages"
+          if [ "$pages" -gt 18 ]; then
+            echo "TMC regular-paper submission exceeds the 18-page submission ceiling"
+            exit 1
+          fi
+          if [ "$pages" -gt 12 ]; then
+            echo "::warning::TMC manuscript is above the 12-page regular-paper baseline and may incur overlength charges after acceptance"
+          fi
+
+      - name: Compile TMC supplemental material
+        run: |
+          cd paper
+          latexmk -C supplement.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references|Citation .* undefined|Reference .* undefined' supplement.log; then
+            echo "Supplement LaTeX quality gate failed"
+            exit 1
+          fi
+          pages="$(pdfinfo supplement.pdf | awk '/^Pages:/ {print $2}')"
+          echo "TMC supplement pages: $pages"
+
+      - name: Build preview artifact
+        run: |
+          mkdir -p build/tmc_preview
+          cp paper/main.pdf build/tmc_preview/TMC_manuscript.pdf
+          cp paper/supplement.pdf build/tmc_preview/TMC_supplement.pdf
+          cp paper/main.tex paper/supplement.tex paper/references.bib build/tmc_preview/
+          cp paper/current_numbers.tex paper/review_numbers.tex paper/data_driven_table.tex paper/dfbsp_table.tex build/tmc_preview/
+          cp -R paper/figures build/tmc_preview/
+          (cd build && zip -qr TMC_submission_preview.zip tmc_preview)
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tmc-submission-preview
+          path: build/TMC_submission_preview.zip
