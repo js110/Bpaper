@@ -74,6 +74,8 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             robust_models=load_robust_models(condition['robust_models_file'])
         robust_models=robust_models or [dict(move=move_model,alpha=alpha_model)]
         robust=RobustPublicBelief(side,robust_models)
+    client_reset_prior=belief.b.copy()
+    attacker_reset_prior=attacker.b.copy()
     prior=belief.b.copy()
     sums={k:0. for k in ['hit','error_cells','peak','logloss','covered95','credible95','entropy']}
     prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0
@@ -82,10 +84,13 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     area_opp={'small':0,'medium':0,'large':0};area_done={'small':0,'medium':0,'large':0}
     gate_times=[];rows=[];bin_counts=np.zeros(10);bin_hits=np.zeros(10);bin_peaks=np.zeros(10);error_m=0.
     for t in range(slots):
-        # Identity resetting is an ideal control: discard past target-specific evidence.
+        # Identity resetting is an ideal control: discard accumulated target-specific
+        # evidence while preserving each model's own configured background prior.
         if condition.get('reset_every',0) and t%condition['reset_every']==0:
-            belief.b=prior.copy()
-            attacker.b=prior.copy()
+            belief.b=client_reset_prior.copy()
+            attacker.b=attacker_reset_prior.copy()
+            belief.seen.clear()
+            attacker.seen.clear()
             if robust:robust.reset()
         if t:
             belief.b=predict(belief.b,side,move_model)
@@ -193,7 +198,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                medium_opportunities=area_opp['medium'],medium_complete=area_done['medium'],
                large_opportunities=area_opp['large'],large_complete=area_done['large'],
                raw_completion=complete/legit,coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
-               reward=complete,latency_slots=1.0 if reports else float('nan'),
+               reward=complete,
                gate_us_p50=float(np.median(gate_times)),gate_us_p95=float(np.quantile(gate_times,.95)),
                cap_violations=cap_violations,attacker_local_cap_violations=attacker_local_cap_violations,
                attacker_effective_cap_violations=attacker_effective_cap_violations,
