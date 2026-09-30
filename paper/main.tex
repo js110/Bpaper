@@ -1,7 +1,7 @@
-\documentclass[review,11pt,times,letterpaper]{elsarticle}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,microtype}
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,graphicx,microtype}
+\usepackage{cite}
 \usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \newtheorem{proposition}{Proposition}
@@ -9,32 +9,52 @@
 \newcommand{\ind}{\mathbf{1}}
 \input{current_numbers}
 \input{review_numbers}
-\journal{Pervasive and Mobile Computing}
+
 \begin{document}
-\begin{frontmatter}
-\title{Robust Branch-Safe Participation for Sequential Mobile Crowdsensing:\\Model Uncertainty and Disclosure Floors}
-\author[aff1]{Lili He}
-\author[aff1]{Sheng Jiang}
-\author[aff1]{Linghui Lyu}
-\author[aff1]{Lei Zhang\corref{cor1}}
-\ead{8213662@163.com}
-\cortext[cor1]{Corresponding author.}
-\address[aff1]{College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China}
+
+\title{Branch-Safe Participation for Location Privacy in Sequential Mobile Crowdsensing}
+
+\author{Lili He, Sheng Jiang, Linghui Lyu, and Lei Zhang%
+\IEEEcompsocitemizethanks{%
+\IEEEcompsocthanksitem L. He, S. Jiang, L. Lyu, and L. Zhang are with the College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China.
+\IEEEcompsocthanksitem Corresponding author: Lei Zhang (e-mail: 8213662@163.com).}}
+
+\markboth{IEEE Transactions on Mobile Computing}%
+{He \MakeLowercase{\textit{et al.}}: Branch-Safe Participation for Location Privacy in Sequential Mobile Crowdsensing}
+
+\IEEEtitleabstractindextext{%
 \begin{abstract}
-Keeping coordinates local does not prevent location leakage from regional task outcomes. A truthful report implies presence in the task region, while silence can also update an observer's belief. We study this linkable binary channel under uncertain delivery, willingness, and timely completion. Branch-safe participation (BSP) chooses the maximal scalar gate that bounds posterior peak after both outputs under a declared model, while robust BSP (R-BSP) intersects feasible gates across a finite ambiguity set. We further show that a truthful positive report has an unavoidable posterior peak that is independent of any positive thinning probability. Disclosure-floor-aware BSP (DF-BSP) therefore introduces an explicit report-side threshold $\tau\ge\rho$ while retaining the original BSP cap for silence; RDF-BSP combines this asymmetric contract with finite-model robustness. In an exploratory GeoLife replay, model-input-group isolation leaves \GeoDevN{} development windows and \GeoValN{} validation windows for model-set construction, while \GeoTestN{} isolated test windows remain excluded from that construction. Against a stronger population-prior replay attacker, strict data-driven R-BSP records \GeoStrictLocal\% observed local-cap violations in this replay but retains only \GeoStrictRet\% of opportunities. At $\tau=0.5$, RDF-BSP retains \GeoRDFSmall\% of 1--8-cell opportunities and \GeoRDFWeighted\% inverse-area-weighted utility, with a \GeoRDFBranch\% branch-specific cap-violation rate and a \GeoRDFLocal\% violation rate of the original BSP local cap. Additional synthetic walks with new seeds show the same qualitative privacy--service trade-off. The guarantees remain channel- and model-set-specific and do not cover arbitrary auxiliary knowledge.
+Mobile crowdsensing can leak location even when exact coordinates never leave a device, because a linkable report certifies presence in a task region and silence can also change an observer's belief. We formalize this sequential report/silence channel and introduce branch-safe participation (BSP), which computes the maximum participation probability that keeps posterior location concentration below a declared cap for every observable branch under a specified mobility and completion model. Robust BSP intersects these feasible gates across a finite model set. We further characterize an unavoidable disclosure floor for truthful positive reports and introduce disclosure-floor-aware BSP and its robust variant, which relax only the report branch while preserving the strict silence constraint. Experiments on synthetic mobility and model-input-isolated Microsoft GeoLife traces show that data-driven robust filtering sharply reduces model-mismatch violations but can sacrifice service, especially for small task regions. A separate report-side ceiling recovers fine-region utility while making the relaxation explicit. The framework therefore exposes the tradeoff among sequential location privacy, model uncertainty, and mobile sensing service. Its guarantees remain conditional on the declared observation channel and finite model set.
 \end{abstract}
-\begin{keyword}
-Mobile crowdsensing \sep location privacy \sep Bayesian inference \sep robust participation \sep disclosure floor \sep adaptive tasks
-\end{keyword}
-\end{frontmatter}
-\section{Introduction}
-Mobile crowdsensing (MCS) allows personal devices to contribute observations for public regions and time windows while keeping exact coordinates locally. Local storage, however, does not remove the information carried by participation outcomes. If a linkable account successfully completes a task valid only inside a region, that completion is evidence of presence there; repeated outcomes can support sequential location inference. Silence is informative as well because delivery, willingness, deadline success, and privacy filtering all affect its probability.
 
-Task-outcome inference is not new. TMarkov studies inference from task acceptance/refusal and mobility correlations~\cite{tmarkov}, while recent fingerprint-based assignment also protects worker and task locations~\cite{fingerprint}. Our narrower question is different: when the platform deliberately observes a truthful binary completion channel---a valid in-region report or silence---can the client regulate the location information in both branches without false reports or a hidden task-selection protocol?
+\begin{IEEEkeywords}
+Mobile crowdsensing, location privacy, sequential inference, Bayesian privacy, robust participation, adaptive sensing.
+\end{IEEEkeywords}}
 
-We model that visible channel and develop branch-safe participation (BSP), a public-history scalar gate that maximizes participation subject to a bound on posterior peak after every positive-probability output. The rule is model conditional: it is neither differential privacy nor a guarantee against arbitrary auxiliary knowledge. We then address two limitations of a single-model scalar gate. Robust BSP (R-BSP) intersects the feasible gates of a finite ambiguity set; a development/validation procedure constructs a replay model set instead of relying only on a hand-selected stress grid. We also show that truthful successful reports have an unavoidable disclosure floor that scalar thinning cannot reduce. Disclosure-floor-aware BSP (DF-BSP) therefore introduces a separate report-side threshold \(\tau\), while keeping silence at the original BSP cap; RDF-BSP combines this asymmetric contract with finite-model robustness.
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
 
-The paper makes four contributions. First, it specifies the report/silence observation boundary and derives a maximal scalar gate with a conditional sequential bound. Second, it derives the maximal common gate for finite model sets and evaluates model-set failures rather than assuming a correct attacker model. Third, it formalizes the positive-report disclosure floor and an asymmetric privacy--service contract for fine-region tasks. Fourth, it evaluates these mechanisms on synthetic mobility and model-input-group-isolated GeoLife development/validation/test windows, including informed-attacker stress, boundary cases, size-aware utility, and task-channel adaptations of PRIVIC~\cite{privic2024} and pointwise maximal leakage (PML)~\cite{pml2024}. Negative results---including severe utility loss under strict robust caps---are retained in the main analysis.
+\IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
+\IEEEPARstart{M}{obile} crowdsensing (MCS) turns personal mobile devices into a distributed sensing substrate for traffic, environmental, and urban-computing services. A common privacy design keeps exact coordinates on the device and exposes only task-level outcomes. That boundary is useful, but it is not information free: when a task is valid only in a geographic region, a truthful completion reveals that the user was eligible there, while a missing completion can also change the platform's belief once delivery, willingness, deadline success, and privacy filtering are taken into account.
+
+The resulting leakage is sequential. A platform can link outcomes to the same account, combine them with a mobility model, and choose future tasks from the accumulated public history. This creates a mobile-systems problem that is different from protecting an uploaded coordinate or hiding task assignment itself. The client must decide online whether to participate, yet both possible outputs of that decision---report and silence---remain observable and can influence subsequent inference.
+
+Existing MCS privacy mechanisms largely protect coordinates, recruitment, matching, or released sensing values before or during assignment~\cite{itam2021,taskloc2022,pmta2024,ppur2024,lrppsta2025,mtadprh2025}. Task-outcome inference has also been studied, including acceptance/refusal inference in TMarkov~\cite{tmarkov} and cryptographically hidden task-selection sequences in HECTA~\cite{inference2026}. Our setting keeps task regions visible and preserves truthful report semantics. The design question is therefore narrower but operationally important: \emph{how much participation can a mobile client safely expose when the platform observes a linkable report/silence sequence?}
+
+Three difficulties make this question nontrivial. First, suppressing reports does not automatically remove leakage because silence is itself probabilistic evidence. Second, a gate calibrated to one mobility or completion model can fail when the observer uses a different plausible model. Third, a truthful positive report has zero support outside the task region, creating a region-dependent disclosure floor that no positive scalar thinning probability can remove.
+
+We address these issues with branch-safe participation (BSP). BSP derives the largest scalar participation gate that bounds posterior location concentration after every positive-probability output under a declared model. Robust BSP (R-BSP) intersects the feasible gates across a finite ambiguity set to make model uncertainty explicit. We then characterize the truthful-report disclosure floor and introduce disclosure-floor-aware BSP (DF-BSP), which uses a separate report-side ceiling while retaining the original silence cap; RDF-BSP combines this asymmetric contract with finite-model robustness. The design remains entirely client-side and uses public task metadata and public history for the gate, while true location is used only for local eligibility.
+
+The main contributions are as follows:
+\begin{itemize}
+    \item We formalize a linkable binary task-outcome channel for sequential MCS and derive a maximal online BSP gate that constrains both report and silence posteriors under explicit mobility and completion assumptions.
+    \item We extend the gate to finite model sets and evaluate informed model-mismatch attacks and outside-set boundary cases, making the scope and failure modes of robustness observable rather than implicit.
+    \item We prove that truthful positive reports induce an unavoidable region-specific disclosure floor and develop DF-BSP/RDF-BSP to separate this report-side floor from the strict silence constraint.
+    \item We evaluate the mechanisms on synthetic mobility and model-input-group-isolated GeoLife traces, with data-driven ambiguity-set construction, size-aware service metrics, adaptive probes, and task-channel adaptations of PRIVIC~\cite{privic2024} and pointwise maximal leakage (PML)~\cite{pml2024}.
+\end{itemize}
+
+The remainder of the paper first positions the observation channel against related MCS privacy mechanisms, then develops the system model and participation gates, analyzes their guarantees and limitations, and finally evaluates privacy--service tradeoffs under matched and mismatched mobile-inference models.
 
 \section{Related Work}
 \label{sec:related}
@@ -44,14 +64,14 @@ HECTA is a close recent precedent because it addresses inference from task-selec
 
 Bayesian privacy measures prior-to-posterior change~\cite{bayesian}. Adaptive differential privacy concerns a different formal guarantee~\cite{adaptive2023}, while PRIVIC protects randomized location releases under geo-indistinguishability~\cite{privic2024}. BSP instead limits posterior concentration under an explicit mobility and availability model. Because a truthful successful report has zero support outside its task region, BSP is not a differentially private coordinate-release mechanism. PML provides a useful optimization-based channel comparator~\cite{pml2024}. Comparator derivations and implementation checks are provided in the Supplementary Material to keep the main text focused.
 
-\section{Proposed Branch-Safe Participation Framework}
+\section{System Model and Branch-Safe Participation}
 \label{sec:model}\label{sec:method}
 Figure~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
-\begin{figure}[tbp]
-\centering\includegraphics[width=\linewidth]{figures/system_architecture.png}
+\begin{figure*}[t]
+\centering\includegraphics[width=0.96\textwidth]{figures/system_architecture.png}
 \caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. Normal tasks are exogenous, while designated adaptive probes are selected from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual schematic of the stated system model, not an experimental result.}
 \label{fig:architecture}
-\end{figure}
+\end{figure*}
 \subsection{System and Observation Model}
 Let $X_t\in\mathcal X$ denote a user's location cell at the sampling instant in slot $t$, where $|\mathcal X|=N$. A task specifies a public region $S_t\subseteq\mathcal X$, a sampling slot, and a deadline. A valid report requires an observation collected inside $S_t$ at that sampling instant and submitted by the deadline. Receiving or accepting a task is not sufficient. The simulator exposes each task outcome only at its common slot deadline; it does not reveal within-slot submission timing.
 
@@ -130,7 +150,7 @@ Robust DF-BSP (RDF-BSP) applies this asymmetric construction independently to ev
 
 Operationally, the client predicts its public-history belief, computes the applicable BSP/R-BSP/DF/RDF gate from public task metadata, samples the private gate coin locally, and releases only a valid report at the common deadline. The observer updates from the same report or silence. The next section establishes the formal guarantees and their scope.
 
-\section{Privacy Guarantees and Robustness Analysis}
+\section{Robustness and Disclosure-Floor Analysis}
 \label{sec:analysis}
 The mechanisms above are Bayesian output-channel controls rather than cryptographic protocols. Their security argument is therefore stated in terms of posterior branches, sequential model assumptions, model mismatch, and the unavoidable information in a truthful positive report.
 
@@ -190,7 +210,7 @@ The same support property rules out interpreting BSP as pure location differenti
 
 The robust guarantee is finite-model, and all guarantees here are channel-specific. If the attacker's exact model belongs to $\mathcal M$, its constraint is enforced by R-BSP; an attacker outside $\mathcal M$ is not covered. Likewise, $\tau>\rho$ explicitly relaxes only the truthful-report branch. It is not evidence that the original $\rho$ cap remains valid after a successful report.
 
-\section{Experimental Evaluation}
+\section{Evaluation}
 \label{sec:experiments}\label{sec:results}
 \subsection{Experimental Setup}
 We use three synthetic mobility settings (static, reflecting random walk, and periodic commute) and Microsoft GeoLife trajectories~\cite{geolife2008,geolife2009,geolife2010}. GeoLife preprocessing scans files in deterministic order and selects the first 48 consecutive in-bounds one-minute bins for each eligible user, without interpolating missing minutes. The rule yields 107 eligible user windows before holdout isolation, split deterministically into 23 development, 17 validation, and 67 test candidates. Because the fitted and replay models consume only the complete 48-slot $8\times8$ state sequence, effective splits are formed by grouping identical model-input paths and assigning each group to the earliest split in development$\rightarrow$validation$\rightarrow$test order. This leaves \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows; no complete model-input path crosses the effective splits. Exact GPS-coordinate hashes are retained as a separate provenance audit. Test windows are not used to construct the data-driven ambiguity set. The \(8\times8\) Beijing grid is intentionally coarse; the study evaluates cell inference, not address recovery.
@@ -233,22 +253,22 @@ A separate boundary run fixes the same model set and changes the correct attacke
 \label{sec:data-driven-results}
 Table~\ref{tab:data-driven} first shows that a defensible model-set construction does not remove the strict-cap utility problem. Against the stronger replay attacker described above, nominal BSP exceeds the attacker's own local cap on \GeoNominalLocal\% of slots and the earlier hand-grid R-BSP on \GeoHandLocal\%. The validation-best single-model BSP reduces the local-cap violation rate to \GeoSingleLocal\% but retains only \GeoSingleRet\% of opportunities, showing that improved model choice explains part, but not all, of the robustness gain. The two-model data-driven R-BSP records \GeoStrictLocal\% local-cap violations in this run and a \GeoStrictHit\% MAP hit rate, but retains only \GeoStrictRet\% of opportunities and \GeoStrictWeighted\% inverse-area-weighted utility. All four strict policies retain zero 1--8-cell opportunities. The data-driven set is therefore better grounded than the hand grid but substantially more conservative; model-set provenance and service viability are separate problems.
 
-\begin{table}[tbp]
+\begin{table*}[t]
 \centering
 \caption{Post-hoc GeoLife data-driven robustness at $\rho=0.1$. The replay attacker uses the development-only smoothed population prior and validation point mobility estimate. ``Local viol.'' tests the attacker's pre-output local cap. Weighted retention is Eq.~\eqref{eq:weighted-utility}; small retention covers 1--8-cell opportunities.}
 \label{tab:data-driven}{\scriptsize\setlength{\tabcolsep}{3pt}\input{data_driven_table}}
-\end{table}
+\end{table*}
 
 \subsection{Fine-Grained Service under Disclosure Floors}
 Table~\ref{tab:dfbsp} quantifies the service alternative. On 20 new synthetic walk seeds, ordinary BSP retains no small-region opportunities and has weighted retention 12.3\%. Asymmetric DF-BSP with $\tau=0.5$ raises small-region retention to 56.4\% (cluster-bootstrap 95\% interval 41.7--69.8\%) and weighted retention to 43.1\%, with no observed violation of its declared branch-specific caps. The silence branch continues to use the original BSP cap. The original BSP local cap is violated on 8.4\% of slots because the report-side relaxation can increase posterior concentration beyond the strict BSP branch bound; MAP hit rate rises from 4.9\% under BSP to 10.8\%.
 
 The stronger replay experiment shows the same trade-off under prior and mobility mismatch. At $\tau=0.5$, non-robust DF-BSP retains \GeoDFSmall\% of small-region opportunities and \GeoDFWeighted\% weighted utility, but violates its declared branch-specific cap on \GeoDFBranch\% of slots because the stronger replay attacker is outside the client model. Data-driven RDF-BSP lowers that violation rate to \GeoRDFBranch\% (cluster-bootstrap 95\% interval \GeoRDFBranchLow--\GeoRDFBranchHigh\%), with \GeoRDFSmall\% small-region retention (95\% interval \GeoRDFSmallLow--\GeoRDFSmallHigh\%) and \GeoRDFWeighted\% weighted utility. Its original BSP local cap is violated on \GeoRDFLocal\% of slots. At $\tau=1$, the report-side threshold is vacuous and should be read as a service control rather than a privacy operating point. No tested $\tau$ is declared optimal.
 
-\begin{table}[tbp]
+\begin{table*}[t]
 \centering
 \caption{Disclosure-floor-aware service frontier at $\rho=0.1$. ``BSP viol.'' reports violation of the original BSP local cap $\max\{\rho,\|b\|_\infty\}$; ``Branch viol.'' reports violation of the declared asymmetric caps in Eq.~\eqref{eq:dfcap}. Weighted and small-region retention emphasize fine-grained service. RDF-BSP uses the two validation-selected models.}
 \label{tab:dfbsp}{\scriptsize\setlength{\tabcolsep}{3pt}\input{dfbsp_table}}
-\end{table}
+\end{table*}
 
 \subsection{Efficiency}
 For an \(n\)-cell state space, BSP evaluates a constant number of dot products and componentwise maxima and is therefore \(O(n)\) per candidate task. R-BSP repeats the same feasibility calculation across a finite ambiguity set of size \(M\), giving \(O(Mn)\) work before taking the common gate. The KL comparator additionally performs an iterative one-dimensional feasibility search, whereas PML-T evaluates the specialized task-channel constraints and PRIVIC-T requires separate offline channel fitting. The repository records Python wall-clock timings for implementation profiling, but absolute values vary with hardware, runtime, and batch context and are therefore not treated as portable performance claims. Probe search, posterior diagnostics, loading, communication, smartphone latency, energy consumption, and cryptographic execution time are outside the reported online gate computation and were not measured as deployment benchmarks.
@@ -267,21 +287,16 @@ Fourth, the attack is greedy with a fixed probe budget. Longer-horizon task desi
 Finally, comparisons depend on finite parameter grids and exploratory interpolation. Bootstrap intervals condition on the selected traces, tasks, and clustering, without resolving distribution shift or multiple testing. The KL and recent-comparator analyses are exploratory. Recent policy envelopes are selected on the evaluation set; their bootstrap intervals describe this selection procedure rather than validating an independently tuned policy. PRIVIC uses one noisy training seed and some IBU/GIBU loops reach their iteration limits; small likelihood gaps do not establish distribution recovery. Its true-eligibility task adapter changes the published output semantics. HECTA differs in observation semantics, trust assumptions, and privacy objectives; the present study does not provide a head-to-head system evaluation or claim an exhaustive novelty assessment.
 
 \subsection{Reproducibility}
-The reproducibility package contains deterministic preprocessing rules, split metadata and hashes, frozen configurations and seeds, trajectory- and event-level outputs used in analysis, bootstrap provenance, comparator-validation fixtures, tests, and manuscript sources. Ground-truth simulator state is retained for evaluation but is not available to the modeled observer. Manuscript tables and numerical macros are generated from the frozen evidence, and the effective GeoLife splits can be reconstructed from the recorded preprocessing rule.
+The reproducibility package contains deterministic preprocessing rules, split metadata and hashes, frozen configurations and seeds, trajectory- and event-level outputs used in analysis, bootstrap provenance, comparator-validation fixtures, tests, and manuscript sources. The supporting code and processed evidence used by this manuscript are version controlled at \url{https://github.com/js110/Bpaper}; the original Microsoft GeoLife archive is obtained separately and is not redistributed. Ground-truth simulator state is retained for evaluation but is not available to the modeled observer. Manuscript tables and numerical macros are generated from the frozen evidence, and the effective GeoLife splits can be reconstructed from the recorded preprocessing rule.
 
 The automated suite contains 31 tests. Core tests cover posterior branches, nominal/robust/disclosure-floor gate bounds and reductions, an informed-attacker R-BSP integration case, the coarsened mobility estimator, KL feasibility, transition conservation, clustered-estimator weighting, and boundary cases. Pipeline and comparator tests cover duplicate or expired tasks, missing minutes, split separation, paired normal tasks, numerical replay, BA/IBU conformance to the PRIVIC author code, PML optimality against a general linear program, vector-valued observation channels, and policy-envelope agreement with a mixture linear program. Superseded exploratory or interrupted outputs are excluded from the current evidence set and remain recoverable through version history; completed evidence runs used by the manuscript contain no recorded simulation failures.
 
 \section{Conclusion}
 Sequential regional task outputs can reveal location despite local storage of precise coordinates, and probabilistic silence must be included in that analysis. BSP provides a maximal scalar gate for both posterior branches under explicit model assumptions, while R-BSP extends the construction to a finite model set. Development/validation-based model selection makes that set more defensible but reveals that strict robust posterior caps can be prohibitively conservative: the isolated replay experiment retains only \GeoStrictRet\% of opportunities. This is linked to a structural truthful-report floor that scalar thinning cannot remove. DF-BSP and RDF-BSP therefore expose a separate report-side threshold $\tau$ and recover measurable fine-region service while reporting, rather than hiding, exceedance of the original $\rho$ cap. At the illustrative $\tau=0.5$, robust replay filtering retains \GeoRDFSmall\% of small-region opportunities and \GeoRDFWeighted\% inverse-area-weighted utility, with a \GeoRDFBranch\% observed branch-cap violation rate and original BSP local-cap violations on \GeoRDFLocal\% of slots. The contribution is consequently a channel-specific framework for strict and explicitly relaxed participation filtering under finite model uncertainty, not a guarantee against arbitrary auxiliary knowledge or a complete mobile-crowdsensing privacy system.
 
-\section*{Data and code availability}
-Code, configurations, deterministic preprocessing, processed GeoLife split files, simulation outputs, analysis scripts, tests, and manuscript sources supporting the reported results are available in the project repository at \url{https://github.com/js110/Bpaper}. The original Microsoft GeoLife trajectory archive is obtained separately from its recorded public source and is not redistributed as part of the manuscript package. Third-party article full texts used for literature checking are likewise excluded from the distributable artifact. The repository is version controlled; a versioned release or immutable archival identifier can be associated with the submitted version separately.
-
-\section*{Funding}
+\section*{Acknowledgments}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
 
-
-
-\bibliographystyle{elsarticle-num}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
 \end{document}
