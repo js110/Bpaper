@@ -52,3 +52,5 @@ Actions:
 ## Remaining evidence boundary
 
 The revised manuscript still does not claim protection against arbitrary out-of-set models, an optimal long-horizon adversary, coordinated multi-account probing, personalized auxiliary information, or unmodeled observation channels. It also does not claim smartphone energy/latency measurements, production MCS task logs, or confirmatory superiority over recent baselines.
+
+Integrated revision status: the novelty/scope revision and targeted reviewer-stress revision are unified in this branch; the final submission is gated on code tests and clean TMC manuscript/supplement compilation.
