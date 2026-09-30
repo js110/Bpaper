@@ -1,0 +1,47 @@
+\begin{tabular}{p{1.45cm}p{2.55cm}p{2.35cm}p{2.6cm}p{2.65cm}p{2.0cm}}
+\toprule
+Method & Protected / visible interface & Truthful report semantics & Main privacy object / assumption & Service semantics & Online control \\
+\midrule
+TMarkov~\cite{tmarkov} &
+Shares a mobility-aware predicted trajectory instead of the actual trajectory &
+Not a report/silence mechanism &
+Actual location/trajectory protected through mobility modeling and prediction &
+Crowdsourcing participation through predicted locations &
+Trajectory-model construction / prediction \\
+
+iTAM / anonymous matching~\cite{itam2021,shutask2018} &
+Paillier-based privacy-preserving task assignment for workers and requesters &
+Outside its main output model &
+Worker/requester location privacy during assignment; cryptographic protocol assumptions &
+Minimizes participant travel distance under assignment constraints &
+Single-/multi-participant assignment; reported complexities $O(n)$ / $O(n\log n)$ \\
+
+HECTA~\cite{inference2026} &
+Hides genuine task choices among protected/dummy task-selection sequences &
+Task-selection transcript is intentionally obscured &
+Inference resistance for task-selection sequences; non-colluding service/auxiliary parties &
+Task allocation with hidden genuine choices &
+Cryptographic allocation protocol \\
+
+Bayesian privacy~\cite{bayesian} &
+Generic mechanism actions induce posterior beliefs over an agent type &
+No task-report semantics are prescribed &
+KL divergence between designer prior and posterior; ex-post/ex-ante privacy constraints &
+Mechanism-design welfare/profit tradeoff &
+Privacy-constrained mechanism design \\
+
+PRIVIC~\cite{privic2024} &
+Randomized released location channel &
+Does not preserve the truthful binary task-output semantics studied here &
+Geo-indistinguishability for incremental location collection &
+Location-data utility under randomized release &
+Offline channel learning plus randomized release \\
+
+BSP / R-BSP &
+Public task region plus linkable truthful report or silence &
+Yes; a success certifies eligibility in the public region &
+Posterior location concentration under an explicit Bayesian mobility/availability model; finite-set robustness for R-BSP &
+Retains a fraction of simulated eligible-and-available opportunities &
+Closed-form scalar gate $O(N)$; finite-set R-BSP $O(KN)$ \\
+\bottomrule
+\end{tabular}

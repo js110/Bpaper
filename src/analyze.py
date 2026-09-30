@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from .geolife import effective_state_group_by_user
 
-METRICS=['hit','error_cells','error_m','peak','logloss','covered95','credible95','entropy','prior_hit','raw_completion','coverage','reward','latency_slots','gate_us_p50','gate_us_p95','ece']
+METRICS=['hit','error_cells','error_m','peak','logloss','covered95','credible95','entropy','prior_hit','raw_completion','coverage','reward','gate_us_p50','gate_us_p95','ece']
 COLORS={'none':'#222222','random':'#0072B2','rate':'#E69F00','coarse':'#009E73','bsp':'#D55E00','positive_only':'#CC79A7','kl':'#56B4E9'}
 MARKERS={'none':'*','random':'o','rate':'s','coarse':'D','bsp':'^','positive_only':'x','kl':'P'}
 LABELS={'none':'No filter','random':'Random participation','rate':'Periodic limit','coarse':'Aligned task grid','bsp':'BSP','positive_only':'Success-only ablation','kl':'KL branch filter'}

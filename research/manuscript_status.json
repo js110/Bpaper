@@ -1,16 +1,16 @@
 {
-  "stage": "tmc_submission_package_technical_ready",
+  "stage": "tmc_major_review_revision_in_progress",
   "target_journal": "IEEE Transactions on Mobile Computing",
   "date": "2026-09-30",
-  "technical_ready": true,
+  "technical_ready": false,
   "submission_ready": false,
   "human_verified": false,
-  "main_manuscript_pages": 9,
-  "supplementary_pages": 2,
+  "main_manuscript_pages": null,
+  "supplementary_pages": null,
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
-  "tests_passed": 31,
+  "tests_passed": 34,
   "completed_conditions": 417,
   "trajectory_executions": 28973,
   "audited_events": 1390704,
@@ -24,15 +24,15 @@
     "TMC_submission_manifest.json"
   ],
   "open_items": [
+    "complete reviewer-driven stress evidence and regenerate manuscript tables",
+    "rebuild TMC manuscript and self-contained submission package",
     "all-author approval of the final TMC manuscript",
     "ORCID identifiers for all authors in the IEEE submission system",
     "originality/exclusive-submission confirmation",
     "competing-interests statement",
-    "CRediT roles if requested by the submission system",
     "funder-role confirmation",
     "GeoLife ethics/data-use wording if required",
-    "author-handled AI-related submission requirements",
-    "decision on versioned GitHub release and/or immutable archive DOI"
+    "author-handled AI-related submission requirements"
   ],
   "not_performed": [
     "hardware/mobile-device experiment",
@@ -71,20 +71,8 @@
     "data_driven_selection_mass_target": 0.95
   },
   "final_qa": {
-    "status": "passed_on_tmc_sources",
-    "source_sha": "c69a65aa99177ecab559121d743935eaedcc7795",
-    "workflow_run": 36661548911,
-    "artifact_id": 11074063660,
-    "artifact_name": "tmc-submission-package",
-    "artifact_digest": "sha256:1cf38948a659db08f957953ee2fb802d7dc1d10ea8388b31bd758d951933cda8",
-    "main_manuscript_compiles": true,
-    "supplement_compiles": true,
-    "staged_source_package_recompiles": true,
-    "unresolved_references": false,
-    "overfull_boxes": false,
-    "main_page_limit_18_satisfied": true,
-    "regular_12_page_baseline_satisfied": true,
-    "visually_inspected": true
+    "status": "revision_evidence_pending",
+    "note": "Reviewer-driven manuscript and stress-test revision in progress; prior TMC package is superseded for this branch."
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
@@ -147,8 +135,5 @@
     "funding_in_first_footnote": true,
     "bibliography_style": "IEEEtran"
   },
-  "tmc_build_workflow_run": 36661548911,
-  "tmc_build_source_sha": "c69a65aa99177ecab559121d743935eaedcc7795",
-  "tmc_artifact_id": 11074063660,
   "tmc_conversion_notes": "research/tmc_conversion_notes.md"
 }

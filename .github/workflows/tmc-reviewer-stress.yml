@@ -1,0 +1,62 @@
+name: tmc-reviewer-stress
+
+on:
+  push:
+    branches: [revise/tmc-major-review-20260930]
+    paths:
+      - 'src/experiment.py'
+      - 'src/analyze.py'
+      - 'src/analyze_reviewer_stress.py'
+      - 'tests/**'
+      - 'configs/tmc_reviewer_stress.json'
+      - '.github/workflows/tmc-reviewer-stress.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: tmc-reviewer-stress
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements-lock.txt
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Run targeted reviewer stress
+        run: |
+          rm -rf results/tmc_reviewer_stress
+          python -m src.experiment --config configs/tmc_reviewer_stress.json
+          python -m src.analyze_reviewer_stress
+
+      - name: Commit refreshed stress evidence
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add results/tmc_reviewer_stress paper/reviewer_stress_table.tex
+          if git diff --cached --quiet; then
+            echo "No reviewer-stress changes"
+            exit 0
+          fi
+          git commit -m "Run TMC reviewer stress experiments"
+          git fetch origin revise/tmc-major-review-20260930
+          remote_sha="$(git rev-parse origin/revise/tmc-major-review-20260930)"
+          if [ "$remote_sha" != "$GITHUB_SHA" ]; then
+            echo "review branch advanced from source SHA $GITHUB_SHA to $remote_sha; refusing stale result publish"
+            exit 1
+          fi
+          git push origin HEAD:revise/tmc-major-review-20260930

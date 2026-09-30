@@ -17,7 +17,7 @@
 
 \maketitle
 
-This supplemental material provides comparator derivations and validation details, finite-model robustness and outside-set boundary tests, the data-driven ambiguity-set construction, and reproducibility information. It introduces no additional primary claims and preserves both the exploratory status of the GeoLife replay and the finite-model scope of the robustness guarantee.
+This supplemental material provides comparator derivations and validation details, finite-model robustness and outside-set boundary tests, additional model/attack sensitivity checks, the data-driven ambiguity-set construction, and reproducibility information. It introduces no additional primary claims and preserves both the exploratory status of the GeoLife replay and the finite-model scope of the robustness guarantee.
 
 \section{Comparator Adaptations and Validation}
 For the pointwise-maximal-leakage comparator, let \(l_i=\Pr(Y=1\mid X=i)\) and \(m=\sum_i b_i l_i\), with \(0\le l_i\le\alpha\mathbf{1}\{i\in S\}\). The task-channel specialization maximizes report probability subject to the published pointwise leakage constraints \(l_i\le e^\epsilon m\) and \(1-l_i\le e^\epsilon(1-m)\) for every state with positive prior mass~\cite{pml2024}. Randomized instances are checked against a general linear program. This is a task-channel specialization rather than a reproduction of every component of the original application.
@@ -41,6 +41,25 @@ The same ambiguity set is then evaluated against correct attacker models that ar
 \input{robust_boundary_table}
 \end{table*}
 
+\section{Additional Model and Probe Sensitivity}
+The original synthetic sensitivity study includes $4\times4$ and $16\times16$ grids in addition to the $8\times8$ main setting. For BSP at $\rho=0.1$, the corresponding MAP-cell hit rates are 7.54\% and 2.57\%, with simulated opportunity retention 10.85\% and 81.03\%, respectively. Because changing grid resolution also changes cell size, prior granularity, and the task-region library, these figures characterize resolution sensitivity rather than physical localization accuracy.
+\begin{table}[t]
+\centering\small
+\caption{Grid-resolution sensitivity for synthetic BSP at $\rho=0.1$. These rows are diagnostics because the task-region library changes with the grid.}
+\label{tab:grid-sensitivity}
+\input{grid_sensitivity_table}
+\end{table}
+
+The post-review stress configuration additionally violates two baseline modeling assumptions. In the spatial-availability stress, the true and attacker availability probability is $0.35$ on one half of the grid and $0.85$ on the other, while the client continues to use scalar $\alpha=0.648$. In the nonstationary-mobility stress, the true and attacker movement probability alternates between $0.05$ and $0.8$ every eight slots while the client uses stationary $0.3$. A separate all-probe condition compares one-step mutual-information greedy selection with a two-step beam look-ahead. The latter is a deeper planning heuristic, not an optimal long-horizon adversary.
+
+\begin{table*}[t]
+\centering\small
+\caption{Targeted post-review stress tests at $\rho=0.1$. Local-cap violations are evaluated under the attacker's model. Opportunity retention is undefined in all-probe rows.}
+\input{reviewer_stress_table}
+\end{table*}
+
+The spatial and nonstationary results reinforce the finite-model interpretation: R-BSP can reduce mismatch violations when its hand-grid models bracket the stress, but no theorem covers the spatial availability field or time-varying movement process. The two-step probe heuristic does not dominate one-step greedy in the tested mismatch, so these experiments do not identify a worst-case task-planning adversary.
+
 \section{Data-Driven Ambiguity Construction}
 The replay ambiguity set is constructed without using the \GeoTestN{} isolated test windows. The \GeoDevN{} development windows define a coarsened reflecting-walk likelihood
 \[
@@ -48,16 +67,16 @@ The replay ambiguity set is constructed without using the \GeoTestN{} isolated t
 \]
 where \(d_i\) is the number of in-grid neighbors. Only change versus no-change events enter this likelihood; destination direction and jump distance are not fitted. Two thousand development state-path-group bootstrap replicates generate mobility candidates, and 2,000 validation state-path-group bootstrap replicates select the smallest set covering at least 95\% of predictive-likelihood winners.
 
-The validation winner distribution is concentrated on two development-only smoothed population-prior candidates, with selection frequencies 84.15\% and 12.80\%. Retaining these two models gives 96.95\% cumulative validation selection mass, above the prespecified 95\% target. The development MLE is \GeoDevMLE{} with a 95\% bootstrap interval \GeoDevCILow--\GeoDevCIHigh{}; the validation point estimate is \GeoValMLE{}. Availability remains externally specified because GeoLife contains trajectories rather than task-delivery, willingness, or deadline observations.
+The validation winner distribution is concentrated on two development-only smoothed population-prior candidates, with selection frequencies 84.15\% and 12.80\%. Retaining these two models gives 96.95\% cumulative validation selection mass, above the prespecified 95\% target. The development MLE is \GeoDevMLE{} with a 95\% bootstrap interval \GeoDevCILow--\GeoDevCIHigh{}; the validation point estimate is \GeoValMLE{}. Availability remains externally specified because GeoLife contains trajectories rather than task-delivery, willingness, deadline, or production-service observations.
 
 A validation-best single-model BSP control is retained to separate improved model fit from finite-set robustness. The strict data-driven R-BSP and the disclosure-floor-aware RDF-BSP service frontier are reported in the main manuscript rather than duplicated here.
 
 \section{Reproducibility Record}
 The repository stores deterministic preprocessing, split metadata, configuration files, seeds, trajectory-level summaries, bootstrap outputs, provenance records, analysis code, and manuscript sources. The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input-group isolation. User IDs and complete 48-slot discrete state-path fingerprints are disjoint across the effective splits.
 
-GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The current automated suite contains 31 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
+GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The current automated suite contains 34 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
 
-The data-driven replay is reported as exploratory because the test replay had been inspected in preceding analyses; it is not treated as independent confirmatory validation. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
+The data-driven replay and post-review stress analyses are reported as exploratory; they are not treated as independent confirmatory superiority tests. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
