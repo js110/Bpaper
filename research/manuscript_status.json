@@ -1,16 +1,16 @@
 {
-  "stage": "tmc_submission_package_technical_ready",
+  "stage": "tmc_major_revision_validation_pending",
   "target_journal": "IEEE Transactions on Mobile Computing",
   "date": "2026-09-30",
-  "technical_ready": true,
+  "technical_ready": false,
   "submission_ready": false,
   "human_verified": false,
-  "main_manuscript_pages": 9,
-  "supplementary_pages": 2,
+  "main_manuscript_pages": null,
+  "supplementary_pages": null,
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
-  "tests_passed": 31,
+  "tests_passed": null,
   "completed_conditions": 417,
   "trajectory_executions": 28973,
   "audited_events": 1390704,
@@ -32,7 +32,9 @@
     "funder-role confirmation",
     "GeoLife ethics/data-use wording if required",
     "author-handled AI-related submission requirements",
-    "decision on versioned GitHub release and/or immutable archive DOI"
+    "decision on versioned GitHub release and/or immutable archive DOI",
+    "validate major-revision manuscript and self-contained TMC package",
+    "author review of tightened scope/novelty language"
   ],
   "not_performed": [
     "hardware/mobile-device experiment",
@@ -71,20 +73,9 @@
     "data_driven_selection_mass_target": 0.95
   },
   "final_qa": {
-    "status": "passed_on_tmc_sources",
-    "source_sha": "c69a65aa99177ecab559121d743935eaedcc7795",
-    "workflow_run": 36661548911,
-    "artifact_id": 11074063660,
-    "artifact_name": "tmc-submission-package",
-    "artifact_digest": "sha256:1cf38948a659db08f957953ee2fb802d7dc1d10ea8388b31bd758d951933cda8",
-    "main_manuscript_compiles": true,
-    "supplement_compiles": true,
-    "staged_source_package_recompiles": true,
-    "unresolved_references": false,
-    "overfull_boxes": false,
-    "main_page_limit_18_satisfied": true,
-    "regular_12_page_baseline_satisfied": true,
-    "visually_inspected": true
+    "status": "major_revision_validation_pending",
+    "review_source_commit": "5997f5b952a3eb8fb2a9319d342cba71bdc089fa",
+    "revision_branch": "tmc-major-revision-review1"
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
