@@ -79,7 +79,7 @@ class PipelineTests(unittest.TestCase):
         side=2
         rects,masks=candidates(side)
         client_prior=[.7,.1,.1,.1]
-        attacker_prior=[.1,.1,.1,.7]
+        attacker_prior=[.1,.15,.2,.55]
         c=dict(id='reset_distinct_priors',delivery=.9,willing=.8,on_time=.9,move_model=0.0,method='bsp',param=.9,
                attack='fixed',scenario='static',reset_every=1,client_prior=client_prior,
                attacker_prior=attacker_prior,legitimate_fraction=1.0)
@@ -87,6 +87,6 @@ class PipelineTests(unittest.TestCase):
         _,events=simulate(c,9901,0,path,rects,masks,2,side,True)
         for e in events:
             self.assertAlmostEqual(e['prior_peak'],.7)
-            self.assertAlmostEqual(e['attacker_prior_peak'],.7)
+            self.assertAlmostEqual(e['attacker_prior_peak'],.55)
         self.assertNotEqual(int(np.argmax(client_prior)),int(np.argmax(attacker_prior)))
 if __name__=='__main__':unittest.main()
