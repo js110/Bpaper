@@ -1,4 +1,4 @@
-# Final author confirmation before PMC submission
+# Final author confirmation before IEEE TMC submission
 
 This checklist contains statements that cannot be inferred from code, experiments, or public sources. It must be completed by the responsible authors before the manuscript is marked submission-ready.
 
@@ -8,7 +8,7 @@ This checklist contains statements that cannot be inferred from code, experiment
 - [x] Affiliation copied from the supplied reference paper: College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China.
 - [x] Lei Zhang is the corresponding author, matching the supplied reference paper.
 - [x] Corresponding email copied from the supplied reference paper: 8213662@163.com.
-- [ ] Every author has read and approved the final manuscript and agrees to submission to Pervasive and Mobile Computing.
+- [ ] Every author has read and approved the final manuscript and agrees to submission to IEEE Transactions on Mobile Computing.
 
 ## Funding
 Grant titles/numbers below are copied from the supplied reference paper. Only the funder-role statement remains for author confirmation:
@@ -22,12 +22,12 @@ Grant titles/numbers below are copied from the supplied reference paper. Only th
 - [ ] Competing-interests statement is supplied and approved by all authors.
 - [ ] CRediT contribution roles are supplied if required by the submission system.
 - [ ] The authors have determined whether institutional ethics approval/exemption or a data-use statement is required for secondary analysis of the public GeoLife dataset and supplied the correct wording.
-- [ ] Any AI-related journal disclosure or figure-caption wording required at submission has been handled directly by the authors.
+- [ ] All authors have ORCID identifiers available for the IEEE submission system.\n- [ ] Any AI-related journal disclosure required at submission has been handled directly by the authors.
 
 ## Reproducibility and repository
 - [ ] The public GitHub repository can remain public at submission.
 - [ ] Decide whether to create a versioned GitHub release and/or immutable archive DOI for the submitted version.
 - [ ] Verify that no third-party full text or raw GeoLife archive is included in the distributable manuscript source package.
-- [ ] Verify the final submission package contains main.tex, references.bib, generated tables, figures, highlights, and all required LaTeX support files.
+- [ ] Verify the TMC submission package contains the main manuscript source/PDF, references, generated tables/macros, figures, and separately uploaded supplemental material.
 
 Only after all boxes above are confirmed should research/manuscript_status.json set submission_ready=true.
