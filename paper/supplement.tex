@@ -24,7 +24,7 @@ For the pointwise-maximal-leakage comparator, let \(l_i=\Pr(Y=1\mid X=i)\) and \
 
 PRIVIC learns a noisy location channel through Blahut--Arimoto and incremental Bayesian updates~\cite{privic2024}. Our BA/IBU/GIBU updates are checked against the authors' public implementation. The task adapter emits a truthful report only when the true state is eligible and the sampled location-channel outcome satisfies the task predicate. Because the adapter changes the output semantics, PRIVIC-T does not inherit the original geo-indistinguishability guarantee. Offline fitting is excluded from online gate timing.
 
-The Bayesian-privacy comparator constrains each positive-probability output by \(D_{\mathrm{KL}}(b^y\|b)\le\kappa\)~\cite{bayesian}. The successful-report divergence is determined by task support, while the silence bound is solved by bisection. It is used as a per-output diagnostic rather than as a cumulative session guarantee.
+The Bayesian-privacy comparator constrains each positive-probability output by \(D_{\mathrm{KL}}(b^y\|b)\le\kappa\)~\cite{bayesian}. The successful-report divergence is determined by task support, while the silence bound is solved by bisection. This is our task-channel specialization of the prior--posterior KL idea, not a reproduction of the original economic mechanism-design setting, and it is used only as a per-output diagnostic rather than as a cumulative session guarantee.
 
 \section{Finite-Model Robustness and Boundary Characterization}
 The hand-grid ambiguity set uses \(v\in\{0.05,0.3,0.8\}\) and \(\alpha\in\{0.3,0.648,0.9\}\). Twenty new synthetic seeds, four users per seed, and 48 slots yield 80 trajectories per reported row at a fixed operating point. When the informed attacker's exact generating model is contained in the set, R-BSP records no local-cap violation in the reported in-set conditions, as expected from the finite-set construction, while retaining about 39.7\% of externally completable normal-task opportunities.
@@ -35,6 +35,15 @@ The hand-grid ambiguity set uses \(v\in\{0.05,0.3,0.8\}\) and \(\alpha\in\{0.3,0
 \end{table*}
 
 The same ambiguity set is then evaluated against correct attacker models that are not exact members. The outside-set value \(\alpha=0.98\) yields a 6.93\% local-cap violation rate with a cluster-bootstrap 95\% interval of 5.70--8.31\%. Interior unlisted values yield zero or rare violations in this finite sample. These results support only a finite-model guarantee and are not evidence of robustness to arbitrary distribution shift.
+
+The synthetic sensitivity suite also varies spatial resolution. Table~\ref{tab:grid-sensitivity} reports the BSP endpoints for 4$\times$4 and 16$\times$16 grids. The substantial change in both posterior concentration and retention shows that the nominal 8$\times$8 operating point is not resolution invariant. Because the rectangular task library is regenerated for each grid, these rows are sensitivity diagnostics rather than a controlled claim that one resolution is superior.
+
+\begin{table*}[t]
+\centering\small
+\caption{Grid-resolution sensitivity for synthetic BSP runs. Retention is simulated completable-opportunity retention under the stated Bernoulli task process.}
+\label{tab:grid-sensitivity}
+\input{grid_sensitivity_table}
+\end{table*}
 \begin{table*}[t]
 \centering\small
 \caption{Boundary characterization for attacker models not explicitly enumerated in the hand-grid ambiguity set.}
@@ -55,7 +64,7 @@ A validation-best single-model BSP control is retained to separate improved mode
 \section{Reproducibility Record}
 The repository stores deterministic preprocessing, split metadata, configuration files, seeds, trajectory-level summaries, bootstrap outputs, provenance records, analysis code, and manuscript sources. The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input-group isolation. User IDs and complete 48-slot discrete state-path fingerprints are disjoint across the effective splits.
 
-GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The current automated suite contains 31 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
+GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The automated suite covers nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
 
 The data-driven replay is reported as exploratory because the test replay had been inspected in preceding analyses; it is not treated as independent confirmatory validation. No mobile-device energy measurement, production MCS task-log study, or independent external reproduction is claimed. The original Microsoft GeoLife archive and third-party article full texts are not redistributed in the submission package.
 
