@@ -95,11 +95,15 @@ Here $Y_t=0$ means that no valid report appeared by the deadline. There are no s
 This design represents opportunistic sampling at a specified instant, not continuous movement toward a newly assigned destination. Users do not change their paths in response to tasks. The simulated normal task stream is public and exogenous. Probe tasks share the same completion requirements as normal tasks; the evaluator's normal/probe label is not an input to the client's gate.
 
 \subsection{Privacy Objective and Bayesian Observation Channel}
-With the observation boundary fixed, the privacy problem becomes a branch-wise Bayesian update. Let $b_t(i)=\Pr(X_t=i\mid H_{t-1},S_t)$ be the predicted belief before the current output, and abbreviate $b=b_t$, $h_i=\alpha_t\ind\{i\in S_t\}$, and $m=\sum_i b_i h_i$. More generally, the branch algebra requires only a declared state-conditional success likelihood
+With the observation boundary fixed, the privacy problem becomes a branch-wise Bayesian update. Let $b_t(i)=\Pr(X_t=i\mid H_{t-1},S_t)$ be the predicted belief before the current output, and abbreviate $b=b_t$, $h_i=\alpha_t\ind\{i\in S_t\}$, and $m=\sum_i b_i h_i$. More generally, the branch algebra requires only a declared state-conditional success likelihood. Define
 \[
- h_i=\ind\{i\in S_t\}\Pr(D_t=W_t=L_t=1\mid X_t=i,H_{t-1},S_t)\in[0,1].
+\begin{aligned}
+a_t(i)&=\Pr(D_t=W_t=L_t=1 \\
+&\qquad\mid X_t=i,H_{t-1},S_t),\\
+h_i&=\ind\{i\in S_t\}a_t(i).
+\end{aligned}
 \]
-If delivery, willingness, and timely completion are conditionally independent given location and public history, this joint probability factors into the product of their state-conditional probabilities. The baseline experiments use the simpler state-independent $\alpha_t$; the spatial-availability stress deliberately violates that client model to test the resulting mismatch. A gate is a deterministic function of public history and the current task; its random coin is private. For $q>0$ and $m>0$, the report posterior is
+If delivery, willingness, and timely completion are conditionally independent given location and public history, the joint term $a_t(i)$ factors into the product of their state-conditional probabilities. The baseline experiments use the simpler state-independent $\alpha_t$; the spatial-availability stress deliberately violates that client model to test the resulting mismatch. A gate is a deterministic function of public history and the current task; its random coin is private. For $q>0$ and $m>0$, the report posterior is
 \begin{equation}
  b_i^+=\frac{b_i h_i}{m}.
  \label{eq:positive}
