@@ -74,9 +74,10 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             robust_models=load_robust_models(condition['robust_models_file'])
         robust_models=robust_models or [dict(move=move_model,alpha=alpha_model)]
         robust=RobustPublicBelief(side,robust_models)
-    client_reset_prior=belief.b.copy()
-    attacker_reset_prior=attacker.b.copy()
+    # Background beliefs evolve without target-specific report/silence evidence.
+    # Identity-reset controls restore each model to its own current background.
     prior=belief.b.copy()
+    attacker_background=attacker.b.copy()
     sums={k:0. for k in ['hit','error_cells','peak','logloss','covered95','credible95','entropy']}
     prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0
     attacker_local_cap_violations=0;attacker_effective_cap_violations=0;attacker_absolute_cap_violations=0;op_cells=set();done_cells=set()
@@ -85,10 +86,10 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     gate_times=[];rows=[];bin_counts=np.zeros(10);bin_hits=np.zeros(10);bin_peaks=np.zeros(10);error_m=0.
     for t in range(slots):
         # Identity resetting is an ideal control: discard accumulated target-specific
-        # evidence while preserving each model's own configured background prior.
+        # evidence while preserving each model's own time-evolved no-output background.
         if condition.get('reset_every',0) and t%condition['reset_every']==0:
-            belief.b=client_reset_prior.copy()
-            attacker.b=attacker_reset_prior.copy()
+            belief.b=prior.copy()
+            attacker.b=attacker_background.copy()
             belief.seen.clear()
             attacker.seen.clear()
             if robust:robust.reset()
@@ -97,6 +98,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             attacker.b=predict(attacker.b,side,attacker.move)
             if robust:robust.predict()
             prior=predict(prior,side,move_model)
+            attacker_background=predict(attacker_background,side,attacker.move)
         is_legit=bool(legitimate_schedule[t])
         if is_legit: idx=int(normal_ids[t])
         elif attack=='adaptive':
