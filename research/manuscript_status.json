@@ -16,7 +16,7 @@
   "audited_events": 1390704,
   "flat_submission_source_verified": true,
   "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36657962884,
+  "final_package_workflow_run": 36658364866,
   "generated_submission_files": [
     "paper/main.pdf",
     "paper/PMC_submission_source.zip",
@@ -71,7 +71,7 @@
   },
   "final_qa": {
     "status": "passed_on_current_sources",
-    "source_sha": "c5f071ab2418f559338d14804392c4c536eda246",
+    "source_sha": "1a22657dba8ed53bf274426f6bff0162fc3c237a",
     "development_main_compiles": true,
     "flat_submission_main_compiles": true,
     "supplement_compiles": true,
@@ -125,5 +125,5 @@
     "effective_counts_source": "results/geolife_decontamination.json",
     "refresh_required": false
   },
-  "final_package_source_sha": "c5f071ab2418f559338d14804392c4c536eda246"
+  "final_package_source_sha": "1a22657dba8ed53bf274426f6bff0162fc3c237a"
 }
