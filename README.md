@@ -1,33 +1,31 @@
-# Bpaper：Sequential Mobile Crowdsensing Location Privacy
+# Bpaper: Sequential Mobile Crowdsensing Location Privacy
 
-This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. The canonical machine-readable submission state is `research/manuscript_status.json`; checked-in PDFs and ZIP artifacts should be treated as current only when that file reports `technical_ready=true` for the validated source SHA.
+This branch contains the IEEE Transactions on Mobile Computing version of the BSP/R-BSP/DF-BSP study. The finalized Elsevier/PMC version is preserved on the `pmc` branch. All TMC manuscript and submission-format changes are isolated to the `tmc` branch.
 
 ## Current manuscript
 
-- Target journal: *Pervasive and Mobile Computing*.
-- Main manuscript: 28 pages, 6 numbered sections, 1 main figure, 2 main tables.
-- Supplementary material: 5 pages.
-- References: 21 cited entries.
-- Automated tests: 31.
-- Recorded experiment executions: 28,973 trajectories and 1,390,704 audited slot events.
-- Technical package status: see `research/manuscript_status.json`. Any evidence or manuscript-source change requires a fresh final-package validation before upload.
+- Target journal: *IEEE Transactions on Mobile Computing*.
+- LaTeX format: IEEE Computer Society journal style via `\\documentclass[10pt,journal,compsoc]{IEEEtran}`.
+- Main-paper policy used here: 12 formatted pages as the regular-paper baseline; submissions may be up to 18 pages.
+- Supplemental material is a separate upload and is not counted toward the main-paper page limit.
+- Manuscript structure: Introduction; Related Work; System Model and Branch-Safe Participation; Robustness and Disclosure-Floor Analysis; Evaluation; Conclusion.
+- Scientific evidence is unchanged from the final model-input-isolated, window-weighted analysis.
+- Technical TMC build status: see `research/manuscript_status.json` and the `tmc-build` workflow.
 - Journal submission status: not submitted; author-owned declarations and approvals remain outstanding.
 
 Primary files:
 
-- paper/main.pdf — current review manuscript.
-- paper/main.tex — current LaTeX source.
-- paper/supplement.pdf and paper/supplement.tex — focused technical supplement.
-- paper/PMC_submission_source.zip — flat Editorial Manager source archive.
-- paper/highlights.docx — Highlights upload file.
-- paper/SUBMISSION_UPLOAD_GUIDE.md — upload map.
-- research/manuscript_status.json — canonical machine-readable status.
-
-Historical drafts, failed/interrupted runs, preview screenshots, and superseded package artifacts were removed from main after finalization. They remain recoverable from Git history.
+- `paper/main.tex` — IEEE TMC manuscript source.
+- `paper/supplement.tex` — separate supplemental material.
+- `paper/COVER_LETTER_DRAFT.md` — TMC cover-letter draft.
+- `paper/TMC_SUBMISSION_CHECKLIST.md` — TMC technical and author checklist.
+- `paper/SUBMISSION_UPLOAD_GUIDE.md` — TMC upload map.
+- `research/tmc_conversion_notes.md` — format/style decisions and sources consulted.
+- `research/manuscript_status.json` — machine-readable conversion status.
 
 ## Scientific scope
 
-The paper studies a linkable truthful report/silence channel for ordinary mobile crowdsensing. It contains:
+The paper studies a linkable truthful report/silence channel for mobile crowdsensing. It contains:
 
 - BSP: a maximal scalar participation gate for report and silence posterior branches.
 - R-BSP: finite-model robust intersection of BSP gates.
@@ -46,7 +44,7 @@ python3 -m unittest discover -s tests -v
 python3 -m src.audit
 ~~~
 
-Python 3.10+ is supported. LaTeX builds use TeX Live/latexmk and the tracked elsarticle class/BST.
+The validated CI path uses Python 3.12. LaTeX builds use TeX Live/latexmk with the IEEEtran publishers package.
 
 ## Data
 
@@ -86,10 +84,8 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
 
 src.paper_assets only synchronizes assets used by the current manuscript; it does not rewrite references, templates, or manuscript text.
 
-## Submission package
+## TMC build and submission preview
 
-The pmc-final-package GitHub Actions workflow runs on main manuscript-source changes and can also be started manually. It runs the unit tests, compiles the development manuscript and supplement, builds and independently compiles the flat Editorial Manager source, verifies PDF text equivalence, and refreshes the final upload artifacts.
+The `tmc-build` GitHub Actions workflow runs on pushes to the `tmc` branch. It executes the full test suite, compiles the IEEE-formatted manuscript and supplement, rejects unresolved references and layout failures, enforces the 18-page submission ceiling, and uploads a source/PDF preview artifact.
 
-Generated package commits contain only derived upload artifacts and the machine-readable status. `research/manuscript_status.json` records `final_package_source_sha`, which is the authoritative source checkpoint for those artifacts; later documentation-only commits do not change the validated manuscript source.
-
-Before submission, complete the author-owned items in paper/AUTHOR_CONFIRMATION.md and paper/PMC_SUBMISSION_CHECKLIST.md.
+Before submission, complete the author-owned items in `paper/AUTHOR_CONFIRMATION.md` and `paper/TMC_SUBMISSION_CHECKLIST.md`.
