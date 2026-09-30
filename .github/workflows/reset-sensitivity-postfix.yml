@@ -1,0 +1,126 @@
+name: reset-sensitivity-postfix
+
+on:
+  push:
+    branches: [tmc]
+    paths:
+      - '.github/workflows/reset-sensitivity-postfix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reset-sensitivity-postfix
+  cancel-in-progress: false
+
+jobs:
+  rerun:
+    if: github.ref == 'refs/heads/tmc'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-lock.txt
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Re-run reset sensitivity with fixed semantics
+        run: |
+          rm -rf results/reset_sensitivity_postfix
+          python -m src.experiment --config configs/reset_sensitivity_postfix.json
+
+      - name: Compare against legacy reset rows
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, math, os
+          from pathlib import Path
+
+          new_path=Path('results/reset_sensitivity_postfix/rows.csv')
+          old_path=Path('results/sensitivity/rows.csv')
+          new=list(csv.DictReader(new_path.open()))
+          old=[r for r in csv.DictReader(old_path.open()) if r['condition'].startswith('reset_every_')]
+
+          key=lambda r:(r['condition'],r['seed'],r['user'])
+          new_map={key(r):r for r in new}
+          old_map={key(r):r for r in old}
+
+          metrics=[
+              'hit','error_cells','error_m','peak','logloss','covered95','credible95',
+              'entropy','prior_hit','raw_completion','coverage','reward','utility',
+              'complete','opportunities','reports'
+          ]
+          max_abs_diff={}
+          differing_rows=set()
+          for metric in metrics:
+              best=0.0
+              for k,nr in new_map.items():
+                  if k not in old_map:
+                      differing_rows.add(k); continue
+                  ov=old_map[k].get(metric,''); nv=nr.get(metric,'')
+                  try:
+                      a=float(ov); b=float(nv)
+                  except ValueError:
+                      if ov!=nv: differing_rows.add(k)
+                      continue
+                  if math.isnan(a) and math.isnan(b):
+                      d=0.0
+                  else:
+                      d=abs(a-b)
+                  if d>0:
+                      differing_rows.add(k)
+                  best=max(best,d)
+              max_abs_diff[metric]=best
+
+          record={
+              'source_sha':os.environ['SOURCE_SHA'],
+              'legacy_directory':'results/sensitivity',
+              'postfix_directory':'results/reset_sensitivity_postfix',
+              'legacy_rows':len(old),
+              'postfix_rows':len(new),
+              'key_sets_equal':set(old_map)==set(new_map),
+              'differing_row_count':len(differing_rows),
+              'max_abs_diff_by_metric':max_abs_diff,
+              'interpretation':(
+                  'The legacy reset_every conditions use no client_prior or attacker_prior, '
+                  'so both sides start from the same default uniform prior. The reset-prior '
+                  'bug is therefore behaviorally dormant for these legacy rows. This post-fix '
+                  'rerun provides source-bound evidence under the corrected implementation.'
+              ),
+              'rows_sha256':hashlib.sha256(new_path.read_bytes()).hexdigest(),
+              'config_sha256':hashlib.sha256(Path('configs/reset_sensitivity_postfix.json').read_bytes()).hexdigest(),
+          }
+          Path('results/reset_sensitivity_postfix/legacy_comparison.json').write_text(
+              json.dumps(record,indent=2)+'\n'
+          )
+          print(json.dumps(record,indent=2))
+          PY
+
+      - name: Commit post-fix evidence
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add results/reset_sensitivity_postfix
+          if git diff --cached --quiet; then
+            echo "No reset-sensitivity changes"
+            exit 0
+          fi
+          git commit -m "Re-run reset sensitivity after prior fix"
+          git fetch origin tmc
+          remote_sha="$(git rev-parse origin/tmc)"
+          if [ "$remote_sha" != "$GITHUB_SHA" ]; then
+            echo "tmc advanced from source SHA $GITHUB_SHA to $remote_sha; refusing stale result publish"
+            exit 1
+          fi
+          git push origin HEAD:tmc
