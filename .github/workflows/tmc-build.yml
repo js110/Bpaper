@@ -88,6 +88,7 @@ jobs:
           cp paper/current_numbers.tex paper/review_numbers.tex \
              paper/data_driven_table.tex paper/dfbsp_table.tex \
              paper/robust_table.tex paper/robust_boundary_table.tex \
+             paper/mechanism_comparison_table.tex paper/reviewer_stress_table.tex \
              build/tmc_submission/
           cp paper/figures/system_architecture.png build/tmc_submission/figures/
 
