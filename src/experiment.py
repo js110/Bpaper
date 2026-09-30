@@ -188,7 +188,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                              task_area=task_area,positive_cap=positive_cap,
                              evaluator_truth=truth,eligible=eligible,available=available,**metrics))
     out={k:v/slots for k,v in sums.items()}
-    out.update(ece=float(np.abs(bin_hits-bin_peaks).sum()/slots),error_m=error_m/slots,seed=seed,user=str(user),scenario=condition['scenario'],condition=condition['id'],
+    out.update(ece=float(np.abs(bin_hits-bin_peaks).sum()/slots),grid_error_m=error_m/slots,seed=seed,user=str(user),scenario=condition['scenario'],condition=condition['id'],
                method=method,param=param,attack=attack,side=side,prior_hit=prior_hit/slots,
                legitimate=legit,opportunities=opportunities,complete=complete,reports=reports,
                utility=complete/opportunities if opportunities else float('nan'),
