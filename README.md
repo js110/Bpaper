@@ -58,7 +58,7 @@ The raw deterministic user-ID split contains 23 development, 17 validation, and 
 
 ## Reproducing experiments
 
-Current evidence retained in main includes results/final, kl_baseline, sensitivity, informed, recent_baselines, recent_privic_thinning, recent_comparison, robust_informed, robust_boundary, data_driven_ambiguity, data_driven_extension, review1_diagnostics, and their analysis/provenance files.
+Current evidence retained in main includes results/final, kl_baseline, sensitivity, reset_sensitivity_postfix, informed, recent_baselines, recent_privic_thinning, recent_comparison, robust_informed, robust_boundary, data_driven_ambiguity, data_driven_extension, review1_diagnostics, and their analysis/provenance files. The post-fix reset rerun supersedes the legacy `reset_every_*` rows for implementation-semantic verification; the legacy equal-prior rows remain only as historical frozen evidence.
 
 A fresh run should use a new output directory rather than overwrite frozen evidence:
 
