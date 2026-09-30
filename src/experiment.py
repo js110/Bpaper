@@ -3,7 +3,7 @@ import argparse,csv,gzip,hashlib,json,platform,time
 from pathlib import Path
 import numpy as np
 from functools import lru_cache
-from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,gates,df_bsp_gates,disclosure_floor,choose_probe,posterior_metrics
+from .model import Task,Observation,PublicBelief,RobustPublicBelief,predict,update,normalize,gates,df_bsp_gates,robust_bsp_gates,robust_df_bsp_gates,disclosure_floor,binary_entropy,choose_probe,posterior_metrics
 from .geolife import load_effective_geolife
 
 @lru_cache(maxsize=64)
@@ -29,6 +29,17 @@ def candidates(side):
     masks=np.array([Task('',0,0,r).mask(side) for r in rects],float)
     return rects,masks
 
+def _value_at(spec,t):
+    a=np.asarray(spec,dtype=float)
+    return float(a) if a.ndim==0 else float(a[min(t,len(a)-1)])
+
+def _alpha_vector(alpha,n):
+    a=np.asarray(alpha,dtype=float)
+    if a.ndim==0:return np.full(n,float(a))
+    if a.shape!=(n,):raise ValueError('location-dependent alpha must have one value per state')
+    if np.any(a<0) or np.any(a>1):raise ValueError('alpha values must be in [0,1]')
+    return a
+
 def path_for(seed,user,side,slots,scenario,move):
     rng=np.random.default_rng(np.random.SeedSequence([seed,user,101]))
     if scenario=='commute':
@@ -38,11 +49,68 @@ def path_for(seed,user,side,slots,scenario,move):
     state=int(rng.integers(side*side));out=[]
     for t in range(slots):
         out.append(state)
-        if scenario!='static' and rng.random()<move:
+        move_t=_value_at(move,t)
+        if scenario!='static' and rng.random()<move_t:
             x,y=divmod(state,side);axis=int(rng.integers(4))
             dx,dy=[(1,0),(-1,0),(0,1),(0,-1)][axis]
             state=int(np.clip(x+dx,0,side-1)*side+np.clip(y+dy,0,side-1))
     return np.array(out)
+
+def _gate_matrix(condition,client_b,robust_bs,masks,rects,slot,alpha_model,channel,privic_qs):
+    method=condition['method'];param=condition['param'];positive_cap=condition.get('positive_cap')
+    if channel is not None:return np.asarray(privic_qs,float)
+    if robust_bs is not None:
+        alphas=np.asarray([m.get('alpha',alpha_model) for m in condition['_robust_specs']],float)
+        if method=='rdfbsp':
+            q=robust_df_bsp_gates(robust_bs,masks,alphas,param,positive_cap,slot,rects)
+        else:q=robust_bsp_gates(robust_bs,masks,alphas,param,slot,rects)
+    elif method=='dfbsp':q=df_bsp_gates(client_b,masks,alpha_model,param,positive_cap,slot,rects)
+    else:q=gates(client_b,masks,alpha_model,method,param,slot,rects)
+    return np.asarray(q,float)[:,None]
+
+def _lookahead2_probe(condition,belief,attacker,robust,masks,rects,slot,alpha_model,move_model,channel,privic_qs):
+    """Two-step beam look-ahead over consecutive probe opportunities.
+
+    The score is current mutual information plus the branch-probability-weighted
+    best next-slot mutual information. It is a stress heuristic, not an optimal
+    long-horizon policy.
+    """
+    robust_bs=robust.beliefs if robust is not None else None
+    qmat=_gate_matrix(condition,belief.b,robust_bs,masks,rects,slot,alpha_model,channel,privic_qs)
+    aalpha=_alpha_vector(attacker.alpha,len(attacker.b))
+    likelihood=masks*(aalpha[None,:]*qmat)
+    mass=(likelihood*attacker.b).sum(axis=1)
+    immediate=binary_entropy(mass)-(binary_entropy(likelihood)*attacker.b).sum(axis=1)
+    beam=max(1,min(int(condition.get('lookahead_beam',12)),len(masks)))
+    beam_idx=np.argsort(-immediate,kind='stable')[:beam]
+    discount=float(condition.get('lookahead_discount',1.0))
+    attacker_move_next=_value_at(condition.get('attacker_move_schedule',condition.get('attacker_move',move_model)),slot+1)
+    scores=[]
+    for idx in beam_idx:
+        qrow=qmat[idx]
+        mask=masks[idx]
+        p1=float(mass[idx])
+        future=0.0
+        for reported,py in ((True,p1),(False,1-p1)):
+            if py<=1e-14:continue
+            ab=update(attacker.b,mask,aalpha,qrow,reported)
+            ab=predict(ab,attacker.side,attacker_move_next)
+            cb=update(belief.b,mask,alpha_model,qrow,reported)
+            cb=predict(cb,belief.side,move_model)
+            rbs=None
+            if robust is not None:
+                branch=[]
+                for member in robust.members:
+                    rb=update(member.b,mask,member.alpha,qrow,reported)
+                    branch.append(predict(rb,robust.side,member.move))
+                rbs=np.vstack(branch)
+            nq=_gate_matrix(condition,cb,rbs,masks,rects,slot+1,alpha_model,channel,privic_qs)
+            nlike=masks*(aalpha[None,:]*nq)
+            nmass=(nlike*ab).sum(axis=1)
+            nmi=binary_entropy(nmass)-(binary_entropy(nlike)*ab).sum(axis=1)
+            future+=py*float(np.max(nmi))
+        scores.append(float(immediate[idx])+discount*future)
+    return int(beam_idx[int(np.argmax(scores))])
 
 def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     delivery=condition['delivery'];willing=condition['willing'];on_time=condition['on_time']
@@ -64,7 +132,8 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     belief=PublicBelief(side,move_model,alpha_model)
     if condition.get('client_prior') is not None:
         belief.b=np.asarray(condition['client_prior'],float);belief.b=belief.b/belief.b.sum()
-    attacker=PublicBelief(side,condition.get('attacker_move',move_model),condition.get('attacker_alpha',alpha_model))
+    attacker_alpha=condition.get('attacker_alpha_by_cell',condition.get('attacker_alpha',alpha_model))
+    attacker=PublicBelief(side,condition.get('attacker_move',move_model),attacker_alpha)
     if condition.get('attacker_prior') is not None:
         attacker.b=np.asarray(condition['attacker_prior'],float);attacker.b=attacker.b/attacker.b.sum()
     robust=None
@@ -73,8 +142,10 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         if robust_models is None and condition.get('robust_models_file'):
             robust_models=load_robust_models(condition['robust_models_file'])
         robust_models=robust_models or [dict(move=move_model,alpha=alpha_model)]
+        condition['_robust_specs']=robust_models
         robust=RobustPublicBelief(side,robust_models)
-    prior=belief.b.copy()
+    client_background=belief.b.copy()
+    attacker_background=attacker.b.copy()
     sums={k:0. for k in ['hit','error_cells','peak','logloss','covered95','credible95','entropy']}
     prior_hit=0.;legit=0;opportunities=0;complete=0;reports=0;cap_violations=0
     attacker_local_cap_violations=0;attacker_effective_cap_violations=0;attacker_absolute_cap_violations=0;op_cells=set();done_cells=set()
@@ -84,18 +155,22 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     for t in range(slots):
         # Identity resetting is an ideal control: discard past target-specific evidence.
         if condition.get('reset_every',0) and t%condition['reset_every']==0:
-            belief.b=prior.copy()
-            attacker.b=prior.copy()
+            belief.b=client_background.copy()
+            attacker.b=attacker_background.copy()
             if robust:robust.reset()
         if t:
-            belief.b=predict(belief.b,side,move_model)
-            attacker.b=predict(attacker.b,side,attacker.move)
+            client_move_t=_value_at(condition.get('move_model_schedule',move_model),t)
+            attacker_move_t=_value_at(condition.get('attacker_move_schedule',condition.get('attacker_move',move_model)),t)
+            belief.b=predict(belief.b,side,client_move_t)
+            attacker.b=predict(attacker.b,side,attacker_move_t)
             if robust:robust.predict()
-            prior=predict(prior,side,move_model)
+            client_background=predict(client_background,side,client_move_t)
+            attacker_background=predict(attacker_background,side,attacker_move_t)
         is_legit=bool(legitimate_schedule[t])
         if is_legit: idx=int(normal_ids[t])
+        elif attack=='lookahead2':
+            idx=_lookahead2_probe(condition,belief,attacker,robust,masks,rects,t,alpha_model,move_model,channel,privic_qs)
         elif attack=='adaptive':
-            from .model import binary_entropy
             if channel is not None:
                 qs=privic_qs
             elif robust is not None:
@@ -104,7 +179,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                 qs=df_bsp_gates(belief.b,masks,alpha_model,param,positive_cap,t,rects)[:,None]
             else:
                 qs=gates(belief.b,masks,alpha_model,method,param,t,rects)[:,None]
-            likelihood=masks*(attacker.alpha*qs)
+            likelihood=masks*(_alpha_vector(attacker.alpha,side*side)[None,:]*qs)
             information=binary_entropy((likelihood*attacker.b).sum(axis=1))-(binary_entropy(likelihood)*attacker.b).sum(axis=1)
             idx=int(np.argmax(information))
         else:idx=int(random_probe_ids[t])
@@ -125,7 +200,11 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
         mask=masks[idx].astype(bool);truth=int(path[t]);task_area=int(mask.sum())
         attacker_positive_floor=disclosure_floor(attacker_bprior,mask)
         eligible=bool(mask[truth])
-        available=bool(ext[t,0]<delivery and ext[t,1]<willing and ext[t,2]<on_time)
+        if condition.get('availability_by_cell') is not None:
+            true_availability=_alpha_vector(condition['availability_by_cell'],side*side)
+            available=bool(ext[t,0]<true_availability[truth])
+        else:
+            available=bool(ext[t,0]<delivery and ext[t,1]<willing and ext[t,2]<on_time)
         q_at_state=float(q[truth]) if channel is not None else q
         reported=bool(eligible and available and ext[t,3]<q_at_state)
         observation=Observation(task.task_id,t,reported)
@@ -164,7 +243,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
             xy=np.array(np.unravel_index(ties,(side,side))).T-np.array(divmod(truth,side))
             error_m+=float(np.linalg.norm(xy*np.array([.3*111320/side,.4*111320*np.cos(np.deg2rad(39.95))/side]),axis=1).mean())
         else:error_m+=metrics['error_cells']*1000
-        prior_hit+=posterior_metrics(prior,truth,side)['hit']
+        prior_hit+=posterior_metrics(client_background,truth,side)['hit']
         if is_legit:
             legit+=1
             area_bin='small' if task_area<=8 else ('medium' if task_area<=31 else 'large')
@@ -193,7 +272,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                medium_opportunities=area_opp['medium'],medium_complete=area_done['medium'],
                large_opportunities=area_opp['large'],large_complete=area_done['large'],
                raw_completion=complete/legit,coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
-               reward=complete,latency_slots=1.0 if reports else float('nan'),
+               reward=complete,
                gate_us_p50=float(np.median(gate_times)),gate_us_p95=float(np.quantile(gate_times,.95)),
                cap_violations=cap_violations,attacker_local_cap_violations=attacker_local_cap_violations,
                attacker_effective_cap_violations=attacker_effective_cap_violations,
@@ -218,7 +297,8 @@ def run(config_path):
             data=load_effective_geolife(cfg['geolife_file'])
             participants=[(int(data['users'][j]),int(data['users'][j]),data['paths'][j][:slots]) for j in range(len(data['users']))]
         else:
-            participants=[(seed,u,path_for(seed,u,side,slots,cond['scenario'],cond['move_true'])) for seed in cfg['seeds'] for u in range(cfg['users_per_seed'])]
+            true_move=cond.get('move_true_schedule',cond['move_true'])
+            participants=[(seed,u,path_for(seed,u,side,slots,cond['scenario'],true_move)) for seed in cfg['seeds'] for u in range(cfg['users_per_seed'])]
         with gzip.open(out/(cond['id']+'.jsonl.gz'),'wt') as f:
             for j,(seed,user,path) in enumerate(participants):
                 try:
