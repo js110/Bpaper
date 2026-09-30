@@ -1,12 +1,12 @@
 {
-  "stage": "pmc_submission_package_technical_ready",
-  "target_journal": "Pervasive and Mobile Computing",
+  "stage": "tmc_conversion_in_progress",
+  "target_journal": "IEEE Transactions on Mobile Computing",
   "date": "2026-09-30",
-  "technical_ready": true,
+  "technical_ready": false,
   "submission_ready": false,
   "human_verified": false,
-  "main_manuscript_pages": 28,
-  "supplementary_pages": 5,
+  "main_manuscript_pages": null,
+  "supplementary_pages": null,
   "references": 21,
   "figures_in_main_manuscript": 1,
   "tables_in_main_manuscript": 2,
@@ -14,16 +14,10 @@
   "completed_conditions": 417,
   "trajectory_executions": 28973,
   "audited_events": 1390704,
-  "flat_submission_source_verified": true,
-  "flat_and_development_pdf_text_equivalent": true,
-  "final_package_workflow_run": 36658364866,
-  "generated_submission_files": [
-    "paper/main.pdf",
-    "paper/PMC_submission_source.zip",
-    "paper/PMC_submission_manifest.json",
-    "paper/highlights.docx",
-    "paper/supplement.pdf"
-  ],
+  "flat_submission_source_verified": false,
+  "flat_and_development_pdf_text_equivalent": false,
+  "final_package_workflow_run": null,
+  "generated_submission_files": [],
   "open_items": [
     "all-author approval of the final manuscript",
     "competing-interests statement",
@@ -70,13 +64,8 @@
     "data_driven_selection_mass_target": 0.95
   },
   "final_qa": {
-    "status": "passed_on_current_sources",
-    "source_sha": "1a22657dba8ed53bf274426f6bff0162fc3c237a",
-    "development_main_compiles": true,
-    "flat_submission_main_compiles": true,
-    "supplement_compiles": true,
-    "flat_and_development_pdf_text_equivalent": true,
-    "zip_manifest_membership_verified": true
+    "status": "tmc_build_pending",
+    "note": "IEEE Computer Society journal conversion is under validation on branch tmc."
   },
   "reference_policy": "research/reference_policy.md",
   "final_internal_review": "research/reviews/final_submission_audit_2026-09-27/review_zh.md",
@@ -93,18 +82,18 @@
     "corresponding_email": "8213662@163.com",
     "affiliation": "College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China",
     "funding": [
-      "Heilongjiang Provincial University Teacher Scientific Research Business Fee \u2014 2018-KYYWF0941",
-      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project \u2014 PL2024F002",
-      "National Foreign Expert Key Support Project \u2014 D2O25O185",
-      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan \u2014 YQJH2024239"
+      "Heilongjiang Provincial University Teacher Scientific Research Business Fee — 2018-KYYWF0941",
+      "Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project — PL2024F002",
+      "National Foreign Expert Key Support Project — D2O25O185",
+      "Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan — YQJH2024239"
     ]
   },
   "manuscript_structure": [
     "Introduction",
     "Related Work",
-    "Proposed Branch-Safe Participation Framework",
-    "Privacy Guarantees and Robustness Analysis",
-    "Experimental Evaluation",
+    "System Model and Branch-Safe Participation",
+    "Robustness and Disclosure-Floor Analysis",
+    "Evaluation",
     "Conclusion"
   ],
   "main_cleanup": {
@@ -125,5 +114,16 @@
     "effective_counts_source": "results/geolife_decontamination.json",
     "refresh_required": false
   },
-  "final_package_source_sha": "1a22657dba8ed53bf274426f6bff0162fc3c237a"
+  "tmc_format": {
+    "latex_class": "IEEEtran",
+    "options": [
+      "10pt",
+      "journal",
+      "compsoc"
+    ],
+    "regular_page_baseline": 12,
+    "maximum_submission_pages": 18,
+    "supplemental_material_separate": true,
+    "authors_visible_by_default": true
+  }
 }
