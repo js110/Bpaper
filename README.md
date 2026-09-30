@@ -90,4 +90,6 @@ src.paper_assets only synchronizes assets used by the current manuscript; it doe
 
 The pmc-final-package GitHub Actions workflow runs on main manuscript-source changes and can also be started manually. It runs the unit tests, compiles the development manuscript and supplement, builds and independently compiles the flat Editorial Manager source, verifies PDF text equivalence, and refreshes the final upload artifacts.
 
+Generated package commits contain only derived upload artifacts and the machine-readable status. `research/manuscript_status.json` records `final_package_source_sha`, which is the authoritative source checkpoint for those artifacts; later documentation-only commits do not change the validated manuscript source.
+
 Before submission, complete the author-owned items in paper/AUTHOR_CONFIRMATION.md and paper/PMC_SUBMISSION_CHECKLIST.md.
