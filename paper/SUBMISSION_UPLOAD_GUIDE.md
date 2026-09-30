@@ -1,30 +1,29 @@
-# PMC submission upload guide
+# IEEE TMC submission upload guide
 
-Target journal: **Pervasive and Mobile Computing**
+Target journal: **IEEE Transactions on Mobile Computing**
 
-Use only the files produced for the source SHA recorded in `../research/manuscript_status.json`; do not reconstruct the package from historical commits or mix artifacts from different runs.
+This guide applies only to the tmc branch. The frozen Elsevier/PMC version is preserved on the pmc branch.
 
-## Upload files
+## Expected submission items
 
-- main.pdf — 28-page final review manuscript.
-- PMC_submission_source.zip — flat one-level LaTeX source for Editorial Manager.
-- supplement.pdf — 5-page supplementary technical material.
-- highlights.docx — five Elsevier Highlights bullets.
-- COVER_LETTER_DRAFT.md — author-reviewed text source for the cover letter.
+- Main manuscript PDF generated from main.tex.
+- LaTeX source files for the main manuscript, including generated table/macro inputs and the system figure.
+- supplement.pdf as a separate supplemental file.
+- Source files for supplemental material if requested by the submission system.
+- Author-reviewed cover letter text from COVER_LETTER_DRAFT.md.
 
-PMC_submission_manifest.json is an internal package manifest and normally does not need to be uploaded.
+Elsevier-specific Highlights and the PMC Editorial Manager ZIP are not TMC submission items.
 
-## Internal files that are not submission items
+## Before upload
 
-- AUTHOR_CONFIRMATION.md
-- PMC_SUBMISSION_CHECKLIST.md
-- SOURCE_README.md
-- raw results/, research/, literature/, workflows, and test files
+Verify that:
 
-Do not upload the raw GeoLife archive or third-party article full texts.
+- the manuscript is compiled with \\documentclass[10pt,journal,compsoc]{IEEEtran};
+- the main manuscript does not exceed 18 formatted pages;
+- the 12-page regular-paper baseline and possible overlength charges are understood if the paper remains longer than 12 pages;
+- all references and figures resolve without LaTeX warnings;
+- supplemental material is uploaded separately rather than appended to the main PDF;
+- the author list and corresponding-author details are correct;
+- the responsible authors have completed the declarations in AUTHOR_CONFIRMATION.md.
 
-## Technical status
-
-Before upload, verify that `../research/manuscript_status.json` reports `technical_ready=true`, `data_status.refresh_required=false`, and a `final_package_source_sha` matching the manuscript source being submitted. The same record must report successful development/flat/supplement compilation, flat-source text equivalence, and ZIP-manifest verification. Page counts are taken from that validated build rather than copied from an older package.
-
-`submission_ready` remains false until the responsible authors complete the declarations and approvals in `AUTHOR_CONFIRMATION.md`.
+The tmc-build GitHub Actions workflow is the technical acceptance gate for this branch.
