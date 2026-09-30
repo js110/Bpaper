@@ -24,6 +24,6 @@ Verify that:
 - all references and figures resolve without LaTeX warnings;
 - supplemental material is uploaded separately rather than appended to the main PDF;
 - the author list and corresponding-author details are correct;
-- the responsible authors have completed the declarations in AUTHOR_CONFIRMATION.md.
+- all authors have ORCID identifiers available for the IEEE submission system;\n- the responsible authors have completed the declarations in AUTHOR_CONFIRMATION.md.
 
 The tmc-build GitHub Actions workflow is the technical acceptance gate for this branch.
