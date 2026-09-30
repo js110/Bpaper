@@ -103,7 +103,7 @@ a_t(i)&=\Pr(D_t=W_t=L_t=1 \\
 h_i&=\ind\{i\in S_t\}a_t(i).
 \end{aligned}
 \]
-If delivery, willingness, and timely completion are conditionally independent given location and public history, the joint term $a_t(i)$ factors into the product of their state-conditional probabilities. The baseline experiments use the simpler state-independent $\alpha_t$; the spatial-availability stress deliberately violates that client model to test the resulting mismatch. A gate is a deterministic function of public history and the current task; its random coin is private. For $q>0$ and $m>0$, the report posterior is
+If delivery, willingness, and timely completion are conditionally independent given location, public history, and the current task metadata, the joint term $a_t(i)$ factors into the product of their state-conditional probabilities. The baseline experiments use the simpler state-independent $\alpha_t$; the spatial-availability stress deliberately violates that client model to test the resulting mismatch. A gate is a deterministic function of public history and the current task; its random coin is private. For $q>0$ and $m>0$, the report posterior is
 \begin{equation}
  b_i^+=\frac{b_i h_i}{m}.
  \label{eq:positive}
