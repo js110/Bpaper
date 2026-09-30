@@ -18,14 +18,9 @@ The workflow independently compiles both the development source and the flat sou
 
 Current scientific contents include nominal BSP, finite-model R-BSP, development/validation-derived R-BSP, asymmetric DF-BSP/RDF-BSP, informed-attacker and ambiguity-boundary stress tests, region-size-aware utility, and recent PML-T/PRIVIC-T task-channel comparisons. The ambiguity and disclosure-floor extensions are explicitly post-hoc and are not presented as independent confirmatory evidence.
 
-Final validated inventory:
-- six numbered sections: Introduction; Related Work; Proposed Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion;
-- main manuscript: 28 pages, 1 figure, 2 tables;
-- supplementary technical material: 5 pages;
-- 21 cited references;
-- 31 automated tests;
-- final flat Editorial Manager source independently compiles to the same 28-page text as the development source;
-- final packaging workflow: GitHub Actions run 36550604036, successful.
+Validation is source-specific. The final-package workflow records the validated source SHA, actual compiled page counts, test count, text-equivalence result, ZIP-membership check, and workflow run in `../research/manuscript_status.json`. Do not infer current technical readiness from an older PDF, ZIP, page count, or workflow run.
+
+The intended manuscript inventory is six numbered sections (Introduction; Related Work; Proposed Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion), one main figure, two main tables, 21 cited references, and the current automated test suite. Actual page counts are taken from the PDFs built by the final workflow.
 
 Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
 

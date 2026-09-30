@@ -1,6 +1,6 @@
 # Bpaper：Sequential Mobile Crowdsensing Location Privacy
 
-This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. The current submission package has been rebuilt on the model-input-group-isolated GeoLife evidence and has passed the technical validation workflow.
+This repository contains the current manuscript and reproducibility record for the BSP/R-BSP/DF-BSP study. The canonical branch is **main**. The canonical machine-readable submission state is `research/manuscript_status.json`; checked-in PDFs and ZIP artifacts should be treated as current only when that file reports `technical_ready=true` for the validated source SHA.
 
 ## Current manuscript
 
@@ -10,7 +10,7 @@ This repository contains the current manuscript and reproducibility record for t
 - References: 21 cited entries.
 - Automated tests: 31.
 - Recorded experiment executions: 28,973 trajectories and 1,390,704 audited slot events.
-- Technical package status: **technically validated**; author-owned declarations and approvals remain outstanding before submission.
+- Technical package status: see `research/manuscript_status.json`. Any evidence or manuscript-source change requires a fresh final-package validation before upload.
 - Journal submission status: not submitted; author-owned declarations and approvals remain outstanding.
 
 Primary files:

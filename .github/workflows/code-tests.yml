@@ -17,7 +17,9 @@ on:
       - 'configs/**'
       - 'requirements.txt'
       - 'requirements-lock.txt'
+      - 'paper/**'
       - '.github/workflows/code-tests.yml'
+      - '.github/workflows/pmc-final-package.yml'
   workflow_dispatch:
 
 permissions:

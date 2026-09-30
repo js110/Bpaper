@@ -61,24 +61,31 @@ jobs:
           latexmk -C
           latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
           if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' main.log; then exit 1; fi
-          pdfinfo main.pdf | grep Pages
+          pages="$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')"
+          echo "Development manuscript pages: $pages"
+          echo "$pages" > ../build/main_pages.txt
       - name: Compile flat submission source
         run: |
           cd build/pmc_submission_flat
           latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
           if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' main.log; then exit 1; fi
-          pdfinfo main.pdf | grep Pages
+          pages="$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')"
+          echo "Flat submission manuscript pages: $pages"
+          echo "$pages" > ../flat_pages.txt
       - name: Compile supplementary technical material
         run: |
           cd paper
           latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
           if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references' supplement.log; then exit 1; fi
-          pdfinfo supplement.pdf | grep Pages
+          pages="$(pdfinfo supplement.pdf | awk '/^Pages:/ {print $2}')"
+          echo "Supplement pages: $pages"
+          echo "$pages" > ../build/supplement_pages.txt
       - name: Verify flat package text equivalence
         run: |
           pdftotext -layout paper/main.pdf build/development.txt
           pdftotext -layout build/pmc_submission_flat/main.pdf build/flat.txt
           diff -u build/development.txt build/flat.txt
+          test "$(cat build/main_pages.txt)" = "$(cat build/flat_pages.txt)"
       - name: Build Elsevier Highlights Word file
         run: python -m src.build_highlights_docx
       - name: Create flat submission zip
@@ -107,17 +114,24 @@ jobs:
       - name: Commit final package
         run: |
           python - <<'PY'
-          import json,os
+          import datetime,json,os
           from pathlib import Path
           p=Path('research/manuscript_status.json')
           status=json.loads(p.read_text())
           status['stage']='pmc_submission_package_technical_ready'
+          status['date']=datetime.date.today().isoformat()
           status['technical_ready']=True
           status['submission_ready']=False
           status['tests_passed']=31
+          status['main_manuscript_pages']=int(Path('build/main_pages.txt').read_text().strip())
+          status['supplementary_pages']=int(Path('build/supplement_pages.txt').read_text().strip())
+          status['flat_submission_source_verified']=True
+          status['flat_and_development_pdf_text_equivalent']=True
           status['final_package_workflow_run']=int(os.environ['GITHUB_RUN_ID'])
+          status['final_package_source_sha']=os.environ['GITHUB_SHA']
           status['final_qa']={
               'status':'passed_on_current_sources',
+              'source_sha':os.environ['GITHUB_SHA'],
               'development_main_compiles':True,
               'flat_submission_main_compiles':True,
               'supplement_compiles':True,
@@ -137,10 +151,15 @@ jobs:
             exit 0
           fi
           git commit -m "Build final PMC submission package"
-          for attempt in 1 2 3; do
-            git pull --rebase origin main
-            if git push origin HEAD:main; then exit 0; fi
-            echo "Push raced with another commit; retrying ($attempt/3)"
-            sleep 2
-          done
-          exit 1
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Refusing package publish with dirty worktree"
+            git status --short
+            exit 1
+          fi
+          git fetch origin main
+          remote_sha="$(git rev-parse origin/main)"
+          if [ "$remote_sha" != "$GITHUB_SHA" ]; then
+            echo "main advanced from validated source SHA $GITHUB_SHA to $remote_sha; refusing to publish a stale package"
+            exit 1
+          fi
+          git push origin HEAD:main

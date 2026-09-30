@@ -2,7 +2,7 @@
 
 Target journal: **Pervasive and Mobile Computing**
 
-Use the current files on main; do not reconstruct the package from historical commits.
+Use only the files produced for the source SHA recorded in `../research/manuscript_status.json`; do not reconstruct the package from historical commits or mix artifacts from different runs.
 
 ## Upload files
 
@@ -25,6 +25,6 @@ Do not upload the raw GeoLife archive or third-party article full texts.
 
 ## Technical status
 
-The validated main and flat-source builds are both 28 pages and text-equivalent. The supplement is 5 pages. All 31 automated tests pass, and the final LaTeX quality gate has no unresolved references, undefined control sequences, oversized floats, or overfull boxes.
+Before upload, verify that `../research/manuscript_status.json` reports `technical_ready=true`, `data_status.refresh_required=false`, and a `final_package_source_sha` matching the manuscript source being submitted. The same record must report successful development/flat/supplement compilation, flat-source text equivalence, and ZIP-manifest verification. Page counts are taken from that validated build rather than copied from an older package.
 
-The repository remains technical_ready=true and submission_ready=false until the responsible authors complete the remaining declarations and approvals listed in AUTHOR_CONFIRMATION.md.
+`submission_ready` remains false until the responsible authors complete the declarations and approvals in `AUTHOR_CONFIRMATION.md`.
