@@ -100,12 +100,13 @@ jobs:
           cp paper/current_numbers.tex paper/review_numbers.tex \
              paper/data_driven_table.tex paper/dfbsp_table.tex \
              paper/robust_table.tex paper/robust_boundary_table.tex \
-             paper/related_work_table.tex paper/grid_sensitivity_table.tex \
+             paper/mechanism_comparison_table.tex paper/reviewer_stress_table.tex \
+             paper/grid_sensitivity_table.tex \
              build/tmc_submission/
           cp paper/figures/system_architecture.png build/tmc_submission/figures/
 
           python - <<'PY'
-          import hashlib, json, os
+          import hashlib, json, os, subprocess
           from pathlib import Path
           paths=[
               'data/manifest.json',
@@ -117,21 +118,32 @@ jobs:
               'configs/robust_boundary.json',
               'configs/data_driven_extension.json',
               'configs/recent_baselines.json',
+              'configs/tmc_reviewer_stress.json',
               'results/combined/analysis/summary.csv',
               'results/sensitivity/analysis/summary.csv',
               'results/robust_informed/analysis/summary.csv',
               'results/robust_boundary/analysis/summary.csv',
               'results/data_driven_extension/analysis/summary.csv',
               'results/recent_comparison/summary.csv',
+              'results/tmc_reviewer_stress/analysis/summary.csv',
+              'results/tmc_reviewer_stress/analysis/provenance.json',
               'paper/current_numbers.tex',
               'paper/review_numbers.tex',
               'paper/data_driven_table.tex',
               'paper/dfbsp_table.tex',
               'paper/robust_table.tex',
               'paper/robust_boundary_table.tex',
+              'paper/mechanism_comparison_table.tex',
+              'paper/reviewer_stress_table.tex',
               'paper/grid_sensitivity_table.tex',
+              'research/tmc_evidence_map.md',
           ]
-          record={'source_sha':os.environ['GITHUB_SHA'],'sha256':{}}
+          if os.environ.get('GITHUB_EVENT_NAME') == 'pull_request':
+              p=subprocess.run(['git','rev-parse','HEAD^2'],capture_output=True,text=True)
+              source_sha=p.stdout.strip() if p.returncode == 0 else os.environ['GITHUB_SHA']
+          else:
+              source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          record={'source_sha':source_sha,'sha256':{}}
           for p in paths:
               q=Path(p)
               if q.exists():

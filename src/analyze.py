@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from .geolife import effective_state_group_by_user
 
-METRICS=['hit','error_cells','grid_error_m','peak','logloss','covered95','credible95','entropy','prior_hit','raw_completion','coverage','reward','gate_us_p50','gate_us_p95','ece']
+METRICS=['hit','error_cells','error_m','peak','logloss','covered95','credible95','entropy','prior_hit','raw_completion','coverage','reward','gate_us_p50','gate_us_p95','ece']
 COLORS={'none':'#222222','random':'#0072B2','rate':'#E69F00','coarse':'#009E73','bsp':'#D55E00','positive_only':'#CC79A7','kl':'#56B4E9'}
 MARKERS={'none':'*','random':'o','rate':'s','coarse':'D','bsp':'^','positive_only':'x','kl':'P'}
 LABELS={'none':'No filter','random':'Random participation','rate':'Periodic limit','coarse':'Aligned task grid','bsp':'BSP','positive_only':'Success-only ablation','kl':'KL branch filter'}
@@ -19,11 +19,6 @@ def load(path):
             if k not in ['condition','scenario','method','attack','user']:
                 v=r[k]
                 r[k]=float('nan') if v in ('','None') else float(v)
-        # Historical frozen runs used the ambiguous name error_m. It is a
-        # distance between the true grid cell and posterior-maximizing grid
-        # cells, expressed in metres from grid geometry; it is not GPS/API error.
-        if 'grid_error_m' not in r and 'error_m' in r:
-            r['grid_error_m']=r['error_m']
     return rows
 
 def clusters(rows):

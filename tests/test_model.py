@@ -125,4 +125,39 @@ class ChannelTests(unittest.TestCase):
                 if psil2>1e-12:
                     silence_bad=update(b,mask,alpha,q2,False).max()>max(rho,prior)-1e-10
                 self.assertTrue(positive_bad or silence_bad)
+    def test_reset_preserves_distinct_attacker_prior(self):
+        client=np.full(4,.25)
+        attacker=np.array([.7,.1,.1,.1])
+        c=dict(delivery=1.,willing=1.,on_time=1.,move_true=0.,move_model=0.,side=2,
+               scenario='static',attack='fixed',method='none',param=1.,id='reset_prior',
+               client_prior=client.tolist(),attacker_prior=attacker.tolist(),reset_every=1,
+               legitimate_fraction=0.)
+        rects,masks=candidates(2);path=np.zeros(2,dtype=int)
+        _,events=simulate(c,7,0,path,rects,masks,2,2,True)
+        self.assertAlmostEqual(events[0]['attacker_prior_peak'],.7)
+        self.assertAlmostEqual(events[1]['attacker_prior_peak'],.7)
+
+    def test_location_dependent_availability_attacker_model(self):
+        alpha=[.2,.2,.9,.9]
+        c=dict(delivery=1.,willing=1.,on_time=1.,move_true=0.,move_model=0.,side=2,
+               scenario='static',attack='adaptive',method='bsp',param=.6,id='loc_alpha',
+               alpha_model=.55,attacker_alpha_by_cell=alpha,availability_by_cell=alpha,
+               legitimate_fraction=0.)
+        rects,masks=candidates(2);path=np.array([0,1,2,3])
+        out,_=simulate(c,9,0,path,rects,masks,4,2,False)
+        self.assertTrue(np.isfinite(out['hit']))
+        self.assertEqual(out['side'],2)
+
+    def test_nonstationary_path_and_two_step_probe_are_reproducible(self):
+        sched=[0.,1.,0.,1.,0.,1.]
+        p1=path_for(11,0,4,6,'walk',sched);p2=path_for(11,0,4,6,'walk',sched)
+        np.testing.assert_array_equal(p1,p2)
+        c=dict(delivery=.9,willing=.8,on_time=.9,move_true=.3,move_model=.3,side=4,
+               scenario='walk',attack='lookahead2',method='bsp',param=.2,id='lookahead',
+               legitimate_fraction=0.,lookahead_beam=6)
+        rects,masks=candidates(4)
+        out1,e1=simulate(c,12,0,path_for(12,0,4,5,'walk',.3),rects,masks,5,4,True)
+        out2,e2=simulate(c,12,0,path_for(12,0,4,5,'walk',.3),rects,masks,5,4,True)
+        self.assertEqual([x['rectangle'] for x in e1],[x['rectangle'] for x in e2])
+        self.assertAlmostEqual(out1['hit'],out2['hit'])
 if __name__=='__main__':unittest.main()
