@@ -115,6 +115,8 @@ def _lookahead2_probe(condition,belief,attacker,robust,masks,rects,slot,alpha_mo
 def simulate(condition,seed,user,path,rects,masks,slots,side,log):
     delivery=condition['delivery'];willing=condition['willing'];on_time=condition['on_time']
     alpha_true=delivery*willing*on_time
+    if condition.get('availability_by_cell') is not None:
+        alpha_true=float(np.mean(_alpha_vector(condition['availability_by_cell'],side*side)))
     alpha_model=condition.get('alpha_model',alpha_true)
     move_model=condition['move_model']
     method=condition['method'];param=condition['param'];attack=condition['attack']
@@ -271,7 +273,7 @@ def simulate(condition,seed,user,path,rects,masks,slots,side,log):
                small_opportunities=area_opp['small'],small_complete=area_done['small'],
                medium_opportunities=area_opp['medium'],medium_complete=area_done['medium'],
                large_opportunities=area_opp['large'],large_complete=area_done['large'],
-               raw_completion=complete/legit,coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
+               raw_completion=complete/legit if legit else float('nan'),coverage=len(done_cells)/len(op_cells) if op_cells else float('nan'),
                reward=complete,
                gate_us_p50=float(np.median(gate_times)),gate_us_p95=float(np.quantile(gate_times,.95)),
                cap_violations=cap_violations,attacker_local_cap_violations=attacker_local_cap_violations,
