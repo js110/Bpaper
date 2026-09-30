@@ -74,17 +74,61 @@ jobs:
           pages="$(pdfinfo supplement.pdf | awk '/^Pages:/ {print $2}')"
           echo "TMC supplement pages: $pages"
 
-      - name: Build preview artifact
+      - name: Record page counts
+        id: pagecounts
         run: |
-          mkdir -p build/tmc_preview
-          cp paper/main.pdf build/tmc_preview/TMC_manuscript.pdf
-          cp paper/supplement.pdf build/tmc_preview/TMC_supplement.pdf
-          cp paper/main.tex paper/supplement.tex paper/references.bib build/tmc_preview/
-          cp paper/current_numbers.tex paper/review_numbers.tex paper/data_driven_table.tex paper/dfbsp_table.tex build/tmc_preview/
-          cp -R paper/figures build/tmc_preview/
-          (cd build && zip -qr TMC_submission_preview.zip tmc_preview)
+          echo "main=$(pdfinfo paper/main.pdf | awk '/^Pages:/ {print $2}')" >> "$GITHUB_OUTPUT"
+          echo "supp=$(pdfinfo paper/supplement.pdf | awk '/^Pages:/ {print $2}')" >> "$GITHUB_OUTPUT"
+
+      - name: Build self-contained TMC submission package
+        run: |
+          rm -rf build/tmc_submission
+          mkdir -p build/tmc_submission/figures
+          cp paper/main.tex paper/supplement.tex paper/references.bib build/tmc_submission/
+          cp paper/current_numbers.tex paper/review_numbers.tex \
+             paper/data_driven_table.tex paper/dfbsp_table.tex \
+             paper/robust_table.tex paper/robust_boundary_table.tex \
+             build/tmc_submission/
+          cp paper/figures/system_architecture.png build/tmc_submission/figures/
+
+          cd build/tmc_submission
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
+          if grep -E 'Overfull|Float too large|Undefined control sequence|There were undefined references|Citation .* undefined|Reference .* undefined' main.log supplement.log; then
+            echo "Staged TMC source package quality gate failed"
+            exit 1
+          fi
+          main_pages="$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')"
+          supp_pages="$(pdfinfo supplement.pdf | awk '/^Pages:/ {print $2}')"
+          mv main.pdf TMC_manuscript.pdf
+          mv supplement.pdf TMC_supplement.pdf
+          latexmk -C main.tex
+          latexmk -C supplement.tex
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          root=Path('.')
+          manifest={
+              'journal':'IEEE Transactions on Mobile Computing',
+              'source_sha':os.environ['GITHUB_SHA'],
+              'main_source':'main.tex',
+              'supplement_source':'supplement.tex',
+              'main_pages':int(os.environ.get('MAIN_PAGES','0') or 0),
+              'supplement_pages':int(os.environ.get('SUPP_PAGES','0') or 0),
+              'files':sorted(str(p) for p in root.rglob('*') if p.is_file()),
+          }
+          Path('TMC_submission_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+          PY
+        env:
+          MAIN_PAGES: ${{ steps.pagecounts.outputs.main }}
+          SUPP_PAGES: ${{ steps.pagecounts.outputs.supp }}
+
+      - name: Create TMC submission archive
+        run: |
+          cd build
+          zip -qr TMC_submission_package.zip tmc_submission
 
       - uses: actions/upload-artifact@v4
         with:
-          name: tmc-submission-preview
-          path: build/TMC_submission_preview.zip
+          name: tmc-submission-package
+          path: build/TMC_submission_package.zip
