@@ -1,29 +1,45 @@
-# Manuscript source and submission bundle
+# IEEE TMC manuscript source
 
-The working manuscript targets *Pervasive and Mobile Computing* and uses Elsevier's `elsarticle` review layout.
+This branch targets *IEEE Transactions on Mobile Computing* and uses the IEEE Computer Society journal layout:
+
+    \\documentclass[10pt,journal,compsoc]{IEEEtran}
 
 Development build:
 
     latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-The repository keeps a convenient development layout, including the `figures/` subdirectory. Elsevier Editorial Manager does not process LaTeX submissions with subfolders, so the development folder itself should not be uploaded as the final LaTeX source package.
+The main manuscript is intentionally kept separate from supplement.tex. IEEE Computer Society supplemental material is submitted as a separate file and does not count toward the main-paper page limit.
 
-The final checkpoint workflow `.github/workflows/pmc-final-package.yml` builds a separate flat source package:
-- `PMC_submission_source.zip`: one-level LaTeX source and all referenced figures/tables;
-- `PMC_submission_manifest.json`: exact packaged-file manifest;
-- `highlights.docx`: Elsevier Highlights upload file generated from `highlights.txt`;
-- `main.pdf`: compiled review manuscript.
+## TMC length policy used by this branch
 
-The workflow independently compiles both the development source and the flat source, rejects unresolved references, undefined controls, overfull boxes, or oversized floats, and compares their extracted PDF text.
+- Regular-paper baseline: 12 formatted double-column pages, including references and any author biographies.
+- Maximum regular-paper submission length: 18 formatted pages.
+- The branch build fails above 18 pages and emits a warning above 12 pages.
+- Supplemental material is separate and not counted in the main manuscript page limit.
 
-Current scientific contents include nominal BSP, finite-model R-BSP, development/validation-derived R-BSP, asymmetric DF-BSP/RDF-BSP, informed-attacker and ambiguity-boundary stress tests, region-size-aware utility, and recent PML-T/PRIVIC-T task-channel comparisons. The ambiguity and disclosure-floor extensions are explicitly post-hoc and are not presented as independent confirmatory evidence.
+## Scientific organization
 
-Validation is source-specific. The final-package workflow records the validated source SHA, actual compiled page counts, test count, text-equivalence result, ZIP-membership check, and workflow run in `../research/manuscript_status.json`. Do not infer current technical readiness from an older PDF, ZIP, page count, or workflow run.
+The TMC version keeps six top-level sections:
 
-The intended manuscript inventory is six numbered sections (Introduction; Related Work; Proposed Framework; Privacy Guarantees and Robustness Analysis; Experimental Evaluation; Conclusion), one main figure, two main tables, 21 cited references, and the current automated test suite. Actual page counts are taken from the PDFs built by the final workflow.
+1. Introduction
+2. Related Work
+3. System Model and Branch-Safe Participation
+4. Robustness and Disclosure-Floor Analysis
+5. Evaluation
+6. Conclusion
 
-Full code, configurations, raw event logs, analyses, provenance, internal reviews, and reproduction notes are stored in the repository root. Third-party article full texts and the raw GeoLife archive are not part of the distributable submission source.
+The mobile-computing problem and observation boundary are made explicit early in the paper. Core mechanism definitions and guarantees stay in the main paper; comparator derivations, finite-model stress details, ambiguity-set construction details, and reproducibility material remain in the supplement unless page pressure requires further movement.
 
-Author-owned declarations remain separate in `AUTHOR_CONFIRMATION.md`. The repository must not claim final author approval, competing-interest status, CRediT roles, funder roles, data-use/ethics wording, or other submission declarations until the responsible authors confirm them.
+## Validation
+
+.github/workflows/tmc-build.yml runs on pushes to the tmc branch. It:
+
+- runs the full Python test suite;
+- installs the IEEE LaTeX publishers package;
+- compiles the main TMC manuscript and supplemental material;
+- rejects unresolved references, undefined commands, oversized/overfull layout problems, and an 18-page main-paper overflow;
+- packages a preview ZIP as a workflow artifact.
+
+The canonical scientific evidence remains the same model-input-isolated, window-weighted analysis used by the final PMC checkpoint. TMC conversion changes presentation and journal framing, not the underlying experimental record.
 
 Working repository: https://github.com/js110/Bpaper
