@@ -13,6 +13,18 @@ on:
       - 'results/**'
       - 'requirements-lock.txt'
       - '.github/workflows/tmc-build.yml'
+  pull_request:
+    branches: [tmc]
+    paths:
+      - 'paper/*.tex'
+      - 'paper/*.bib'
+      - 'paper/figures/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'data/**'
+      - 'results/**'
+      - 'requirements-lock.txt'
+      - '.github/workflows/tmc-build.yml'
   workflow_dispatch:
 
 concurrency:
