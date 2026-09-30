@@ -75,4 +75,18 @@ class PipelineTests(unittest.TestCase):
         self.assertLess(abs(fit_move_coarsened(paths,8)-.3),.04)
         static=np.vstack([path_for(9200,u,8,80,'static',0) for u in range(8)])
         self.assertEqual(fit_move_coarsened(static,8),0.0)
+    def test_identity_reset_preserves_distinct_client_and_attacker_priors(self):
+        side=2
+        rects,masks=candidates(side)
+        client_prior=[.7,.1,.1,.1]
+        attacker_prior=[.1,.1,.1,.7]
+        c=dict(delivery=.9,willing=.8,on_time=.9,move_model=0.0,method='bsp',param=.9,
+               attack='fixed',scenario='static',reset_every=1,client_prior=client_prior,
+               attacker_prior=attacker_prior,legitimate_fraction=1.0)
+        path=np.array([0,0])
+        _,events=simulate(c,9901,0,path,rects,masks,2,side,True)
+        for e in events:
+            self.assertAlmostEqual(e['prior_peak'],.7)
+            self.assertAlmostEqual(e['attacker_prior_peak'],.7)
+        self.assertNotEqual(int(np.argmax(client_prior)),int(np.argmax(attacker_prior)))
 if __name__=='__main__':unittest.main()
