@@ -16,6 +16,7 @@
 
 \author{Lili He, Sheng Jiang, Linghui Lyu, and Lei Zhang%
 \IEEEcompsocitemizethanks{%
+\IEEEcompsocthanksitem This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, the National Foreign Expert Key Support Project under Grant D2O25O185, and the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
 \IEEEcompsocthanksitem L. He, S. Jiang, L. Lyu, and L. Zhang are with the College of Information and Electronic Technology, Jiamusi University, Jiamusi 154007, China.
 \IEEEcompsocthanksitem Corresponding author: Lei Zhang (e-mail: 8213662@163.com).}}
 
@@ -293,9 +294,6 @@ The automated suite contains 31 tests. Core tests cover posterior branches, nomi
 
 \section{Conclusion}
 Sequential regional task outputs can reveal location despite local storage of precise coordinates, and probabilistic silence must be included in that analysis. BSP provides a maximal scalar gate for both posterior branches under explicit model assumptions, while R-BSP extends the construction to a finite model set. Development/validation-based model selection makes that set more defensible but reveals that strict robust posterior caps can be prohibitively conservative: the isolated replay experiment retains only \GeoStrictRet\% of opportunities. This is linked to a structural truthful-report floor that scalar thinning cannot remove. DF-BSP and RDF-BSP therefore expose a separate report-side threshold $\tau$ and recover measurable fine-region service while reporting, rather than hiding, exceedance of the original $\rho$ cap. At the illustrative $\tau=0.5$, robust replay filtering retains \GeoRDFSmall\% of small-region opportunities and \GeoRDFWeighted\% inverse-area-weighted utility, with a \GeoRDFBranch\% observed branch-cap violation rate and original BSP local-cap violations on \GeoRDFLocal\% of slots. The contribution is consequently a channel-specific framework for strict and explicitly relaxed participation filtering under finite model uncertainty, not a guarantee against arbitrary auxiliary knowledge or a complete mobile-crowdsensing privacy system.
-
-\section*{Acknowledgment}
-This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
