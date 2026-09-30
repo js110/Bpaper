@@ -4,7 +4,9 @@ on:
   push:
     branches: [tmc]
     paths:
-      - 'paper/**'
+      - 'paper/*.tex'
+      - 'paper/*.bib'
+      - 'paper/figures/**'
       - 'src/**'
       - 'tests/**'
       - 'data/**'
