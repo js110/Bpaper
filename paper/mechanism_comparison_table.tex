@@ -3,11 +3,11 @@
 Method & Protected / visible interface & Truthful report semantics & Main privacy object / assumption & Service semantics & Online control \\
 \midrule
 TMarkov~\cite{tmarkov} &
-Shares a mobility-aware predicted trajectory instead of the actual trajectory &
-Not a report/silence mechanism &
-Actual location/trajectory protected through mobility modeling and prediction &
-Crowdsourcing participation through predicted locations &
-Trajectory-model construction / prediction \\
+Mobility model constructs a $K$-anonymous candidate-location set / predicted trajectory instead of the actual trajectory &
+Threat model includes inference from accepted/rejected task locations; defense changes the shared-location interface rather than gating a visible binary outcome &
+Actual location/trajectory protected through mobility-aware anonymity and prediction &
+Crowdsourcing participation through predicted / anonymous candidate locations &
+Mobility prediction plus anonymity-set construction \\
 
 iTAM / anonymous matching~\cite{itam2021,shutask2018} &
 Paillier-based privacy-preserving task assignment for workers and requesters &
@@ -29,6 +29,13 @@ No task-report semantics are prescribed &
 KL divergence between designer prior and posterior; ex-post/ex-ante privacy constraints &
 Mechanism-design welfare/profit tradeoff &
 Privacy-constrained mechanism design \\
+
+PML-T~\cite{pml2024} &
+Adapted truthful binary task channel with state-dependent report likelihoods &
+Yes in the adapter; positive reports remain restricted to eligible states &
+Pointwise maximal-leakage constraints on each output relative to its marginal; adapter-specific semantics &
+Maximizes report probability under the adapted task channel &
+Per-task constrained optimization, validated against a general LP \\
 
 PRIVIC~\cite{privic2024} &
 Randomized released location channel &
