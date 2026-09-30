@@ -11,6 +11,8 @@ on:
       - 'tests/**'
       - 'data/**'
       - 'results/**'
+      - 'configs/**'
+      - 'research/tmc_evidence_map.md'
       - 'requirements-lock.txt'
       - '.github/workflows/tmc-build.yml'
   pull_request:
@@ -23,6 +25,8 @@ on:
       - 'tests/**'
       - 'data/**'
       - 'results/**'
+      - 'configs/**'
+      - 'research/tmc_evidence_map.md'
       - 'requirements-lock.txt'
       - '.github/workflows/tmc-build.yml'
   workflow_dispatch:
@@ -119,8 +123,11 @@ jobs:
               'configs/data_driven_extension.json',
               'configs/recent_baselines.json',
               'configs/tmc_reviewer_stress.json',
+              'configs/reset_sensitivity_postfix.json',
               'results/combined/analysis/summary.csv',
               'results/sensitivity/analysis/summary.csv',
+              'results/reset_sensitivity_postfix/rows.csv',
+              'results/reset_sensitivity_postfix/legacy_comparison.json',
               'results/robust_informed/analysis/summary.csv',
               'results/robust_boundary/analysis/summary.csv',
               'results/data_driven_extension/analysis/summary.csv',
