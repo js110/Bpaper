@@ -80,7 +80,7 @@ class PipelineTests(unittest.TestCase):
         rects,masks=candidates(side)
         client_prior=[.7,.1,.1,.1]
         attacker_prior=[.1,.1,.1,.7]
-        c=dict(delivery=.9,willing=.8,on_time=.9,move_model=0.0,method='bsp',param=.9,
+        c=dict(id='reset_distinct_priors',delivery=.9,willing=.8,on_time=.9,move_model=0.0,method='bsp',param=.9,
                attack='fixed',scenario='static',reset_every=1,client_prior=client_prior,
                attacker_prior=attacker_prior,legitimate_fraction=1.0)
         path=np.array([0,0])
