@@ -43,12 +43,12 @@ The same ambiguity set is then evaluated against correct attacker models that ar
 
 \section{Additional Model and Probe Sensitivity}
 The original synthetic sensitivity study includes $4\times4$ and $16\times16$ grids in addition to the $8\times8$ main setting. For BSP at $\rho=0.1$, the corresponding MAP-cell hit rates are 7.54\% and 2.57\%, with simulated opportunity retention 10.85\% and 81.03\%, respectively. Because changing grid resolution also changes cell size, prior granularity, and the task-region library, these figures characterize resolution sensitivity rather than physical localization accuracy.
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \caption{Grid-resolution sensitivity for synthetic BSP at $\rho=0.1$. These rows are diagnostics because the task-region library changes with the grid.}
 \label{tab:grid-sensitivity}
 \input{grid_sensitivity_table}
-\end{table}
+\end{table*}
 
 The post-review stress configuration additionally violates two baseline modeling assumptions. In the spatial-availability stress, the true and attacker availability probability is $0.35$ on one half of the grid and $0.85$ on the other, while the client continues to use scalar $\alpha=0.648$. In the nonstationary-mobility stress, the true and attacker movement probability alternates between $0.05$ and $0.8$ every eight slots while the client uses stationary $0.3$. A separate all-probe condition compares one-step mutual-information greedy selection with a two-step beam look-ahead. The latter is a deeper planning heuristic, not an optimal long-horizon adversary.
 
