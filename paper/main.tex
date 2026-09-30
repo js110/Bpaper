@@ -66,10 +66,10 @@ Bayesian privacy measures prior-to-posterior change~\cite{bayesian}. Adaptive di
 
 \section{System Model and Branch-Safe Participation}
 \label{sec:model}\label{sec:method}
-Figure~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
+Fig.~\ref{fig:architecture} separates private sensing state from the information available to the platform. Public task metadata enters both the eligibility check and the participation filter. The same observable outcome updates the client's declared-model belief and the attacker's inference.
 \begin{figure*}[t]
 \centering\includegraphics[width=0.96\textwidth]{figures/system_architecture.png}
-\caption{System architecture and observation boundary. A linkable account produces a truthful report or silence at a common deadline. Normal tasks are exogenous, while designated adaptive probes are selected from public history. The BSP gate uses predicted belief and task metadata; true location is used locally for eligibility. The platform does not directly observe true location, task-delivery status, or the gate coin. This is a conceptual schematic of the stated system model, not an experimental result.}
+\caption{System model and observation boundary. The client uses true location only for local eligibility and computes the BSP gate from public history and task metadata. The platform observes only a linkable truthful report or silence at the common deadline; true location, delivery state, willingness, completion state, and the private gate coin remain hidden. Adaptive probes are selected from public history.}
 \label{fig:architecture}
 \end{figure*}
 \subsection{System and Observation Model}
@@ -255,7 +255,7 @@ Table~\ref{tab:data-driven} first shows that a defensible model-set construction
 
 \begin{table*}[t]
 \centering
-\caption{Post-hoc GeoLife data-driven robustness at $\rho=0.1$. The replay attacker uses the development-only smoothed population prior and validation point mobility estimate. ``Local viol.'' tests the attacker's pre-output local cap. Weighted retention is Eq.~\eqref{eq:weighted-utility}; small retention covers 1--8-cell opportunities.}
+\caption{GeoLife data-driven robustness at $\rho=0.1$. The attacker uses the development-derived population prior and validation mobility estimate. ``Local viol.'' is the pre-output local-cap violation rate; small retention covers 1--8-cell opportunities.}
 \label{tab:data-driven}{\scriptsize\setlength{\tabcolsep}{3pt}\input{data_driven_table}}
 \end{table*}
 
@@ -266,7 +266,7 @@ The stronger replay experiment shows the same trade-off under prior and mobility
 
 \begin{table*}[t]
 \centering
-\caption{Disclosure-floor-aware service frontier at $\rho=0.1$. ``BSP viol.'' reports violation of the original BSP local cap $\max\{\rho,\|b\|_\infty\}$; ``Branch viol.'' reports violation of the declared asymmetric caps in Eq.~\eqref{eq:dfcap}. Weighted and small-region retention emphasize fine-grained service. RDF-BSP uses the two validation-selected models.}
+\caption{Disclosure-floor-aware service frontier at $\rho=0.1$. ``BSP viol.'' uses the original BSP local cap; ``Branch viol.'' uses the asymmetric caps in Eq.~\eqref{eq:dfcap}. RDF-BSP uses the two validation-selected models.}
 \label{tab:dfbsp}{\scriptsize\setlength{\tabcolsep}{3pt}\input{dfbsp_table}}
 \end{table*}
 
@@ -294,7 +294,7 @@ The automated suite contains 31 tests. Core tests cover posterior branches, nomi
 \section{Conclusion}
 Sequential regional task outputs can reveal location despite local storage of precise coordinates, and probabilistic silence must be included in that analysis. BSP provides a maximal scalar gate for both posterior branches under explicit model assumptions, while R-BSP extends the construction to a finite model set. Development/validation-based model selection makes that set more defensible but reveals that strict robust posterior caps can be prohibitively conservative: the isolated replay experiment retains only \GeoStrictRet\% of opportunities. This is linked to a structural truthful-report floor that scalar thinning cannot remove. DF-BSP and RDF-BSP therefore expose a separate report-side threshold $\tau$ and recover measurable fine-region service while reporting, rather than hiding, exceedance of the original $\rho$ cap. At the illustrative $\tau=0.5$, robust replay filtering retains \GeoRDFSmall\% of small-region opportunities and \GeoRDFWeighted\% inverse-area-weighted utility, with a \GeoRDFBranch\% observed branch-cap violation rate and original BSP local-cap violations on \GeoRDFLocal\% of slots. The contribution is consequently a channel-specific framework for strict and explicitly relaxed participation filtering under finite model uncertainty, not a guarantee against arbitrary auxiliary knowledge or a complete mobile-crowdsensing privacy system.
 
-\section*{Acknowledgments}
+\section*{Acknowledgment}
 This work was supported in part by the Heilongjiang Provincial University Teacher Scientific Research Business Fee under Grant 2018-KYYWF0941, in part by the Heilongjiang Provincial Natural Science Foundation Joint Fund Cultivation Project under Grant PL2024F002, in part by the National Foreign Expert Key Support Project under Grant D2O25O185, and in part by the Heilongjiang Provincial Undergraduate University Excellent Young Teacher Fundamental Research Support Plan under Grant YQJH2024239.
 
 \bibliographystyle{IEEEtran}
