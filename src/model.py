@@ -43,7 +43,16 @@ def predict(b,side,move):
 
 
 def update(b,mask,alpha,q,reported):
-    likelihood=alpha*q*np.asarray(mask,dtype=float)
+    mask=np.asarray(mask,dtype=float)
+    alpha=np.asarray(alpha,dtype=float)
+    q=np.asarray(q,dtype=float)
+    likelihood=alpha*q*mask
+    if likelihood.shape!=mask.shape:
+        try: likelihood=np.broadcast_to(likelihood,mask.shape)
+        except ValueError as e: raise ValueError('alpha/q shape incompatible with state mask') from e
+    if np.any(likelihood<0) or np.any(likelihood>1+1e-12) or not np.all(np.isfinite(likelihood)):
+        raise ValueError('invalid observation likelihood')
+    likelihood=np.clip(likelihood,0,1)
     return normalize(b*(likelihood if reported else 1-likelihood))
 
 
@@ -179,7 +188,13 @@ def posterior_metrics(b,true,side):
 
 class PublicBelief:
     def __init__(self,side,move,alpha):
-        self.side=side;self.move=move;self.alpha=alpha
+        self.side=side;self.move=move
+        a=np.asarray(alpha,dtype=float)
+        if a.ndim==0:self.alpha=float(a)
+        elif a.shape==(side*side,):self.alpha=a.copy()
+        else:raise ValueError('alpha must be scalar or one value per state')
+        if np.any(np.asarray(self.alpha)<0) or np.any(np.asarray(self.alpha)>1) or not np.all(np.isfinite(np.asarray(self.alpha))):
+            raise ValueError('alpha values must be in [0,1]')
         self.b=np.full(side*side,1/(side*side));self.seen=set()
     def observe(self,task,observation,q):
         if task.task_id!=observation.task_id or task.slot!=observation.slot:
