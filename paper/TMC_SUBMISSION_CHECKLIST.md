@@ -44,4 +44,4 @@ Before submission, the responsible authors must confirm:
 5. funding roles and acknowledgments;
 6. any required GeoLife secondary-data/ethics wording;
 7. CRediT or other contribution metadata if requested;
-8. any IEEE disclosure requirements that are not technical manuscript content.
+8. ORCID identifiers for all authors, as required by IEEE journals for peer-review submission;\n9. any IEEE disclosure requirements that are not technical manuscript content.
