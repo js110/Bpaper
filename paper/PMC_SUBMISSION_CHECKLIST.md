@@ -11,17 +11,19 @@ Current canonical branch: **main**.
 - The flat Editorial Manager source archive contains no subfolders.
 - highlights.txt is the editable source for highlights.docx.
 
-## Current technical state
+## Final technical acceptance criteria
 
-- Main manuscript: 28 pages.
-- Flat source rebuild: 28 pages and text-equivalent to the development build.
-- Supplement: 5 pages.
-- References: 21 cited entries.
-- Automated tests: 31.
-- No final unresolved references, undefined control sequences, oversized floats, or overfull boxes.
-- Robustness is explicitly limited to the declared finite model set.
-- The GeoLife ambiguity-set/disclosure-floor extension is explicitly post-hoc.
-- DF-BSP/RDF-BSP use a report-side threshold; the original BSP local cap remains the reference strict contract and silence is not relaxed.
+The final package is acceptable for upload only when `../research/manuscript_status.json` records all of the following for the current source SHA:
+
+- `technical_ready=true` and `data_status.refresh_required=false`;
+- all 31 automated tests pass;
+- development manuscript, flat submission source, and supplement compile successfully;
+- development and flat PDFs are text-equivalent and have the same recorded page count;
+- the flat ZIP matches its manifest;
+- no unresolved references, undefined control sequences, oversized floats, or overfull boxes are reported by the final quality gate;
+- robustness remains explicitly limited to the declared finite model set;
+- the GeoLife ambiguity-set/disclosure-floor extension remains explicitly post-hoc;
+- DF-BSP/RDF-BSP retain the original BSP cap for silence and use a separate report-side threshold.
 
 ## Validation workflows
 
