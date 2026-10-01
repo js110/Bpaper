@@ -2,6 +2,10 @@
 
 This branch contains the IEEE Transactions on Mobile Computing version of the BSP/R-BSP/DF-BSP study. The finalized Elsevier/PMC version is preserved on the `pmc` branch. All TMC manuscript and submission-format changes are isolated to the `tmc` branch.
 
+## Canonical experimental artifact
+
+The independently usable experimental code and the selected frozen numerical evidence for the TMC manuscript have been exported to [Branch-Safe (fixed artifact commit)](https://github.com/js110/Branch-Safe/tree/2dfaeeced5bb162203fa689b482d229371a17671). This `Bpaper/tmc` repository remains the manuscript and complete historical event-log archive. The export's source baseline is commit `2cc94ff6e7c4696dc364392dc19c8137d0cb7e65`; the new repository includes an evidence map and a Git blob SHA manifest so a reader can audit what was transferred without guessing from the moving branch.
+
 ## Current manuscript
 
 - Target journal: *IEEE Transactions on Mobile Computing*.

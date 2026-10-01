@@ -1,5 +1,7 @@
 # TMC evidence-to-manuscript map
 
+**Canonical code/evidence artifact (version pinned):** [js110/Branch-Safe at `2dfaeeced5bb162203fa689b482d229371a17671`](https://github.com/js110/Branch-Safe/tree/2dfaeeced5bb162203fa689b482d229371a17671). The selected frozen aggregates, per-run rows, configurations, and testing source are exported there with `docs/source_manifest.json` documenting byte-identical copies from original commit `2cc94ff6e7c4696dc364392dc19c8137d0cb7e65`. Complete event-level JSONL logs, original processed-coordinate caches and the manuscript build remain at the original Bpaper source baseline; the public code artifact does not claim to duplicate those larger archives.
+
 This file records the source-of-truth path from frozen experiment evidence to the quantitative material used in the TMC manuscript. It is intended to prevent manual number drift; it is not an additional statistical analysis.
 
 | Manuscript item | Generated/source file | Evidence / configuration | Provenance / integrity record |
