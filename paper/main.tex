@@ -78,7 +78,7 @@ Taken together, these works show why the observation interface must be made expl
 \label{sec:model}\label{sec:method}
 The distinction above suggests the central modeling requirement: the client's private sensing state must be separated from the transcript available to the platform. Fig.~\ref{fig:architecture} makes this boundary explicit. Public task metadata enters both the local eligibility check and the participation filter, while the same observable report/silence outcome updates the client's declared-model belief and the attacker's inference.
 \begin{figure*}[t]
-\centering\includegraphics[width=0.96\textwidth]{figures/system_architecture.eps}
+\centering\includegraphics[width=0.96\textwidth]{figures/system_architecture.jpg}
 \caption{System model and observation boundary. The client uses true location only for local eligibility and computes the BSP-family gate from declared-model belief(s), public history, and task metadata. The platform observes only a linkable truthful report or silence at the common deadline; true location, delivery state, willingness, completion state, and the private gate coin remain hidden. Adaptive probes are selected from public history.}
 \label{fig:architecture}
 \end{figure*}

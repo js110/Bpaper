@@ -107,7 +107,7 @@ jobs:
              paper/mechanism_comparison_table.tex paper/reviewer_stress_table.tex \
              paper/grid_sensitivity_table.tex \
              build/tmc_submission/
-          cp paper/figures/*.eps build/tmc_submission/figures/
+          cp paper/figures/*.eps paper/figures/system_architecture.jpg build/tmc_submission/figures/
 
           python - <<'PY'
           import hashlib, json, os, subprocess
