@@ -105,7 +105,7 @@ jobs:
              paper/data_driven_table.tex paper/dfbsp_table.tex \
              paper/robust_table.tex paper/robust_boundary_table.tex \
              paper/mechanism_comparison_table.tex paper/reviewer_stress_table.tex \
-             paper/grid_sensitivity_table.tex \
+             paper/grid_sensitivity_table.tex paper/recent_matched_table.tex \
              build/tmc_submission/
           cp paper/figures/*.eps paper/figures/system_architecture.jpg build/tmc_submission/figures/
 
@@ -143,6 +143,7 @@ jobs:
               'paper/mechanism_comparison_table.tex',
               'paper/reviewer_stress_table.tex',
               'paper/grid_sensitivity_table.tex',
+              'paper/recent_matched_table.tex',
               'research/tmc_evidence_map.md',
           ]
           if os.environ.get('GITHUB_EVENT_NAME') == 'pull_request':

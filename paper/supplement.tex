@@ -26,6 +26,15 @@ PRIVIC learns a noisy location channel through Blahut--Arimoto and incremental B
 
 The Bayesian-privacy comparator constrains each positive-probability output by \(D_{\mathrm{KL}}(b^y\|b)\le\kappa\)~\cite{bayesian}. The successful-report divergence is determined by task support, while the silence bound is solved by bisection. It is used as a per-output diagnostic rather than as a cumulative session guarantee.
 
+For transparency, Table~\ref{tab:recent-matched} reports the matched-retention comparison at target simulated opportunity retention 0.5 across all four mobility settings. These operating points are selected by the same post-hoc envelope interpolation used in the main text; the intervals therefore describe that exploratory selection procedure rather than an independently tuned policy.
+
+\begin{table*}[t]
+\centering\small
+\caption{Exploratory matched-retention comparison at target simulated opportunity retention 0.5. \emph{Difference} is BSP MAP hit rate minus comparator MAP hit rate; negative values favor BSP for this metric.}
+\label{tab:recent-matched}
+\input{recent_matched_table}
+\end{table*}
+
 \section{Robustness Boundary and Additional Stress Tests}
 \subsection{Finite-Model Boundary}
 The hand-grid ambiguity set uses \(v\in\{0.05,0.3,0.8\}\) and \(\alpha\in\{0.3,0.648,0.9\}\). Twenty new synthetic seeds, four users per seed, and 48 slots yield 80 trajectories per reported row at a fixed operating point. When the informed attacker's exact generating model is contained in the set, R-BSP records no local-cap violation in the reported in-set conditions, as expected from the finite-set construction, while retaining about 39.7\% of externally completable normal-task opportunities.
