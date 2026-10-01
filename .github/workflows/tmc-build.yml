@@ -57,7 +57,7 @@ jobs:
       - name: Install IEEE LaTeX and PDF tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-publishers texlive-fonts-recommended poppler-utils zip
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-publishers texlive-fonts-recommended texlive-font-utils ghostscript poppler-utils zip
 
       - name: Compile TMC manuscript
         run: |
@@ -107,7 +107,7 @@ jobs:
              paper/mechanism_comparison_table.tex paper/reviewer_stress_table.tex \
              paper/grid_sensitivity_table.tex \
              build/tmc_submission/
-          cp paper/figures/system_architecture.png build/tmc_submission/figures/
+          cp paper/figures/*.eps build/tmc_submission/figures/
 
           python - <<'PY'
           import hashlib, json, os, subprocess
