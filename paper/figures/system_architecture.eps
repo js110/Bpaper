@@ -1,0 +1,71 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: 0 0 1000 580
+%%LanguageLevel: 2
+%%Pages: 1
+%%EndComments
+/Times-Roman findfont 12 scalefont setfont
+/cshow { dup stringwidth pop 2 div neg 0 rmoveto show } bind def
+/rshow { dup stringwidth pop neg 0 rmoveto show } bind def
+/box { /h exch def /w exch def /y exch def /x exch def newpath x y moveto w 0 rlineto 0 h rlineto w neg 0 rlineto closepath 1 setgray fill 0 setgray 1.2 setlinewidth stroke } bind def
+/arrow { /y2 exch def /x2 exch def /y1 exch def /x1 exch def newpath x1 y1 moveto x2 y2 lineto 1.2 setlinewidth stroke /ang y2 y1 sub x2 x1 sub atan def gsave x2 y2 translate ang rotate newpath 0 0 moveto -9 4 lineto -9 -4 lineto closepath fill grestore } bind def
+/line { newpath moveto lineto stroke } bind def
+0.96 setgray 20 25 590 525 rectfill 0 setgray 1.5 setlinewidth 20 25 590 525 rectstroke
+0.985 setgray 635 25 345 525 rectfill 0 setgray 1.5 setlinewidth 635 25 345 525 rectstroke
+[6 5] 0 setdash newpath 620 10 moveto 620 570 lineto stroke [] 0 setdash
+/Times-Bold findfont 20 scalefont setfont 315 525 moveto (CLIENT DEVICE) cshow
+/Times-Bold findfont 18 scalefont setfont 807 525 moveto (PLATFORM / ADVERSARY) cshow
+/Times-Bold findfont 12 scalefont setfont 620 558 moveto (Observation boundary) cshow
+230 440 190 55 box
+/Times-Bold findfont 12 scalefont setfont 325 474.65 moveto (Local sensing) cshow
+/Times-Roman findfont 9 scalefont setfont 325 454.85 moveto (True location stays local) cshow
+180 345 300 62 box
+/Times-Bold findfont 12 scalefont setfont 330 384.06 moveto (Eligibility + success process) cshow
+/Times-Roman findfont 9 scalefont setfont 330 361.74 moveto (Hidden states: D_t, W_t, L_t) cshow
+45 220 170 62 box
+/Times-Bold findfont 12 scalefont setfont 130 259.06 moveto (Declared-model belief\(s\)) cshow
+/Times-Roman findfont 9 scalefont setfont 130 236.74 moveto (Predicted from public history) cshow
+275 215 215 68 box
+/Times-Bold findfont 12 scalefont setfont 382.5 257.84000000000003 moveto (BSP-family participation gate) cshow
+/Times-Roman findfont 9 scalefont setfont 382.5 233.36 moveto (Computes q_t from belief + task) cshow
+300 125 190 58 box
+/Times-Bold findfont 12 scalefont setfont 395 161.54 moveto (Private randomization) cshow
+/Times-Roman findfont 9 scalefont setfont 395 140.66 moveto (G_t ~ Bernoulli\(q_t\)) cshow
+485 125 115 58 box
+/Times-Bold findfont 12 scalefont setfont 542.5 161.54 moveto (Outcome) cshow
+/Times-Roman findfont 9 scalefont setfont 542.5 140.66 moveto (1_S D_t W_t L_t G_t) cshow
+455 60 145 45 box
+/Times-Bold findfont 12 scalefont setfont 527.5 88.35 moveto (Common-deadline release) cshow
+/Times-Roman findfont 9 scalefont setfont 527.5 72.15 moveto (Report or silence) cshow
+705 405 210 62 box
+/Times-Bold findfont 12 scalefont setfont 810 444.06 moveto (Normal tasks + adaptive probes) cshow
+/Times-Roman findfont 9 scalefont setfont 810 421.74 moveto (Public task metadata) cshow
+705 170 210 62 box
+/Times-Bold findfont 12 scalefont setfont 810 209.06 moveto (Bayesian inference) cshow
+/Times-Roman findfont 9 scalefont setfont 810 186.74 moveto (Linkable account history) cshow
+325 440 325 407 arrow
+705 435 480 375 arrow
+/Times-Roman findfont 9 scalefont setfont 585 420 moveto (Task region, sampling slot, and deadline) cshow
+690 395 490 250 arrow
+/Times-Roman findfont 9 scalefont setfont 585 330 moveto (Task metadata) cshow
+215 250 275 250 arrow
+/Times-Roman findfont 9 scalefont setfont 245 264 moveto (Predicted belief) cshow
+382 215 382 183 arrow
+/Times-Roman findfont 9 scalefont setfont 440 194 moveto (Gate probability q_t) cshow
+450 345 535 183 arrow
+/Times-Roman findfont 9 scalefont setfont 510 285 moveto (Eligibility + D_t W_t L_t) cshow
+490 154 485 154 arrow
+/Times-Roman findfont 9 scalefont setfont 500 169 moveto (Private coin G_t) cshow
+542 125 528 105 arrow
+600 82 705 201 arrow
+/Times-Roman findfont 9 scalefont setfont 650 132 moveto (Report or silence) cshow
+915 200 950 200 arrow
+newpath 950 200 moveto 950 436 lineto 915 436 lineto stroke
+/Times-Roman findfont 9 scalefont setfont 946 320 moveto (Choose next probe) rshow
+newpath 705 201 moveto 650 201 lineto 650 42 lineto 130 42 lineto 130 220 lineto stroke
+130 42 130 220 arrow
+/Times-Roman findfont 9 scalefont setfont 330 48 moveto (Public outcome update) cshow
+/Times-Roman findfont 9 scalefont setfont 335 315 moveto (Gate depends on declared-model belief\(s\), not true location) cshow
+/Times-Roman findfont 9 scalefont setfont 807 115 moveto (Platform does not observe true location, D_t/W_t/L_t,) cshow
+/Times-Roman findfont 9 scalefont setfont 807 100 moveto (or private gate coin G_t.) cshow
+showpage
+%%EOF
