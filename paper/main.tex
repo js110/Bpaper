@@ -280,16 +280,9 @@ A separate boundary run fixes the same model set and changes the correct attacke
 \subsection{Sensitivity Beyond the Baseline Model}
 Finite-set robustness still leaves a second question: how sensitive is the mechanism to assumptions that are not represented in the ambiguity set? We first examine discretization. The original sensitivity study varies the grid resolution in the synthetic walk setting. With BSP at $\rho=0.1$, the $4\times4$ grid gives a 7.54\% MAP-cell hit rate and 10.85\% simulated opportunity retention, whereas the $16\times16$ grid gives 2.57\% hit and 81.03\% retention. These numbers are not directly comparable as physical localization errors because changing the grid changes the cell size, state-space prior, and task library. They instead show that the privacy--retention frontier is resolution dependent.
 
-Table~\ref{tab:reviewer-stress} adds targeted post-review stresses. Under a synthetic spatial availability field ($0.35$ on one half of the grid and $0.85$ on the other), the client still uses scalar $\alpha=0.648$ while the attacker knows the spatial field. BSP then violates the attacker's local cap on 6.56\% of slots; the nine-model R-BSP reduces, but does not eliminate, the rate to 0.47\%. When the true/attacker movement probability alternates between $0.05$ and $0.8$ every eight slots while the client remains stationary at $0.3$, BSP records 2.34\% local-cap violations and R-BSP records none in this finite sample. These results are deliberate model-outside-set stresses and do not extend the theorem.
+Additional targeted post-review stresses are summarized in full in the Supplementary Material. Under a synthetic spatial availability field ($0.35$ on one half of the grid and $0.85$ on the other), the client still uses scalar $\alpha=0.648$ while the attacker knows the spatial field. BSP then violates the attacker's local cap on 6.56\% of slots; the nine-model R-BSP reduces, but does not eliminate, the rate to 0.47\%. When the true/attacker movement probability alternates between $0.05$ and $0.8$ every eight slots while the client remains stationary at $0.3$, BSP records 2.34\% local-cap violations and R-BSP records none in this finite sample. These results are deliberate model-outside-set stresses and do not extend the theorem.
 
 We also replace every normal task by a probe and compare the main one-step mutual-information greedy rule with a two-step beam look-ahead that scores current information gain plus the branch-probability-weighted best next-slot gain. In this tested mismatch, the deeper heuristic does \emph{not} dominate the one-step rule: BSP local-cap violations are 25.47\% for one-step greedy and 14.22\% for the two-step heuristic, with similar MAP hit rates (9.04\% and 9.23\%). R-BSP records no local-cap violation for either heuristic. Thus the additional test broadens task-planning sensitivity but still does not establish protection against an optimal long-horizon attacker.
-
-\begin{table*}[t]
-\centering
-\caption{Targeted post-review stress tests at $\rho=0.1$. \textit{Local viol.} is measured under the attacker's model. Opportunity retention is undefined for the all-probe planning rows. These are exploratory synthetic stresses, not production-task measurements.}
-\label{tab:reviewer-stress}
-{\scriptsize\setlength{\tabcolsep}{4pt}\input{reviewer_stress_table}}
-\end{table*}
 
 \subsection{Data-Driven Robustness}
 \label{sec:data-driven-results}
