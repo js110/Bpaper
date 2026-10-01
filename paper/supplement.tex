@@ -17,7 +17,7 @@
 
 \maketitle
 
-The main manuscript develops the mechanisms and primary evidence; this supplement provides the derivations and audit detail needed to interpret those results. It covers comparator adaptations and validation, finite-model robustness and outside-set boundaries, additional model and probe sensitivity checks, the data-driven ambiguity-set construction, and reproducibility records. No additional primary claim is introduced here: the GeoLife replay remains exploratory, and the robustness guarantee remains explicitly finite-model.
+The main manuscript develops the mechanisms and primary evidence; this supplement collects the supporting derivations, complete stress-test tables, and audit detail needed to interpret those results without interrupting the main narrative. It is organized around comparator validation, robustness boundaries and additional stresses, data-driven ambiguity-set construction, and reproducibility/provenance. No additional primary claim is introduced here: the GeoLife replay remains exploratory, and the robustness guarantee remains explicitly finite-model.
 
 \section{Comparator Adaptations and Validation}
 For the pointwise-maximal-leakage comparator, let \(l_i=\Pr(Y=1\mid X=i)\) and \(m=\sum_i b_i l_i\), with \(0\le l_i\le\alpha\mathbf{1}\{i\in S\}\). The task-channel specialization maximizes report probability subject to the published pointwise leakage constraints \(l_i\le e^\epsilon m\) and \(1-l_i\le e^\epsilon(1-m)\) for every state with positive prior mass~\cite{pml2024}. Randomized instances are checked against a general linear program. This is a task-channel specialization rather than a reproduction of every component of the original application.
@@ -26,7 +26,8 @@ PRIVIC learns a noisy location channel through Blahut--Arimoto and incremental B
 
 The Bayesian-privacy comparator constrains each positive-probability output by \(D_{\mathrm{KL}}(b^y\|b)\le\kappa\)~\cite{bayesian}. The successful-report divergence is determined by task support, while the silence bound is solved by bisection. It is used as a per-output diagnostic rather than as a cumulative session guarantee.
 
-\section{Finite-Model Robustness and Boundary Characterization}
+\section{Robustness Boundary and Additional Stress Tests}
+\subsection{Finite-Model Boundary}
 The hand-grid ambiguity set uses \(v\in\{0.05,0.3,0.8\}\) and \(\alpha\in\{0.3,0.648,0.9\}\). Twenty new synthetic seeds, four users per seed, and 48 slots yield 80 trajectories per reported row at a fixed operating point. When the informed attacker's exact generating model is contained in the set, R-BSP records no local-cap violation in the reported in-set conditions, as expected from the finite-set construction, while retaining about 39.7\% of externally completable normal-task opportunities.
 \begin{table*}[t]
 \centering\small
@@ -41,7 +42,7 @@ Having verified the in-set construction, we next test where it ceases to apply. 
 \input{robust_boundary_table}
 \end{table*}
 
-\section{Additional Model and Probe Sensitivity}
+\subsection{Grid, Process, and Probe Sensitivity}
 The original synthetic sensitivity study includes $4\times4$ and $16\times16$ grids in addition to the $8\times8$ main setting. For BSP at $\rho=0.1$, the corresponding MAP-cell hit rates are 7.54\% and 2.57\%, with simulated opportunity retention 10.85\% and 81.03\%, respectively. Because changing grid resolution also changes cell size, prior granularity, and the task-region library, these figures characterize resolution sensitivity rather than physical localization accuracy.
 \begin{table*}[t]
 \centering\small
@@ -52,6 +53,8 @@ The original synthetic sensitivity study includes $4\times4$ and $16\times16$ gr
 
 Grid resolution changes the representation itself; the next stresses instead perturb the process assumptions while keeping the nominal client model fixed. The post-review configuration deliberately violates two baseline assumptions. In the spatial-availability stress, the true and attacker availability probability is $0.35$ on one half of the grid and $0.85$ on the other, while the client continues to use scalar $\alpha=0.648$. In the nonstationary-mobility stress, the true and attacker movement probability alternates between $0.05$ and $0.8$ every eight slots while the client uses stationary $0.3$. A separate all-probe condition compares one-step mutual-information greedy selection with a two-step beam look-ahead. The latter is a deeper planning heuristic, not an optimal long-horizon adversary.
 
+The main manuscript reports the key stress-test values in prose; the complete quantitative summary is retained here to avoid duplicating the same table in both documents.
+
 \begin{table*}[t]
 \centering\small
 \caption{Targeted post-review stress tests at $\rho=0.1$. Local-cap violations are evaluated under the attacker's model. Opportunity retention is undefined in all-probe rows.}
@@ -60,7 +63,7 @@ Grid resolution changes the representation itself; the next stresses instead per
 
 Together, the spatial and nonstationary results reinforce the finite-model interpretation: R-BSP can reduce mismatch violations when its hand-grid models bracket the stress, but no theorem covers the spatial availability field or the time-varying movement process. The two-step probe heuristic does not dominate one-step greedy in the tested mismatch, so these experiments do not identify a worst-case task-planning adversary.
 
-\section{Data-Driven Ambiguity Construction}
+\section{Data-Driven Ambiguity-Set Construction}
 The hand-grid stresses clarify the guarantee boundary but do not provide a data-grounded way to choose the ambiguity set. For the GeoLife replay, we therefore construct the ambiguity set without using the \GeoTestN{} isolated test windows. The \GeoDevN{} development windows define a coarsened reflecting-walk likelihood
 \[
 \Pr(\mathrm{change}\mid i)=v d_i/4,
@@ -71,7 +74,7 @@ The validation winner distribution is concentrated on two development-only smoot
 
 A validation-best single-model BSP control is retained to separate improved model fit from finite-set robustness. The strict data-driven R-BSP and the disclosure-floor-aware RDF-BSP service frontier are reported in the main manuscript rather than duplicated here.
 
-\section{Reproducibility Record}
+\section{Reproducibility and Provenance}
 To make the preceding analyses auditable rather than merely repeatable in principle, the repository stores deterministic preprocessing, split metadata, configuration files, seeds, trajectory-level summaries, bootstrap outputs, provenance records, analysis code, and manuscript sources. The effective GeoLife analysis split contains \GeoDevN{} development, \GeoValN{} validation, and \GeoTestN{} test windows after model-input-group isolation. User IDs and complete 48-slot discrete state-path fingerprints are disjoint across the effective splits.
 
 GeoLife point estimates average effective user windows and their constituent positions, whereas uncertainty intervals resample complete state-path groups so that duplicate model-input paths are not treated as independent clusters. The current automated suite contains 35 tests covering nominal, robust, and disclosure-floor posterior branches; gate reductions and maximality; informed-attacker integration; transition conservation; clustered-estimator weighting; GeoLife split and missing-minute handling; numerical replay; PML linear-program checks; PRIVIC author-code checks; and policy-envelope optimization.
